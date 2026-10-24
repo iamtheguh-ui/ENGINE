@@ -1003,6 +1003,8 @@ body.analysis-mode .sync-block { display: none; }
 body:not(.score-mode) #score-card { display: none; }
 body:not(.sales-mode) #penjualan { display: none; }
 body:not(.analysis-mode) #analisa-penjualan { display: none; }
+body:not(.analysis-mode) #master-data,
+body:not(.analysis-mode) #analisa-stok { display: none; }
 
 .score-view {
   display: flex;
@@ -1489,6 +1491,7 @@ body:not(.analysis-mode) #analisa-penjualan { display: none; }
     linear-gradient(145deg, rgba(15, 27, 48, 0.94), rgba(8, 14, 26, 0.96));
 }
 .analysis-hero-stats { flex-basis: 420px; }
+.analysis-head-actions { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
 
 .analysis-toolbar { align-items: flex-end; }
 .analysis-field {
@@ -1557,6 +1560,13 @@ body:not(.analysis-mode) #analisa-penjualan { display: none; }
   gap: 14px;
   margin-top: 12px;
 }
+.analysis-master-left {
+  display: grid;
+  gap: 10px;
+  align-content: start;
+}
+.analysis-master-left .analysis-field { min-width: 0; }
+.analysis-master-left .analysis-drop { min-height: 118px; }
 .analysis-drop {
   position: relative;
   display: flex;
@@ -1845,6 +1855,16 @@ body:not(.analysis-mode) #analisa-penjualan { display: none; }
 .analysis-compare-table td { padding: 8px 9px; }
 .analysis-compare-table .analysis-sub { max-width: 210px; overflow: hidden; text-overflow: ellipsis; }
 
+.analysis-recap-table { min-width: 760px; }
+.analysis-recap-table .analysis-recap-total td {
+  border-top: 1px solid var(--line);
+  background: rgba(56, 189, 248, 0.07);
+  color: var(--text);
+  font-weight: 700;
+}
+.analysis-recap-table .analysis-recap-total .analysis-rank { color: var(--dim); }
+.analysis-recap-table .analysis-recap-total .analysis-name { color: var(--text); }
+
 .analysis-insight-panel { padding: 16px; }
 .analysis-insight-layout {
   display: grid;
@@ -1972,6 +1992,70 @@ body:not(.analysis-mode) #analisa-penjualan { display: none; }
   gap: 14px;
   align-items: start;
 }
+
+/* --------------------------------------------------------------- analisa stok gudang */
+.stok-table { min-width: 640px; }
+.stok-table th,
+.stok-table td { white-space: nowrap; }
+.stok-table .stok-depo-head { text-align: center; color: #7dd3fc; }
+.stok-table td .analysis-sub { display: block; color: var(--muted); font-size: 10px; }
+.stok-doi { font-variant-numeric: tabular-nums; }
+.stok-doi.is-critical { color: #fda4af; font-weight: 700; }
+.stok-doi.is-aman { color: #6ee7c6; font-weight: 700; }
+.stok-doi.is-normal { color: var(--text); }
+.stok-doi.is-empty { color: var(--muted); }
+.stok-list { display: flex; flex-direction: column; }
+.stok-list-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 9px 2px;
+  border-bottom: 1px solid var(--line);
+}
+.stok-list-item:last-child { border-bottom: 0; }
+.stok-list-main { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.stok-list-main strong { font-size: 12px; }
+.stok-list-main .analysis-sub { font-size: 10px; color: var(--muted); }
+.stok-list-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+  font-size: 10.5px;
+  color: var(--muted);
+  text-align: right;
+}
+.stok-list-num { white-space: nowrap; }
+.stok-chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 1px 7px;
+  border-radius: 999px;
+  background: rgba(56, 189, 248, 0.14);
+  color: #7dd3fc;
+  font-weight: 700;
+  font-size: 10px;
+}
+.stok-list-item.is-critical .stok-chip { background: rgba(248, 113, 113, 0.16); color: #fda4af; }
+.stok-list-item.is-aman .stok-chip { background: rgba(52, 211, 153, 0.16); color: #6ee7c6; }
+.stok-list-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.stok-limit {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 10.5px;
+  color: var(--muted);
+  white-space: nowrap;
+}
+.stok-limit .select { min-width: 96px; padding: 4px 8px; font-size: 11px; }
 .analysis-channel {
   display: flex;
   flex-direction: column;
@@ -4183,7 +4267,31 @@ body.jks-mode .jks-view {
             <circle cx="7" cy="16" r="1.2"/><circle cx="10" cy="12" r="1.2"/>
             <circle cx="13" cy="14" r="1.2"/><circle cx="17" cy="8" r="1.2"/>
           </svg>
-          <span>Analisa Penjualan</span>
+          <span>Analisa Performa Depo</span>
+        </a>
+        <a class="sidebar-link" href="#analisa-cabang" data-nav="analisa-cabang" data-group="analisa">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M4 19V5"/><path d="M4 19h16"/>
+            <path d="M7 15l3-3 3 2 4-6"/>
+            <path d="M14 8h3v3"/>
+            <path d="M4 12h16"/>
+          </svg>
+          <span>Analisa Performa Cabang</span>
+        </a>
+        <a class="sidebar-link" href="#analisa-stok" data-nav="analisa-stok" data-group="analisa">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M4 8l8-4 8 4v9l-8 4-8-4z"/>
+            <path d="M4 8l8 4 8-4"/><path d="M12 12v9"/>
+          </svg>
+          <span>Analisa Stok Gudang</span>
+        </a>
+        <a class="sidebar-link" href="#master-data" data-nav="master-data" data-group="analisa">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <ellipse cx="12" cy="6" rx="7" ry="3"/>
+            <path d="M5 6v6c0 1.7 3.1 3 7 3s7-1.3 7-3V6"/>
+            <path d="M5 12v6c0 1.7 3.1 3 7 3s7-1.3 7-3v-6"/>
+          </svg>
+          <span>Master Data</span>
         </a>
         <a class="sidebar-link" href="#transaksi" data-nav="transaksi" data-group="omset">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -4663,13 +4771,13 @@ body.jks-mode .jks-view {
         <header class="panel-head panel-head-wrap">
           <div>
             <h2>Sumber Data Penjualan</h2>
-            <p>Excel, CSV, atau JSON &middot; maksimal 6 file &middot; upload terpisah dari Analisa Penjualan</p>
+            <p>Excel (.xlsx/.xls/.xlsb), CSV, atau JSON &middot; maksimal 6 file &middot; upload terpisah dari Analisa Performa Depo</p>
           </div>
           <button id="salesTemplateBtn" class="score-btn score-btn-ghost" type="button">Template Excel</button>
         </header>
         <div class="analysis-upload-body">
           <label class="analysis-drop" id="salesDropZone" for="salesFileInput">
-            <input id="salesFileInput" class="analysis-file-input" type="file" multiple accept=".xlsx,.xls,.csv,.json,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-excel,text/csv,application/json">
+            <input id="salesFileInput" class="analysis-file-input" type="file" multiple accept=".xlsx,.xls,.xlsb,.csv,.json,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-excel,application/vnd.ms-excel.sheet.binary.macroEnabled.12,text/csv,application/json">
             <span class="analysis-drop-icon" aria-hidden="true">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M12 16V4"/><path d="M7 9l5-5 5 5"/><path d="M5 16v3h14v-3"/>
@@ -4811,7 +4919,7 @@ body.jks-mode .jks-view {
       </section>
 
       <footer class="sales-foot">
-        <span id="salesFootNote">Sumber: upload manual &middot; template Analisa Penjualan</span>
+        <span id="salesFootNote">Sumber: upload manual &middot; template Analisa Performa Depo</span>
         <span class="muted">Penjualan bersih = VALUE NETT &middot; nilai kotor = VALUE</span>
       </footer>
     </section>
@@ -4826,7 +4934,7 @@ body.jks-mode .jks-view {
             <span>Kembali ke Dashboard</span>
           </a>
           <p class="score-eyebrow">UPLOAD MANUAL &middot; MAKSIMAL 6 FILE</p>
-          <h1 id="analysisTitle" tabindex="-1">Analisa Penjualan</h1>
+          <h1 id="analysisTitle" tabindex="-1">Analisa Performa Depo</h1>
           <p id="analysisSub" class="score-subtitle">Bandingkan penjualan gross pada nomor hari kerja (HK) yang sama. Pilih HK 22 untuk melihat data HK 22 dari setiap bulan.</p>
         </div>
         <div class="score-hero-stats analysis-hero-stats">
@@ -4868,6 +4976,12 @@ body.jks-mode .jks-view {
               <option value="all">Semua divisi</option>
             </select>
           </label>
+          <label class="analysis-field analysis-field-wide">
+            <span>Filter depo</span>
+            <select id="analysisDepo" class="select" aria-label="Filter depo">
+              <option value="all">Semua depo</option>
+            </select>
+          </label>
           <label class="analysis-field analysis-field-period">
             <span>Perbandingan</span>
             <select id="analysisPeriod" class="select" aria-label="Pilihan perbandingan MTD">
@@ -4896,13 +5010,13 @@ body.jks-mode .jks-view {
         <header class="panel-head panel-head-wrap">
           <div>
             <h2>Data Penjualan</h2>
-            <p>Excel, CSV, atau JSON &middot; maksimal 6 file &middot; semua file digabung</p>
+            <p>Excel (.xlsx/.xls/.xlsb), CSV, atau JSON &middot; maksimal 6 file &middot; semua file digabung</p>
           </div>
           <button id="analysisTemplateBtn" class="score-btn score-btn-ghost" type="button">Template Excel</button>
         </header>
         <div class="analysis-upload-body">
           <label class="analysis-drop" id="analysisDropZone" for="analysisFileInput">
-            <input id="analysisFileInput" class="analysis-file-input" type="file" multiple accept=".xlsx,.xls,.csv,.json,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-excel,text/csv,application/json">
+            <input id="analysisFileInput" class="analysis-file-input" type="file" multiple accept=".xlsx,.xls,.xlsb,.csv,.json,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-excel,application/vnd.ms-excel.sheet.binary.macroEnabled.12,text/csv,application/json">
             <span class="analysis-drop-icon" aria-hidden="true">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M12 16V4"/><path d="M7 9l5-5 5 5"/><path d="M5 16v3h14v-3"/>
@@ -4932,7 +5046,7 @@ body.jks-mode .jks-view {
           </svg>
         </span>
         <strong>Belum ada data untuk dianalisa</strong>
-        <p>Upload file penjualan (maksimal 6 file), lalu pilih HK, divisi, dan perbandingan MTD vs Last 1&ndash;6 Months. Semua perhitungan memakai omset gross.</p>
+        <p>Upload file penjualan (maksimal 6 file), lalu pilih HK, divisi, depo, dan perbandingan MTD vs Last 1&ndash;6 Months. Master outlet &amp; item dapat diunggah dari menu Master Data. Semua perhitungan memakai omset gross.</p>
       </div>
 
       <div id="analysisResults" class="analysis-results hidden">
@@ -4964,6 +5078,33 @@ body.jks-mode .jks-view {
           </article>
         </div>
 
+        <section id="analysisDepoRecapPanel" class="panel analysis-panel" aria-label="Rekap per depo">
+          <header class="panel-head panel-head-wrap">
+            <div>
+              <h2>Rekap Depo</h2>
+              <p>Ringkasan KPI MTD tiap depo &middot; tampil saat memilih <strong>Semua depo</strong></p>
+            </div>
+            <span id="analysisDepoInfo" class="muted sales-table-info">&mdash;</span>
+          </header>
+          <div class="table-scroll analysis-table-scroll">
+            <table class="data-table analysis-compare-table analysis-recap-table">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Depo</th>
+                  <th class="num">Omset MTD</th>
+                  <th class="num">Rata-rata/HK</th>
+                  <th class="num">Vs bulan lalu</th>
+                  <th class="num">Total pembanding</th>
+                  <th class="num">Outlet aktif</th>
+                  <th class="num">Share MTD</th>
+                </tr>
+              </thead>
+              <tbody id="analysisDepoBody"></tbody>
+            </table>
+          </div>
+        </section>
+
         <section class="panel analysis-panel" aria-label="Perbandingan penjualan bulanan">
           <header class="panel-head panel-head-wrap">
             <div>
@@ -4994,24 +5135,6 @@ body.jks-mode .jks-view {
         </section>
 
         <div class="analysis-detail-grid">
-          <section class="panel analysis-panel" aria-label="Omset per depo">
-            <header class="panel-head panel-head-wrap">
-              <div>
-                <h2>Omset by Depo</h2>
-                <p>MTD vs rata-rata bulanan periode &middot; hanya bulan dengan data HK yang sama</p>
-              </div>
-              <span id="analysisDepoInfo" class="muted sales-table-info">&mdash;</span>
-            </header>
-            <div class="table-scroll analysis-table-scroll">
-              <table class="data-table analysis-compare-table">
-                <thead>
-                  <tr><th>#</th><th>Depo</th><th class="num">MTD</th><th class="num">Avg/bln</th><th class="num">MTD vs avg</th><th class="num">Share MTD</th></tr>
-                </thead>
-                <tbody id="analysisDepoBody"></tbody>
-              </table>
-            </div>
-          </section>
-
           <section class="panel analysis-panel" aria-label="Omset per outlet">
             <header class="panel-head panel-head-wrap">
               <div>
@@ -5051,7 +5174,7 @@ body.jks-mode .jks-view {
           <section class="panel analysis-panel" aria-label="Omset per salesman">
             <header class="panel-head panel-head-wrap">
               <div>
-                <h2>Omset by Salesman</h2>
+                <h2 id="analysisOmsetDimTitle">Omset by Salesman</h2>
                 <p>MTD vs rata-rata bulanan periode &middot; hanya bulan dengan data HK yang sama</p>
               </div>
               <span id="analysisSalesmanInfo" class="muted sales-table-info">&mdash;</span>
@@ -5059,7 +5182,7 @@ body.jks-mode .jks-view {
             <div class="table-scroll analysis-table-scroll">
               <table class="data-table analysis-compare-table">
                 <thead>
-                  <tr><th>#</th><th>Salesman</th><th class="num">MTD</th><th class="num">Avg/bln</th><th class="num">MTD vs avg</th><th class="num">Share MTD</th></tr>
+                  <tr><th>#</th><th id="analysisOmsetDimCol">Salesman</th><th class="num">MTD</th><th class="num">Avg/bln</th><th class="num">MTD vs avg</th><th class="num">Share MTD</th></tr>
                 </thead>
                 <tbody id="analysisSalesmanBody"></tbody>
               </table>
@@ -5105,7 +5228,7 @@ body.jks-mode .jks-view {
           <section class="panel analysis-panel" aria-label="ROA per salesman">
             <header class="panel-head panel-head-wrap">
               <div>
-                <h2>ROA by Salesman</h2>
+                <h2 id="analysisRoaDimTitle">ROA by Salesman</h2>
                 <p>ROA = jumlah outlet bertransaksi (distinct) &middot; MTD vs rata-rata bulanan</p>
               </div>
               <span id="analysisRoaSalesmanInfo" class="muted sales-table-info">&mdash;</span>
@@ -5113,7 +5236,7 @@ body.jks-mode .jks-view {
             <div class="table-scroll analysis-table-scroll">
               <table class="data-table analysis-compare-table">
                 <thead>
-                  <tr><th>#</th><th>Salesman</th><th class="num">ROA MTD</th><th class="num">ROA Avg/bln</th><th class="num">MTD vs avg</th><th class="num">Omset MTD</th></tr>
+                  <tr><th>#</th><th id="analysisRoaDimCol">Salesman</th><th class="num">ROA MTD</th><th class="num">ROA Avg/bln</th><th class="num">MTD vs avg</th><th class="num">Omset MTD</th></tr>
                 </thead>
                 <tbody id="analysisRoaSalesmanBody"></tbody>
               </table>
@@ -5123,7 +5246,7 @@ body.jks-mode .jks-view {
           <section class="panel analysis-panel" aria-label="EC per salesman">
             <header class="panel-head panel-head-wrap">
               <div>
-                <h2>EC by Salesman</h2>
+                <h2 id="analysisEcDimTitle">EC by Salesman</h2>
                 <p>EC = faktur/outlet efektif &middot; MTD vs rata-rata periode</p>
               </div>
               <span id="analysisEcInfo" class="muted sales-table-info">&mdash;</span>
@@ -5131,7 +5254,7 @@ body.jks-mode .jks-view {
             <div class="table-scroll analysis-table-scroll">
               <table class="data-table analysis-compare-table">
                 <thead>
-                  <tr><th>#</th><th>Salesman</th><th class="num">EC MTD</th><th class="num">Avg EC/bln</th><th class="num">MTD vs avg</th><th class="num">MTD Omset</th></tr>
+                  <tr><th>#</th><th id="analysisEcDimCol">Salesman</th><th class="num">EC MTD</th><th class="num">Avg EC/bln</th><th class="num">MTD vs avg</th><th class="num">MTD Omset</th></tr>
                 </thead>
                 <tbody id="analysisEcBody"></tbody>
               </table>
@@ -5166,6 +5289,285 @@ body.jks-mode .jks-view {
       </div>
     </section>
 
+    <section id="master-data" class="score-view analysis-view hidden" aria-labelledby="masterTitle">
+      <div class="score-hero analysis-hero">
+        <div class="score-hero-main">
+          <a class="score-back" href="#ringkasan" data-return-dashboard>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M19 12H5"/><path d="M11 18l-6-6 6-6"/>
+            </svg>
+            <span>Kembali ke Dashboard</span>
+          </a>
+          <p class="score-eyebrow">MASTER DATA &middot; PENDUKUNG ANALISA</p>
+          <h1 id="masterTitle" tabindex="-1">Master Data</h1>
+          <p class="score-subtitle">Unggah master outlet (maksimal 6 file) dan master item. Dipakai untuk melengkapi kolom yang kosong pada data penjualan &amp; analisa.</p>
+        </div>
+        <div class="score-hero-stats analysis-hero-stats">
+          <div class="score-stat">
+            <span>Master Outlet</span>
+            <strong id="masterOutletCount">0 / 6</strong>
+          </div>
+          <div class="score-stat">
+            <span>Master Item</span>
+            <strong id="masterItemCount">0 / 6</strong>
+          </div>
+        </div>
+      </div>
+
+      <section class="panel analysis-upload-panel" aria-label="Upload master data">
+        <header class="panel-head panel-head-wrap">
+          <div>
+            <h2>Upload Master Data</h2>
+            <p>Pilih jenis master, lalu unggah satu atau beberapa file &middot; maksimal 6 file per jenis</p>
+          </div>
+          <div class="analysis-head-actions">
+            <button id="masterTemplateBtn" class="score-btn score-btn-ghost" type="button">Unduh template</button>
+            <button id="masterResetBtn" class="score-btn score-btn-ghost" type="button">Hapus semua</button>
+          </div>
+        </header>
+        <div class="analysis-upload-body">
+          <div class="analysis-master-left">
+            <label class="analysis-field analysis-field-wide">
+              <span>Jenis master</span>
+              <select id="masterType" class="select" aria-label="Jenis master data">
+                <option value="outlet">Master Outlet &middot; kode outlet &rarr; depo / channel / divisi / salesman</option>
+                <option value="item">Master Item &middot; kode item &rarr; nama / kategori</option>
+              </select>
+            </label>
+            <label class="analysis-drop" id="masterDropZone" for="masterFileInput">
+              <input id="masterFileInput" class="analysis-file-input" type="file" multiple accept=".xlsx,.xls,.xlsb,.csv,.json,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-excel,application/vnd.ms-excel.sheet.binary.macroEnabled.12,text/csv,application/json">
+              <span class="analysis-drop-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M12 16V4"/><path d="M7 9l5-5 5 5"/><path d="M5 16v3h14v-3"/>
+                </svg>
+              </span>
+              <strong>Tarik &amp; lepas file master di sini</strong>
+              <span>atau klik untuk memilih file</span>
+              <em id="masterDropHint">Belum ada master</em>
+            </label>
+          </div>
+          <div class="analysis-file-wrap">
+            <div class="analysis-file-head">
+              <span>Master terunggah</span>
+              <strong id="masterFileCount">0 / 6</strong>
+            </div>
+            <div id="masterFileList" class="analysis-file-list">
+              <p class="analysis-muted">Belum ada master data.</p>
+            </div>
+            <p id="masterUploadStatus" class="analysis-status">Master data dipakai untuk melengkapi kolom yang kosong dan disimpan lokal di perangkat ini.</p>
+          </div>
+        </div>
+      </section>
+    </section>
+
+    <section id="analisa-stok" class="score-view analysis-view hidden" aria-labelledby="stokTitle">
+      <div class="score-hero analysis-hero">
+        <div class="score-hero-main">
+          <a class="score-back" href="#ringkasan" data-return-dashboard>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M19 12H5"/><path d="M11 18l-6-6 6-6"/>
+            </svg>
+            <span>Kembali ke Dashboard</span>
+          </a>
+          <p class="score-eyebrow">UPLOAD MANUAL &middot; MAKSIMAL 6 FILE</p>
+          <h1 id="stokTitle" tabindex="-1">Analisa Stok Gudang</h1>
+          <p id="stokSub" class="score-subtitle">Analisa Days of Inventory (DOI) per depo: daftar item critical &amp; aman, serta saran intra-barang dari depo terdekat.</p>
+        </div>
+        <div class="score-hero-stats analysis-hero-stats">
+          <div class="score-stat">
+            <span>Item</span>
+            <strong id="stokItemHero">0</strong>
+          </div>
+          <div class="score-stat">
+            <span>DOI Critical</span>
+            <strong id="stokCriticalHero">0</strong>
+          </div>
+          <div class="score-stat">
+            <span>DOI Aman</span>
+            <strong id="stokAmanHero">0</strong>
+          </div>
+          <div class="score-stat">
+            <span>File</span>
+            <strong id="stokFileHero">0 / 6</strong>
+          </div>
+        </div>
+      </div>
+
+      <section class="panel analysis-upload-panel" aria-label="Upload stok gudang">
+        <header class="panel-head panel-head-wrap">
+          <div>
+            <h2>Upload Data Stok Gudang</h2>
+            <p>Excel (.xlsx/.xls/.xlsb), CSV, atau JSON sesuai template &middot; satu file per periode &middot; maksimal 6 file</p>
+          </div>
+          <div class="analysis-head-actions">
+            <button id="stokTemplateBtn" class="score-btn score-btn-ghost" type="button">Unduh template</button>
+            <button id="stokResetBtn" class="score-btn score-btn-ghost" type="button">Hapus data</button>
+          </div>
+        </header>
+        <div class="analysis-upload-body">
+          <div class="analysis-master-left">
+            <label class="analysis-drop" id="stokDropZone" for="stokFileInput">
+              <input id="stokFileInput" class="analysis-file-input" type="file" multiple accept=".xlsx,.xls,.xlsb,.csv,.json,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-excel,application/vnd.ms-excel.sheet.binary.macroEnabled.12,text/csv,application/json">
+              <span class="analysis-drop-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M12 16V4"/><path d="M7 9l5-5 5 5"/><path d="M5 16v3h14v-3"/>
+                </svg>
+              </span>
+              <strong>Tarik &amp; lepas file stok di sini</strong>
+              <span>atau klik untuk memilih file</span>
+              <em id="stokDropHint">Belum ada data</em>
+            </label>
+          </div>
+          <div class="analysis-file-wrap">
+            <div class="analysis-file-head">
+              <span>File terunggah</span>
+              <strong id="stokFileCount">0 / 6</strong>
+            </div>
+            <div id="stokFileList" class="analysis-file-list">
+              <p class="analysis-muted">Belum ada data stok.</p>
+            </div>
+            <p id="stokUploadStatus" class="analysis-status">Data diproses di browser dan disimpan lokal di perangkat ini.</p>
+          </div>
+        </div>
+      </section>
+
+      <div class="score-toolbar analysis-toolbar">
+        <div class="score-toolbar-left">
+          <label class="analysis-field analysis-field-wide">
+            <span>Filter depo</span>
+            <select id="stokDepo" class="select" aria-label="Filter depo stok">
+              <option value="all">Semua depo</option>
+            </select>
+          </label>
+        </div>
+      </div>
+
+      <div id="stokEmpty" class="analysis-empty-card">
+        <span class="analysis-empty-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M4 8l8-4 8 4v9l-8 4-8-4z"/><path d="M4 8l8 4 8-4"/><path d="M12 12v9"/>
+          </svg>
+        </span>
+        <strong>Belum ada data stok gudang</strong>
+        <p>Unggah file stok sesuai template (kolom depo: stok, sellout, DOI). Barang dengan DOI 0, sellout 0, dan stok 0 tidak ditampilkan.</p>
+      </div>
+
+      <div id="stokResults" class="analysis-results hidden">
+        <div class="analysis-kpi-grid">
+          <article class="kpi kpi-primary">
+            <span class="kpi-label">Total Item</span>
+            <strong id="stokKpiItems" class="kpi-value">&mdash;</strong>
+            <span id="stokKpiItemsSub" class="kpi-sub">item dengan stok</span>
+          </article>
+          <article class="kpi">
+            <span class="kpi-label">Item DOI Critical</span>
+            <strong id="stokKpiCritical" class="kpi-value">&mdash;</strong>
+            <span class="kpi-sub">DOI &lt; 14 hari</span>
+          </article>
+          <article class="kpi">
+            <span class="kpi-label">Item DOI Aman</span>
+            <strong id="stokKpiAman" class="kpi-value">&mdash;</strong>
+            <span class="kpi-sub">DOI &gt; 30 hari</span>
+          </article>
+          <article class="kpi">
+            <span class="kpi-label">Depo Dianalisa</span>
+            <strong id="stokKpiDepos" class="kpi-value">&mdash;</strong>
+            <span id="stokKpiDeposSub" class="kpi-sub">depo</span>
+          </article>
+        </div>
+
+        <section class="panel analysis-panel">
+          <header class="panel-head panel-head-wrap">
+            <div>
+              <h2>Daftar Stok &amp; DOI</h2>
+              <p>Nilai per depo: stok &middot; sellout &middot; DOI (hari) &middot; merah = critical, hijau = aman</p>
+            </div>
+            <span id="stokTableInfo" class="muted sales-table-info">&mdash;</span>
+          </header>
+          <div class="table-scroll analysis-table-scroll">
+            <table class="data-table analysis-compare-table stok-table">
+              <thead id="stokTableHead"></thead>
+              <tbody id="stokTableBody"></tbody>
+            </table>
+          </div>
+        </section>
+
+        <div class="analysis-detail-grid">
+          <section class="panel analysis-panel">
+            <header class="panel-head panel-head-wrap">
+              <div>
+                <h2>Item DOI Critical</h2>
+                <p>DOI &lt; 14 hari &middot; perlu segera dikirim</p>
+              </div>
+              <div class="stok-list-actions">
+                <span id="stokCriticalInfo" class="muted sales-table-info">&mdash;</span>
+                <label class="stok-limit">
+                  <span class="stok-limit-label">Tampil</span>
+                  <select id="stokCriticalLimit" class="select" aria-label="Jumlah baris Item DOI Critical">
+                    <option value="10">10 baris</option>
+                    <option value="25">25 baris</option>
+                    <option value="50">50 baris</option>
+                    <option value="100">100 baris</option>
+                    <option value="0">Semua</option>
+                  </select>
+                </label>
+              </div>
+            </header>
+            <div id="stokCriticalList" class="stok-list"></div>
+          </section>
+          <section class="panel analysis-panel">
+            <header class="panel-head panel-head-wrap">
+              <div>
+                <h2>Saran Intra-Barang</h2>
+                <p>Pindahkan stok dari depo terdekat yang surplus</p>
+              </div>
+              <div class="stok-list-actions">
+                <span id="stokSaranInfo" class="muted sales-table-info">&mdash;</span>
+                <label class="stok-limit">
+                  <span class="stok-limit-label">Tampil</span>
+                  <select id="stokSaranLimit" class="select" aria-label="Jumlah baris Saran Intra-Barang">
+                    <option value="10">10 baris</option>
+                    <option value="25">25 baris</option>
+                    <option value="50">50 baris</option>
+                    <option value="100">100 baris</option>
+                    <option value="0">Semua</option>
+                  </select>
+                </label>
+              </div>
+            </header>
+            <div id="stokSaranList" class="stok-list"></div>
+          </section>
+          <section class="panel analysis-panel">
+            <header class="panel-head panel-head-wrap">
+              <div>
+                <h2>Item DOI Aman (Surplus)</h2>
+                <p>DOI &gt; 30 hari &middot; stok dapat dipindahkan</p>
+              </div>
+              <div class="stok-list-actions">
+                <span id="stokAmanInfo" class="muted sales-table-info">&mdash;</span>
+                <label class="stok-limit">
+                  <span class="stok-limit-label">Tampil</span>
+                  <select id="stokAmanLimit" class="select" aria-label="Jumlah baris Item DOI Aman">
+                    <option value="10">10 baris</option>
+                    <option value="25">25 baris</option>
+                    <option value="50">50 baris</option>
+                    <option value="100">100 baris</option>
+                    <option value="0">Semua</option>
+                  </select>
+                </label>
+              </div>
+            </header>
+            <div id="stokAmanList" class="stok-list"></div>
+          </section>
+        </div>
+
+        <footer class="sales-foot analysis-foot">
+          <span id="stokFootNote">Belum ada data.</span>
+          <span class="muted">DOI = Days of Inventory (hari) &middot; Critical &lt; 14 hari &middot; Aman &gt; 30 hari &middot; saran intra-barang memakai pengelompokan wilayah depo</span>
+        </footer>
+      </div>
+    </section>
+
     <section id="jks-editor" class="jks-view" aria-label="JKS Editor">
       <aside class="jks-panel" aria-label="Panel data JKS">
         <header class="jks-brand">
@@ -5184,14 +5586,14 @@ body.jks-mode .jks-view {
 
         <div class="jks-panel-scroll">
           <label class="jks-upload" id="jksDropZone" for="jksFileInput">
-            <input class="jks-file-input" id="jksFileInput" type="file" accept=".xlsx,.xls,.csv,.json,.geojson,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-excel,text/csv,application/json">
+            <input class="jks-file-input" id="jksFileInput" type="file" accept=".xlsx,.xls,.xlsb,.csv,.json,.geojson,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-excel,application/vnd.ms-excel.sheet.binary.macroEnabled.12,text/csv,application/json">
             <span class="jks-upload-icon" aria-hidden="true">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M12 16V4"/><path d="M7 9l5-5 5 5"/><path d="M5 16v3h14v-3"/>
               </svg>
             </span>
             <strong>Unggah data outlet</strong>
-            <span>Excel (.xlsx/.xls) &middot; CSV &middot; JSON</span>
+            <span>Excel (.xlsx/.xls/.xlsb) &middot; CSV &middot; JSON</span>
             <em id="jksFileName">Belum ada file</em>
           </label>
 
@@ -5473,7 +5875,7 @@ body.jks-mode .jks-view {
       </svg>
       <span>Penjualan</span>
     </a>
-    <a class="bottom-nav-item" href="#analisa-penjualan" data-group-nav="analisa" title="Analisa Penjualan">
+    <a class="bottom-nav-item" href="#analisa-penjualan" data-group-nav="analisa" title="Analisa Performa Depo">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
         <path d="M4 19V5"/><path d="M4 19h16"/>
         <path d="M7 16l3-4 3 2 4-6"/>
@@ -7590,6 +7992,7 @@ body.jks-mode .jks-view {
     analysisHkInput: $("#analysisHkInput"),
     analysisBasis: $("#analysisBasis"),
     analysisDivisi: $("#analysisDivisi"),
+    analysisDepo: $("#analysisDepo"),
     analysisPeriod: $("#analysisPeriod"),
     analysisPeriodLabel: $("#analysisPeriodLabel"),
     analysisResetBtn: $("#analysisResetBtn"),
@@ -7601,6 +8004,54 @@ body.jks-mode .jks-view {
     analysisFileCount: $("#analysisFileCount"),
     analysisFileList: $("#analysisFileList"),
     analysisUploadStatus: $("#analysisUploadStatus"),
+    masterType: $("#masterType"),
+    masterDropZone: $("#masterDropZone"),
+    masterFileInput: $("#masterFileInput"),
+    masterDropHint: $("#masterDropHint"),
+    masterFileCount: $("#masterFileCount"),
+    masterFileList: $("#masterFileList"),
+    masterUploadStatus: $("#masterUploadStatus"),
+    masterResetBtn: $("#masterResetBtn"),
+    masterTemplateBtn: $("#masterTemplateBtn"),
+    masterOutletCount: $("#masterOutletCount"),
+    masterItemCount: $("#masterItemCount"),
+    masterTitle: $("#masterTitle"),
+    stokTitle: $("#stokTitle"),
+    stokSub: $("#stokSub"),
+    stokItemHero: $("#stokItemHero"),
+    stokCriticalHero: $("#stokCriticalHero"),
+    stokAmanHero: $("#stokAmanHero"),
+    stokFileHero: $("#stokFileHero"),
+    stokTemplateBtn: $("#stokTemplateBtn"),
+    stokResetBtn: $("#stokResetBtn"),
+    stokDropZone: $("#stokDropZone"),
+    stokFileInput: $("#stokFileInput"),
+    stokDropHint: $("#stokDropHint"),
+    stokFileCount: $("#stokFileCount"),
+    stokFileList: $("#stokFileList"),
+    stokUploadStatus: $("#stokUploadStatus"),
+    stokDepo: $("#stokDepo"),
+    stokEmpty: $("#stokEmpty"),
+    stokResults: $("#stokResults"),
+    stokKpiItems: $("#stokKpiItems"),
+    stokKpiItemsSub: $("#stokKpiItemsSub"),
+    stokKpiCritical: $("#stokKpiCritical"),
+    stokKpiAman: $("#stokKpiAman"),
+    stokKpiDepos: $("#stokKpiDepos"),
+    stokKpiDeposSub: $("#stokKpiDeposSub"),
+    stokTableInfo: $("#stokTableInfo"),
+    stokTableHead: $("#stokTableHead"),
+    stokTableBody: $("#stokTableBody"),
+    stokCriticalInfo: $("#stokCriticalInfo"),
+    stokCriticalList: $("#stokCriticalList"),
+    stokCriticalLimit: $("#stokCriticalLimit"),
+    stokSaranInfo: $("#stokSaranInfo"),
+    stokSaranList: $("#stokSaranList"),
+    stokSaranLimit: $("#stokSaranLimit"),
+    stokAmanInfo: $("#stokAmanInfo"),
+    stokAmanList: $("#stokAmanList"),
+    stokAmanLimit: $("#stokAmanLimit"),
+    stokFootNote: $("#stokFootNote"),
     analysisEmpty: $("#analysisEmpty"),
     analysisResults: $("#analysisResults"),
     analysisKpiNett: $("#analysisKpiNett"),
@@ -7620,12 +8071,19 @@ body.jks-mode .jks-view {
     analysisMonthlyBody: $("#analysisMonthlyBody"),
     analysisDepoInfo: $("#analysisDepoInfo"),
     analysisDepoBody: $("#analysisDepoBody"),
+    analysisDepoRecapPanel: $("#analysisDepoRecapPanel"),
     analysisOutletInfo: $("#analysisOutletInfo"),
     analysisOutletBody: $("#analysisOutletBody"),
     analysisProductInfo: $("#analysisProductInfo"),
     analysisProductBody: $("#analysisProductBody"),
     analysisSalesmanInfo: $("#analysisSalesmanInfo"),
     analysisSalesmanBody: $("#analysisSalesmanBody"),
+    analysisOmsetDimTitle: $("#analysisOmsetDimTitle"),
+    analysisOmsetDimCol: $("#analysisOmsetDimCol"),
+    analysisRoaDimTitle: $("#analysisRoaDimTitle"),
+    analysisRoaDimCol: $("#analysisRoaDimCol"),
+    analysisEcDimTitle: $("#analysisEcDimTitle"),
+    analysisEcDimCol: $("#analysisEcDimCol"),
     analysisChannelInfo: $("#analysisChannelInfo"),
     analysisChannelBody: $("#analysisChannelBody"),
     analysisRoaProductInfo: $("#analysisRoaProductInfo"),
@@ -7651,11 +8109,95 @@ body.jks-mode .jks-view {
     period: 3,
     divisi: "all",
     divisiOptions: [],
+    depo: "all",
+    depoOptions: [],
+    mode: "depo",
     notice: null,
     storageError: "",
     anchorKey: "",
     maxHk: 0,
   };
+
+  const ANALYSIS_MASTER_KEY = "analysis-master-v2";
+  const MASTER_TYPE_LABELS = {
+    outlet: "Master Outlet",
+    item: "Master Item",
+  };
+  const MASTER_MAX_FILES = {
+    outlet: 6,
+    item: 6,
+  };
+  const MASTER_OUTLET_HEADERS = [
+    "NO", "KODE OUTLET", "NAMA OUTLET", "NIK KTP", "FC", "PEMILIK", "ALAMAT",
+    "KET.KABUPATEN", "KET.KECAMATAN", "KET.KELURAHAN", "KDPOS", "NO TELP", "TOP",
+    "DIV", "TYPE OUTLET", "JENIS OUTLET", "LIMIT KREDIT", "FLAG", "TGL REGISTER",
+    "LAST UP DATE", "HARI_K", "RAYON", "KD_SLS", "NAMA_SLS", "KET", "STATUS BLN INI",
+    "SC", "PMA", "KODE SAP", "NOO", "TYPE OUTLET2", "KD OUTLET", "NIK SALESMAN",
+  ];
+  const MASTER_ITEM_HEADERS = ["KODE ITEM", "ITEM PRODUK", "KATEGORI (MARK NEW)", "SATUAN"];
+  const masterState = {
+    type: "outlet",
+    loading: false,
+    notice: null,
+    files: { outlet: [], item: [] },
+    maps: { outlet: null, item: null },
+  };
+
+  const STOK_MAX_FILES = 6;
+  const STOK_KEY = "stok-gudang-v1";
+  const STOK_DOI_CRITICAL = 14;
+  const STOK_DOI_AMAN = 30;
+  const STOK_BI_MIN = 1;
+  const STOK_DEPO_CODES = [
+    "BNJ", "PBD", "KBJ", "MDT", "MDU", "LDC", "TJM", "LPM", "RAP", "KIS",
+    "KPN", "PMR", "TBT", "SBR", "PYB", "SBA", "PSP", "GST",
+  ];
+  const STOK_DEPO_NAMES = {
+    LPM: "Lubuk Pakam",
+    TJM: "Tanjung Morawa",
+    MDT: "Medan Timur",
+    PYB: "Panyabungan",
+    KIS: "Kisaran",
+    RAP: "Rantau Prapat",
+    KPN: "Kota Pinang",
+    PBD: "Pangkalan Brandan",
+    BNJ: "Binjai",
+    KBJ: "Kabanjahe",
+    TBT: "Tebing Tinggi",
+    PMR: "Pematang Siantar",
+    SBR: "Siborong Borong",
+    SBA: "Sibolga",
+    PSP: "Padang Sidimpuan",
+    MDU: "Medan Utara",
+    LDC: "LDC",
+    GST: "GST",
+  };
+  const STOK_REGIONS = [
+    { name: "Medan Raya", depos: ["MDT", "MDU", "BNJ", "PBD", "LPM", "TJM", "GST", "LDC"] },
+    { name: "Sumatera Timur", depos: ["TBT", "PMR", "KIS", "RAP", "KPN"] },
+    { name: "Dataran Tinggi", depos: ["KBJ", "SBR"] },
+    { name: "Pantai Barat", depos: ["SBA", "PSP", "PYB"] },
+  ];
+  const STOK_TEMPLATE_HEADERS = [
+    "NO", "KODE ITEM", "ITEM PRODUK",
+    "BNJ", "SELLOUT", "DOI", "PBD", "SELLOUT", "DOI", "KBJ", "SELLOUT", "DOI",
+    "MDT", "SELLOUT", "DOI", "MDU", "SELLOUT", "DOI", "SELLOUT LDC", "DOI LDC",
+    "TJM", "SELLOUT", "DOI", "LPM", "SELLOUT", "DOI", "RAP", "SELLOUT", "DOI",
+    "KIS", "SELLOUT", "DOI", "KPN", "SELLOUT", "DOI", "", "",
+    "PMR", "SELLOUT", "DOI", "TBT", "SELLOUT", "DOI", "SBR", "SELLOUT", "DOI",
+    "PYB", "SELLOUT", "DOI", "SBA", "SELLOUT", "DOI", "PSP", "SELLOUT", "DOI",
+    "GST", "SELLOUT", "TOTAL QTT", "TOTAL SELLOUT", "TOTAL DOI", "", "KATEGORI ECERAN",
+  ];
+  const stokState = {
+    files: [],
+    loading: false,
+    notice: null,
+    depo: "all",
+    storageError: "",
+    limits: { critical: 10, aman: 10, saran: 10 },
+  };
+
+  const STOK_LIST_LIMIT_OPTIONS = [10, 25, 50, 100, 0];
 
   const SCORE_REFRESH_MS = 60 * 1000;
   const SALES_MAX_FILES = 6;
@@ -9063,7 +9605,9 @@ body.jks-mode .jks-view {
 
   function salesBuildData() {
     const rows = [];
-    salesUploadState.files.forEach((file) => rows.push(...file.rows));
+    salesUploadState.files.forEach((file) => {
+      file.rows.forEach((row) => rows.push(analysisApplyMasters(row)));
+    });
     if (!rows.length) return null;
 
     const kpi = { nett: 0, value: 0, discount: 0, discount_pct: 0, qty: 0, lines: 0 };
@@ -11840,7 +12384,7 @@ legendControl.addTo(map);
 
     try {
       const isExcel =
-        /\.(xlsx|xls)$/i.test(file.name) ||
+        /\.(xlsx|xls|xlsb)$/i.test(file.name) ||
         /spreadsheet|excel/i.test(file.type || "");
       let objects = [];
       let sheetName = "";
@@ -12604,7 +13148,7 @@ legendControl.addTo(map);
     const name = String(file.name || "").toLowerCase();
     const extension = name.includes(".") ? name.split(".").pop() : "";
 
-    if (["xlsx", "xls"].includes(extension)) {
+    if (["xlsx", "xls", "xlsb"].includes(extension)) {
       if (!window.XLSX || !window.XLSX.read) {
         throw new Error("Pustaka Excel belum termuat. Periksa koneksi CDN.");
       }
@@ -12645,7 +13189,7 @@ legendControl.addTo(map);
       return { objects: parsed.objects, sheets: ["CSV"], score: parsed.score };
     }
 
-    throw new Error("Format file tidak didukung. Gunakan .xlsx, .xls, .csv, atau .json.");
+    throw new Error("Format file tidak didukung. Gunakan .xlsx, .xls, .xlsb, .csv, atau .json.");
   }
 
   function analysisNormalizeDivision(value) {
@@ -12941,9 +13485,1139 @@ legendControl.addTo(map);
       );
   }
 
+  function masterNormalizeObject(object) {
+    const normalized = {};
+    Object.keys(object || {}).forEach((key) => {
+      const value = object[key];
+      if (value !== null && value !== undefined && String(value).trim() !== "") {
+        normalized[jksNormalizeKey(key)] = value;
+      }
+    });
+    return normalized;
+  }
+
+  function masterPick(normalized, ...aliases) {
+    for (const alias of aliases) {
+      const key = jksNormalizeKey(alias);
+      if (Object.prototype.hasOwnProperty.call(normalized, key)) {
+        return String(normalized[key]).trim();
+      }
+    }
+    return "";
+  }
+
+  function masterBuildMap(type, objects) {
+    const map = {};
+    let count = 0;
+    (objects || []).forEach((object) => {
+      const row = masterNormalizeObject(object);
+      let code = "";
+      let record = null;
+      if (type === "outlet") {
+        code = masterPick(row, "KODE OUTLET", "KD OUTLET", "OUTLET CODE", "KODE TOKO", "ID OUTLET", "CODE");
+        record = {
+          code,
+          name: masterPick(row, "NAMA OUTLET", "OUTLET", "NAMA TOKO", "CUSTOMER", "NAMA CUSTOMER", "NAME"),
+          depo: masterPick(row, "PMA", "DEPO", "DEPOT", "CABANG", "BRANCH", "DISTRIBUTOR", "FC", "AREA"),
+          channel: masterPick(row, "JENIS OUTLET", "TYPE OUTLET", "TYPE OUTLET2", "CHANNEL", "CHANEL", "SALURAN"),
+          divisi: masterPick(row, "DIV", "DIVISI", "DIVISION", "DEPARTEMEN", "DEPT"),
+          salesman: masterPick(row, "NAMA_SLS", "NAMA SALESMAN", "SALESMAN", "SALES MAN", "NAMA SALES"),
+          salesmanCode: masterPick(row, "KD_SLS", "KD SLS2", "NIK SALESMAN", "KODE SALESMAN", "KD SALESMAN", "SALESMAN CODE"),
+          route: masterPick(row, "RAYON", "RUTE", "ROUTE"),
+        };
+      } else {
+        code = masterPick(row, "KODE ITEM", "KD_BRG", "KODE BARANG", "KODE PRODUK", "SKU", "ITEM CODE", "PRODUCT CODE");
+        record = {
+          code,
+          name: masterPick(row, "ITEM PRODUK", "NM_BRG", "DESCRIPTION", "NAMA BARANG", "NAMA PRODUK", "PRODUCT", "ITEM"),
+          category: masterPick(row, "KATEGORI (MARK NEW)", "KATEGORI", "MARK NEW", "MARK", "BRAND", "KATEGORI PRODUK", "CATEGORY"),
+          unit: masterPick(row, "SATUAN", "UNIT", "UOM"),
+        };
+      }
+      if (!code) return;
+      map[code.toUpperCase()] = record;
+      count += 1;
+    });
+    return { map, count };
+  }
+
+  function masterHeaderRowHint(type) {
+    // Master Outlet mengikuti file asli: 3 baris pembuka, header di baris 4.
+    return type === "item" ? 0 : 3;
+  }
+
+  function masterHeaderScore(row, expected) {
+    if (!Array.isArray(row)) return -1;
+    let filled = 0;
+    let matched = 0;
+    row.forEach((value) => {
+      const key = jksNormalizeKey(String(value ?? "").trim());
+      if (!key) return;
+      filled += 1;
+      if (expected.has(key)) matched += 1;
+    });
+    if (filled < 2) return -1;
+    return matched;
+  }
+
+  function masterObjectsFromAoa(aoa, type) {
+    if (!Array.isArray(aoa) || !aoa.length) return [];
+    const expected = new Set(
+      masterHeadersFor(type).map((header) => jksNormalizeKey(header))
+    );
+    const scanLimit = Math.min(aoa.length, 20);
+    let headerIndex = -1;
+    let bestScore = -1;
+    for (let index = 0; index < scanLimit; index += 1) {
+      const score = masterHeaderScore(aoa[index], expected);
+      if (score < 0) continue;
+      if (score > bestScore) {
+        bestScore = score;
+        headerIndex = index;
+      }
+    }
+    // Jika tidak ada baris yang cocok dengan header yang dikenal, pakai baris
+    // default untuk tipe tersebut (Master Outlet baris 4), kalau kosong pakai
+    // baris pertama yang berisi data.
+    if (headerIndex < 0 || bestScore < 1) {
+      const hint = Math.min(masterHeaderRowHint(type), aoa.length - 1);
+      if (masterHeaderScore(aoa[hint], expected) >= 0) {
+        headerIndex = hint;
+      } else {
+        headerIndex = 0;
+        for (let index = 0; index < scanLimit; index += 1) {
+          if (masterHeaderScore(aoa[index], expected) >= 0) {
+            headerIndex = index;
+            break;
+          }
+        }
+      }
+    }
+    const headers = (aoa[headerIndex] || []).map((header) => String(header).trim());
+    if (!headers.some(Boolean)) return [];
+    return aoa
+      .slice(headerIndex + 1)
+      .map((values) => {
+        const object = {};
+        headers.forEach((header, index) => {
+          if (header) object[header] = values[index] ?? "";
+        });
+        return object;
+      })
+      .filter((object) =>
+        Object.values(object).some((value) => String(value).trim() !== "")
+      );
+  }
+
+  async function masterReadFile(file, type) {
+    const name = String(file.name || "").toLowerCase();
+    const extension = name.includes(".") ? name.split(".").pop() : "";
+
+    if (["xlsx", "xls", "xlsb"].includes(extension)) {
+      if (!window.XLSX || !window.XLSX.read) {
+        throw new Error("Pustaka Excel belum termuat. Periksa koneksi CDN.");
+      }
+      const buffer = await file.arrayBuffer();
+      const workbook = window.XLSX.read(new Uint8Array(buffer), {
+        type: "array",
+        cellDates: true,
+      });
+      const objects = [];
+      const sheets = [];
+      (workbook.SheetNames || []).forEach((sheetName) => {
+        const sheet = workbook.Sheets[sheetName];
+        if (!sheet) return;
+        const aoa = window.XLSX.utils.sheet_to_json(sheet, {
+          header: 1,
+          defval: "",
+          raw: true,
+          blankrows: false,
+        });
+        const rows = masterObjectsFromAoa(aoa, type);
+        if (rows.length) {
+          objects.push(...rows);
+          sheets.push(sheetName);
+        }
+      });
+      if (!objects.length) throw new Error("Tidak ada baris data pada file master.");
+      return { objects, sheets };
+    }
+
+    if (extension === "json") {
+      const text = await file.text();
+      let payload;
+      try {
+        payload = JSON.parse(text);
+      } catch (error) {
+        throw new Error("JSON tidak valid.");
+      }
+      const objects = jksObjectsFromJson(payload);
+      if (!objects.length) throw new Error("JSON tidak berisi daftar baris.");
+      return { objects, sheets: ["JSON"] };
+    }
+
+    if (extension === "csv") {
+      const text = (await file.text()).replace(/^\uFEFF/, "");
+      if (!text.trim()) throw new Error("File CSV kosong.");
+      const delimiter = jksDetectDelimiter(text);
+      const aoa = jksParseDelimited(text, delimiter);
+      const objects = masterObjectsFromAoa(aoa, type);
+      if (!objects.length) throw new Error("Tidak ada baris data pada file master.");
+      return { objects, sheets: ["CSV"] };
+    }
+
+    throw new Error("Format file tidak didukung. Gunakan .xlsx, .xls, .xlsb, .csv, atau .json.");
+  }
+
+  function analysisApplyMasters(row) {
+    const maps = masterState.maps;
+    if (!maps.outlet && !maps.item) return row;
+
+    const outletKey = String(row.outletCode || "").trim().toUpperCase();
+    const productKey = String(row.productCode || "").trim().toUpperCase();
+    const outlet = maps.outlet && outletKey ? maps.outlet[outletKey] : null;
+    const product = maps.item && productKey ? maps.item[productKey] : null;
+    if (!outlet && !product) return row;
+
+    const enriched = { ...row };
+    const isPlaceholder = (value, placeholder) => !value || value === placeholder;
+    const isEmpty = (value) => !value || String(value).trim() === "";
+
+    if (outlet) {
+      if (isPlaceholder(enriched.depo, "Tanpa depo") && outlet.depo) {
+        enriched.depo = outlet.depo;
+      }
+      if (isPlaceholder(enriched.channel, "Tanpa channel") && outlet.channel) {
+        enriched.channel = outlet.channel;
+      }
+      if (
+        (isPlaceholder(enriched.outletName, "Outlet tanpa nama") ||
+          enriched.outletName === enriched.outletCode) &&
+        outlet.name
+      ) {
+        enriched.outletName = outlet.name;
+      }
+      if (isEmpty(enriched.salesmanCode) && outlet.salesmanCode) {
+        enriched.salesmanCode = outlet.salesmanCode;
+      }
+      if (
+        (isPlaceholder(enriched.salesman, "Tanpa salesman") ||
+          enriched.salesman === enriched.salesmanCode) &&
+        outlet.salesman
+      ) {
+        enriched.salesman = outlet.salesman;
+      }
+      if (isPlaceholder(enriched.route, "Tanpa rute") && outlet.route) {
+        enriched.route = outlet.route;
+      }
+      if (isPlaceholder(row.divisi, "Tanpa divisi")) {
+        const fromMaster = outlet.divisi || "";
+        const divisi =
+          analysisNormalizeDivision(fromMaster) ||
+          analysisDivisionFromSalesman(enriched.salesman) ||
+          fromMaster ||
+          "";
+        if (divisi) enriched.divisi = divisi;
+      }
+    }
+
+    if (product) {
+      if (
+        (isPlaceholder(enriched.productName, "Produk tanpa nama") ||
+          enriched.productName === enriched.productCode) &&
+        product.name
+      ) {
+        enriched.productName = product.name;
+      }
+      if (product.category) {
+        const derivedCategory =
+          isPlaceholder(row.category, "Tanpa kategori") ||
+          row.category === row.productName ||
+          row.category === row.brand;
+        if (derivedCategory) enriched.category = product.category;
+      }
+    }
+
+    return enriched;
+  }
+
+  function analysisRenderDepoOptions(options) {
+    if (!els.analysisDepo) return;
+    const values = ["all", ...(options || []).filter((value) => value !== "all")];
+    if (!values.includes(analysisState.depo)) analysisState.depo = "all";
+    els.analysisDepo.replaceChildren(
+      ...values.map((value) => {
+        const option = document.createElement("option");
+        option.value = value;
+        option.textContent = value === "all" ? "Semua depo" : value;
+        return option;
+      })
+    );
+    els.analysisDepo.value = analysisState.depo;
+  }
+
+  function masterMergeMaps(type) {
+    const files = masterState.files[type] || [];
+    if (!files.length) return null;
+    const merged = {};
+    files.forEach((entry) => {
+      if (entry && entry.map) Object.assign(merged, entry.map);
+    });
+    return Object.keys(merged).length ? merged : null;
+  }
+
+  function masterRebuildMaps() {
+    masterState.maps = {
+      outlet: masterMergeMaps("outlet"),
+      item: masterMergeMaps("item"),
+    };
+  }
+
+  function masterFileRows(type) {
+    return (masterState.files[type] || []).reduce(
+      (total, entry) => total + (entry.count || 0),
+      0
+    );
+  }
+
+  function masterPayload() {
+    return {
+      version: 2,
+      savedAt: new Date().toISOString(),
+      type: masterState.type,
+      files: masterState.files,
+    };
+  }
+
+  async function masterPersist() {
+    const hasData = masterState.files.outlet.length || masterState.files.item.length;
+    try {
+      await analysisIdbWrite(ANALYSIS_MASTER_KEY, hasData ? masterPayload() : null);
+    } catch (error) {
+      masterState.notice = { kind: "warn", text: "Master data tidak bisa disimpan lokal." };
+    }
+  }
+
+  async function masterRestore() {
+    try {
+      const payload = await analysisIdbRead(ANALYSIS_MASTER_KEY);
+      if (!payload || !payload.files) return;
+      const normalize = (value) => (Array.isArray(value) ? value.filter(Boolean) : []);
+      masterState.files = {
+        outlet: normalize(payload.files.outlet),
+        item: normalize(payload.files.item),
+      };
+      if (payload.type && MASTER_TYPE_LABELS[payload.type]) {
+        masterState.type = payload.type;
+      }
+      masterRebuildMaps();
+    } catch (error) {
+      // Master data bersifat opsional; abaikan bila tidak bisa dipulihkan.
+    }
+  }
+
+  function masterRenderFiles() {
+    if (els.masterType) els.masterType.value = masterState.type;
+    const type = masterState.type;
+    const max = MASTER_MAX_FILES[type] || 6;
+    const files = masterState.files[type] || [];
+    if (els.masterFileCount) els.masterFileCount.textContent = `${files.length} / ${max}`;
+    if (els.masterOutletCount) {
+      els.masterOutletCount.textContent = `${masterState.files.outlet.length} / ${MASTER_MAX_FILES.outlet} · ${fmtNum(masterFileRows("outlet"))} baris`;
+    }
+    if (els.masterItemCount) {
+      els.masterItemCount.textContent = `${masterState.files.item.length} / ${MASTER_MAX_FILES.item} · ${fmtNum(masterFileRows("item"))} baris`;
+    }
+    if (els.masterDropHint) {
+      els.masterDropHint.textContent = files.length
+        ? `${files.length} file · ${fmtNum(masterFileRows(type))} baris`
+        : "Belum ada master";
+    }
+    if (els.masterFileList) {
+      const items = files.map((entry, index) => `
+        <div class="analysis-file-item">
+          <span class="analysis-file-icon">${type === "outlet" ? "OUT" : "ITM"}</span>
+          <div class="analysis-file-main">
+            <strong>${escapeHtml(entry.name)}</strong>
+            <span>${fmtNum(entry.count)} baris · ${analysisFormatBytes(entry.size)}</span>
+          </div>
+          <button class="analysis-file-remove" type="button" data-master-remove="${index}" aria-label="Hapus ${escapeHtml(entry.name)}">&times;</button>
+        </div>
+      `);
+      els.masterFileList.innerHTML = items.length
+        ? items.join("")
+        : `<p class="analysis-muted">Belum ada ${MASTER_TYPE_LABELS[type].toLowerCase()}.</p>`;
+    }
+    if (els.masterUploadStatus) {
+      const notice = masterState.notice;
+      els.masterUploadStatus.textContent = notice
+        ? notice.text
+        : `${MASTER_TYPE_LABELS[type]} dipakai untuk melengkapi kolom yang kosong dan disimpan lokal di perangkat ini.`;
+    }
+  }
+
+  async function masterApplyFile(fileList) {
+    if (masterState.loading) return;
+    const incoming = Array.from(fileList || []);
+    if (!incoming.length) return;
+    const type = masterState.type;
+    const max = MASTER_MAX_FILES[type] || 6;
+    const current = masterState.files[type] || [];
+    const room = max - current.length;
+    if (room <= 0) {
+      masterState.notice = {
+        kind: "warn",
+        text: `${MASTER_TYPE_LABELS[type]} sudah maksimal ${max} file. Hapus salah satu untuk menambah.`,
+      };
+      masterRenderFiles();
+      return;
+    }
+    const selected = incoming.slice(0, room);
+    const skipped = incoming.length - selected.length;
+    masterState.loading = true;
+    masterState.notice = { kind: "info", text: `Membaca ${selected.length} file…` };
+    masterRenderFiles();
+    let addedFiles = 0;
+    let addedRows = 0;
+    const failures = [];
+    for (const file of selected) {
+      try {
+        const parsed = await masterReadFile(file, type);
+        const built = masterBuildMap(type, parsed.objects);
+        if (!built.count) throw new Error("tidak ada baris dengan kode yang dikenali");
+        current.push({
+          name: file.name,
+          size: Number(file.size) || 0,
+          count: built.count,
+          sheets: parsed.sheets || [],
+          map: built.map,
+        });
+        addedFiles += 1;
+        addedRows += built.count;
+      } catch (error) {
+        failures.push(`${file.name}: ${analysisSafeError(error)}`);
+      }
+    }
+    masterState.files[type] = current;
+    masterRebuildMaps();
+    if (addedFiles && !failures.length) {
+      masterState.notice = {
+        kind: "success",
+        text: `${MASTER_TYPE_LABELS[type]} diperbarui: ${fmtNum(addedFiles)} file · ${fmtNum(addedRows)} baris${skipped ? ` · ${skipped} file dilewati (maks ${max})` : ""}.`,
+      };
+    } else if (addedFiles && failures.length) {
+      masterState.notice = {
+        kind: "warn",
+        text: `${fmtNum(addedFiles)} file ditambahkan, ${failures.length} gagal. ${failures[0]}`,
+      };
+    } else {
+      masterState.notice = { kind: "warn", text: `Gagal: ${failures[0] || "tidak ada file terbaca"}` };
+    }
+    try {
+      await masterPersist();
+    } finally {
+      masterState.loading = false;
+      masterRenderFiles();
+      analysisRefresh();
+      salesRefresh();
+    }
+  }
+
+  function masterRemove(index) {
+    const type = masterState.type;
+    const files = masterState.files[type] || [];
+    const idx = Number(index);
+    if (!Number.isInteger(idx) || idx < 0 || idx >= files.length) return;
+    const removed = files.splice(idx, 1)[0];
+    masterState.notice = {
+      kind: "info",
+      text: `${MASTER_TYPE_LABELS[type]} dihapus${removed ? `: ${removed.name}` : ""}.`,
+    };
+    masterRebuildMaps();
+    masterPersist();
+    masterRenderFiles();
+    analysisRefresh();
+    salesRefresh();
+  }
+
+  function masterReset() {
+    if (!masterState.files.outlet.length && !masterState.files.item.length) return;
+    if (typeof window.confirm === "function" && !window.confirm("Hapus semua master data?")) {
+      return;
+    }
+    masterState.files = { outlet: [], item: [] };
+    masterState.maps = { outlet: null, item: null };
+    masterState.notice = { kind: "info", text: "Semua master data dihapus." };
+    masterPersist();
+    masterRenderFiles();
+    analysisRefresh();
+    salesRefresh();
+  }
+
+  function masterHeadersFor(type) {
+    return type === "item" ? MASTER_ITEM_HEADERS : MASTER_OUTLET_HEADERS;
+  }
+
+  function masterTemplateAoa(type) {
+    const headers = masterHeadersFor(type);
+    if (type === "item") return [headers];
+    // Template Master Outlet: header berada di baris 4 (3 baris pembuka).
+    return [
+      ["MASTER OUTLET"],
+      ["Header kolom ada di baris 4. Jangan menghapus 3 baris di atas."],
+      [""],
+      headers,
+    ];
+  }
+
+  function downloadMasterTemplate() {
+    const type = masterState.type;
+    const headers = masterHeadersFor(type);
+    const aoa = masterTemplateAoa(type);
+    const fileBase = type === "item" ? "template-master-item" : "template-master-outlet";
+    const sheetName = type === "item" ? "MASTER ITEM" : "MASTER OUTLET";
+    const XLSX = window.XLSX;
+    if (XLSX && XLSX.utils && typeof XLSX.writeFile === "function") {
+      const sheet = XLSX.utils.aoa_to_sheet(aoa);
+      sheet["!cols"] = headers.map((header) => ({
+        wch: Math.max(12, Math.min(26, String(header).length + 4)),
+      }));
+      const workbook = XLSX.utils.book_new();
+      XLSX.utils.book_append_sheet(workbook, sheet, sheetName);
+      XLSX.writeFile(workbook, `${fileBase}.xlsx`);
+      return "excel";
+    }
+    jksDownload(`${fileBase}.csv`, analysisAoaToCsv(aoa));
+    return "csv";
+  }
+
+
+  function stokNum(value) {
+    if (typeof value === "number") return Number.isFinite(value) ? value : 0;
+    let text = String(value ?? "").trim();
+    if (!text) return 0;
+    text = text.replace(/[\s\u00a0]/g, "");
+    const hasDot = text.includes(".");
+    const hasComma = text.includes(",");
+    if (hasDot && hasComma) text = text.replace(/\./g, "").replace(",", ".");
+    else if (hasComma) text = text.replace(",", ".");
+    const num = Number(text.replace(/[^0-9.\-]/g, ""));
+    return Number.isFinite(num) ? num : 0;
+  }
+
+  function stokRound(value) {
+    return Math.round((Number(value) || 0) * 10) / 10;
+  }
+
+  function stokFmtQty(value) {
+    const num = Number(value) || 0;
+    return Number.isInteger(num)
+      ? num.toLocaleString("id-ID", { maximumFractionDigits: 0 })
+      : num.toLocaleString("id-ID", { maximumFractionDigits: 2 });
+  }
+
+  function stokFmtDoi(value) {
+    const num = Number(value) || 0;
+    if (!num) return "0";
+    return num.toLocaleString("id-ID", { maximumFractionDigits: 1 });
+  }
+
+  function stokLimitNote(total, shownCount) {
+    return total > shownCount ? ` · tampil ${fmtNum(shownCount)}` : "";
+  }
+
+  function stokDepoLabel(code) {
+    const name = STOK_DEPO_NAMES[code];
+    return name && name !== code ? `${code} · ${name}` : code;
+  }
+
+  function stokStatus(doi) {
+    const value = Number(doi) || 0;
+    if (value <= 0) return "empty";
+    if (value < STOK_DOI_CRITICAL) return "critical";
+    if (value > STOK_DOI_AMAN) return "aman";
+    return "normal";
+  }
+
+  function stokParseAoa(aoa) {
+    if (!Array.isArray(aoa) || !aoa.length) return { items: [], count: 0 };
+    const norm = (value) => String(value ?? "").toUpperCase().replace(/\s+/g, " ").trim();
+    let headerIndex = -1;
+    for (let index = 0; index < Math.min(aoa.length, 25); index += 1) {
+      const row = aoa[index];
+      if (Array.isArray(row) && row.some((cell) => norm(cell).includes("KODE ITEM"))) {
+        headerIndex = index;
+        break;
+      }
+    }
+    if (headerIndex < 0) {
+      for (let index = 0; index < Math.min(aoa.length, 25); index += 1) {
+        const row = aoa[index];
+        if (Array.isArray(row) && row.some((cell) => norm(cell).includes("ITEM PRODUK"))) {
+          headerIndex = index;
+          break;
+        }
+      }
+    }
+    if (headerIndex < 0) return { items: [], count: 0 };
+
+    const headers = (aoa[headerIndex] || []).map(norm);
+    const codeCol = headers.findIndex((header) => header.includes("KODE ITEM"));
+    const nameCol = headers.findIndex((header) => header.includes("ITEM PRODUK"));
+    const catCol = headers.findIndex((header) => header.includes("KATEGORI"));
+    const biCol = headers.findIndex((header) => header === "BI");
+    const cols = {};
+    headers.forEach((header, index) => {
+      if (header.includes("LDC")) {
+        const entry = cols.LDC || (cols.LDC = {});
+        if (header.includes("SELLOUT")) entry.sellout = index;
+        else if (header.includes("DOI")) entry.doi = index;
+        return;
+      }
+      if (STOK_DEPO_CODES.includes(header)) {
+        const entry = { stock: index };
+        if (headers[index + 1] && headers[index + 1].includes("SELLOUT")) {
+          entry.sellout = index + 1;
+          if (headers[index + 2] && headers[index + 2].includes("DOI")) entry.doi = index + 2;
+        }
+        cols[header] = entry;
+      }
+    });
+
+    const items = [];
+    for (let rowIndex = headerIndex + 1; rowIndex < aoa.length; rowIndex += 1) {
+      const row = aoa[rowIndex];
+      if (!Array.isArray(row)) continue;
+      const code = codeCol >= 0 ? String(row[codeCol] ?? "").trim() : "";
+      const name = nameCol >= 0 ? String(row[nameCol] ?? "").trim() : "";
+      if (!code && !name) continue;
+      // Kolom "BI": nilainya dipakai untuk menyaring item (harus > 1) saat ditampilkan.
+      const bi = biCol >= 0 ? stokNum(row[biCol]) : null;
+      const depos = {};
+      STOK_DEPO_CODES.forEach((depo) => {
+        const col = cols[depo];
+        if (!col) return;
+        const stock = col.stock != null ? stokNum(row[col.stock]) : 0;
+        const sellout = col.sellout != null ? stokNum(row[col.sellout]) : 0;
+        let doi = col.doi != null ? stokNum(row[col.doi]) : 0;
+        if (!doi && stock > 0 && sellout > 0) doi = stock / sellout;
+        if (stock <= 0 && sellout <= 0 && doi <= 0) return;
+        depos[depo] = { stock, sellout, doi: stokRound(doi) };
+      });
+      if (!Object.keys(depos).length) continue;
+      items.push({
+        code: code || name,
+        name: name || code,
+        category: catCol >= 0 ? String(row[catCol] ?? "").trim() : "",
+        bi,
+        depos,
+      });
+    }
+    return { items, count: items.length };
+  }
+
+  async function stokReadAoa(file) {
+    const name = String(file.name || "").toLowerCase();
+    const extension = name.includes(".") ? name.split(".").pop() : "";
+    if (["xlsx", "xls", "xlsb"].includes(extension)) {
+      if (!window.XLSX || !window.XLSX.read) {
+        throw new Error("Pustaka Excel belum termuat. Periksa koneksi CDN.");
+      }
+      const buffer = await file.arrayBuffer();
+      const workbook = window.XLSX.read(new Uint8Array(buffer), { type: "array", cellDates: true });
+      const list = [];
+      (workbook.SheetNames || []).forEach((sheetName) => {
+        const sheet = workbook.Sheets[sheetName];
+        if (!sheet) return;
+        const aoa = window.XLSX.utils.sheet_to_json(sheet, {
+          header: 1,
+          defval: "",
+          raw: true,
+          blankrows: false,
+        });
+        if (aoa && aoa.length) list.push(aoa);
+      });
+      if (!list.length) throw new Error("Tidak ada baris data pada file stok.");
+      return list;
+    }
+    if (extension === "json") {
+      const text = await file.text();
+      let payload;
+      try {
+        payload = JSON.parse(text);
+      } catch (error) {
+        throw new Error("JSON tidak valid.");
+      }
+      const objects = jksObjectsFromJson(payload);
+      if (!objects.length) throw new Error("JSON tidak berisi daftar baris.");
+      const headers = Object.keys(objects[0]);
+      const aoa = [headers, ...objects.map((object) => headers.map((header) => object[header] ?? ""))];
+      return [aoa];
+    }
+    if (extension === "csv") {
+      const text = (await file.text()).replace(/^\uFEFF/, "");
+      if (!text.trim()) throw new Error("File CSV kosong.");
+      const delimiter = jksDetectDelimiter(text);
+      const aoa = jksParseDelimited(text, delimiter);
+      if (!aoa.length) throw new Error("Tidak ada baris data pada file stok.");
+      return [aoa];
+    }
+    throw new Error("Format file tidak didukung. Gunakan .xlsx, .xls, .xlsb, .csv, atau .json.");
+  }
+
+  function stokMergedItems() {
+    const map = new Map();
+    stokState.files.forEach((file) => {
+      (file.items || []).forEach((item) => {
+        const key = String(item.code || item.name || "").toUpperCase();
+        if (!key) return;
+        const existing = map.get(key);
+        if (existing) {
+          Object.assign(existing.depos, item.depos);
+          if ((!existing.name || existing.name === existing.code) && item.name) existing.name = item.name;
+          if (!existing.category && item.category) existing.category = item.category;
+          if (item.bi != null && (existing.bi == null || item.bi > existing.bi)) existing.bi = item.bi;
+        } else {
+          map.set(key, { ...item, depos: { ...item.depos } });
+        }
+      });
+    });
+    return Array.from(map.values())
+      .filter((item) => item.bi == null || item.bi > STOK_BI_MIN)
+      .sort((left, right) =>
+        String(left.name).localeCompare(String(right.name), "id")
+      );
+  }
+
+  function stokAvailableDepos(items) {
+    const present = new Set();
+    items.forEach((item) => Object.keys(item.depos).forEach((depo) => present.add(depo)));
+    return STOK_DEPO_CODES.filter((depo) => present.has(depo));
+  }
+
+  function stokRenderFiles() {
+    const totalItems = stokState.files.reduce((total, file) => total + (file.count || 0), 0);
+    if (els.stokFileCount) els.stokFileCount.textContent = `${stokState.files.length} / ${STOK_MAX_FILES}`;
+    if (els.stokFileHero) els.stokFileHero.textContent = `${stokState.files.length} / ${STOK_MAX_FILES}`;
+    if (els.stokDropHint) {
+      els.stokDropHint.textContent = stokState.files.length
+        ? `${stokState.files.length} file · ${fmtNum(totalItems)} item`
+        : "Belum ada data";
+    }
+    if (els.stokFileList) {
+      const items = stokState.files.map((file, index) => `
+        <div class="analysis-file-item">
+          <span class="analysis-file-icon">STK</span>
+          <div class="analysis-file-main">
+            <strong>${escapeHtml(file.name)}</strong>
+            <span>${fmtNum(file.count)} item · ${analysisFormatBytes(file.size)}</span>
+          </div>
+          <button class="analysis-file-remove" type="button" data-stok-remove="${index}" aria-label="Hapus ${escapeHtml(file.name)}">&times;</button>
+        </div>
+      `);
+      els.stokFileList.innerHTML = items.length
+        ? items.join("")
+        : `<p class="analysis-muted">Belum ada data stok.</p>`;
+    }
+    if (els.stokUploadStatus) {
+      const notice = stokState.notice;
+      els.stokUploadStatus.textContent = notice
+        ? notice.text
+        : "Data diproses di browser dan disimpan lokal di perangkat ini.";
+    }
+  }
+
+  function stokRenderEmpty() {
+    if (els.stokResults) els.stokResults.classList.add("hidden");
+    if (els.stokEmpty) els.stokEmpty.classList.remove("hidden");
+    if (els.stokItemHero) els.stokItemHero.textContent = "0";
+    if (els.stokCriticalHero) els.stokCriticalHero.textContent = "0";
+    if (els.stokAmanHero) els.stokAmanHero.textContent = "0";
+    if (els.stokSub) {
+      els.stokSub.textContent =
+        "Analisa Days of Inventory (DOI) per depo: daftar item critical & aman, serta saran intra-barang dari depo terdekat.";
+    }
+  }
+
+  function stokRenderDepoOptions(depos) {
+    if (!els.stokDepo) return;
+    const values = ["all", ...depos];
+    if (!values.includes(stokState.depo)) stokState.depo = "all";
+    els.stokDepo.replaceChildren(
+      ...values.map((value) => {
+        const option = document.createElement("option");
+        option.value = value;
+        option.textContent = value === "all" ? "Semua depo" : stokDepoLabel(value);
+        return option;
+      })
+    );
+    els.stokDepo.value = stokState.depo;
+  }
+
+  function stokDoiCell(cell) {
+    if (!cell) return `<td class="num stok-doi is-empty">&mdash;</td>`;
+    const status = stokStatus(cell.doi);
+    return `<td class="num stok-doi is-${status}">${stokFmtDoi(cell.doi)}</td>`;
+  }
+
+  function stokListRow(item, depo, cell, extraClass) {
+    return `
+      <div class="stok-list-item ${extraClass || ""}">
+        <div class="stok-list-main">
+          <strong>${escapeHtml(item.name)}</strong>
+          <span class="analysis-sub">${escapeHtml(item.code)}${item.category ? ` · ${escapeHtml(item.category)}` : ""}</span>
+        </div>
+        <div class="stok-list-meta">
+          <span class="stok-chip" title="${escapeHtml(stokDepoLabel(depo))}">${escapeHtml(depo)}</span>
+          <span class="stok-list-num">DOI ${stokFmtDoi(cell.doi)} h</span>
+          <span class="stok-list-num">Stok ${stokFmtQty(cell.stock)}</span>
+          <span class="stok-list-num">SO ${stokFmtQty(cell.sellout)}</span>
+        </div>
+      </div>
+    `;
+  }
+
+  function stokRenderTable(items, visibleDepos) {
+    if (els.stokTableHead) {
+      const head = `
+        <tr>
+          <th rowspan="2">#</th>
+          <th rowspan="2">Item</th>
+          <th rowspan="2">Kategori</th>
+          ${visibleDepos.map((depo) => `<th colspan="3" class="stok-depo-head" title="${escapeHtml(stokDepoLabel(depo))}">${escapeHtml(depo)}</th>`).join("")}
+        </tr>
+        <tr>
+          ${visibleDepos.map(() => `<th class="num">Stok</th><th class="num">SO</th><th class="num">DOI</th>`).join("")}
+        </tr>
+      `;
+      els.stokTableHead.innerHTML = head;
+    }
+    if (!els.stokTableBody) return;
+    const limit = 200;
+    const shown = items.slice(0, limit);
+    if (els.stokTableInfo) {
+      els.stokTableInfo.textContent = `${fmtNum(items.length)} item${items.length > limit ? ` · tampil ${limit} pertama` : ""}`;
+    }
+    if (!shown.length) {
+      els.stokTableBody.innerHTML = `<tr><td colspan="${3 + visibleDepos.length * 3}"><div class="table-loading">Tidak ada item untuk filter ini.</div></td></tr>`;
+      return;
+    }
+    els.stokTableBody.innerHTML = shown.map((item, index) => {
+      const cells = visibleDepos.map((depo) => {
+        const cell = item.depos[depo];
+        if (!cell) {
+          return `<td class="num">&mdash;</td><td class="num">&mdash;</td><td class="num stok-doi is-empty">&mdash;</td>`;
+        }
+        return `<td class="num">${stokFmtQty(cell.stock)}</td><td class="num">${stokFmtQty(cell.sellout)}</td>${stokDoiCell(cell)}`;
+      }).join("");
+      return `
+        <tr>
+          <td>${index + 1}</td>
+          <td><strong>${escapeHtml(item.name)}</strong><span class="analysis-sub">${escapeHtml(item.code)}</span></td>
+          <td>${escapeHtml(item.category || "—")}</td>
+          ${cells}
+        </tr>
+      `;
+    }).join("");
+  }
+
+  function stokRenderCritical(items, visibleDepos) {
+    const rows = [];
+    items.forEach((item) => {
+      visibleDepos.forEach((depo) => {
+        const cell = item.depos[depo];
+        if (cell && stokStatus(cell.doi) === "critical") rows.push({ item, depo, cell });
+      });
+    });
+    rows.sort((left, right) => left.cell.doi - right.cell.doi);
+    const limit = Number(stokState.limits.critical) || 0;
+    const shown = limit > 0 ? rows.slice(0, limit) : rows;
+    if (els.stokCriticalInfo) {
+      els.stokCriticalInfo.textContent = `${fmtNum(rows.length)} baris · DOI < ${STOK_DOI_CRITICAL} h${stokLimitNote(rows.length, shown.length)}`;
+    }
+    if (els.stokCriticalList) {
+      els.stokCriticalList.innerHTML = shown.length
+        ? shown.map((row) => stokListRow(row.item, row.depo, row.cell, "is-critical")).join("")
+        : `<p class="analysis-muted">Tidak ada item critical.</p>`;
+    }
+  }
+
+  function stokRenderAman(items, visibleDepos) {
+    const rows = [];
+    items.forEach((item) => {
+      visibleDepos.forEach((depo) => {
+        const cell = item.depos[depo];
+        if (cell && stokStatus(cell.doi) === "aman") rows.push({ item, depo, cell });
+      });
+    });
+    rows.sort((left, right) => right.cell.doi - left.cell.doi);
+    const limit = Number(stokState.limits.aman) || 0;
+    const shown = limit > 0 ? rows.slice(0, limit) : rows;
+    if (els.stokAmanInfo) {
+      els.stokAmanInfo.textContent = `${fmtNum(rows.length)} baris · DOI > ${STOK_DOI_AMAN} h${stokLimitNote(rows.length, shown.length)}`;
+    }
+    if (els.stokAmanList) {
+      els.stokAmanList.innerHTML = shown.length
+        ? shown.map((row) => stokListRow(row.item, row.depo, row.cell, "is-aman")).join("")
+        : `<p class="analysis-muted">Tidak ada item aman/surplus.</p>`;
+    }
+  }
+
+  function stokRenderSaran(items, filterDepo) {
+    const rows = [];
+    items.forEach((item) => {
+      STOK_REGIONS.forEach((region) => {
+        const present = region.depos.filter((depo) => item.depos[depo]);
+        const surplus = present.filter((depo) => stokStatus(item.depos[depo].doi) === "aman");
+        const critical = present.filter(
+          (depo) =>
+            stokStatus(item.depos[depo].doi) === "critical" &&
+            (filterDepo === "all" || depo === filterDepo)
+        );
+        if (!surplus.length || !critical.length) return;
+        critical.forEach((toDepo) => {
+          surplus.forEach((fromDepo) => {
+            rows.push({
+              item,
+              region: region.name,
+              fromDepo,
+              fromCell: item.depos[fromDepo],
+              toDepo,
+              toCell: item.depos[toDepo],
+            });
+          });
+        });
+      });
+    });
+    rows.sort((left, right) => right.fromCell.stock - left.fromCell.stock);
+    const limit = Number(stokState.limits.saran) || 0;
+    const shown = limit > 0 ? rows.slice(0, limit) : rows;
+    if (els.stokSaranInfo) {
+      els.stokSaranInfo.textContent = `${fmtNum(rows.length)} saran${stokLimitNote(rows.length, shown.length)}`;
+    }
+    if (els.stokSaranList) {
+      els.stokSaranList.innerHTML = shown.length
+        ? shown.map((row) => `
+          <div class="stok-list-item">
+            <div class="stok-list-main">
+              <strong>${escapeHtml(row.item.name)}</strong>
+              <span class="analysis-sub">${escapeHtml(row.item.code)} · ${escapeHtml(row.region)}</span>
+            </div>
+            <div class="stok-list-meta">
+              <span class="stok-list-num">Kirim dari <strong>${escapeHtml(row.fromDepo)}</strong> (DOI ${stokFmtDoi(row.fromCell.doi)} h · stok ${stokFmtQty(row.fromCell.stock)})</span>
+              <span class="stok-list-num">&rarr; <strong>${escapeHtml(row.toDepo)}</strong> (DOI ${stokFmtDoi(row.toCell.doi)} h)</span>
+            </div>
+          </div>
+        `).join("")
+        : `<p class="analysis-muted">Belum ada saran (butuh depo critical &amp; depo surplus pada wilayah yang sama).</p>`;
+    }
+  }
+
+  function stokSyncLimitControls() {
+    if (els.stokCriticalLimit) els.stokCriticalLimit.value = String(stokState.limits.critical);
+    if (els.stokAmanLimit) els.stokAmanLimit.value = String(stokState.limits.aman);
+    if (els.stokSaranLimit) els.stokSaranLimit.value = String(stokState.limits.saran);
+  }
+
+  function stokRefresh() {
+    stokRenderFiles();
+    stokSyncLimitControls();
+    if (!stokState.files.length) {
+      stokRenderEmpty();
+      stokRenderDepoOptions([]);
+      return;
+    }
+    const allItems = stokMergedItems();
+    if (!allItems.length) {
+      stokRenderEmpty();
+      stokRenderDepoOptions([]);
+      return;
+    }
+
+    const available = stokAvailableDepos(allItems);
+    stokRenderDepoOptions(available);
+    const filterDepo =
+      stokState.depo !== "all" && available.includes(stokState.depo) ? stokState.depo : "all";
+    const visibleDepos = filterDepo === "all" ? available : [filterDepo];
+    const items = filterDepo === "all"
+      ? allItems
+      : allItems.filter((item) => item.depos[filterDepo]);
+
+    if (els.stokResults) els.stokResults.classList.remove("hidden");
+    if (els.stokEmpty) els.stokEmpty.classList.add("hidden");
+
+    let criticalItems = 0;
+    let amanItems = 0;
+    items.forEach((item) => {
+      let isCritical = false;
+      let isAman = false;
+      visibleDepos.forEach((depo) => {
+        const cell = item.depos[depo];
+        if (!cell) return;
+        const status = stokStatus(cell.doi);
+        if (status === "critical") isCritical = true;
+        if (status === "aman") isAman = true;
+      });
+      if (isCritical) criticalItems += 1;
+      if (isAman) amanItems += 1;
+    });
+
+    if (els.stokItemHero) els.stokItemHero.textContent = fmtNum(items.length);
+    if (els.stokCriticalHero) els.stokCriticalHero.textContent = fmtNum(criticalItems);
+    if (els.stokAmanHero) els.stokAmanHero.textContent = fmtNum(amanItems);
+    if (els.stokSub) {
+      els.stokSub.textContent = `${fmtNum(items.length)} item · ${visibleDepos.length} depo · DOI critical < ${STOK_DOI_CRITICAL} hari · DOI aman > ${STOK_DOI_AMAN} hari.`;
+    }
+
+    if (els.stokKpiItems) els.stokKpiItems.textContent = fmtNum(items.length);
+    if (els.stokKpiItemsSub) {
+      els.stokKpiItemsSub.textContent = filterDepo === "all" ? "semua depo" : `depo ${filterDepo}`;
+    }
+    if (els.stokKpiCritical) els.stokKpiCritical.textContent = fmtNum(criticalItems);
+    if (els.stokKpiAman) els.stokKpiAman.textContent = fmtNum(amanItems);
+    if (els.stokKpiDepos) els.stokKpiDepos.textContent = fmtNum(visibleDepos.length);
+    if (els.stokKpiDeposSub) els.stokKpiDeposSub.textContent = `${fmtNum(stokState.files.length)} file`;
+
+    stokRenderTable(items, visibleDepos);
+    stokRenderCritical(items, visibleDepos);
+    stokRenderAman(items, visibleDepos);
+    stokRenderSaran(items, filterDepo);
+
+    if (els.stokFootNote) {
+      els.stokFootNote.textContent = `${fmtNum(stokState.files.length)} file · ${fmtNum(items.length)} item · ${visibleDepos.length} depo · DOI critical < ${STOK_DOI_CRITICAL}, aman > ${STOK_DOI_AMAN} hari`;
+    }
+  }
+
+  async function stokPersist() {
+    try {
+      await analysisIdbWrite(
+        STOK_KEY,
+        stokState.files.length
+          ? { version: 1, savedAt: new Date().toISOString(), files: stokState.files }
+          : null
+      );
+    } catch (error) {
+      stokState.storageError = "Data stok tidak bisa disimpan lokal.";
+    }
+  }
+
+  async function stokRestore() {
+    try {
+      const payload = await analysisIdbRead(STOK_KEY);
+      if (!payload || !Array.isArray(payload.files)) return false;
+      stokState.files = payload.files.filter(Boolean);
+      return stokState.files.length > 0;
+    } catch (error) {
+      return false;
+    }
+  }
+
+  async function stokApplyFile(fileList) {
+    if (stokState.loading) return;
+    const incoming = Array.from(fileList || []);
+    if (!incoming.length) return;
+    const room = STOK_MAX_FILES - stokState.files.length;
+    if (room <= 0) {
+      stokState.notice = {
+        kind: "warn",
+        text: `Maksimal ${STOK_MAX_FILES} file. Hapus salah satu untuk menambah.`,
+      };
+      stokRenderFiles();
+      return;
+    }
+    const selected = incoming.slice(0, room);
+    const skipped = incoming.length - selected.length;
+    stokState.loading = true;
+    stokState.notice = { kind: "info", text: `Membaca ${selected.length} file…` };
+    stokRenderFiles();
+    let added = 0;
+    let addedItems = 0;
+    const failures = [];
+    for (const file of selected) {
+      try {
+        const aoaList = await stokReadAoa(file);
+        let fileItems = [];
+        aoaList.forEach((aoa) => {
+          const parsed = stokParseAoa(aoa);
+          if (parsed.items.length) fileItems = fileItems.concat(parsed.items);
+        });
+        if (!fileItems.length) throw new Error("tidak ada baris item yang dikenali");
+        stokState.files.push({
+          name: file.name,
+          size: Number(file.size) || 0,
+          count: fileItems.length,
+          items: fileItems,
+        });
+        added += 1;
+        addedItems += fileItems.length;
+      } catch (error) {
+        failures.push(`${file.name}: ${analysisSafeError(error)}`);
+      }
+    }
+    if (added && !failures.length) {
+      stokState.notice = {
+        kind: "success",
+        text: `Data stok diperbarui: ${fmtNum(added)} file · ${fmtNum(addedItems)} item${skipped ? ` · ${skipped} file dilewati (maks ${STOK_MAX_FILES})` : ""}.`,
+      };
+    } else if (added) {
+      stokState.notice = {
+        kind: "warn",
+        text: `${fmtNum(added)} file ditambahkan, ${failures.length} gagal. ${failures[0]}`,
+      };
+    } else {
+      stokState.notice = { kind: "warn", text: `Gagal: ${failures[0] || "tidak ada file terbaca"}` };
+    }
+    try {
+      await stokPersist();
+    } finally {
+      stokState.loading = false;
+      if (els.stokFileInput) els.stokFileInput.value = "";
+      stokRefresh();
+    }
+  }
+
+  function stokRemove(index) {
+    const idx = Number(index);
+    if (!Number.isInteger(idx) || idx < 0 || idx >= stokState.files.length) return;
+    const removed = stokState.files.splice(idx, 1)[0];
+    stokState.notice = { kind: "info", text: `File dihapus${removed ? `: ${removed.name}` : ""}.` };
+    stokPersist();
+    stokRefresh();
+  }
+
+  function stokReset() {
+    if (!stokState.files.length) return;
+    if (typeof window.confirm === "function" && !window.confirm("Hapus semua data stok gudang?")) {
+      return;
+    }
+    stokState.files = [];
+    stokState.notice = { kind: "info", text: "Semua data stok dihapus." };
+    stokPersist();
+    stokRefresh();
+  }
+
+  function downloadStokTemplate() {
+    const headers = STOK_TEMPLATE_HEADERS;
+    const XLSX = window.XLSX;
+    if (XLSX && XLSX.utils && typeof XLSX.writeFile === "function") {
+      const sheet = XLSX.utils.aoa_to_sheet([headers]);
+      sheet["!cols"] = headers.map((header) => ({
+        wch: Math.max(9, Math.min(20, String(header).length + 3)),
+      }));
+      const workbook = XLSX.utils.book_new();
+      XLSX.utils.book_append_sheet(workbook, sheet, "STOK GUDANG");
+      XLSX.writeFile(workbook, "template-stok-gudang.xlsx");
+      return "excel";
+    }
+    jksDownload("template-stok-gudang.csv", analysisAoaToCsv([headers]));
+    return "csv";
+  }
+
   function analysisBuildData() {
     const allRows = [];
-    analysisState.files.forEach((file) => allRows.push(...file.rows));
+    analysisState.files.forEach((file) => {
+      file.rows.forEach((row) => allRows.push(analysisApplyMasters(row)));
+    });
     const invalidRows = analysisState.files.reduce((total, file) => total + file.invalid, 0);
 
     if (!allRows.length) {
@@ -13006,10 +14680,21 @@ legendControl.addTo(map);
     }
     analysisState.divisiOptions = divisiOptions;
 
-    const filteredRows =
-      analysisState.divisi === "all"
-        ? workingRows
-        : workingRows.filter((row) => row.divisi === analysisState.divisi);
+    const depoOptions = Array.from(
+      new Set(workingRows.map((row) => row.depo).filter(Boolean))
+    ).sort((left, right) => left.localeCompare(right));
+    if (analysisState.depo !== "all" && !depoOptions.includes(analysisState.depo)) {
+      analysisState.depo = "all";
+    }
+    analysisState.depoOptions = depoOptions;
+
+    let filteredRows = workingRows;
+    if (analysisState.divisi !== "all") {
+      filteredRows = filteredRows.filter((row) => row.divisi === analysisState.divisi);
+    }
+    if (analysisState.depo !== "all") {
+      filteredRows = filteredRows.filter((row) => row.depo === analysisState.depo);
+    }
 
     let anchorMaxDataHk = 0;
     filteredRows.forEach((row) => {
@@ -13155,6 +14840,8 @@ legendControl.addTo(map);
       period: analysisState.period,
       divisi: analysisState.divisi,
       divisiOptions,
+      depo: analysisState.depo,
+      depoOptions,
       periodRows,
       mtdRows,
       previousRows: previousMonthRows,
@@ -13315,6 +15002,7 @@ legendControl.addTo(map);
       els.analysisFileCountHero.textContent = `${analysisState.files.length} / ${ANALYSIS_MAX_FILES}`;
     }
     analysisRenderDivisiOptions([]);
+    analysisRenderDepoOptions([]);
   }
 
   const ANALYSIS_DB_NAME = "analisaPenjualanLocalDB";
@@ -13687,6 +15375,52 @@ legendControl.addTo(map);
     return `${number >= 0 ? "+" : "-"}${fmtRp(Math.abs(number))}`;
   }
 
+  function analysisRenderDepoRecap(body, items, options = {}) {
+    if (!body) return;
+    const list = items || [];
+    const hk = Math.max(1, Number(options.hk) || 1);
+    const totalMtd = Number(options.totalMtd) || 0;
+    const previousAvailable = options.previousAvailable !== false;
+    const comparisonAvailable = options.comparisonAvailable !== false;
+
+    if (!list.length) {
+      body.innerHTML = analysisEmptyRow(8);
+      return;
+    }
+
+    const rows = list.map((item, index) => {
+      const share = totalMtd > 0 ? (item.mtdNet / totalMtd) * 100 : 0;
+      const perHk = item.mtdNet / hk;
+      return `
+        <tr>
+          <td class="analysis-rank">${index + 1}</td>
+          <td><div class="analysis-name">${escapeHtml(item.name || "—")}</div></td>
+          <td class="num">${fmtRp(item.mtdNet)}</td>
+          <td class="num">${fmtRp(perHk)}</td>
+          ${analysisDeltaCell(item.mtdNet, item.previousNet, previousAvailable)}
+          <td class="num">${comparisonAvailable ? fmtRp(item.periodNet) : "—"}</td>
+          <td class="num">${fmtNum(item.mtdOutlets)}</td>
+          ${analysisShareCell(share)}
+        </tr>
+      `;
+    });
+
+    const totalRow = `
+      <tr class="analysis-recap-total">
+        <td class="analysis-rank">&Sigma;</td>
+        <td><div class="analysis-name">Semua depo</div></td>
+        <td class="num">${fmtRp(totalMtd)}</td>
+        <td class="num">${fmtRp(totalMtd / hk)}</td>
+        ${analysisDeltaCell(totalMtd, options.previousNet, previousAvailable)}
+        <td class="num">${comparisonAvailable ? fmtRp(options.totalNet || 0) : "—"}</td>
+        <td class="num">${fmtNum(options.totalOutlets || 0)}</td>
+        ${analysisShareCell(100)}
+      </tr>
+    `;
+
+    body.innerHTML = rows.join("") + totalRow;
+  }
+
   function analysisRenderCompareTable(body, items, options = {}) {
     if (!body) return;
     const top = (items || []).slice(0, options.limit || 10);
@@ -14032,9 +15766,20 @@ legendControl.addTo(map);
     if (els.analysisResults) els.analysisResults.classList.remove("hidden");
     if (els.analysisEmpty) els.analysisEmpty.classList.add("hidden");
 
+    const mode = analysisState.mode === "cabang" ? "cabang" : "depo";
+    const dimLabel = mode === "cabang" ? "Depo" : "Salesman";
+    const dimItems = mode === "cabang" ? data.depos : data.salesmen;
+    const dimSub = mode === "cabang"
+      ? (item) => `${fmtNum(item.mtdOutlets)} outlet`
+      : (item) => [item.code, item.divisi, `${fmtNum(item.mtdOutlets)} outlet`]
+        .filter(Boolean)
+        .join(" · ");
+
     const period = Math.max(1, Math.min(6, Math.round(Number(data.period) || analysisState.period || 1)));
     const divisiLabel = data.divisi === "all" ? "Semua divisi" : `Divisi ${data.divisi}`;
+    const depoLabel = data.depo === "all" ? "Semua depo" : `Depo ${data.depo}`;
     analysisRenderDivisiOptions(data.divisiOptions);
+    analysisRenderDepoOptions(data.depoOptions);
     const anchorSuffix = data.anchorIsCurrent ? "" : " (bulan data terakhir)";
     if (els.analysisAnchor) {
       els.analysisAnchor.textContent = `${data.anchor.label} · HK ${data.hk}${anchorSuffix}`;
@@ -14042,7 +15787,7 @@ legendControl.addTo(map);
     if (els.analysisDivisiHero) els.analysisDivisiHero.textContent = divisiLabel;
     if (els.analysisHkHero) els.analysisHkHero.textContent = `HK ${data.hk}`;
     if (els.analysisSub) {
-      els.analysisSub.textContent = `Bulan acuan ${data.anchor.label}${anchorSuffix} · ${analysisPeriodText(period)} · ${divisiLabel} · omset gross sampai HK ${data.hk}.`;
+      els.analysisSub.textContent = `Bulan acuan ${data.anchor.label}${anchorSuffix} · ${analysisPeriodText(period)} · ${divisiLabel} · ${depoLabel} · omset gross sampai HK ${data.hk}.`;
     }
     if (els.analysisHkInput) {
       els.analysisHkInput.max = String(Math.max(1, data.maxHk));
@@ -14051,7 +15796,7 @@ legendControl.addTo(map);
       }
     }
     if (els.analysisPeriodLabel) {
-      els.analysisPeriodLabel.textContent = `${analysisPeriodText(period)} · ${divisiLabel} · HK ${data.hk}`;
+      els.analysisPeriodLabel.textContent = `${analysisPeriodText(period)} · ${divisiLabel} · ${depoLabel} · HK ${data.hk}`;
     }
 
     const growth = data.anchor.available && data.previous && data.previous.available && data.previous.net > 0
@@ -14163,12 +15908,25 @@ legendControl.addTo(map);
       limit: 10,
     };
 
-    analysisRenderCompareTable(els.analysisDepoBody, data.depos, {
-      ...compareOptions,
-      sub: (item) => `${fmtNum(item.mtdOutlets)} outlet · avg ${fmtRp(item.avgNet)}`,
-    });
-    if (els.analysisDepoInfo) {
-      els.analysisDepoInfo.textContent = `${fmtNum(data.depos.length)} depo · top ${Math.min(10, data.depos.length)}`;
+    const depoAll = data.depo === "all" && mode === "depo";
+    if (els.analysisDepoRecapPanel) {
+      els.analysisDepoRecapPanel.classList.toggle("hidden", !depoAll);
+    }
+    if (depoAll) {
+      analysisRenderDepoRecap(els.analysisDepoBody, data.depos, {
+        hk: data.hk,
+        totalMtd: data.anchor.net,
+        totalNet: data.totalNet,
+        totalOutlets: data.anchor.outlets,
+        previousNet: data.previous && data.previous.available ? data.previous.net : 0,
+        previousAvailable: Boolean(data.previousAvailable && data.previous && data.previous.available),
+        comparisonAvailable: data.availableMonths > 0,
+      });
+      if (els.analysisDepoInfo) {
+        els.analysisDepoInfo.textContent = `${fmtNum(data.depos.length)} depo · rekap MTD`;
+      }
+    } else if (els.analysisDepoBody) {
+      els.analysisDepoBody.innerHTML = "";
     }
 
     analysisRenderCompareTable(els.analysisOutletBody, data.outlets, {
@@ -14187,14 +15945,19 @@ legendControl.addTo(map);
       els.analysisProductInfo.textContent = `${fmtNum(data.categories.length)} kategori produk · top ${Math.min(10, data.categories.length)}`;
     }
 
-    analysisRenderCompareTable(els.analysisSalesmanBody, data.salesmen, {
+    if (els.analysisOmsetDimTitle) els.analysisOmsetDimTitle.textContent = `Omset by ${dimLabel}`;
+    if (els.analysisOmsetDimCol) els.analysisOmsetDimCol.textContent = dimLabel;
+    if (els.analysisRoaDimTitle) els.analysisRoaDimTitle.textContent = `ROA by ${dimLabel}`;
+    if (els.analysisRoaDimCol) els.analysisRoaDimCol.textContent = dimLabel;
+    if (els.analysisEcDimTitle) els.analysisEcDimTitle.textContent = `EC by ${dimLabel}`;
+    if (els.analysisEcDimCol) els.analysisEcDimCol.textContent = dimLabel;
+
+    analysisRenderCompareTable(els.analysisSalesmanBody, dimItems, {
       ...compareOptions,
-      sub: (item) => [item.code, item.divisi, `${fmtNum(item.mtdOutlets)} outlet`]
-        .filter(Boolean)
-        .join(" · "),
+      sub: dimSub,
     });
     if (els.analysisSalesmanInfo) {
-      els.analysisSalesmanInfo.textContent = `${fmtNum(data.salesmen.length)} salesman · top ${Math.min(10, data.salesmen.length)}`;
+      els.analysisSalesmanInfo.textContent = `${fmtNum(dimItems.length)} ${dimLabel.toLowerCase()} · top ${Math.min(10, dimItems.length)}`;
     }
 
     analysisRenderCompareTable(els.analysisChannelBody, data.channels, {
@@ -14218,7 +15981,7 @@ legendControl.addTo(map);
       els.analysisRoaProductInfo.textContent = `${fmtNum(roaCategories.length)} kategori produk · ROA = jumlah outlet`;
     }
 
-    analysisRenderRoaTable(els.analysisRoaSalesmanBody, data.salesmen, {
+    analysisRenderRoaTable(els.analysisRoaSalesmanBody, dimItems, {
       limit: 10,
       months: data.availableMonths,
       comparisonAvailable: data.availableMonths > 0,
@@ -14227,25 +15990,23 @@ legendControl.addTo(map);
         .join(" · "),
     });
     if (els.analysisRoaSalesmanInfo) {
-      const roaSalesmen = data.salesmen.filter(
+      const roaRows = dimItems.filter(
         (item) => item.mtdOutlets > 0 || item.periodOutlets > 0
       );
-      els.analysisRoaSalesmanInfo.textContent = `${fmtNum(roaSalesmen.length)} salesman · ROA = jumlah outlet`;
+      els.analysisRoaSalesmanInfo.textContent = `${fmtNum(roaRows.length)} ${dimLabel.toLowerCase()} · ROA = jumlah outlet`;
     }
 
-    analysisRenderEcTable(els.analysisEcBody, data.salesmen, {
+    analysisRenderEcTable(els.analysisEcBody, dimItems, {
       limit: 10,
       months: data.availableMonths,
       comparisonAvailable: data.availableMonths > 0,
-      sub: (item) => [item.code, item.divisi, `${fmtNum(item.mtdOutlets)} outlet`]
-        .filter(Boolean)
-        .join(" · "),
+      sub: dimSub,
     });
     if (els.analysisEcInfo) {
-      const ecSalesmen = data.salesmen.filter(
+      const ecRows = dimItems.filter(
         (item) => item.mtdEc > 0 || item.periodEc > 0
       );
-      els.analysisEcInfo.textContent = `${fmtNum(ecSalesmen.length)} salesman · EC = faktur/outlet efektif`;
+      els.analysisEcInfo.textContent = `${fmtNum(ecRows.length)} ${dimLabel.toLowerCase()} · EC = faktur/outlet efektif`;
     }
 
     analysisRenderInsights(data);
@@ -14381,6 +16142,8 @@ legendControl.addTo(map);
     analysisState.maxHk = 0;
     analysisState.divisi = "all";
     analysisState.divisiOptions = [];
+    analysisState.depo = "all";
+    analysisState.depoOptions = [];
     analysisState.storageError = "";
     if (els.analysisFileInput) els.analysisFileInput.value = "";
     analysisPersistLocal();
@@ -14515,12 +16278,99 @@ legendControl.addTo(map);
       analysisRefresh();
     });
 
+    els.analysisDepo?.addEventListener("change", () => {
+      analysisState.depo = els.analysisDepo.value || "all";
+      analysisRefresh();
+    });
+
     els.analysisPeriod?.addEventListener("change", () => {
       const period = Math.round(Number(els.analysisPeriod.value) || 3);
       analysisState.period = Math.max(1, Math.min(6, period));
       els.analysisPeriod.value = String(analysisState.period);
       analysisRefresh();
     });
+
+    els.masterType?.addEventListener("change", () => {
+      const value = els.masterType.value;
+      masterState.type = MASTER_TYPE_LABELS[value] ? value : "outlet";
+      masterRenderFiles();
+    });
+
+    els.masterFileInput?.addEventListener("change", async (event) => {
+      await masterApplyFile(event.target.files);
+      event.target.value = "";
+    });
+
+    els.masterDropZone?.addEventListener("dragenter", (event) => {
+      event.preventDefault();
+      if (!masterState.loading) els.masterDropZone.classList.add("is-dragover");
+    });
+    els.masterDropZone?.addEventListener("dragover", (event) => {
+      event.preventDefault();
+      if (event.dataTransfer) event.dataTransfer.dropEffect = "copy";
+    });
+    els.masterDropZone?.addEventListener("dragleave", (event) => {
+      if (!els.masterDropZone.contains(event.relatedTarget)) {
+        els.masterDropZone.classList.remove("is-dragover");
+      }
+    });
+    els.masterDropZone?.addEventListener("drop", (event) => {
+      event.preventDefault();
+      els.masterDropZone.classList.remove("is-dragover");
+      masterApplyFile(event.dataTransfer?.files);
+    });
+
+    els.masterFileList?.addEventListener("click", (event) => {
+      const button = event.target.closest("[data-master-remove]");
+      if (!button) return;
+      masterRemove(button.dataset.masterRemove);
+    });
+
+    els.masterResetBtn?.addEventListener("click", masterReset);
+    els.masterTemplateBtn?.addEventListener("click", downloadMasterTemplate);
+
+    els.stokTemplateBtn?.addEventListener("click", downloadStokTemplate);
+    els.stokResetBtn?.addEventListener("click", stokReset);
+    els.stokFileInput?.addEventListener("change", async (event) => {
+      await stokApplyFile(event.target.files);
+      event.target.value = "";
+    });
+    els.stokDropZone?.addEventListener("dragenter", (event) => {
+      event.preventDefault();
+      if (!stokState.loading) els.stokDropZone.classList.add("is-dragover");
+    });
+    els.stokDropZone?.addEventListener("dragover", (event) => {
+      event.preventDefault();
+      if (event.dataTransfer) event.dataTransfer.dropEffect = "copy";
+    });
+    els.stokDropZone?.addEventListener("dragleave", (event) => {
+      if (!els.stokDropZone.contains(event.relatedTarget)) {
+        els.stokDropZone.classList.remove("is-dragover");
+      }
+    });
+    els.stokDropZone?.addEventListener("drop", (event) => {
+      event.preventDefault();
+      els.stokDropZone.classList.remove("is-dragover");
+      stokApplyFile(event.dataTransfer?.files);
+    });
+    els.stokFileList?.addEventListener("click", (event) => {
+      const button = event.target.closest("[data-stok-remove]");
+      if (!button) return;
+      stokRemove(button.dataset.stokRemove);
+    });
+    els.stokDepo?.addEventListener("change", () => {
+      stokState.depo = els.stokDepo.value || "all";
+      stokRefresh();
+    });
+    const bindStokLimit = (element, key) => {
+      element?.addEventListener("change", () => {
+        stokState.limits[key] = Math.max(0, Number(element.value) || 0);
+        stokRefresh();
+      });
+    };
+    bindStokLimit(els.stokCriticalLimit, "critical");
+    bindStokLimit(els.stokAmanLimit, "aman");
+    bindStokLimit(els.stokSaranLimit, "saran");
 
     analysisState.basis = els.analysisBasis?.value === "mon-fri" ? "mon-fri" : "mon-sat";
     analysisState.period = Math.max(
@@ -14529,6 +16379,11 @@ legendControl.addTo(map);
     );
     if (els.analysisPeriod) els.analysisPeriod.value = String(analysisState.period);
     analysisState.divisi = els.analysisDivisi?.value || "all";
+    analysisState.depo = els.analysisDepo?.value || "all";
+    await stokRestore();
+    stokRefresh();
+    await masterRestore();
+    masterRenderFiles();
     const restored = await analysisRestoreLocal();
     if (restored) {
       analysisRefresh();
@@ -14597,7 +16452,7 @@ legendControl.addTo(map);
         omset: "Dashboard",
         performance: "Performance",
         penjualan: "Penjualan",
-        analisa: "Analisa Penjualan",
+        analisa: "Analisa Performa Depo",
         jks: "JKS Editor",
       };
       const sheetLinks = {
@@ -14660,7 +16515,10 @@ legendControl.addTo(map);
         event.preventDefault();
         if (link.dataset.nav === "score-card") showScoreView();
         else if (link.dataset.nav === "penjualan") showSalesView();
-        else if (link.dataset.nav === "analisa-penjualan") showAnalysisView();
+        else if (link.dataset.nav === "analisa-penjualan") showAnalysisView({ mode: "depo" });
+        else if (link.dataset.nav === "analisa-cabang") showAnalysisView({ mode: "cabang" });
+        else if (link.dataset.nav === "master-data") showMasterView();
+        else if (link.dataset.nav === "analisa-stok") showStokView();
         else showDashboardView(link.dataset.nav);
       });
     });
@@ -14739,20 +16597,68 @@ legendControl.addTo(map);
       window.requestAnimationFrame(() => els.salesTitle?.focus());
     }
 
+    function setAnalysisSection(id) {
+      ["analisa-penjualan", "analisa-stok", "master-data"].forEach((sid) => {
+        const node = document.getElementById(sid);
+        if (node) node.classList.toggle("hidden", sid !== id);
+      });
+    }
+
     function showAnalysisView(options = {}) {
+      const mode = options.mode === "cabang" ? "cabang" : "depo";
+      analysisState.mode = mode;
       jksLeave();
       document.body.classList.remove("score-mode", "sales-mode");
       stopScoreAutoRefresh();
       stopSalesAutoRefresh();
       document.body.classList.add("analysis-mode");
       setGroup("analisa");
-      document.title = "Analisa Penjualan · CAB Medan Raya";
+      setAnalysisSection("analisa-penjualan");
+      const activeId = mode === "cabang" ? "analisa-cabang" : "analisa-penjualan";
+      document.title = `${mode === "cabang" ? "Analisa Performa Cabang" : "Analisa Performa Depo"} · CAB Medan Raya`;
       if (mobileQuery.matches) setOpen(false);
-      setActive("analisa-penjualan");
-      setHash("#analisa-penjualan");
+      setActive(activeId);
+      setHash(`#${activeId}`);
+      if (els.analysisTitle) {
+        els.analysisTitle.textContent = mode === "cabang" ? "Analisa Performa Cabang" : "Analisa Performa Depo";
+      }
       if (options.scroll !== false) window.scrollTo({ top: 0, behavior: "auto" });
       analysisRefresh();
       window.requestAnimationFrame(() => els.analysisTitle?.focus());
+    }
+
+    function showMasterView(options = {}) {
+      jksLeave();
+      document.body.classList.remove("score-mode", "sales-mode");
+      stopScoreAutoRefresh();
+      stopSalesAutoRefresh();
+      document.body.classList.add("analysis-mode");
+      setGroup("analisa");
+      setAnalysisSection("master-data");
+      document.title = "Master Data · CAB Medan Raya";
+      if (mobileQuery.matches) setOpen(false);
+      setActive("master-data");
+      setHash("#master-data");
+      if (options.scroll !== false) window.scrollTo({ top: 0, behavior: "auto" });
+      masterRenderFiles();
+      window.requestAnimationFrame(() => els.masterTitle?.focus());
+    }
+
+    function showStokView(options = {}) {
+      jksLeave();
+      document.body.classList.remove("score-mode", "sales-mode");
+      stopScoreAutoRefresh();
+      stopSalesAutoRefresh();
+      document.body.classList.add("analysis-mode");
+      setGroup("analisa");
+      setAnalysisSection("analisa-stok");
+      document.title = "Analisa Stok Gudang · CAB Medan Raya";
+      if (mobileQuery.matches) setOpen(false);
+      setActive("analisa-stok");
+      setHash("#analisa-stok");
+      if (options.scroll !== false) window.scrollTo({ top: 0, behavior: "auto" });
+      stokRefresh();
+      window.requestAnimationFrame(() => els.stokTitle?.focus());
     }
 
     function showJksView(options = {}) {
@@ -14808,7 +16714,19 @@ legendControl.addTo(map);
         return;
       }
       if (hash === "#analisa-penjualan") {
-        showAnalysisView({ scroll: false });
+        showAnalysisView({ scroll: false, mode: "depo" });
+        return;
+      }
+      if (hash === "#analisa-cabang") {
+        showAnalysisView({ scroll: false, mode: "cabang" });
+        return;
+      }
+      if (hash === "#master-data") {
+        showMasterView({ scroll: false });
+        return;
+      }
+      if (hash === "#analisa-stok") {
+        showStokView({ scroll: false });
         return;
       }
 
@@ -14834,7 +16752,10 @@ legendControl.addTo(map);
         (link) =>
           link.dataset.nav !== "score-card" &&
           link.dataset.nav !== "penjualan" &&
-          link.dataset.nav !== "analisa-penjualan"
+          link.dataset.nav !== "analisa-penjualan" &&
+          link.dataset.nav !== "analisa-cabang" &&
+          link.dataset.nav !== "analisa-stok" &&
+          link.dataset.nav !== "master-data"
       )
       .map((link) => document.getElementById(link.dataset.nav))
       .filter(Boolean);
@@ -14870,7 +16791,15 @@ legendControl.addTo(map);
         return;
       }
       if (document.body.classList.contains("analysis-mode")) {
-        setActive("analisa-penjualan");
+        const masterNode = document.getElementById("master-data");
+        const stokNode = document.getElementById("analisa-stok");
+        if (masterNode && !masterNode.classList.contains("hidden")) {
+          setActive("master-data");
+        } else if (stokNode && !stokNode.classList.contains("hidden")) {
+          setActive("analisa-stok");
+        } else {
+          setActive(analysisState.mode === "cabang" ? "analisa-cabang" : "analisa-penjualan");
+        }
         ticking = false;
         return;
       }
@@ -14919,7 +16848,7 @@ legendControl.addTo(map);
       } else if (document.body.classList.contains("analysis-mode")) {
         analysisSetNotice(
           "info",
-          "Analisa Penjualan memakai data unggahan manual. Tambahkan file untuk memperbarui data."
+          "Analisa Performa Depo memakai data unggahan manual. Tambahkan file untuk memperbarui data."
         );
       } else if (document.body.classList.contains("score-mode")) {
         loadScoreCard(true);
