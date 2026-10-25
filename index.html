@@ -2684,8 +2684,8 @@ body:not(.analysis-mode) #analisa-stok { display: none; }
 
 body[data-group="omset"] .sidebar-link[data-group]:not([data-group="omset"]),
 body[data-group="performance"] .sidebar-link[data-group]:not([data-group="performance"]),
-body[data-group="penjualan"] .sidebar-link[data-group]:not([data-group="penjualan"]):not([data-group="analisa"]),
-body[data-group="analisa"] .sidebar-link[data-group]:not([data-group="analisa"]):not([data-group="penjualan"]) {
+body[data-group="penjualan"] .sidebar-link[data-group]:not([data-group="penjualan"]),
+body[data-group="upload"] .sidebar-link[data-group]:not([data-group="upload"]) {
   display: none !important;
 }
 
@@ -4186,6 +4186,160 @@ body.jks-mode .jks-view {
   .jks-section.jks-help { display: none; }
 }
 
+/* ==================================================================
+   Tangkapan gambar (PNG) + kirim WhatsApp
+   ================================================================== */
+.shot-host { position: relative; }
+
+.shot-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 6px;
+  margin-top: 10px;
+  opacity: 0.62;
+  transition: opacity 0.18s ease;
+}
+
+.shot-host:hover > .shot-actions,
+.shot-host:focus-within > .shot-actions { opacity: 1; }
+
+.shot-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  padding: 0;
+  border: 1px solid rgba(148, 163, 184, 0.22);
+  border-radius: 8px;
+  background: rgba(148, 163, 184, 0.1);
+  color: var(--muted);
+  cursor: pointer;
+  transition: color 0.15s, border-color 0.15s, background 0.15s, transform 0.15s;
+}
+
+.shot-btn svg { width: 14px; height: 14px; }
+
+.shot-btn:hover {
+  color: var(--text);
+  border-color: rgba(56, 189, 248, 0.45);
+  background: rgba(56, 189, 248, 0.14);
+  transform: translateY(-1px);
+}
+
+.shot-btn:focus-visible {
+  outline: 2px solid rgba(56, 189, 248, 0.7);
+  outline-offset: 2px;
+}
+
+.shot-btn-wa { color: #86efac; border-color: rgba(74, 222, 128, 0.28); }
+.shot-btn-wa:hover {
+  color: #4ade80;
+  border-color: rgba(74, 222, 128, 0.5);
+  background: rgba(74, 222, 128, 0.14);
+}
+
+.shot-page-bar {
+  position: fixed;
+  right: max(14px, env(safe-area-inset-right, 0px));
+  bottom: calc(var(--bottom-nav-h) + env(safe-area-inset-bottom, 0px) + 14px);
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  padding: 5px;
+  border: 1px solid rgba(148, 163, 184, 0.2);
+  border-radius: 12px;
+  background: rgba(9, 15, 27, 0.86);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.38);
+}
+
+.shot-page-bar .shot-actions { margin-top: 0; opacity: 1; }
+
+.shot-toast {
+  position: fixed;
+  left: 50%;
+  bottom: calc(var(--bottom-nav-h) + env(safe-area-inset-bottom, 0px) + 18px);
+  z-index: 260;
+  max-width: min(90vw, 460px);
+  padding: 10px 14px;
+  border: 1px solid rgba(148, 163, 184, 0.22);
+  border-radius: 10px;
+  background: rgba(9, 15, 27, 0.95);
+  color: var(--text);
+  font-size: 12px;
+  line-height: 1.4;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+  opacity: 0;
+  transform: translate(-50%, 12px);
+  pointer-events: none;
+  transition: opacity 0.18s ease, transform 0.18s ease;
+}
+
+.shot-toast.is-visible { opacity: 1; transform: translate(-50%, 0); }
+.shot-toast[data-kind="success"] { border-color: rgba(74, 222, 128, 0.42); }
+.shot-toast[data-kind="warn"] { border-color: rgba(248, 113, 113, 0.42); }
+
+body.shot-capturing .shot-actions,
+body.shot-capturing .shot-page-bar { display: none !important; }
+
+body.shot-capturing *,
+body.shot-capturing *::before,
+body.shot-capturing *::after {
+  animation: none !important;
+  transition: none !important;
+}
+
+/* html2canvas belum mendukung color-mix(); ganti dengan warna setara saat menangkap. */
+body.shot-capturing .avatar {
+  background: rgba(148, 163, 184, 0.14) !important;
+  border-color: rgba(148, 163, 184, 0.28) !important;
+}
+
+@media (max-width: 640px) {
+  .shot-page-bar { right: 10px; padding: 4px; }
+  .shot-btn { width: 28px; height: 28px; }
+}
+
+/* ----- Master Data: satu tempat untuk semua unggahan ---------------------- */
+.sales-source-note {
+  margin: 10px 0 0;
+  padding: 8px 12px;
+  border: 1px dashed var(--line);
+  border-radius: 10px;
+  background: rgba(56, 189, 248, 0.05);
+  font-size: 10.5px;
+}
+.master-hero-stats { flex-basis: 520px; }
+.master-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  gap: 14px;
+  align-items: start;
+}
+.master-card { padding: 14px; }
+.master-card-head { gap: 10px; }
+.master-card-head h2 { font-size: 13px; }
+.master-card-head p {
+  margin: 2px 0 0;
+  max-width: 360px;
+  color: var(--muted);
+  font-size: 10px;
+  line-height: 1.5;
+}
+.master-card-head .analysis-head-actions { flex: 0 0 auto; }
+.master-card-body {
+  grid-template-columns: minmax(0, 1fr);
+  gap: 12px;
+  margin-top: 12px;
+}
+.master-card-body .analysis-drop { min-height: 108px; }
+@media (max-width: 640px) {
+  .master-grid { grid-template-columns: minmax(0, 1fr); }
+}
+
   </style>
 </head>
 <body data-refresh="30" data-demo="0" data-group="omset">
@@ -4260,7 +4414,7 @@ body.jks-mode .jks-view {
           </svg>
           <span>Penjualan</span>
         </a>
-        <a class="sidebar-link" href="#analisa-penjualan" data-nav="analisa-penjualan" data-group="analisa">
+        <a class="sidebar-link" href="#analisa-penjualan" data-nav="analisa-penjualan" data-group="penjualan">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <path d="M4 19V5"/><path d="M4 19h16"/>
             <path d="M7 16l3-4 3 2 4-6"/>
@@ -4269,7 +4423,7 @@ body.jks-mode .jks-view {
           </svg>
           <span>Analisa Performa Depo</span>
         </a>
-        <a class="sidebar-link" href="#analisa-cabang" data-nav="analisa-cabang" data-group="analisa">
+        <a class="sidebar-link" href="#analisa-cabang" data-nav="analisa-cabang" data-group="penjualan">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <path d="M4 19V5"/><path d="M4 19h16"/>
             <path d="M7 15l3-3 3 2 4-6"/>
@@ -4278,14 +4432,14 @@ body.jks-mode .jks-view {
           </svg>
           <span>Analisa Performa Cabang</span>
         </a>
-        <a class="sidebar-link" href="#analisa-stok" data-nav="analisa-stok" data-group="analisa">
+        <a class="sidebar-link" href="#analisa-stok" data-nav="analisa-stok" data-group="penjualan">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <path d="M4 8l8-4 8 4v9l-8 4-8-4z"/>
             <path d="M4 8l8 4 8-4"/><path d="M12 12v9"/>
           </svg>
           <span>Analisa Stok Gudang</span>
         </a>
-        <a class="sidebar-link" href="#master-data" data-nav="master-data" data-group="analisa">
+        <a class="sidebar-link" href="#master-data" data-nav="master-data" data-group="upload">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <ellipse cx="12" cy="6" rx="7" ry="3"/>
             <path d="M5 6v6c0 1.7 3.1 3 7 3s7-1.3 7-3V6"/>
@@ -4719,13 +4873,13 @@ body.jks-mode .jks-view {
             </svg>
             <span>Kembali ke Dashboard</span>
           </a>
-          <p class="score-eyebrow">UPLOAD MANUAL &middot; MAKSIMAL 6 FILE</p>
+          <p class="score-eyebrow">SUMBER: MASTER DATA &middot; DBASE (DATA PENJUALAN)</p>
           <h1 id="salesTitle" tabindex="-1">Penjualan</h1>
-          <p id="salesViewSub" class="score-subtitle">Ringkasan penjualan gross &amp; nett dari file yang diunggah. Semua file digabung.</p>
+          <p id="salesViewSub" class="score-subtitle">Ringkasan penjualan gross &amp; nett dari file Dbase di menu Master Data. Hanya data MTD (bulan berjalan).</p>
         </div>
         <div class="score-hero-stats">
           <div class="score-stat score-stat-wide">
-            <span>Periode</span>
+            <span>Periode MTD</span>
             <strong id="salesPeriod">Memuat&hellip;</strong>
           </div>
           <div class="score-stat">
@@ -4757,48 +4911,11 @@ body.jks-mode .jks-view {
         </div>
         <div class="score-toolbar-right">
           <span id="salesFreshness" class="score-freshness">Belum ada data</span>
-          <button id="salesAddBtn" class="score-btn score-btn-primary" type="button">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <path d="M12 5v14"/><path d="M5 12h14"/>
-            </svg>
-            <span>Tambah file</span>
-          </button>
-          <button id="salesResetBtn" class="score-btn score-btn-ghost" type="button">Reset</button>
+          <a class="score-btn score-btn-ghost" href="#master-data" data-nav="master-data" data-group="upload">Master Data</a>
         </div>
       </div>
 
-      <section class="panel analysis-upload-panel sales-upload-panel" aria-label="Upload data penjualan">
-        <header class="panel-head panel-head-wrap">
-          <div>
-            <h2>Sumber Data Penjualan</h2>
-            <p>Excel (.xlsx/.xls/.xlsb), CSV, atau JSON &middot; maksimal 6 file &middot; upload terpisah dari Analisa Performa Depo</p>
-          </div>
-          <button id="salesTemplateBtn" class="score-btn score-btn-ghost" type="button">Template Excel</button>
-        </header>
-        <div class="analysis-upload-body">
-          <label class="analysis-drop" id="salesDropZone" for="salesFileInput">
-            <input id="salesFileInput" class="analysis-file-input" type="file" multiple accept=".xlsx,.xls,.xlsb,.csv,.json,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-excel,application/vnd.ms-excel.sheet.binary.macroEnabled.12,text/csv,application/json">
-            <span class="analysis-drop-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M12 16V4"/><path d="M7 9l5-5 5 5"/><path d="M5 16v3h14v-3"/>
-              </svg>
-            </span>
-            <strong>Tarik &amp; lepas file di sini</strong>
-            <span>atau klik untuk memilih file</span>
-            <em id="salesDropHint">0 dari 6 file</em>
-          </label>
-          <div class="analysis-file-wrap">
-            <div class="analysis-file-head">
-              <span>File terunggah</span>
-              <strong id="salesFileCount">0 / 6</strong>
-            </div>
-            <div id="salesFileList" class="analysis-file-list">
-              <p class="analysis-muted">Belum ada file. Tambahkan file penjualan.</p>
-            </div>
-            <p id="salesUploadStatus" class="analysis-status">Data diproses di browser dan disimpan lokal di perangkat ini.</p>
-          </div>
-        </div>
-      </section>
+      <p id="salesSourceNote" class="analysis-status sales-source-note">Belum ada data. Unggah file Dbase (data penjualan) di menu Master Data.</p>
 
       <div class="sales-kpi-grid">
         <article class="kpi kpi-primary">
@@ -4838,7 +4955,7 @@ body.jks-mode .jks-view {
           <header class="panel-head panel-head-wrap">
             <div>
               <h2>Tren Harian</h2>
-              <p id="salesTrendSub">Penjualan bersih per hari</p>
+              <p id="salesTrendSub">Penjualan gross per hari (MTD)</p>
             </div>
           </header>
           <div id="salesDaily" class="sales-bars" role="list">
@@ -4849,7 +4966,7 @@ body.jks-mode .jks-view {
           <header class="panel-head panel-head-wrap">
             <div>
               <h2>Channel</h2>
-              <p>Kontribusi penjualan bersih</p>
+              <p>Kontribusi penjualan gross (VALUE) MTD</p>
             </div>
           </header>
           <div id="salesChannels" class="sales-channel-list">
@@ -4862,17 +4979,17 @@ body.jks-mode .jks-view {
         <header class="panel-head panel-head-wrap">
           <div>
             <h2>Salesman</h2>
-            <p>Peringkat berdasarkan penjualan bersih</p>
+            <p>Peringkat MTD berdasarkan penjualan gross (VALUE)</p>
           </div>
           <span id="salesSalesmanInfo" class="muted sales-table-info">&mdash;</span>
         </header>
         <div class="table-scroll">
           <table class="data-table sales-table">
             <thead>
-              <tr><th>Salesman</th><th class="num">Bersih</th><th class="num">Qty</th><th class="num">Baris</th><th class="num">Share</th></tr>
+              <tr><th>Salesman</th><th class="num">Gross</th><th class="num">Qty</th><th class="num">Baris</th><th class="num">Share</th><th class="num">Target</th><th class="num">Penc.</th></tr>
             </thead>
             <tbody id="salesSalesmanBody">
-              <tr><td colspan="5"><div class="table-loading">Memuat&hellip;</div></td></tr>
+              <tr><td colspan="7"><div class="table-loading">Memuat&hellip;</div></td></tr>
             </tbody>
           </table>
         </div>
@@ -4882,14 +4999,14 @@ body.jks-mode .jks-view {
         <header class="panel-head panel-head-wrap">
           <div>
             <h2>Outlet</h2>
-            <p>Peringkat outlet berdasarkan penjualan bersih</p>
+            <p>Peringkat outlet MTD berdasarkan penjualan gross (VALUE)</p>
           </div>
           <span id="salesOutletInfo" class="muted sales-table-info">&mdash;</span>
         </header>
         <div class="table-scroll">
           <table class="data-table sales-table">
             <thead>
-              <tr><th>Kode</th><th>Outlet</th><th>Channel</th><th class="num">Bersih</th><th class="num">Qty</th><th class="num">Baris</th></tr>
+              <tr><th>Kode</th><th>Outlet</th><th>Channel</th><th class="num">Gross</th><th class="num">Qty</th><th class="num">Baris</th></tr>
             </thead>
             <tbody id="salesOutletBody">
               <tr><td colspan="6"><div class="table-loading">Memuat&hellip;</div></td></tr>
@@ -4902,14 +5019,14 @@ body.jks-mode .jks-view {
         <header class="panel-head panel-head-wrap">
           <div>
             <h2>Kategori Produk (Mark New)</h2>
-            <p>Peringkat kategori produk (MARK NEW) berdasarkan penjualan bersih</p>
+            <p>Peringkat kategori produk (MARK NEW) berdasarkan penjualan gross (VALUE) MTD</p>
           </div>
           <span id="salesProductInfo" class="muted sales-table-info">&mdash;</span>
         </header>
         <div class="table-scroll">
           <table class="data-table sales-table">
             <thead>
-              <tr><th>Kategori Produk</th><th class="num">Bersih</th><th class="num">Qty</th><th class="num">Baris</th><th class="num">Share</th></tr>
+              <tr><th>Kategori Produk</th><th class="num">Gross</th><th class="num">Qty</th><th class="num">Baris</th><th class="num">Share</th></tr>
             </thead>
             <tbody id="salesProductBody">
               <tr><td colspan="5"><div class="table-loading">Memuat&hellip;</div></td></tr>
@@ -4919,8 +5036,8 @@ body.jks-mode .jks-view {
       </section>
 
       <footer class="sales-foot">
-        <span id="salesFootNote">Sumber: upload manual &middot; template Analisa Performa Depo</span>
-        <span class="muted">Penjualan bersih = VALUE NETT &middot; nilai kotor = VALUE</span>
+        <span id="salesFootNote">Sumber: Master Data (Dbase) &middot; MTD</span>
+        <span class="muted">Nilai pada tabel = gross (VALUE) &middot; VALUE NETT = penjualan bersih</span>
       </footer>
     </section>
 
@@ -4933,7 +5050,7 @@ body.jks-mode .jks-view {
             </svg>
             <span>Kembali ke Dashboard</span>
           </a>
-          <p class="score-eyebrow">UPLOAD MANUAL &middot; MAKSIMAL 6 FILE</p>
+          <p class="score-eyebrow">SUMBER: MASTER DATA &middot; DBASE (DATA PENJUALAN)</p>
           <h1 id="analysisTitle" tabindex="-1">Analisa Performa Depo</h1>
           <p id="analysisSub" class="score-subtitle">Bandingkan penjualan gross pada nomor hari kerja (HK) yang sama. Pilih HK 22 untuk melihat data HK 22 dari setiap bulan.</p>
         </div>
@@ -4944,7 +5061,7 @@ body.jks-mode .jks-view {
           </div>
           <div class="score-stat">
             <span>File</span>
-            <strong id="analysisFileCountHero">0 / 6</strong>
+            <strong id="analysisFileCountHero">0 / 15</strong>
           </div>
           <div class="score-stat">
             <span>Divisi</span>
@@ -4996,48 +5113,11 @@ body.jks-mode .jks-view {
         </div>
         <div class="score-toolbar-right">
           <span id="analysisPeriodLabel" class="score-freshness">Belum ada data</span>
-          <button id="analysisResetBtn" class="score-btn score-btn-ghost" type="button">Reset</button>
-          <button id="analysisAddBtn" class="score-btn score-btn-primary" type="button">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <path d="M12 5v14"/><path d="M5 12h14"/>
-            </svg>
-            <span>Tambah file</span>
-          </button>
+          <a class="score-btn score-btn-ghost" href="#master-data" data-nav="master-data" data-group="upload">Master Data</a>
         </div>
       </div>
 
-      <section class="panel analysis-upload-panel" aria-label="Upload data penjualan">
-        <header class="panel-head panel-head-wrap">
-          <div>
-            <h2>Data Penjualan</h2>
-            <p>Excel (.xlsx/.xls/.xlsb), CSV, atau JSON &middot; maksimal 6 file &middot; semua file digabung</p>
-          </div>
-          <button id="analysisTemplateBtn" class="score-btn score-btn-ghost" type="button">Template Excel</button>
-        </header>
-        <div class="analysis-upload-body">
-          <label class="analysis-drop" id="analysisDropZone" for="analysisFileInput">
-            <input id="analysisFileInput" class="analysis-file-input" type="file" multiple accept=".xlsx,.xls,.xlsb,.csv,.json,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-excel,application/vnd.ms-excel.sheet.binary.macroEnabled.12,text/csv,application/json">
-            <span class="analysis-drop-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M12 16V4"/><path d="M7 9l5-5 5 5"/><path d="M5 16v3h14v-3"/>
-              </svg>
-            </span>
-            <strong>Tarik &amp; lepas file di sini</strong>
-            <span>atau klik untuk memilih file</span>
-            <em id="analysisDropHint">0 dari 6 file</em>
-          </label>
-          <div class="analysis-file-wrap">
-            <div class="analysis-file-head">
-              <span>File terunggah</span>
-              <strong id="analysisFileCount">0 / 6</strong>
-            </div>
-            <div id="analysisFileList" class="analysis-file-list">
-              <p class="analysis-muted">Belum ada file. Tambahkan file penjualan untuk mulai analisa.</p>
-            </div>
-            <p id="analysisUploadStatus" class="analysis-status">Data diproses di browser dan disimpan lokal di perangkat ini.</p>
-          </div>
-        </div>
-      </section>
+      <p id="analysisSourceNote" class="analysis-status sales-source-note">Sumber data: Master Data &middot; Dbase (data penjualan). Belum ada file.</p>
 
       <div id="analysisEmpty" class="analysis-empty-card">
         <span class="analysis-empty-icon" aria-hidden="true">
@@ -5046,7 +5126,7 @@ body.jks-mode .jks-view {
           </svg>
         </span>
         <strong>Belum ada data untuk dianalisa</strong>
-        <p>Upload file penjualan (maksimal 6 file), lalu pilih HK, divisi, depo, dan perbandingan MTD vs Last 1&ndash;6 Months. Master outlet &amp; item dapat diunggah dari menu Master Data. Semua perhitungan memakai omset gross.</p>
+        <p>Unggah file Dbase (data penjualan) di menu Master Data, lalu pilih HK, divisi, depo, dan perbandingan MTD vs Last 1&ndash;6 Months. Master outlet, item, dan salesman juga diunggah dari menu Master Data. Semua perhitungan memakai omset gross.</p>
       </div>
 
       <div id="analysisResults" class="analysis-results hidden">
@@ -5182,7 +5262,7 @@ body.jks-mode .jks-view {
             <div class="table-scroll analysis-table-scroll">
               <table class="data-table analysis-compare-table">
                 <thead>
-                  <tr><th>#</th><th id="analysisOmsetDimCol">Salesman</th><th class="num">MTD</th><th class="num">Avg/bln</th><th class="num">MTD vs avg</th><th class="num">Share MTD</th></tr>
+                  <tr><th>#</th><th id="analysisOmsetDimCol">Salesman</th><th class="num">MTD</th><th class="num">Avg/bln</th><th class="num">MTD vs avg</th><th class="num">Share MTD</th><th id="analysisSalesmanTargetCol" class="num" hidden>Target MTD</th><th id="analysisSalesmanPctCol" class="num" hidden>Penc.</th></tr>
                 </thead>
                 <tbody id="analysisSalesmanBody"></tbody>
               </table>
@@ -5298,66 +5378,255 @@ body.jks-mode .jks-view {
             </svg>
             <span>Kembali ke Dashboard</span>
           </a>
-          <p class="score-eyebrow">MASTER DATA &middot; PENDUKUNG ANALISA</p>
+          <p class="score-eyebrow">MASTER DATA &middot; SATU TEMPAT UNTUK SEMUA UNGGAHAN</p>
           <h1 id="masterTitle" tabindex="-1">Master Data</h1>
-          <p class="score-subtitle">Unggah master outlet (maksimal 6 file) dan master item. Dipakai untuk melengkapi kolom yang kosong pada data penjualan &amp; analisa.</p>
+          <p class="score-subtitle">Semua file unggahan dikelola di sini: Dbase (data penjualan), stok gudang, master outlet/item/salesman, dan target salesman. Maksimal 15 file per kategori &middot; diproses di browser dan disimpan lokal di perangkat ini.</p>
         </div>
-        <div class="score-hero-stats analysis-hero-stats">
+        <div class="score-hero-stats analysis-hero-stats master-hero-stats">
+          <div class="score-stat">
+            <span>Dbase</span>
+            <strong id="masterDbaseHero">0 / 15</strong>
+          </div>
+          <div class="score-stat">
+            <span>Stok Gudang</span>
+            <strong id="masterStokHero">0 / 15</strong>
+          </div>
           <div class="score-stat">
             <span>Master Outlet</span>
-            <strong id="masterOutletCount">0 / 6</strong>
+            <strong id="masterOutletHero">0 / 15</strong>
           </div>
           <div class="score-stat">
             <span>Master Item</span>
-            <strong id="masterItemCount">0 / 6</strong>
+            <strong id="masterItemHero">0 / 15</strong>
+          </div>
+          <div class="score-stat">
+            <span>Master Salesman</span>
+            <strong id="masterSalesmanHero">0 / 15</strong>
+          </div>
+          <div class="score-stat">
+            <span>Target Salesman</span>
+            <strong id="masterTargetHero">0 / 15</strong>
           </div>
         </div>
       </div>
 
-      <section class="panel analysis-upload-panel" aria-label="Upload master data">
-        <header class="panel-head panel-head-wrap">
-          <div>
-            <h2>Upload Master Data</h2>
-            <p>Pilih jenis master, lalu unggah satu atau beberapa file &middot; maksimal 6 file per jenis</p>
-          </div>
-          <div class="analysis-head-actions">
-            <button id="masterTemplateBtn" class="score-btn score-btn-ghost" type="button">Unduh template</button>
-            <button id="masterResetBtn" class="score-btn score-btn-ghost" type="button">Hapus semua</button>
-          </div>
-        </header>
-        <div class="analysis-upload-body">
-          <div class="analysis-master-left">
-            <label class="analysis-field analysis-field-wide">
-              <span>Jenis master</span>
-              <select id="masterType" class="select" aria-label="Jenis master data">
-                <option value="outlet">Master Outlet &middot; kode outlet &rarr; depo / channel / divisi / salesman</option>
-                <option value="item">Master Item &middot; kode item &rarr; nama / kategori</option>
-              </select>
-            </label>
-            <label class="analysis-drop" id="masterDropZone" for="masterFileInput">
-              <input id="masterFileInput" class="analysis-file-input" type="file" multiple accept=".xlsx,.xls,.xlsb,.csv,.json,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-excel,application/vnd.ms-excel.sheet.binary.macroEnabled.12,text/csv,application/json">
+      <div class="master-grid">
+        <article class="panel master-card" data-master-card="dbase">
+          <header class="panel-head panel-head-wrap master-card-head">
+            <div>
+              <h2>Dbase &middot; Data Penjualan</h2>
+              <p>Excel (.xlsx/.xls/.xlsb), CSV, atau JSON &middot; maksimal 15 file &middot; dipakai menu Penjualan &amp; Analisa Performa Depo/Cabang</p>
+            </div>
+            <div class="analysis-head-actions">
+              <button id="analysisTemplateBtn" class="score-btn score-btn-ghost" type="button">Template</button>
+              <button id="analysisResetBtn" class="score-btn score-btn-ghost" type="button">Hapus</button>
+            </div>
+          </header>
+          <div class="analysis-upload-body master-card-body">
+            <label class="analysis-drop" id="analysisDropZone" for="analysisFileInput">
+              <input id="analysisFileInput" class="analysis-file-input" type="file" multiple accept=".xlsx,.xls,.xlsb,.csv,.json,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-excel,application/vnd.ms-excel.sheet.binary.macroEnabled.12,text/csv,application/json">
               <span class="analysis-drop-icon" aria-hidden="true">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
                   <path d="M12 16V4"/><path d="M7 9l5-5 5 5"/><path d="M5 16v3h14v-3"/>
                 </svg>
               </span>
-              <strong>Tarik &amp; lepas file master di sini</strong>
+              <strong>Tarik &amp; lepas file dbase di sini</strong>
               <span>atau klik untuk memilih file</span>
-              <em id="masterDropHint">Belum ada master</em>
+              <em id="analysisDropHint">0 dari 15 file</em>
             </label>
-          </div>
-          <div class="analysis-file-wrap">
-            <div class="analysis-file-head">
-              <span>Master terunggah</span>
-              <strong id="masterFileCount">0 / 6</strong>
+            <div class="analysis-file-wrap">
+              <div class="analysis-file-head">
+                <span>File terunggah</span>
+                <strong id="analysisFileCount">0 / 15</strong>
+              </div>
+              <div id="analysisFileList" class="analysis-file-list">
+                <p class="analysis-muted">Belum ada file. Unggah file dbase (data penjualan).</p>
+              </div>
+              <p id="analysisUploadStatus" class="analysis-status">Dipakai bersama oleh menu Penjualan dan Analisa Performa Depo/Cabang. Disimpan lokal di perangkat ini.</p>
             </div>
-            <div id="masterFileList" class="analysis-file-list">
-              <p class="analysis-muted">Belum ada master data.</p>
-            </div>
-            <p id="masterUploadStatus" class="analysis-status">Master data dipakai untuk melengkapi kolom yang kosong dan disimpan lokal di perangkat ini.</p>
           </div>
-        </div>
-      </section>
+        </article>
+
+        <article class="panel master-card" data-master-card="stok">
+          <header class="panel-head panel-head-wrap master-card-head">
+            <div>
+              <h2>Stok Gudang</h2>
+              <p>Excel (.xlsx/.xls/.xlsb), CSV, atau JSON sesuai template &middot; maksimal 15 file &middot; dipakai Analisa Stok Gudang</p>
+            </div>
+            <div class="analysis-head-actions">
+              <button id="stokTemplateBtn" class="score-btn score-btn-ghost" type="button">Template</button>
+              <button id="stokResetBtn" class="score-btn score-btn-ghost" type="button">Hapus</button>
+            </div>
+          </header>
+          <div class="analysis-upload-body master-card-body">
+            <label class="analysis-drop" id="stokDropZone" for="stokFileInput">
+              <input id="stokFileInput" class="analysis-file-input" type="file" multiple accept=".xlsx,.xls,.xlsb,.csv,.json,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-excel,application/vnd.ms-excel.sheet.binary.macroEnabled.12,text/csv,application/json">
+              <span class="analysis-drop-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M12 16V4"/><path d="M7 9l5-5 5 5"/><path d="M5 16v3h14v-3"/>
+                </svg>
+              </span>
+              <strong>Tarik &amp; lepas file stok di sini</strong>
+              <span>atau klik untuk memilih file</span>
+              <em id="stokDropHint">Belum ada data</em>
+            </label>
+            <div class="analysis-file-wrap">
+              <div class="analysis-file-head">
+                <span>File terunggah</span>
+                <strong id="stokFileCount">0 / 15</strong>
+              </div>
+              <div id="stokFileList" class="analysis-file-list">
+                <p class="analysis-muted">Belum ada data stok.</p>
+              </div>
+              <p id="stokUploadStatus" class="analysis-status">Dipakai oleh menu Analisa Stok Gudang. Disimpan lokal di perangkat ini.</p>
+            </div>
+          </div>
+        </article>
+
+        <article class="panel master-card" data-master-card="outlet">
+          <header class="panel-head panel-head-wrap master-card-head">
+            <div>
+              <h2>Master Outlet</h2>
+              <p>Kode outlet &rarr; nama / depo / channel / divisi / salesman &middot; maksimal 15 file</p>
+            </div>
+            <div class="analysis-head-actions">
+              <button id="masterOutletTemplate" class="score-btn score-btn-ghost" type="button">Template</button>
+              <button id="masterOutletReset" class="score-btn score-btn-ghost" type="button">Hapus</button>
+            </div>
+          </header>
+          <div class="analysis-upload-body master-card-body">
+            <label class="analysis-drop" id="masterOutletDrop" for="masterOutletInput">
+              <input id="masterOutletInput" class="analysis-file-input" type="file" multiple accept=".xlsx,.xls,.xlsb,.csv,.json,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-excel,application/vnd.ms-excel.sheet.binary.macroEnabled.12,text/csv,application/json">
+              <span class="analysis-drop-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M12 16V4"/><path d="M7 9l5-5 5 5"/><path d="M5 16v3h14v-3"/>
+                </svg>
+              </span>
+              <strong>Tarik &amp; lepas file master outlet</strong>
+              <span>atau klik untuk memilih file</span>
+              <em id="masterOutletHint">Belum ada file</em>
+            </label>
+            <div class="analysis-file-wrap">
+              <div class="analysis-file-head">
+                <span>File terunggah</span>
+                <strong id="masterOutletCount">0 / 15</strong>
+              </div>
+              <div id="masterOutletList" class="analysis-file-list">
+                <p class="analysis-muted">Belum ada master outlet.</p>
+              </div>
+              <p id="masterOutletStatus" class="analysis-status">Melengkapi kolom depo, channel, divisi, dan salesman yang kosong pada data penjualan.</p>
+            </div>
+          </div>
+        </article>
+
+        <article class="panel master-card" data-master-card="item">
+          <header class="panel-head panel-head-wrap master-card-head">
+            <div>
+              <h2>Master Item</h2>
+              <p>Kode item &rarr; nama produk / kategori (mark new) / satuan &middot; maksimal 15 file</p>
+            </div>
+            <div class="analysis-head-actions">
+              <button id="masterItemTemplate" class="score-btn score-btn-ghost" type="button">Template</button>
+              <button id="masterItemReset" class="score-btn score-btn-ghost" type="button">Hapus</button>
+            </div>
+          </header>
+          <div class="analysis-upload-body master-card-body">
+            <label class="analysis-drop" id="masterItemDrop" for="masterItemInput">
+              <input id="masterItemInput" class="analysis-file-input" type="file" multiple accept=".xlsx,.xls,.xlsb,.csv,.json,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-excel,application/vnd.ms-excel.sheet.binary.macroEnabled.12,text/csv,application/json">
+              <span class="analysis-drop-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M12 16V4"/><path d="M7 9l5-5 5 5"/><path d="M5 16v3h14v-3"/>
+                </svg>
+              </span>
+              <strong>Tarik &amp; lepas file master item</strong>
+              <span>atau klik untuk memilih file</span>
+              <em id="masterItemHint">Belum ada file</em>
+            </label>
+            <div class="analysis-file-wrap">
+              <div class="analysis-file-head">
+                <span>File terunggah</span>
+                <strong id="masterItemCount">0 / 15</strong>
+              </div>
+              <div id="masterItemList" class="analysis-file-list">
+                <p class="analysis-muted">Belum ada master item.</p>
+              </div>
+              <p id="masterItemStatus" class="analysis-status">Melengkapi nama produk dan kategori yang kosong pada data penjualan.</p>
+            </div>
+          </div>
+        </article>
+
+        <article class="panel master-card" data-master-card="salesman">
+          <header class="panel-head panel-head-wrap master-card-head">
+            <div>
+              <h2>Master Salesman</h2>
+              <p>Kode salesman &rarr; nama / divisi / depo / channel &middot; maksimal 15 file</p>
+            </div>
+            <div class="analysis-head-actions">
+              <button id="masterSalesmanTemplate" class="score-btn score-btn-ghost" type="button">Template</button>
+              <button id="masterSalesmanReset" class="score-btn score-btn-ghost" type="button">Hapus</button>
+            </div>
+          </header>
+          <div class="analysis-upload-body master-card-body">
+            <label class="analysis-drop" id="masterSalesmanDrop" for="masterSalesmanInput">
+              <input id="masterSalesmanInput" class="analysis-file-input" type="file" multiple accept=".xlsx,.xls,.xlsb,.csv,.json,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-excel,application/vnd.ms-excel.sheet.binary.macroEnabled.12,text/csv,application/json">
+              <span class="analysis-drop-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M12 16V4"/><path d="M7 9l5-5 5 5"/><path d="M5 16v3h14v-3"/>
+                </svg>
+              </span>
+              <strong>Tarik &amp; lepas file master salesman</strong>
+              <span>atau klik untuk memilih file</span>
+              <em id="masterSalesmanHint">Belum ada file</em>
+            </label>
+            <div class="analysis-file-wrap">
+              <div class="analysis-file-head">
+                <span>File terunggah</span>
+                <strong id="masterSalesmanCount">0 / 15</strong>
+              </div>
+              <div id="masterSalesmanList" class="analysis-file-list">
+                <p class="analysis-muted">Belum ada master salesman.</p>
+              </div>
+              <p id="masterSalesmanStatus" class="analysis-status">Melengkapi nama salesman, divisi, depo, dan channel yang kosong pada data penjualan.</p>
+            </div>
+          </div>
+        </article>
+
+        <article class="panel master-card" data-master-card="target">
+          <header class="panel-head panel-head-wrap master-card-head">
+            <div>
+              <h2>Target Salesman</h2>
+              <p>Kolom: kode salesman, bulan, target &middot; maksimal 15 file &middot; dipakai kolom Target &amp; Pencapaian di tabel Salesman</p>
+            </div>
+            <div class="analysis-head-actions">
+              <button id="masterTargetTemplate" class="score-btn score-btn-ghost" type="button">Template</button>
+              <button id="masterTargetReset" class="score-btn score-btn-ghost" type="button">Hapus</button>
+            </div>
+          </header>
+          <div class="analysis-upload-body master-card-body">
+            <label class="analysis-drop" id="masterTargetDrop" for="masterTargetInput">
+              <input id="masterTargetInput" class="analysis-file-input" type="file" multiple accept=".xlsx,.xls,.xlsb,.csv,.json,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-excel,application/vnd.ms-excel.sheet.binary.macroEnabled.12,text/csv,application/json">
+              <span class="analysis-drop-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M12 16V4"/><path d="M7 9l5-5 5 5"/><path d="M5 16v3h14v-3"/>
+                </svg>
+              </span>
+              <strong>Tarik &amp; lepas file target salesman</strong>
+              <span>atau klik untuk memilih file</span>
+              <em id="masterTargetHint">Belum ada file</em>
+            </label>
+            <div class="analysis-file-wrap">
+              <div class="analysis-file-head">
+                <span>File terunggah</span>
+                <strong id="masterTargetCount">0 / 15</strong>
+              </div>
+              <div id="masterTargetList" class="analysis-file-list">
+                <p class="analysis-muted">Belum ada target salesman.</p>
+              </div>
+              <p id="masterTargetStatus" class="analysis-status">Tanpa kolom bulan, target dianggap target bulanan yang sama untuk setiap bulan.</p>
+            </div>
+          </div>
+        </article>
+      </div>
     </section>
 
     <section id="analisa-stok" class="score-view analysis-view hidden" aria-labelledby="stokTitle">
@@ -5369,7 +5638,7 @@ body.jks-mode .jks-view {
             </svg>
             <span>Kembali ke Dashboard</span>
           </a>
-          <p class="score-eyebrow">UPLOAD MANUAL &middot; MAKSIMAL 6 FILE</p>
+          <p class="score-eyebrow">SUMBER: MASTER DATA &middot; STOK GUDANG</p>
           <h1 id="stokTitle" tabindex="-1">Analisa Stok Gudang</h1>
           <p id="stokSub" class="score-subtitle">Analisa Days of Inventory (DOI) per depo: daftar item critical &amp; aman, serta saran intra-barang dari depo terdekat.</p>
         </div>
@@ -5388,48 +5657,12 @@ body.jks-mode .jks-view {
           </div>
           <div class="score-stat">
             <span>File</span>
-            <strong id="stokFileHero">0 / 6</strong>
+            <strong id="stokFileHero">0 / 15</strong>
           </div>
         </div>
       </div>
 
-      <section class="panel analysis-upload-panel" aria-label="Upload stok gudang">
-        <header class="panel-head panel-head-wrap">
-          <div>
-            <h2>Upload Data Stok Gudang</h2>
-            <p>Excel (.xlsx/.xls/.xlsb), CSV, atau JSON sesuai template &middot; satu file per periode &middot; maksimal 6 file</p>
-          </div>
-          <div class="analysis-head-actions">
-            <button id="stokTemplateBtn" class="score-btn score-btn-ghost" type="button">Unduh template</button>
-            <button id="stokResetBtn" class="score-btn score-btn-ghost" type="button">Hapus data</button>
-          </div>
-        </header>
-        <div class="analysis-upload-body">
-          <div class="analysis-master-left">
-            <label class="analysis-drop" id="stokDropZone" for="stokFileInput">
-              <input id="stokFileInput" class="analysis-file-input" type="file" multiple accept=".xlsx,.xls,.xlsb,.csv,.json,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-excel,application/vnd.ms-excel.sheet.binary.macroEnabled.12,text/csv,application/json">
-              <span class="analysis-drop-icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M12 16V4"/><path d="M7 9l5-5 5 5"/><path d="M5 16v3h14v-3"/>
-                </svg>
-              </span>
-              <strong>Tarik &amp; lepas file stok di sini</strong>
-              <span>atau klik untuk memilih file</span>
-              <em id="stokDropHint">Belum ada data</em>
-            </label>
-          </div>
-          <div class="analysis-file-wrap">
-            <div class="analysis-file-head">
-              <span>File terunggah</span>
-              <strong id="stokFileCount">0 / 6</strong>
-            </div>
-            <div id="stokFileList" class="analysis-file-list">
-              <p class="analysis-muted">Belum ada data stok.</p>
-            </div>
-            <p id="stokUploadStatus" class="analysis-status">Data diproses di browser dan disimpan lokal di perangkat ini.</p>
-          </div>
-        </div>
-      </section>
+      <p id="stokSourceNote" class="analysis-status sales-source-note">Sumber data: Master Data &middot; Stok Gudang. Belum ada file.</p>
 
       <div class="score-toolbar analysis-toolbar">
         <div class="score-toolbar-left">
@@ -5449,7 +5682,7 @@ body.jks-mode .jks-view {
           </svg>
         </span>
         <strong>Belum ada data stok gudang</strong>
-        <p>Unggah file stok sesuai template (kolom depo: stok, sellout, DOI). Barang dengan DOI 0, sellout 0, dan stok 0 tidak ditampilkan.</p>
+        <p>Unggah file stok di menu Master Data (kategori Stok Gudang) sesuai template (kolom depo: stok, sellout, DOI). Barang dengan DOI 0, sellout 0, dan stok 0 tidak ditampilkan.</p>
       </div>
 
       <div id="stokResults" class="analysis-results hidden">
@@ -5875,12 +6108,12 @@ body.jks-mode .jks-view {
       </svg>
       <span>Penjualan</span>
     </a>
-    <a class="bottom-nav-item" href="#analisa-penjualan" data-group-nav="analisa" title="Analisa Performa Depo">
+    <a class="bottom-nav-item" href="#master-data" data-group-nav="upload" title="Upload & Master Data">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-        <path d="M4 19V5"/><path d="M4 19h16"/>
-        <path d="M7 16l3-4 3 2 4-6"/>
+        <path d="M12 16V4"/><path d="M7 9l5-5 5 5"/>
+        <path d="M4 16v3a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-3"/>
       </svg>
-      <span>Analisa</span>
+      <span>Upload</span>
     </a>
     <a class="bottom-nav-item" href="#jks-editor" data-group-nav="jks" title="JKS Editor">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -5923,6 +6156,7 @@ body.jks-mode .jks-view {
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js" crossorigin=""></script>
+  <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js" crossorigin=""></script>
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
   <script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js" crossorigin=""></script>
   <script>
@@ -7883,15 +8117,7 @@ body.jks-mode .jks-view {
     salesFreshness: $("#salesFreshness"),
     salesOutletSearch: $("#salesOutletSearch"),
     salesChannelFilter: $("#salesChannelFilter"),
-    salesAddBtn: $("#salesAddBtn"),
-    salesResetBtn: $("#salesResetBtn"),
-    salesTemplateBtn: $("#salesTemplateBtn"),
-    salesDropZone: $("#salesDropZone"),
-    salesFileInput: $("#salesFileInput"),
-    salesDropHint: $("#salesDropHint"),
-    salesFileCount: $("#salesFileCount"),
-    salesFileList: $("#salesFileList"),
-    salesUploadStatus: $("#salesUploadStatus"),
+    salesSourceNote: $("#salesSourceNote"),
     salesKpiNett: $("#salesKpiNett"),
     salesKpiValue: $("#salesKpiValue"),
     salesKpiDiscount: $("#salesKpiDiscount"),
@@ -7996,7 +8222,6 @@ body.jks-mode .jks-view {
     analysisPeriod: $("#analysisPeriod"),
     analysisPeriodLabel: $("#analysisPeriodLabel"),
     analysisResetBtn: $("#analysisResetBtn"),
-    analysisAddBtn: $("#analysisAddBtn"),
     analysisTemplateBtn: $("#analysisTemplateBtn"),
     analysisDropZone: $("#analysisDropZone"),
     analysisFileInput: $("#analysisFileInput"),
@@ -8004,17 +8229,13 @@ body.jks-mode .jks-view {
     analysisFileCount: $("#analysisFileCount"),
     analysisFileList: $("#analysisFileList"),
     analysisUploadStatus: $("#analysisUploadStatus"),
-    masterType: $("#masterType"),
-    masterDropZone: $("#masterDropZone"),
-    masterFileInput: $("#masterFileInput"),
-    masterDropHint: $("#masterDropHint"),
-    masterFileCount: $("#masterFileCount"),
-    masterFileList: $("#masterFileList"),
-    masterUploadStatus: $("#masterUploadStatus"),
-    masterResetBtn: $("#masterResetBtn"),
-    masterTemplateBtn: $("#masterTemplateBtn"),
-    masterOutletCount: $("#masterOutletCount"),
-    masterItemCount: $("#masterItemCount"),
+    analysisSourceNote: $("#analysisSourceNote"),
+    masterDbaseHero: $("#masterDbaseHero"),
+    masterStokHero: $("#masterStokHero"),
+    masterOutletHero: $("#masterOutletHero"),
+    masterItemHero: $("#masterItemHero"),
+    masterSalesmanHero: $("#masterSalesmanHero"),
+    masterTargetHero: $("#masterTargetHero"),
     masterTitle: $("#masterTitle"),
     stokTitle: $("#stokTitle"),
     stokSub: $("#stokSub"),
@@ -8030,6 +8251,7 @@ body.jks-mode .jks-view {
     stokFileCount: $("#stokFileCount"),
     stokFileList: $("#stokFileList"),
     stokUploadStatus: $("#stokUploadStatus"),
+    stokSourceNote: $("#stokSourceNote"),
     stokDepo: $("#stokDepo"),
     stokEmpty: $("#stokEmpty"),
     stokResults: $("#stokResults"),
@@ -8078,6 +8300,8 @@ body.jks-mode .jks-view {
     analysisProductBody: $("#analysisProductBody"),
     analysisSalesmanInfo: $("#analysisSalesmanInfo"),
     analysisSalesmanBody: $("#analysisSalesmanBody"),
+    analysisSalesmanTargetCol: $("#analysisSalesmanTargetCol"),
+    analysisSalesmanPctCol: $("#analysisSalesmanPctCol"),
     analysisOmsetDimTitle: $("#analysisOmsetDimTitle"),
     analysisOmsetDimCol: $("#analysisOmsetDimCol"),
     analysisRoaDimTitle: $("#analysisRoaDimTitle"),
@@ -8098,7 +8322,7 @@ body.jks-mode .jks-view {
     analysisFootNote: $("#analysisFootNote"),
   };
 
-  const ANALYSIS_MAX_FILES = 6;
+  const ANALYSIS_MAX_FILES = 15;
   const ANALYSIS_STORAGE_KEY = "analisaPenjualanLocalData.v1";
   const analysisState = {
     files: [],
@@ -8122,10 +8346,14 @@ body.jks-mode .jks-view {
   const MASTER_TYPE_LABELS = {
     outlet: "Master Outlet",
     item: "Master Item",
+    salesman: "Master Salesman",
+    target: "Target Salesman",
   };
-  const MASTER_MAX_FILES = {
-    outlet: 6,
-    item: 6,
+  const MASTER_CARD_TYPES = ["outlet", "item", "salesman", "target"];  const MASTER_MAX_FILES = {
+    outlet: 15,
+    item: 15,
+    salesman: 15,
+    target: 15,
   };
   const MASTER_OUTLET_HEADERS = [
     "NO", "KODE OUTLET", "NAMA OUTLET", "NIK KTP", "FC", "PEMILIK", "ALAMAT",
@@ -8135,15 +8363,39 @@ body.jks-mode .jks-view {
     "SC", "PMA", "KODE SAP", "NOO", "TYPE OUTLET2", "KD OUTLET", "NIK SALESMAN",
   ];
   const MASTER_ITEM_HEADERS = ["KODE ITEM", "ITEM PRODUK", "KATEGORI (MARK NEW)", "SATUAN"];
-  const masterState = {
-    type: "outlet",
-    loading: false,
-    notice: null,
-    files: { outlet: [], item: [] },
-    maps: { outlet: null, item: null },
+  const MASTER_SALESMAN_HEADERS = [
+    "KODE SALESMAN", "NAMA SALESMAN", "DIVISI", "DEPO/PMA", "CHANNEL",
+  ];
+  const MASTER_TARGET_HEADERS = [
+    "KODE SALESMAN", "NAMA SALESMAN", "BULAN", "TARGET",
+  ];
+  const MASTER_MONTH_NAMES = {
+    jan: 0, feb: 1, mar: 2, apr: 3, mei: 4, may: 4, jun: 5, jul: 6,
+    agu: 7, aug: 7, agt: 7, sep: 8, okt: 9, oct: 9, nov: 10, des: 11, dec: 11,
   };
+  const MASTER_CARD_HINTS = {
+    outlet:
+      "Melengkapi kolom depo, channel, divisi, dan salesman yang kosong pada data penjualan. Disimpan lokal di perangkat ini.",
+    item:
+      "Melengkapi nama produk dan kategori yang kosong pada data penjualan. Disimpan lokal di perangkat ini.",
+    salesman:
+      "Melengkapi nama salesman, divisi, depo, dan channel yang kosong pada data penjualan. Disimpan lokal di perangkat ini.",
+    target:
+      "Dipakai untuk kolom Target & Pencapaian di tabel Salesman. Tanpa kolom bulan, target dianggap sama untuk setiap bulan. Disimpan lokal di perangkat ini.",
+  };
+  const masterState = {
+    loading: "",
+    notice: null,
+    files: { outlet: [], item: [], salesman: [], target: [] },
+    maps: { outlet: null, item: null, salesman: null, target: null },
+  };
+  function masterCardEl(type, suffix) {
+    return $(
+      `#master${type.charAt(0).toUpperCase()}${type.slice(1)}${suffix}`
+    );
+  }
 
-  const STOK_MAX_FILES = 6;
+  const STOK_MAX_FILES = 15;
   const STOK_KEY = "stok-gudang-v1";
   const STOK_DOI_CRITICAL = 14;
   const STOK_DOI_AMAN = 30;
@@ -8200,16 +8452,10 @@ body.jks-mode .jks-view {
   const STOK_LIST_LIMIT_OPTIONS = [10, 25, 50, 100, 0];
 
   const SCORE_REFRESH_MS = 60 * 1000;
-  const SALES_MAX_FILES = 6;
-  const SALES_DB_KEY = "sales-v1";
-  const SALES_STORAGE_KEY = "penjualanLocalData.v1";
-  const salesUploadState = {
-    files: [],
-    nextId: 1,
-    loading: false,
-    notice: null,
-    storageError: "",
-  };
+  // Data penjualan (Dbase) kini dikelola dari menu Master Data memakai
+  // analysisState.files (dipakai bersama Penjualan & Analisa Performa Depo/Cabang).
+  const SALES_LEGACY_DB_KEY = "sales-v1";
+  const SALES_LEGACY_STORAGE_KEY = "penjualanLocalData.v1";
 
   const rpFormatter = new Intl.NumberFormat("id-ID", {
     style: "currency",
@@ -9323,7 +9569,7 @@ body.jks-mode .jks-view {
           month: "long",
           year: "numeric",
         });
-    return `${label} · ${fmtRp(item.nett)} · ${salesQtyFormatter.format(
+    return `${label} · ${fmtRp(item.value)} · ${salesQtyFormatter.format(
       item.qty || 0
     )} qty · ${fmtNum(item.lines || 0)} baris`;
   }
@@ -9339,26 +9585,26 @@ body.jks-mode .jks-view {
       return;
     }
     const max = rows.reduce(
-      (acc, item) => Math.max(acc, Number(item.nett) || 0),
+      (acc, item) => Math.max(acc, Number(item.value) || 0),
       0
     );
-    const total = rows.reduce((acc, item) => acc + (Number(item.nett) || 0), 0);
+    const total = rows.reduce((acc, item) => acc + (Number(item.value) || 0), 0);
     const peak = rows.reduce(
       (best, item) =>
-        !best || (Number(item.nett) || 0) > (Number(best.nett) || 0) ? item : best,
+        !best || (Number(item.value) || 0) > (Number(best.value) || 0) ? item : best,
       null
     );
     const fragment = document.createDocumentFragment();
     rows.forEach((item) => {
       const bar = salesMake("div", "sales-bar");
-      if (max > 0 && Number(item.nett) === max) bar.classList.add("is-peak");
+      if (max > 0 && Number(item.value) === max) bar.classList.add("is-peak");
       bar.setAttribute("role", "listitem");
       bar.setAttribute("aria-label", salesDayTitle(item));
       bar.title = salesDayTitle(item);
       const track = salesMake("div", "sales-bar-track");
       const fill = salesMake("div", "sales-bar-fill");
       fill.style.height = `${
-        max > 0 ? Math.max(3, ((Number(item.nett) || 0) / max) * 100) : 3
+        max > 0 ? Math.max(3, ((Number(item.value) || 0) / max) * 100) : 3
       }%`;
       track.appendChild(fill);
       bar.appendChild(track);
@@ -9369,11 +9615,12 @@ body.jks-mode .jks-view {
     });
     container.replaceChildren(fragment);
     if (peak) {
+      const mtd = salesMtdLabel(data);
       salesSetText(
         els.salesTrendSub,
-        `Penjualan bersih per hari · total ${fmtCompact(
+        `Penjualan gross per hari${mtd ? ` · ${mtd}` : ""} · total ${fmtCompact(
           total
-        )} · tertinggi ${fmtCompact(peak.nett)} (${salesDayLabel(peak.date)})`
+        )} · tertinggi ${fmtCompact(peak.value)} (${salesDayLabel(peak.date)})`
       );
     }
   }
@@ -9388,9 +9635,9 @@ body.jks-mode .jks-view {
       );
       return;
     }
-    const total = rows.reduce((acc, item) => acc + (Number(item.nett) || 0), 0);
+    const total = rows.reduce((acc, item) => acc + (Number(item.value) || 0), 0);
     const max = rows.reduce(
-      (acc, item) => Math.max(acc, Number(item.nett) || 0),
+      (acc, item) => Math.max(acc, Number(item.value) || 0),
       0
     );
     const fragment = document.createDocumentFragment();
@@ -9402,15 +9649,15 @@ body.jks-mode .jks-view {
         salesMake(
           "span",
           "sales-channel-val",
-          `${fmtCompact(item.nett)} · ${fmtPct(
-            total ? ((Number(item.nett) || 0) / total) * 100 : 0
+          `${fmtCompact(item.value)} · ${fmtPct(
+            total ? ((Number(item.value) || 0) / total) * 100 : 0
           )}`
         )
       );
       const bar = salesMake("div", "sales-channel-bar");
       const fill = salesMake("i");
       fill.style.width = `${
-        max > 0 ? Math.max(2, ((Number(item.nett) || 0) / max) * 100) : 2
+        max > 0 ? Math.max(2, ((Number(item.value) || 0) / max) * 100) : 2
       }%`;
       bar.appendChild(fill);
       row.append(top, bar);
@@ -9448,37 +9695,64 @@ body.jks-mode .jks-view {
     if (!tbody) return;
     const rows = Array.isArray(data.salesmen) ? data.salesmen : [];
     const total =
-      Number(data.kpi && data.kpi.nett) ||
-      rows.reduce((acc, item) => acc + (Number(item.nett) || 0), 0);
+      Number(data.kpi && data.kpi.value) ||
+      rows.reduce((acc, item) => acc + (Number(item.value) || 0), 0);
     if (!rows.length) {
-      salesTableMessage(tbody, 5, "Belum ada data salesman.");
+      salesTableMessage(tbody, 7, "Belum ada data salesman.");
       salesSetText(els.salesSalesmanInfo, "—");
       return;
     }
+    let targetTotal = 0;
+    let targetCount = 0;
     const fragment = document.createDocumentFragment();
     rows.forEach((item) => {
       const tr = document.createElement("tr");
       const name = salesMake("td");
       name.appendChild(salesMake("span", "sales-name", item.name || "—"));
-      const value = salesMake("td", "num", fmtRp(item.nett));
-      value.title = fmtRp(item.nett);
+      const value = salesMake("td", "num", fmtRp(item.value));
+      value.title = fmtRp(item.value);
       const share = salesMake("td", "num");
       share.appendChild(
-        salesShareCell(total ? (Number(item.nett) || 0) / total : 0)
+        salesShareCell(total ? (Number(item.value) || 0) / total : 0)
       );
+      const target = salesMake(
+        "td",
+        "num",
+        item.target == null ? "—" : fmtRp(item.target)
+      );
+      if (item.target != null) target.title = fmtRp(item.target);
+      const pct = salesMake("td", "num");
+      if (item.target == null || item.target <= 0) {
+        pct.textContent = "—";
+      } else {
+        const ratio = ((Number(item.value) || 0) / item.target) * 100;
+        pct.appendChild(
+          salesMake(
+            "span",
+            `analysis-pct ${ratio >= 100 ? "is-positive" : "is-negative"}`,
+            fmtPct(ratio)
+          )
+        );
+        pct.title = `${fmtRp(item.value)} dari ${fmtRp(item.target)}`;
+        targetTotal += item.target;
+        targetCount += 1;
+      }
       tr.append(
         name,
         value,
         salesMake("td", "num", salesQtyFormatter.format(item.qty || 0)),
         salesMake("td", "num", fmtNum(item.lines || 0)),
-        share
+        share,
+        target,
+        pct
       );
       fragment.appendChild(tr);
     });
     tbody.replaceChildren(fragment);
+    const info = `${fmtNum(rows.length)} salesman · total ${fmtCompact(total)}`;
     salesSetText(
       els.salesSalesmanInfo,
-      `${fmtNum(rows.length)} salesman · total ${fmtCompact(total)}`
+      targetCount ? `${info} · target ${fmtCompact(targetTotal)}` : info
     );
   }
 
@@ -9514,8 +9788,8 @@ body.jks-mode .jks-view {
     const fragment = document.createDocumentFragment();
     shown.forEach((item) => {
       const tr = document.createElement("tr");
-      const value = salesMake("td", "num", fmtRp(item.nett));
-      value.title = fmtRp(item.nett);
+      const value = salesMake("td", "num", fmtRp(item.value));
+      value.title = fmtRp(item.value);
       tr.append(
         salesMake("td", "sales-code", item.code || "—"),
         salesMake("td", "sales-name", item.name || "—"),
@@ -9538,8 +9812,8 @@ body.jks-mode .jks-view {
     const all = Array.isArray(data.categories) ? data.categories : [];
     const shown = all.slice(0, SALES_PRODUCT_LIMIT);
     const total =
-      Number(data.kpi && data.kpi.nett) ||
-      all.reduce((acc, item) => acc + (Number(item.nett) || 0), 0);
+      Number(data.kpi && data.kpi.value) ||
+      all.reduce((acc, item) => acc + (Number(item.value) || 0), 0);
     if (!shown.length) {
       salesTableMessage(tbody, 5, "Belum ada data kategori produk.");
       salesSetText(els.salesProductInfo, "—");
@@ -9548,11 +9822,11 @@ body.jks-mode .jks-view {
     const fragment = document.createDocumentFragment();
     shown.forEach((item) => {
       const tr = document.createElement("tr");
-      const value = salesMake("td", "num", fmtRp(item.nett));
-      value.title = fmtRp(item.nett);
+      const value = salesMake("td", "num", fmtRp(item.value));
+      value.title = fmtRp(item.value);
       const share = salesMake("td", "num");
       share.appendChild(
-        salesShareCell(total ? (Number(item.nett) || 0) / total : 0)
+        salesShareCell(total ? (Number(item.value) || 0) / total : 0)
       );
       tr.append(
         salesMake("td", "sales-name", item.name || "—"),
@@ -9604,11 +9878,32 @@ body.jks-mode .jks-view {
   }
 
   function salesBuildData() {
-    const rows = [];
-    salesUploadState.files.forEach((file) => {
-      file.rows.forEach((row) => rows.push(analysisApplyMasters(row)));
+    const allRows = [];
+    analysisState.files.forEach((file) => {
+      file.rows.forEach((row) => allRows.push(analysisApplyMasters(row)));
     });
+    if (!allRows.length) return null;
+
+    // Penjualan hanya menampilkan MTD: bulan berjalan diambil dari tanggal
+    // terakhir yang ada di data (sama seperti bulan acuan menu Analisa).
+    let latestDate = null;
+    allRows.forEach((row) => {
+      if (row.date instanceof Date && (!latestDate || row.date > latestDate)) {
+        latestDate = row.date;
+      }
+    });
+    const anchorKey = latestDate ? analysisMonthKey(latestDate) : "";
+    const anchorIsCurrent =
+      !!anchorKey && anchorKey === analysisMonthKey(new Date());
+    const rows = anchorKey
+      ? allRows.filter((row) => {
+          const monthKey =
+            row.monthKey || (row.date ? analysisMonthKey(row.date) : "");
+          return monthKey === anchorKey;
+        })
+      : allRows;
     if (!rows.length) return null;
+    const targetMonths = new Set();
 
     const kpi = { nett: 0, value: 0, discount: 0, discount_pct: 0, qty: 0, lines: 0 };
     const outlets = new Map();
@@ -9656,7 +9951,10 @@ body.jks-mode .jks-view {
       bump(
         salesmen,
         row.salesmanCode || row.salesman || "SALESMAN",
-        { name: row.salesman || row.salesmanCode || "—" },
+        {
+          name: row.salesman || row.salesmanCode || "—",
+          code: row.salesmanCode || "",
+        },
         nett,
         gross,
         qty
@@ -9677,6 +9975,9 @@ body.jks-mode .jks-view {
         gross,
         qty
       );
+
+      const monthKey = row.monthKey || (row.date ? analysisMonthKey(row.date) : "");
+      if (monthKey) targetMonths.add(monthKey);
 
       const dateKey = row.dateKey || (row.date ? analysisDateKey(row.date) : "");
       if (dateKey) {
@@ -9700,17 +10001,31 @@ body.jks-mode .jks-view {
     kpi.discount = kpi.value - kpi.nett;
     kpi.discount_pct = kpi.value > 0 ? kpi.discount / kpi.value : 0;
 
-    const byNett = (left, right) => right.nett - left.nett;
+    const targetMonthList = anchorKey ? [anchorKey] : Array.from(targetMonths).sort();
+    let targetTotal = 0;
+    salesmen.forEach((item) => {
+      const entry = masterTargetEntry(item.code, item.name);
+      item.target = masterTargetValue(entry, targetMonthList);
+      if (item.target != null) targetTotal += item.target;
+    });
+
+    const byValue = (left, right) => right.value - left.value;
     return {
-      sheet: "Upload manual",
+      sheet: "Master Data",
       period_label: salesPeriodText(minDate, maxDate),
       updated_at: maxDate ? analysisDateKey(maxDate) : "",
-      files: salesUploadState.files.length,
+      files: analysisState.files.length,
+      anchorKey,
+      anchorLabel: anchorKey ? analysisMonthLabel(anchorKey) : "",
+      anchorIsCurrent,
+      totalRows: allRows.length,
+      rowsUsed: rows.length,
+      targetTotal,
       kpi,
-      outlets: Array.from(outlets.values()).sort(byNett),
-      salesmen: Array.from(salesmen.values()).sort(byNett),
-      channels: Array.from(channels.values()).sort(byNett),
-      categories: Array.from(categories.values()).sort(byNett),
+      outlets: Array.from(outlets.values()).sort(byValue),
+      salesmen: Array.from(salesmen.values()).sort(byValue),
+      channels: Array.from(channels.values()).sort(byValue),
+      categories: Array.from(categories.values()).sort(byValue),
       daily: Array.from(daily.values()).sort((left, right) =>
         left.date.localeCompare(right.date)
       ),
@@ -9721,7 +10036,7 @@ body.jks-mode .jks-view {
     state.salesData = null;
     salesSetText(
       els.salesViewSub,
-      "Ringkasan penjualan gross & nett dari file yang diunggah. Semua file digabung."
+      "Ringkasan penjualan gross & nett dari file Dbase di menu Master Data. Hanya data MTD (bulan berjalan)."
     );
     salesSetText(els.salesPeriod, "Belum ada data");
     salesSetText(els.salesOutletCount, "—");
@@ -9748,23 +10063,35 @@ body.jks-mode .jks-view {
     if (els.salesChannelFilter) {
       els.salesChannelFilter.replaceChildren(new Option("Semua channel", ""));
     }
-    salesTableMessage(els.salesSalesmanBody, 5, "Belum ada data salesman.");
+    salesTableMessage(els.salesSalesmanBody, 7, "Belum ada data salesman.");
     salesTableMessage(els.salesOutletBody, 6, "Belum ada data outlet.");
     salesTableMessage(els.salesProductBody, 5, "Belum ada data kategori produk.");
     if (els.salesFreshness) {
       els.salesFreshness.textContent = "Belum ada data";
       els.salesFreshness.classList.remove("is-stale", "is-error");
     }
-    if (els.salesFootNote) els.salesFootNote.textContent = "Sumber: upload manual";
+    if (els.salesFootNote) els.salesFootNote.textContent = "Sumber: Master Data (Dbase)";
+  }
+
+  function salesMtdLabel(data) {
+    const label =
+      data && data.anchorLabel && data.anchorLabel !== "—" ? data.anchorLabel : "";
+    if (!label) return "";
+    return data.anchorIsCurrent ? `MTD ${label}` : `${label} · bulan terakhir data`;
   }
 
   function renderSalesData(data) {
     state.salesData = data;
     state.salesLastLoadedAt = Date.now();
+    const mtd = salesMtdLabel(data);
 
     salesSetText(
       els.salesViewSub,
-      `Upload manual · ${data.files || 0} file · penjualan gross (VALUE) & bersih (VALUE NETT)`
+      `Sumber Master Data (Dbase) · ${data.files || 0} file${
+        mtd ? ` · ${mtd}` : ""
+      } · penjualan gross (VALUE) & bersih (VALUE NETT)${
+        data.anchorIsCurrent ? " · hanya bulan berjalan" : ""
+      }`
     );
     salesSetText(els.salesPeriod, data.period_label || "—");
     salesSetText(els.salesOutletCount, fmtNum(data.outlets ? data.outlets.length : 0));
@@ -9780,14 +10107,15 @@ body.jks-mode .jks-view {
     renderSalesProducts(data);
 
     if (els.salesFootNote) {
-      els.salesFootNote.textContent = `Sumber: upload manual · ${data.files || 0} file · ${
-        data.period_label || "—"
-      }`;
+      els.salesFootNote.textContent = `Sumber: Master Data (Dbase) · ${data.files || 0} file${
+        mtd ? ` · ${mtd}` : ""
+      } · ${data.period_label || "—"}`;
     }
     if (els.salesFreshness) {
-      els.salesFreshness.textContent = `${data.files || 0} file · data lokal`;
+      els.salesFreshness.textContent = `${data.files || 0} file · ${mtd || "data lokal"}`;
       els.salesFreshness.classList.remove("is-stale", "is-error");
     }
+    salesUpdateSourceNote();
   }
 
   function loadSalesView() {
@@ -9807,198 +10135,83 @@ body.jks-mode .jks-view {
     }
   }
 
-  // ----- Upload terpisah Penjualan -----------------------------------------
+  // ----- Sumber data Penjualan (dikelola dari menu Master Data) -------------
 
-  function salesSetNotice(kind, text) {
-    salesUploadState.notice = text ? { kind, text } : null;
-    salesRenderFiles();
-  }
-
-  function salesRenderFiles() {
-    const count = salesUploadState.files.length;
-    const atLimit = count >= SALES_MAX_FILES;
-    const busy = salesUploadState.loading;
-
-    if (els.salesFileCount) els.salesFileCount.textContent = `${count} / ${SALES_MAX_FILES}`;
-    if (els.salesDropHint) {
-      els.salesDropHint.textContent = atLimit
-        ? "Batas 6 file tercapai"
-        : `${count} dari ${SALES_MAX_FILES} file`;
-    }
-    if (els.salesAddBtn) els.salesAddBtn.disabled = atLimit || busy;
-    if (els.salesResetBtn) els.salesResetBtn.disabled = busy;
-    if (els.salesFileInput) els.salesFileInput.disabled = atLimit || busy;
-    if (els.salesDropZone) {
-      els.salesDropZone.classList.toggle("is-disabled", atLimit || busy);
-    }
-    if (els.salesFileList) {
-      els.salesFileList.innerHTML = datasetFileListHtml(
-        salesUploadState.files,
-        "Belum ada file. Tambahkan file penjualan.",
-        "data-sales-remove"
-      );
-    }
-    if (els.salesUploadStatus) {
-      if (busy) {
-        els.salesUploadStatus.textContent = "Memproses file…";
-        els.salesUploadStatus.className = "analysis-status is-loading";
-      } else if (salesUploadState.storageError) {
-        const noticeText = salesUploadState.notice ? `${salesUploadState.notice.text} ` : "";
-        els.salesUploadStatus.textContent = `${noticeText}${salesUploadState.storageError}`;
-        els.salesUploadStatus.className = "analysis-status is-warn";
-      } else if (salesUploadState.notice) {
-        els.salesUploadStatus.textContent = salesUploadState.notice.text;
-        els.salesUploadStatus.className = `analysis-status is-${salesUploadState.notice.kind}`;
-      } else {
-        els.salesUploadStatus.textContent =
-          "Data diproses di browser dan disimpan lokal di perangkat ini.";
-        els.salesUploadStatus.className = "analysis-status";
-      }
-    }
+  function salesUpdateSourceNote() {
+    if (!els.salesSourceNote) return;
+    const count = analysisState.files.length;
+    const mtd = salesMtdLabel(state.salesData);
+    els.salesSourceNote.textContent = count
+      ? `Sumber: Master Data · Dbase (data penjualan) · ${count} file${
+          mtd ? ` · ${mtd}` : ""
+        }`
+      : "Belum ada data. Unggah file Dbase (data penjualan) di menu Master Data.";
   }
 
   function salesRefresh() {
-    salesRenderFiles();
     loadSalesView();
+    salesUpdateSourceNote();
   }
 
-  async function salesAddFiles(fileList) {
-    if (salesUploadState.loading) return;
-    const incoming = Array.from(fileList || []);
-    if (!incoming.length) return;
-
-    const remaining = SALES_MAX_FILES - salesUploadState.files.length;
-    if (remaining <= 0) {
-      salesSetNotice("warn", "Batas maksimal 6 file sudah tercapai. Hapus file lain terlebih dahulu.");
-      return;
+  // Data penjualan lama (sebelum upload dipindah ke Master Data) dipulihkan
+  // sekali saja agar tidak perlu unggah ulang.
+  async function salesMigrateLegacy() {
+    let payload = null;
+    try {
+      payload = await analysisIdbRead(SALES_LEGACY_DB_KEY);
+    } catch (error) {
+      payload = null;
     }
-
-    const accepted = [];
-    const messages = [];
-    if (incoming.length > remaining) {
-      messages.push(`Hanya ${remaining} file pertama yang diproses karena batas maksimal 6 file.`);
-    }
-
-    incoming.slice(0, remaining).forEach((file) => {
-      const key = `${file.name}|${file.size}|${file.lastModified}`;
-      if (salesUploadState.files.some((item) => item.key === key)) {
-        messages.push(`${file.name} sudah ada di daftar.`);
-        return;
-      }
-      accepted.push(file);
-    });
-
-    if (!accepted.length) {
-      salesSetNotice("warn", messages.join(" ") || "Tidak ada file baru yang bisa ditambahkan.");
-      return;
-    }
-
-    salesUploadState.loading = true;
-    salesRenderFiles();
-    let added = 0;
-    const failures = [];
-
-    for (const file of accepted) {
+    if (!payload) {
       try {
-        const parsed = await analysisReadFile(file);
-        const rows = parsed.objects
-          .map((object) => analysisNormalizeRow(object))
-          .filter(Boolean);
-        if (!rows.length) throw new Error("Tidak ada baris dengan tanggal valid.");
-        const invalid = Math.max(0, parsed.objects.length - rows.length);
-        salesUploadState.files.push({
-          id: `sales-${salesUploadState.nextId++}`,
-          key: `${file.name}|${file.size}|${file.lastModified}`,
-          name: file.name,
-          size: file.size,
-          sheets: parsed.sheets || [],
-          rows,
-          invalid,
-        });
-        added += 1;
+        const raw = window.localStorage.getItem(SALES_LEGACY_STORAGE_KEY) || "";
+        if (raw) payload = JSON.parse(raw);
       } catch (error) {
-        failures.push(`${file.name}: ${analysisSafeError(error)}`);
+        payload = null;
+      }
+    }
+    if (!payload) return false;
+
+    let imported = 0;
+    if (!analysisState.files.length) {
+      let restored = null;
+      try {
+        restored = await datasetRestore(
+          SALES_LEGACY_DB_KEY,
+          SALES_LEGACY_STORAGE_KEY,
+          ANALYSIS_MAX_FILES,
+          "dbase"
+        );
+      } catch (error) {
+        restored = null;
+      }
+      if (restored && restored.files.length) {
+        analysisState.files = restored.files;
+        const maxId = restored.files.reduce((max, file) => {
+          const match = String(file.id || "").match(/(\d+)$/);
+          return Math.max(max, match ? Number(match[1]) : 0);
+        }, 0);
+        analysisState.nextId = Math.max(1, maxId + 1);
+        analysisState.notice = {
+          kind: "success",
+          text: `${restored.files.length} file penjualan lama dipindahkan ke Master Data (kategori Dbase).`,
+        };
+        imported = restored.files.length;
+        try {
+          await analysisPersistLocal();
+        } catch (error) {
+          /* data tetap dipakai walau gagal disimpan */
+        }
       }
     }
 
-    salesUploadState.loading = false;
-    const noticeParts = [];
-    if (added) noticeParts.push(`${added} file ditambahkan.`);
-    if (messages.length) noticeParts.push(...messages);
-    if (failures.length) noticeParts.push(`Gagal: ${failures.join("; ")}`);
-    salesUploadState.notice = {
-      kind: failures.length ? "warn" : "success",
-      text: noticeParts.join(" "),
-    };
-    salesPersistLocal();
-    salesRefresh();
-  }
-
-  function salesRemoveFile(id) {
-    const before = salesUploadState.files.length;
-    salesUploadState.files = salesUploadState.files.filter((file) => file.id !== id);
-    if (salesUploadState.files.length === before) return;
-    salesUploadState.notice = { kind: "info", text: "File dihapus dari data lokal." };
-    salesPersistLocal();
-    salesRefresh();
-  }
-
-  function salesReset() {
-    if (
-      salesUploadState.files.length &&
-      !window.confirm("Hapus semua file penjualan?")
-    ) {
-      return false;
+    try {
+      await analysisIdbWrite(SALES_LEGACY_DB_KEY, null);
+      window.localStorage.removeItem(SALES_LEGACY_STORAGE_KEY);
+    } catch (error) {
+      /* pembersihan bersifat opsional */
     }
-    salesUploadState.files = [];
-    salesUploadState.notice = null;
-    salesUploadState.storageError = "";
-    if (els.salesFileInput) els.salesFileInput.value = "";
-    salesPersistLocal();
-    salesRefresh();
-    return true;
-  }
-
-  function salesDownloadTemplate() {
-    const kind = downloadPenjualanTemplate();
-    salesSetNotice(
-      "success",
-      kind === "excel"
-        ? "Template Excel penjualan diunduh."
-        : "Template CSV diunduh (pustaka Excel belum termuat)."
-    );
-  }
-
-  function salesPersistLocal() {
-    return datasetPersist(
-      salesUploadState,
-      SALES_STORAGE_KEY,
-      SALES_DB_KEY,
-      salesRenderFiles
-    );
-  }
-
-  async function salesRestoreLocal() {
-    const restored = await datasetRestore(
-      SALES_DB_KEY,
-      SALES_STORAGE_KEY,
-      SALES_MAX_FILES,
-      "sales"
-    );
-    if (!restored) return false;
-    salesUploadState.files = restored.files;
-    const maxId = restored.files.reduce((max, file) => {
-      const match = String(file.id || "").match(/(\d+)$/);
-      return Math.max(max, match ? Number(match[1]) : 0);
-    }, 0);
-    salesUploadState.nextId = Math.max(1, maxId + 1);
-    salesUploadState.notice = {
-      kind: "success",
-      text: `${restored.files.length} file penjualan dipulihkan dari penyimpanan lokal browser ini.`,
-    };
-    salesUploadState.storageError = "";
-    if (restored.fromLocalStorage) salesPersistLocal();
-    return true;
+    return imported > 0;
   }
 
   function initSalesView() {
@@ -10017,54 +10230,7 @@ body.jks-mode .jks-view {
       });
     }
 
-    els.salesAddBtn?.addEventListener("click", () => {
-      if (salesUploadState.loading) return;
-      if (salesUploadState.files.length >= SALES_MAX_FILES) {
-        salesSetNotice("warn", "Batas maksimal 6 file sudah tercapai. Hapus file lain terlebih dahulu.");
-        return;
-      }
-      els.salesFileInput?.click();
-    });
-
-    els.salesFileInput?.addEventListener("change", async (event) => {
-      await salesAddFiles(event.target.files);
-      event.target.value = "";
-    });
-
-    els.salesTemplateBtn?.addEventListener("click", salesDownloadTemplate);
-    els.salesResetBtn?.addEventListener("click", salesReset);
-
-    els.salesDropZone?.addEventListener("dragenter", (event) => {
-      event.preventDefault();
-      if (salesUploadState.files.length < SALES_MAX_FILES && !salesUploadState.loading) {
-        els.salesDropZone.classList.add("is-dragover");
-      }
-    });
-    els.salesDropZone?.addEventListener("dragover", (event) => {
-      event.preventDefault();
-      if (event.dataTransfer) event.dataTransfer.dropEffect = "copy";
-    });
-    els.salesDropZone?.addEventListener("dragleave", (event) => {
-      if (!els.salesDropZone.contains(event.relatedTarget)) {
-        els.salesDropZone.classList.remove("is-dragover");
-      }
-    });
-    els.salesDropZone?.addEventListener("drop", (event) => {
-      event.preventDefault();
-      els.salesDropZone.classList.remove("is-dragover");
-      salesAddFiles(event.dataTransfer?.files);
-    });
-
-    els.salesFileList?.addEventListener("click", (event) => {
-      const button = event.target.closest("[data-sales-remove]");
-      if (!button) return;
-      salesRemoveFile(button.dataset.salesRemove);
-    });
-
-    salesRestoreLocal().finally(() => {
-      salesRenderFiles();
-      loadSalesView();
-    });
+    salesRefresh();
   }
 
   // =========================================================================
@@ -12996,6 +13162,24 @@ legendControl.addTo(map);
     return info.dates.get(analysisDateKey(date)) ?? null;
   }
 
+  // Baris pada hari non-kerja (mis. Minggu pada basis Senin–Sabtu) tetap
+  // dihitung: HK-nya mengikuti hari kerja berikutnya di bulan yang sama, atau
+  // HK terakhir bulan itu bila tidak ada hari kerja lagi setelahnya.
+  function analysisHkForDateOrNext(date, basis) {
+    const direct = analysisHkForDate(date, basis);
+    if (direct) return { hk: direct, offDay: false };
+    const year = date.getFullYear();
+    const monthIndex = date.getMonth();
+    const info = analysisMonthInfo(year, monthIndex, basis);
+    const lastDay = new Date(year, monthIndex + 1, 0).getDate();
+    for (let day = date.getDate() + 1; day <= lastDay; day += 1) {
+      const probe = new Date(year, monthIndex, day);
+      const hk = info.dates.get(analysisDateKey(probe));
+      if (hk) return { hk, offDay: true };
+    }
+    return { hk: info.maxHk || 1, offDay: true };
+  }
+
   function analysisHeaderMeta(row) {
     const keys = (Array.isArray(row) ? row : []).map(jksNormalizeKey);
     const hasDate = keys.some(
@@ -13525,6 +13709,19 @@ legendControl.addTo(map);
           salesmanCode: masterPick(row, "KD_SLS", "KD SLS2", "NIK SALESMAN", "KODE SALESMAN", "KD SALESMAN", "SALESMAN CODE"),
           route: masterPick(row, "RAYON", "RUTE", "ROUTE"),
         };
+      } else if (type === "salesman") {
+        code = masterPick(
+          row,
+          "KODE SALESMAN", "KD SALESMAN", "KD_SLS", "KD SLS2", "NIK SALESMAN",
+          "SALESMAN CODE", "KODE/NIK SALESMAN", "KODE"
+        );
+        record = {
+          code,
+          name: masterPick(row, "NAMA SALESMAN", "NAMA_SLS", "SALESMAN", "SALES MAN", "NAMA SALES"),
+          divisi: masterPick(row, "DIVISI", "DIV", "DIVISION", "DEPARTEMEN", "DEPT"),
+          depo: masterPick(row, "DEPO/PMA", "DEPO", "PMA", "DEPOT", "CABANG", "BRANCH", "AREA", "FC"),
+          channel: masterPick(row, "CHANNEL", "CHANEL", "SALURAN"),
+        };
       } else {
         code = masterPick(row, "KODE ITEM", "KD_BRG", "KODE BARANG", "KODE PRODUK", "SKU", "ITEM CODE", "PRODUCT CODE");
         record = {
@@ -13541,9 +13738,96 @@ legendControl.addTo(map);
     return { map, count };
   }
 
+  function masterTargetMonthKey(value) {
+    if (value == null || value === "") return "";
+    if (value instanceof Date && !Number.isNaN(value.getTime())) {
+      return analysisMonthKey(value);
+    }
+    const text = String(value).trim().toLowerCase();
+    if (!text) return "";
+    let match = text.match(/^(\d{4})[/\-.](\d{1,2})$/);
+    if (match) {
+      const month = Number(match[2]);
+      if (month >= 1 && month <= 12) return `${match[1]}-${analysisPad(month)}`;
+    }
+    match = text.match(/^(\d{1,2})[/\-.](\d{4})$/);
+    if (match) {
+      const month = Number(match[1]);
+      if (month >= 1 && month <= 12) return `${match[2]}-${analysisPad(month)}`;
+    }
+    match = text.match(/([a-z]{3,})[^a-z0-9]*(\d{2,4})/);
+    if (match && MASTER_MONTH_NAMES[match[1].slice(0, 3)] != null) {
+      let year = Number(match[2]);
+      if (year < 100) year += 2000;
+      return `${year}-${analysisPad(MASTER_MONTH_NAMES[match[1].slice(0, 3)] + 1)}`;
+    }
+    match = text.match(/(\d{4})[^a-z0-9]*([a-z]{3,})/);
+    if (match && MASTER_MONTH_NAMES[match[2].slice(0, 3)] != null) {
+      return `${match[1]}-${analysisPad(MASTER_MONTH_NAMES[match[2].slice(0, 3)] + 1)}`;
+    }
+    const date = analysisParseDate(value);
+    if (date) return analysisMonthKey(date);
+    return "";
+  }
+
+  function masterBuildTargetMap(objects) {
+    const map = {};
+    let count = 0;
+    (objects || []).forEach((object) => {
+      const row = masterNormalizeObject(object);
+      const code = masterPick(
+        row,
+        "KODE SALESMAN", "KD SALESMAN", "KD_SLS", "KD SLS2", "NIK SALESMAN",
+        "KODE/NIK SALESMAN", "SALESMAN CODE", "KODE"
+      );
+      if (!code) return;
+      const target = stokNum(
+        masterPick(
+          row,
+          "TARGET", "TARGET SALES", "TARGET PENJUALAN", "TARGET BULAN",
+          "TARGET MTD", "VALUE TARGET", "NILAI TARGET"
+        )
+      );
+      if (!target) return;
+      const monthKey = masterTargetMonthKey(
+        masterPick(row, "BULAN", "PERIODE", "BULAN TARGET", "MONTH", "TANGGAL")
+      );
+      const key = code.trim().toUpperCase();
+      const entry = map[key] || { code: key, name: "", months: {}, default: null };
+      const name = masterPick(row, "NAMA SALESMAN", "NAMA_SLS", "SALESMAN", "NAMA SALES");
+      if (name && !entry.name) entry.name = name;
+      if (monthKey) entry.months[monthKey] = (entry.months[monthKey] || 0) + target;
+      else entry.default = (entry.default || 0) + target;
+      map[key] = entry;
+      count += 1;
+    });
+    return { map, count };
+  }
+
+  function masterTargetEntry(...keys) {
+    const map = masterState.maps ? masterState.maps.target : null;
+    if (!map) return null;
+    for (const key of keys) {
+      const clean = String(key || "").trim().toUpperCase();
+      if (clean && map[clean]) return map[clean];
+    }
+    return null;
+  }
+
+  function masterTargetValue(entry, monthKeys) {
+    if (!entry) return null;
+    const keys = monthKeys && monthKeys.length ? monthKeys : [""];
+    let total = 0;
+    keys.forEach((key) => {
+      if (key && entry.months[key] != null) total += Number(entry.months[key]) || 0;
+      else if (entry.default != null) total += Number(entry.default) || 0;
+    });
+    return total;
+  }
+
   function masterHeaderRowHint(type) {
     // Master Outlet mengikuti file asli: 3 baris pembuka, header di baris 4.
-    return type === "item" ? 0 : 3;
+    return type === "outlet" ? 3 : 0;
   }
 
   function masterHeaderScore(row, expected) {
@@ -13671,13 +13955,15 @@ legendControl.addTo(map);
 
   function analysisApplyMasters(row) {
     const maps = masterState.maps;
-    if (!maps.outlet && !maps.item) return row;
+    if (!maps.outlet && !maps.item && !maps.salesman) return row;
 
     const outletKey = String(row.outletCode || "").trim().toUpperCase();
     const productKey = String(row.productCode || "").trim().toUpperCase();
+    const salesmanKey = String(row.salesmanCode || "").trim().toUpperCase();
     const outlet = maps.outlet && outletKey ? maps.outlet[outletKey] : null;
     const product = maps.item && productKey ? maps.item[productKey] : null;
-    if (!outlet && !product) return row;
+    const salesman = maps.salesman && salesmanKey ? maps.salesman[salesmanKey] : null;
+    if (!outlet && !product && !salesman) return row;
 
     const enriched = { ...row };
     const isPlaceholder = (value, placeholder) => !value || value === placeholder;
@@ -13718,6 +14004,26 @@ legendControl.addTo(map);
           fromMaster ||
           "";
         if (divisi) enriched.divisi = divisi;
+      }
+    }
+
+    if (salesman) {
+      if (
+        (isPlaceholder(enriched.salesman, "Tanpa salesman") ||
+          enriched.salesman === enriched.salesmanCode) &&
+        salesman.name
+      ) {
+        enriched.salesman = salesman.name;
+      }
+      if (isPlaceholder(enriched.divisi, "Tanpa divisi") && salesman.divisi) {
+        enriched.divisi =
+          analysisNormalizeDivision(salesman.divisi) || salesman.divisi;
+      }
+      if (isPlaceholder(enriched.depo, "Tanpa depo") && salesman.depo) {
+        enriched.depo = salesman.depo;
+      }
+      if (isPlaceholder(enriched.channel, "Tanpa channel") && salesman.channel) {
+        enriched.channel = salesman.channel;
       }
     }
 
@@ -13770,6 +14076,8 @@ legendControl.addTo(map);
     masterState.maps = {
       outlet: masterMergeMaps("outlet"),
       item: masterMergeMaps("item"),
+      salesman: masterMergeMaps("salesman"),
+      target: masterMergeMaps("target"),
     };
   }
 
@@ -13782,17 +14090,22 @@ legendControl.addTo(map);
 
   function masterPayload() {
     return {
-      version: 2,
+      version: 3,
       savedAt: new Date().toISOString(),
-      type: masterState.type,
       files: masterState.files,
     };
   }
 
+  function masterHasFiles() {
+    return MASTER_CARD_TYPES.some((type) => (masterState.files[type] || []).length > 0);
+  }
+
   async function masterPersist() {
-    const hasData = masterState.files.outlet.length || masterState.files.item.length;
     try {
-      await analysisIdbWrite(ANALYSIS_MASTER_KEY, hasData ? masterPayload() : null);
+      await analysisIdbWrite(
+        ANALYSIS_MASTER_KEY,
+        masterHasFiles() ? masterPayload() : null
+      );
     } catch (error) {
       masterState.notice = { kind: "warn", text: "Master data tidak bisa disimpan lokal." };
     }
@@ -13803,69 +14116,88 @@ legendControl.addTo(map);
       const payload = await analysisIdbRead(ANALYSIS_MASTER_KEY);
       if (!payload || !payload.files) return;
       const normalize = (value) => (Array.isArray(value) ? value.filter(Boolean) : []);
-      masterState.files = {
-        outlet: normalize(payload.files.outlet),
-        item: normalize(payload.files.item),
-      };
-      if (payload.type && MASTER_TYPE_LABELS[payload.type]) {
-        masterState.type = payload.type;
-      }
+      MASTER_CARD_TYPES.forEach((type) => {
+        masterState.files[type] = normalize(payload.files[type]);
+      });
       masterRebuildMaps();
     } catch (error) {
       // Master data bersifat opsional; abaikan bila tidak bisa dipulihkan.
     }
   }
 
-  function masterRenderFiles() {
-    if (els.masterType) els.masterType.value = masterState.type;
-    const type = masterState.type;
-    const max = MASTER_MAX_FILES[type] || 6;
+  function masterRenderCard(type) {
+    const max = MASTER_MAX_FILES[type] || 15;
     const files = masterState.files[type] || [];
-    if (els.masterFileCount) els.masterFileCount.textContent = `${files.length} / ${max}`;
-    if (els.masterOutletCount) {
-      els.masterOutletCount.textContent = `${masterState.files.outlet.length} / ${MASTER_MAX_FILES.outlet} · ${fmtNum(masterFileRows("outlet"))} baris`;
-    }
-    if (els.masterItemCount) {
-      els.masterItemCount.textContent = `${masterState.files.item.length} / ${MASTER_MAX_FILES.item} · ${fmtNum(masterFileRows("item"))} baris`;
-    }
-    if (els.masterDropHint) {
-      els.masterDropHint.textContent = files.length
+    const busy = masterState.loading === type;
+    const atLimit = files.length >= max;
+    const badge = masterCardEl(type, "Badge");
+    const hint = masterCardEl(type, "Hint");
+    const list = masterCardEl(type, "List");
+    const status = masterCardEl(type, "Status");
+    const input = masterCardEl(type, "Input");
+    const drop = masterCardEl(type, "Drop");
+    const reset = masterCardEl(type, "Reset");
+    const icon =
+      type === "outlet" ? "OUT"
+        : type === "item" ? "ITM"
+          : type === "salesman" ? "SLS" : "TGT";
+
+    if (badge) badge.textContent = `${files.length} / ${max}`;
+    if (input) input.disabled = atLimit || busy;
+    if (drop) drop.classList.toggle("is-disabled", atLimit || busy);
+    if (reset) reset.disabled = busy || !files.length;
+    if (hint) {
+      hint.textContent = files.length
         ? `${files.length} file · ${fmtNum(masterFileRows(type))} baris`
-        : "Belum ada master";
+        : "Belum ada file";
     }
-    if (els.masterFileList) {
+    if (list) {
       const items = files.map((entry, index) => `
         <div class="analysis-file-item">
-          <span class="analysis-file-icon">${type === "outlet" ? "OUT" : "ITM"}</span>
+          <span class="analysis-file-icon">${icon}</span>
           <div class="analysis-file-main">
             <strong>${escapeHtml(entry.name)}</strong>
             <span>${fmtNum(entry.count)} baris · ${analysisFormatBytes(entry.size)}</span>
           </div>
-          <button class="analysis-file-remove" type="button" data-master-remove="${index}" aria-label="Hapus ${escapeHtml(entry.name)}">&times;</button>
+          <button class="analysis-file-remove" type="button" data-master-type="${type}" data-master-remove="${index}" aria-label="Hapus ${escapeHtml(entry.name)}">&times;</button>
         </div>
       `);
-      els.masterFileList.innerHTML = items.length
+      list.innerHTML = items.length
         ? items.join("")
         : `<p class="analysis-muted">Belum ada ${MASTER_TYPE_LABELS[type].toLowerCase()}.</p>`;
     }
-    if (els.masterUploadStatus) {
+    if (status) {
       const notice = masterState.notice;
-      els.masterUploadStatus.textContent = notice
-        ? notice.text
-        : `${MASTER_TYPE_LABELS[type]} dipakai untuk melengkapi kolom yang kosong dan disimpan lokal di perangkat ini.`;
+      const mine = notice && notice.type === type ? notice : null;
+      status.textContent = mine
+        ? mine.text
+        : MASTER_CARD_HINTS[type] || `${MASTER_TYPE_LABELS[type]} disimpan lokal di perangkat ini.`;
+      status.className = mine ? `analysis-status is-${mine.kind}` : "analysis-status";
     }
   }
 
-  async function masterApplyFile(fileList) {
+  function masterRenderFiles() {
+    MASTER_CARD_TYPES.forEach((type) => {
+      masterRenderCard(type);
+      const hero = masterCardEl(type, "Hero");
+      const max = MASTER_MAX_FILES[type] || 15;
+      if (hero) {
+        hero.textContent = `${(masterState.files[type] || []).length} / ${max}`;
+      }
+    });
+  }
+
+  async function masterApplyFile(type, fileList) {
     if (masterState.loading) return;
+    if (!MASTER_TYPE_LABELS[type]) return;
     const incoming = Array.from(fileList || []);
     if (!incoming.length) return;
-    const type = masterState.type;
-    const max = MASTER_MAX_FILES[type] || 6;
+    const max = MASTER_MAX_FILES[type] || 15;
     const current = masterState.files[type] || [];
     const room = max - current.length;
     if (room <= 0) {
       masterState.notice = {
+        type,
         kind: "warn",
         text: `${MASTER_TYPE_LABELS[type]} sudah maksimal ${max} file. Hapus salah satu untuk menambah.`,
       };
@@ -13874,8 +14206,8 @@ legendControl.addTo(map);
     }
     const selected = incoming.slice(0, room);
     const skipped = incoming.length - selected.length;
-    masterState.loading = true;
-    masterState.notice = { kind: "info", text: `Membaca ${selected.length} file…` };
+    masterState.loading = type;
+    masterState.notice = { type, kind: "info", text: `Membaca ${selected.length} file…` };
     masterRenderFiles();
     let addedFiles = 0;
     let addedRows = 0;
@@ -13883,7 +14215,9 @@ legendControl.addTo(map);
     for (const file of selected) {
       try {
         const parsed = await masterReadFile(file, type);
-        const built = masterBuildMap(type, parsed.objects);
+        const built = type === "target"
+          ? masterBuildTargetMap(parsed.objects)
+          : masterBuildMap(type, parsed.objects);
         if (!built.count) throw new Error("tidak ada baris dengan kode yang dikenali");
         current.push({
           name: file.name,
@@ -13902,34 +14236,37 @@ legendControl.addTo(map);
     masterRebuildMaps();
     if (addedFiles && !failures.length) {
       masterState.notice = {
+        type,
         kind: "success",
         text: `${MASTER_TYPE_LABELS[type]} diperbarui: ${fmtNum(addedFiles)} file · ${fmtNum(addedRows)} baris${skipped ? ` · ${skipped} file dilewati (maks ${max})` : ""}.`,
       };
     } else if (addedFiles && failures.length) {
       masterState.notice = {
+        type,
         kind: "warn",
         text: `${fmtNum(addedFiles)} file ditambahkan, ${failures.length} gagal. ${failures[0]}`,
       };
     } else {
-      masterState.notice = { kind: "warn", text: `Gagal: ${failures[0] || "tidak ada file terbaca"}` };
+      masterState.notice = { type, kind: "warn", text: `Gagal: ${failures[0] || "tidak ada file terbaca"}` };
     }
     try {
       await masterPersist();
     } finally {
-      masterState.loading = false;
+      masterState.loading = "";
       masterRenderFiles();
       analysisRefresh();
       salesRefresh();
     }
   }
 
-  function masterRemove(index) {
-    const type = masterState.type;
+  function masterRemove(type, index) {
+    if (!MASTER_TYPE_LABELS[type]) return;
     const files = masterState.files[type] || [];
     const idx = Number(index);
     if (!Number.isInteger(idx) || idx < 0 || idx >= files.length) return;
     const removed = files.splice(idx, 1)[0];
     masterState.notice = {
+      type,
       kind: "info",
       text: `${MASTER_TYPE_LABELS[type]} dihapus${removed ? `: ${removed.name}` : ""}.`,
     };
@@ -13940,14 +14277,17 @@ legendControl.addTo(map);
     salesRefresh();
   }
 
-  function masterReset() {
-    if (!masterState.files.outlet.length && !masterState.files.item.length) return;
-    if (typeof window.confirm === "function" && !window.confirm("Hapus semua master data?")) {
+  function masterReset(type) {
+    if (!MASTER_TYPE_LABELS[type]) return;
+    const files = masterState.files[type] || [];
+    if (!files.length) return;
+    const label = MASTER_TYPE_LABELS[type];
+    if (typeof window.confirm === "function" && !window.confirm(`Hapus semua file ${label}?`)) {
       return;
     }
-    masterState.files = { outlet: [], item: [] };
-    masterState.maps = { outlet: null, item: null };
-    masterState.notice = { kind: "info", text: "Semua master data dihapus." };
+    masterState.files[type] = [];
+    masterRebuildMaps();
+    masterState.notice = { type, kind: "info", text: `${label} dihapus semua.` };
     masterPersist();
     masterRenderFiles();
     analysisRefresh();
@@ -13955,39 +14295,52 @@ legendControl.addTo(map);
   }
 
   function masterHeadersFor(type) {
-    return type === "item" ? MASTER_ITEM_HEADERS : MASTER_OUTLET_HEADERS;
+    if (type === "item") return MASTER_ITEM_HEADERS;
+    if (type === "salesman") return MASTER_SALESMAN_HEADERS;
+    if (type === "target") return MASTER_TARGET_HEADERS;
+    return MASTER_OUTLET_HEADERS;
   }
 
   function masterTemplateAoa(type) {
     const headers = masterHeadersFor(type);
-    if (type === "item") return [headers];
-    // Template Master Outlet: header berada di baris 4 (3 baris pembuka).
-    return [
-      ["MASTER OUTLET"],
-      ["Header kolom ada di baris 4. Jangan menghapus 3 baris di atas."],
-      [""],
-      headers,
-    ];
+    if (type === "outlet") {
+      // Template Master Outlet: header berada di baris 4 (3 baris pembuka).
+      return [
+        ["MASTER OUTLET"],
+        ["Header kolom ada di baris 4. Jangan menghapus 3 baris di atas."],
+        [""],
+        headers,
+      ];
+    }
+    return [headers];
   }
 
-  function downloadMasterTemplate() {
-    const type = masterState.type;
+  function masterTemplateName(type) {
+    const table = {
+      outlet: { file: "template-master-outlet", sheet: "MASTER OUTLET" },
+      item: { file: "template-master-item", sheet: "MASTER ITEM" },
+      salesman: { file: "template-master-salesman", sheet: "MASTER SALESMAN" },
+      target: { file: "template-target-salesman", sheet: "TARGET SALESMAN" },
+    };
+    return table[type] || table.outlet;
+  }
+
+  function downloadMasterTemplate(type = "outlet") {
     const headers = masterHeadersFor(type);
     const aoa = masterTemplateAoa(type);
-    const fileBase = type === "item" ? "template-master-item" : "template-master-outlet";
-    const sheetName = type === "item" ? "MASTER ITEM" : "MASTER OUTLET";
+    const { file, sheet } = masterTemplateName(type);
     const XLSX = window.XLSX;
     if (XLSX && XLSX.utils && typeof XLSX.writeFile === "function") {
-      const sheet = XLSX.utils.aoa_to_sheet(aoa);
-      sheet["!cols"] = headers.map((header) => ({
+      const sheetObject = XLSX.utils.aoa_to_sheet(aoa);
+      sheetObject["!cols"] = headers.map((header) => ({
         wch: Math.max(12, Math.min(26, String(header).length + 4)),
       }));
       const workbook = XLSX.utils.book_new();
-      XLSX.utils.book_append_sheet(workbook, sheet, sheetName);
-      XLSX.writeFile(workbook, `${fileBase}.xlsx`);
+      XLSX.utils.book_append_sheet(workbook, sheetObject, sheet);
+      XLSX.writeFile(workbook, `${file}.xlsx`);
       return "excel";
     }
-    jksDownload(`${fileBase}.csv`, analysisAoaToCsv(aoa));
+    jksDownload(`${file}.csv`, analysisAoaToCsv(aoa));
     return "csv";
   }
 
@@ -14199,6 +14552,7 @@ legendControl.addTo(map);
     const totalItems = stokState.files.reduce((total, file) => total + (file.count || 0), 0);
     if (els.stokFileCount) els.stokFileCount.textContent = `${stokState.files.length} / ${STOK_MAX_FILES}`;
     if (els.stokFileHero) els.stokFileHero.textContent = `${stokState.files.length} / ${STOK_MAX_FILES}`;
+    if (els.masterStokHero) els.masterStokHero.textContent = `${stokState.files.length} / ${STOK_MAX_FILES}`;
     if (els.stokDropHint) {
       els.stokDropHint.textContent = stokState.files.length
         ? `${stokState.files.length} file · ${fmtNum(totalItems)} item`
@@ -14223,7 +14577,12 @@ legendControl.addTo(map);
       const notice = stokState.notice;
       els.stokUploadStatus.textContent = notice
         ? notice.text
-        : "Data diproses di browser dan disimpan lokal di perangkat ini.";
+        : "Dipakai oleh menu Analisa Stok Gudang. Disimpan lokal di perangkat ini.";
+    }
+    if (els.stokSourceNote) {
+      els.stokSourceNote.textContent = stokState.files.length
+        ? `Sumber data: Master Data · Stok Gudang · ${stokState.files.length} file · ${fmtNum(totalItems)} item.`
+        : "Sumber data: Master Data · Stok Gudang. Belum ada file.";
     }
   }
 
@@ -14630,16 +14989,17 @@ legendControl.addTo(map);
       };
     }
 
-    const workingRows = [];
+    const usableRows = [];
     let offDayRows = 0;
     allRows.forEach((row) => {
-      const hk = analysisHkForDate(row.date, analysisState.basis);
-      row.hk = hk;
-      if (hk) workingRows.push(row);
-      else offDayRows += 1;
+      const info = analysisHkForDateOrNext(row.date, analysisState.basis);
+      row.hk = info.hk;
+      row.offDay = info.offDay;
+      if (info.offDay) offDayRows += 1;
+      usableRows.push(row);
     });
 
-    if (!workingRows.length) {
+    if (!usableRows.length) {
       return {
         empty: true,
         totalRows: allRows.length,
@@ -14653,8 +15013,8 @@ legendControl.addTo(map);
       1,
       Math.min(6, Math.round(Number(analysisState.period) || 3))
     );
-    let latestDate = workingRows[0].date;
-    workingRows.forEach((row) => {
+    let latestDate = usableRows[0].date;
+    usableRows.forEach((row) => {
       if (row.date > latestDate) latestDate = row.date;
     });
 
@@ -14673,7 +15033,7 @@ legendControl.addTo(map);
     analysisState.anchorKey = anchorKey;
 
     const divisiOptions = Array.from(
-      new Set(workingRows.map((row) => row.divisi).filter(Boolean))
+      new Set(usableRows.map((row) => row.divisi).filter(Boolean))
     ).sort((left, right) => left.localeCompare(right));
     if (analysisState.divisi !== "all" && !divisiOptions.includes(analysisState.divisi)) {
       analysisState.divisi = "all";
@@ -14681,14 +15041,14 @@ legendControl.addTo(map);
     analysisState.divisiOptions = divisiOptions;
 
     const depoOptions = Array.from(
-      new Set(workingRows.map((row) => row.depo).filter(Boolean))
+      new Set(usableRows.map((row) => row.depo).filter(Boolean))
     ).sort((left, right) => left.localeCompare(right));
     if (analysisState.depo !== "all" && !depoOptions.includes(analysisState.depo)) {
       analysisState.depo = "all";
     }
     analysisState.depoOptions = depoOptions;
 
-    let filteredRows = workingRows;
+    let filteredRows = usableRows;
     if (analysisState.divisi !== "all") {
       filteredRows = filteredRows.filter((row) => row.divisi === analysisState.divisi);
     }
@@ -14933,12 +15293,12 @@ legendControl.addTo(map);
     const busy = analysisState.loading;
     if (els.analysisFileCount) els.analysisFileCount.textContent = `${count} / ${ANALYSIS_MAX_FILES}`;
     if (els.analysisFileCountHero) els.analysisFileCountHero.textContent = `${count} / ${ANALYSIS_MAX_FILES}`;
+    if (els.masterDbaseHero) els.masterDbaseHero.textContent = `${count} / ${ANALYSIS_MAX_FILES}`;
     if (els.analysisDropHint) {
       els.analysisDropHint.textContent = atLimit
-        ? "Batas 6 file tercapai"
+        ? `Batas ${ANALYSIS_MAX_FILES} file tercapai`
         : `${count} dari ${ANALYSIS_MAX_FILES} file`;
     }
-    if (els.analysisAddBtn) els.analysisAddBtn.disabled = atLimit || busy;
     if (els.analysisFileInput) els.analysisFileInput.disabled = atLimit || busy;
     if (els.analysisDropZone) {
       els.analysisDropZone.classList.toggle("is-disabled", atLimit || busy);
@@ -14947,7 +15307,7 @@ legendControl.addTo(map);
     if (els.analysisFileList) {
       els.analysisFileList.innerHTML = datasetFileListHtml(
         analysisState.files,
-        "Belum ada file. Tambahkan file penjualan untuk mulai analisa.",
+        "Belum ada file. Unggah file Dbase (data penjualan) di menu Master Data.",
         "data-analysis-remove"
       );
     }
@@ -14968,6 +15328,12 @@ legendControl.addTo(map);
           "Data diproses di browser dan disimpan lokal di perangkat ini.";
         els.analysisUploadStatus.className = "analysis-status";
       }
+    }
+
+    if (els.analysisSourceNote) {
+      els.analysisSourceNote.textContent = count
+        ? `Sumber data: Master Data · Dbase (data penjualan) · ${count} file.`
+        : "Sumber data: Master Data · Dbase (data penjualan). Belum ada file.";
     }
   }
 
@@ -15425,6 +15791,8 @@ legendControl.addTo(map);
     if (!body) return;
     const top = (items || []).slice(0, options.limit || 10);
     const comparisonAvailable = options.comparisonAvailable !== false && Number(options.months) > 0;
+    const withTarget = typeof options.target === "function";
+    const colspan = 6 + (withTarget ? 2 : 0);
     body.innerHTML = top.length
       ? top.map((item, index) => {
         const share = options.totalMtd > 0 ? (item.mtdNet / options.totalMtd) * 100 : 0;
@@ -15432,6 +15800,16 @@ legendControl.addTo(map);
         const subHtml = sub
           ? `<div class="analysis-sub">${escapeHtml(sub)}</div>`
           : "";
+        let targetHtml = "";
+        if (withTarget) {
+          const target = options.target(item);
+          if (target == null || target <= 0) {
+            targetHtml = `<td class="num">—</td><td class="num">—</td>`;
+          } else {
+            const ratio = ((Number(item.mtdNet) || 0) / target) * 100;
+            targetHtml = `<td class="num">${fmtRp(target)}</td><td class="num"><span class="analysis-pct ${ratio >= 100 ? "is-positive" : "is-negative"}">${fmtPct(ratio)}</span></td>`;
+          }
+        }
         return `
           <tr>
             <td class="analysis-rank">${index + 1}</td>
@@ -15440,10 +15818,11 @@ legendControl.addTo(map);
             <td class="num" title="Rata-rata ${fmtNum(options.months || 0)} bulan pembanding">${comparisonAvailable ? fmtRp(item.avgNet) : "—"}</td>
             ${analysisDeltaCell(item.mtdNet, item.avgNet, comparisonAvailable)}
             ${analysisShareCell(share)}
+            ${targetHtml}
           </tr>
         `;
       }).join("")
-      : analysisEmptyRow(6);
+      : analysisEmptyRow(colspan);
   }
 
   function analysisRenderRoaTable(body, items, options = {}) {
@@ -15952,9 +16331,24 @@ legendControl.addTo(map);
     if (els.analysisEcDimTitle) els.analysisEcDimTitle.textContent = `EC by ${dimLabel}`;
     if (els.analysisEcDimCol) els.analysisEcDimCol.textContent = dimLabel;
 
+    const targetEnabled = mode === "depo" && !!masterState.maps.target;
+    if (els.analysisSalesmanTargetCol) {
+      els.analysisSalesmanTargetCol.toggleAttribute("hidden", !targetEnabled);
+    }
+    if (els.analysisSalesmanPctCol) {
+      els.analysisSalesmanPctCol.toggleAttribute("hidden", !targetEnabled);
+    }
+
     analysisRenderCompareTable(els.analysisSalesmanBody, dimItems, {
       ...compareOptions,
       sub: dimSub,
+      target: targetEnabled
+        ? (item) =>
+          masterTargetValue(
+            masterTargetEntry(item.code, item.name),
+            [data.anchorKey]
+          )
+        : undefined,
     });
     if (els.analysisSalesmanInfo) {
       els.analysisSalesmanInfo.textContent = `${fmtNum(dimItems.length)} ${dimLabel.toLowerCase()} · top ${Math.min(10, dimItems.length)}`;
@@ -16012,7 +16406,10 @@ legendControl.addTo(map);
     analysisRenderInsights(data);
 
     if (els.analysisFootNote) {
-      els.analysisFootNote.textContent = `File ${data.files}/${ANALYSIS_MAX_FILES} · ${divisiLabel} · ${analysisPeriodText(period)} · ${data.availableMonths} bulan pembanding tersedia pada HK ${data.hk} · omset gross`;
+      const offDayNote = data.offDayRows
+        ? ` · ${fmtNum(data.offDayRows)} baris hari non-kerja ikut dihitung`
+        : "";
+      els.analysisFootNote.textContent = `File ${data.files}/${ANALYSIS_MAX_FILES} · ${divisiLabel} · ${analysisPeriodText(period)} · ${data.availableMonths} bulan pembanding tersedia pada HK ${data.hk} · omset gross${offDayNote}`;
     }
   }
 
@@ -16026,15 +16423,15 @@ legendControl.addTo(map);
     const data = analysisBuildData();
     if (data.empty) {
       analysisRenderEmpty();
-      if (data.totalRows && !data.offDayRows) {
+      if (data.totalRows) {
         analysisSetNotice(
           "error",
           "File terbaca, tetapi tidak ada baris dengan tanggal valid untuk dianalisa."
         );
-      } else if (data.offDayRows) {
+      } else if (data.invalidRows) {
         analysisSetNotice(
-          "warn",
-          "Semua baris berada di hari non-kerja. Ubah basis hari kerja atau unggah data hari kerja."
+          "error",
+          `${fmtNum(data.invalidRows)} baris dilewati karena tanggalnya tidak bisa dibaca.`
         );
       }
       return;
@@ -16050,14 +16447,14 @@ legendControl.addTo(map);
 
     const remaining = ANALYSIS_MAX_FILES - analysisState.files.length;
     if (remaining <= 0) {
-      analysisSetNotice("warn", "Batas maksimal 6 file sudah tercapai. Hapus file lain terlebih dahulu.");
+      analysisSetNotice("warn", `Batas maksimal ${ANALYSIS_MAX_FILES} file sudah tercapai. Hapus file lain terlebih dahulu.`);
       return;
     }
 
     const accepted = [];
     const messages = [];
     if (incoming.length > remaining) {
-      messages.push(`Hanya ${remaining} file pertama yang diproses karena batas maksimal 6 file.`);
+      messages.push(`Hanya ${remaining} file pertama yang diproses karena batas maksimal ${ANALYSIS_MAX_FILES} file.`);
     }
 
     incoming.slice(0, remaining).forEach((file) => {
@@ -16215,15 +16612,6 @@ legendControl.addTo(map);
       event.target.value = "";
     });
 
-    els.analysisAddBtn?.addEventListener("click", () => {
-      if (analysisState.loading) return;
-      if (analysisState.files.length >= ANALYSIS_MAX_FILES) {
-        analysisSetNotice("warn", "Batas maksimal 6 file sudah tercapai. Hapus file lain terlebih dahulu.");
-        return;
-      }
-      els.analysisFileInput?.click();
-    });
-
     els.analysisTemplateBtn?.addEventListener("click", analysisDownloadTemplate);
 
     els.analysisResetBtn?.addEventListener("click", analysisReset);
@@ -16290,44 +16678,50 @@ legendControl.addTo(map);
       analysisRefresh();
     });
 
-    els.masterType?.addEventListener("change", () => {
-      const value = els.masterType.value;
-      masterState.type = MASTER_TYPE_LABELS[value] ? value : "outlet";
-      masterRenderFiles();
+    MASTER_CARD_TYPES.forEach((type) => {
+      const input = masterCardEl(type, "Input");
+      const drop = masterCardEl(type, "Drop");
+      const list = masterCardEl(type, "List");
+      const reset = masterCardEl(type, "Reset");
+      const template = masterCardEl(type, "Template");
+      input?.addEventListener("change", async (event) => {
+        await masterApplyFile(type, event.target.files);
+        event.target.value = "";
+      });
+      drop?.addEventListener("dragenter", (event) => {
+        event.preventDefault();
+        if (!masterState.loading) drop.classList.add("is-dragover");
+      });
+      drop?.addEventListener("dragover", (event) => {
+        event.preventDefault();
+        if (event.dataTransfer) event.dataTransfer.dropEffect = "copy";
+      });
+      drop?.addEventListener("dragleave", (event) => {
+        if (!drop.contains(event.relatedTarget)) drop.classList.remove("is-dragover");
+      });
+      drop?.addEventListener("drop", (event) => {
+        event.preventDefault();
+        drop.classList.remove("is-dragover");
+        masterApplyFile(type, event.dataTransfer?.files);
+      });
+      list?.addEventListener("click", (event) => {
+        const button = event.target.closest("[data-master-remove]");
+        if (!button) return;
+        masterRemove(type, button.dataset.masterRemove);
+      });
+      reset?.addEventListener("click", () => masterReset(type));
+      template?.addEventListener("click", () => {
+        const kind = downloadMasterTemplate(type);
+        masterState.notice = {
+          type,
+          kind: "success",
+          text: kind === "excel"
+            ? `Template ${MASTER_TYPE_LABELS[type]} diunduh.`
+            : `Template ${MASTER_TYPE_LABELS[type]} diunduh (CSV, pustaka Excel belum termuat).`,
+        };
+        masterRenderFiles();
+      });
     });
-
-    els.masterFileInput?.addEventListener("change", async (event) => {
-      await masterApplyFile(event.target.files);
-      event.target.value = "";
-    });
-
-    els.masterDropZone?.addEventListener("dragenter", (event) => {
-      event.preventDefault();
-      if (!masterState.loading) els.masterDropZone.classList.add("is-dragover");
-    });
-    els.masterDropZone?.addEventListener("dragover", (event) => {
-      event.preventDefault();
-      if (event.dataTransfer) event.dataTransfer.dropEffect = "copy";
-    });
-    els.masterDropZone?.addEventListener("dragleave", (event) => {
-      if (!els.masterDropZone.contains(event.relatedTarget)) {
-        els.masterDropZone.classList.remove("is-dragover");
-      }
-    });
-    els.masterDropZone?.addEventListener("drop", (event) => {
-      event.preventDefault();
-      els.masterDropZone.classList.remove("is-dragover");
-      masterApplyFile(event.dataTransfer?.files);
-    });
-
-    els.masterFileList?.addEventListener("click", (event) => {
-      const button = event.target.closest("[data-master-remove]");
-      if (!button) return;
-      masterRemove(button.dataset.masterRemove);
-    });
-
-    els.masterResetBtn?.addEventListener("click", masterReset);
-    els.masterTemplateBtn?.addEventListener("click", downloadMasterTemplate);
 
     els.stokTemplateBtn?.addEventListener("click", downloadStokTemplate);
     els.stokResetBtn?.addEventListener("click", stokReset);
@@ -16391,6 +16785,9 @@ legendControl.addTo(map);
       analysisRenderFiles();
       analysisRenderEmpty();
     }
+    // Penjualan memakai data Dbase yang sama; segarkan agar tidak basi ketika
+    // pemulihan lokal selesai setelah rute awal diterapkan.
+    salesRefresh();
   }
 
   function initSidebar() {
@@ -16438,21 +16835,21 @@ legendControl.addTo(map);
         omset: "Menu Omset",
         performance: "Menu Performance",
         penjualan: "Menu Penjualan",
-        analisa: "Menu Analisa",
+        upload: "Menu Upload",
         jks: "Menu JKS",
       };
       const statusText = {
         omset: "Auto-refresh 30 detik",
         performance: "Performance · data manual",
         penjualan: "Penjualan · 120 detik",
-        analisa: "Data manual · maks. 6 file",
+        upload: "Master Data · maks. 15 file",
         jks: "Data manual · tanpa auto-refresh",
       };
       const headings = {
         omset: "Dashboard",
         performance: "Performance",
         penjualan: "Penjualan",
-        analisa: "Analisa Performa Depo",
+        upload: "Master Data",
         jks: "JKS Editor",
       };
       const sheetLinks = {
@@ -16488,8 +16885,8 @@ legendControl.addTo(map);
           const label = els.sidebarSheetLink.querySelector("span");
           if (label) label.textContent = "Data manual";
           els.sidebarSheetLink.setAttribute("aria-disabled", "true");
-        } else if (safeGroup === "analisa") {
-          els.sidebarSheetLink.href = "#analisa-penjualan";
+        } else if (safeGroup === "upload") {
+          els.sidebarSheetLink.href = "#master-data";
           const label = els.sidebarSheetLink.querySelector("span");
           if (label) label.textContent = "Data manual";
           els.sidebarSheetLink.setAttribute("aria-disabled", "true");
@@ -16529,7 +16926,7 @@ legendControl.addTo(map);
         const group = item.dataset.groupNav;
         if (group === "performance") showScoreView();
         else if (group === "penjualan") showSalesView();
-        else if (group === "analisa") showAnalysisView();
+        else if (group === "upload") showMasterView();
         else if (group === "jks") showJksView();
         else showDashboardView("ringkasan");
       });
@@ -16592,8 +16989,7 @@ legendControl.addTo(map);
       setActive("penjualan");
       setHash("#penjualan");
       if (options.scroll !== false) window.scrollTo({ top: 0, behavior: "auto" });
-      salesRenderFiles();
-      loadSalesView();
+      salesRefresh();
       window.requestAnimationFrame(() => els.salesTitle?.focus());
     }
 
@@ -16612,7 +17008,7 @@ legendControl.addTo(map);
       stopScoreAutoRefresh();
       stopSalesAutoRefresh();
       document.body.classList.add("analysis-mode");
-      setGroup("analisa");
+      setGroup("penjualan");
       setAnalysisSection("analisa-penjualan");
       const activeId = mode === "cabang" ? "analisa-cabang" : "analisa-penjualan";
       document.title = `${mode === "cabang" ? "Analisa Performa Cabang" : "Analisa Performa Depo"} · CAB Medan Raya`;
@@ -16633,7 +17029,7 @@ legendControl.addTo(map);
       stopScoreAutoRefresh();
       stopSalesAutoRefresh();
       document.body.classList.add("analysis-mode");
-      setGroup("analisa");
+      setGroup("upload");
       setAnalysisSection("master-data");
       document.title = "Master Data · CAB Medan Raya";
       if (mobileQuery.matches) setOpen(false);
@@ -16650,7 +17046,7 @@ legendControl.addTo(map);
       stopScoreAutoRefresh();
       stopSalesAutoRefresh();
       document.body.classList.add("analysis-mode");
-      setGroup("analisa");
+      setGroup("penjualan");
       setAnalysisSection("analisa-stok");
       document.title = "Analisa Stok Gudang · CAB Medan Raya";
       if (mobileQuery.matches) setOpen(false);
@@ -16853,8 +17249,7 @@ legendControl.addTo(map);
       } else if (document.body.classList.contains("score-mode")) {
         loadScoreCard(true);
       } else if (document.body.classList.contains("sales-mode")) {
-        salesRenderFiles();
-        loadSalesView();
+        salesRefresh();
       } else {
         fetchDashboard(true);
       }
@@ -16927,6 +17322,223 @@ legendControl.addTo(map);
     }, 1000);
   }
 
+  /* ==================================================================
+     Tangkapan gambar (PNG) + kirim WhatsApp
+     ================================================================== */
+  const SHOT_HOST_SELECTOR = "main.page .panel, main.page .kpi";
+  const SHOT_ICON_DOWNLOAD =
+    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v10"/><path d="M8 10l4 4 4-4"/><path d="M4 19h16"/></svg>';
+  const SHOT_ICON_WHATSAPP =
+    '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.04 2.02c-5.46 0-9.9 4.44-9.9 9.9 0 1.75.46 3.45 1.32 4.95L2 22l5.27-1.38a9.9 9.9 0 0 0 4.77 1.21h.01c5.46 0 9.9-4.44 9.9-9.9 0-2.65-1.03-5.14-2.9-7.01a9.82 9.82 0 0 0-7.01-2.9Zm5.81 14.1c-.25.69-1.43 1.32-1.97 1.37-.5.05-1.13.07-1.82-.11-.42-.11-.96-.31-1.64-.61-2.88-1.24-4.76-4.14-4.9-4.33-.14-.19-1.17-1.55-1.17-2.96 0-1.41.73-2.1 1-2.39.26-.29.57-.36.76-.36s.38 0 .55.01c.18.01.42-.07.66.5.25.58.83 2 .9 2.15.07.15.11.32.02.51-.09.19-.14.31-.28.48-.14.16-.29.36-.42.48-.14.14-.28.29-.12.57.16.29.72 1.19 1.55 1.93 1.06.95 1.96 1.24 2.24 1.38.28.14.44.11.6-.07.16-.19.69-.8.87-1.07.18-.27.36-.22.61-.13.25.09 1.59.75 1.86.88.27.14.45.21.52.32.07.11.07.65-.18 1.34Z"/></svg>';
+
+  const shotState = { busy: false, toastTimer: null };
+
+  function shotSlug(text) {
+    const slug = String(text || "dashboard")
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, "-")
+      .replace(/^-+|-+$/g, "")
+      .slice(0, 60);
+    return slug || "dashboard";
+  }
+
+  function shotLabelOf(host) {
+    if (!host) return "Dashboard";
+    const heading = host.querySelector("h1, h2, h3");
+    if (heading && heading.textContent.trim()) return heading.textContent.trim();
+    const label = host.querySelector(".kpi-label, .score-stat-label");
+    if (label && label.textContent.trim()) return label.textContent.trim();
+    const stat = host.querySelector(".score-stat > span");
+    if (stat && stat.textContent.trim()) return stat.textContent.trim();
+    return host.getAttribute("aria-label") || "Dashboard";
+  }
+
+  function shotToast(message, kind) {
+    let node = document.getElementById("shotToast");
+    if (!node) {
+      node = document.createElement("div");
+      node.id = "shotToast";
+      node.className = "shot-toast";
+      node.setAttribute("role", "status");
+      node.setAttribute("aria-live", "polite");
+      document.body.appendChild(node);
+    }
+    node.textContent = message;
+    node.dataset.kind = kind || "info";
+    node.classList.add("is-visible");
+    if (shotState.toastTimer) window.clearTimeout(shotState.toastTimer);
+    shotState.toastTimer = window.setTimeout(() => {
+      node.classList.remove("is-visible");
+    }, 4200);
+  }
+
+  function shotCanvas(element) {
+    if (!window.html2canvas) {
+      return Promise.reject(
+        new Error("Pustaka tangkapan layar belum termuat. Periksa koneksi internet.")
+      );
+    }
+    const rect = element.getBoundingClientRect();
+    const longest = Math.max(rect.width, rect.height, 1);
+    let scale = Math.min(2, Math.max(1, window.devicePixelRatio || 1));
+    if (longest * scale > 6000) scale = Math.max(1, 6000 / longest);
+    const background =
+      getComputedStyle(document.body).backgroundColor || "#0b1220";
+    document.body.classList.add("shot-capturing");
+    return window
+      .html2canvas(element, {
+        backgroundColor: background,
+        scale,
+        useCORS: true,
+        logging: false,
+        windowWidth: document.documentElement.clientWidth,
+        windowHeight: window.innerHeight,
+      })
+      .then((canvas) => {
+        document.body.classList.remove("shot-capturing");
+        if (!canvas || !canvas.width || !canvas.height) {
+          throw new Error(
+            "Bagian ini belum bisa ditangkap karena tidak sedang tampil."
+          );
+        }
+        return canvas;
+      })
+      .catch((error) => {
+        document.body.classList.remove("shot-capturing");
+        throw error;
+      });
+  }
+
+  function shotSavePng(canvas, name) {
+    const link = document.createElement("a");
+    link.download = `${name}.png`;
+    link.href = canvas.toDataURL("image/png");
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+  }
+
+  async function shotSharePng(canvas, name, text) {
+    const blob = await new Promise((resolve) =>
+      canvas.toBlob(resolve, "image/png")
+    );
+    if (!blob) throw new Error("Gagal membuat berkas gambar.");
+    const file = new File([blob], `${name}.png`, { type: "image/png" });
+    if (navigator.canShare && navigator.canShare({ files: [file] })) {
+      await navigator.share({ files: [file], text });
+      return "shared";
+    }
+    shotSavePng(canvas, name);
+    const message = `${text} — gambar sudah diunduh otomatis, lampirkan dari Galeri/Unduhan.`;
+    window.open(
+      `https://wa.me/?text=${encodeURIComponent(message)}`,
+      "_blank",
+      "noopener"
+    );
+    return "fallback";
+  }
+
+  async function shotRun(container, action) {
+    if (shotState.busy) return;
+    const scope = container.dataset.shotScope;
+    const target =
+      scope === "page" ? document.querySelector("main.page") : container.parentElement;
+    if (!target) return;
+    const label =
+      scope === "page"
+        ? document.title.replace(/\s*[·|].*$/, "").trim() || "Dashboard"
+        : shotLabelOf(target);
+    const name = shotSlug(label);
+    shotState.busy = true;
+    shotToast(
+      action === "share" ? "Menyiapkan gambar…" : "Membuat gambar PNG…",
+      "info"
+    );
+    try {
+      const canvas = await shotCanvas(target);
+      if (action === "share") {
+        const result = await shotSharePng(
+          canvas,
+          name,
+          `${label} · Cab Medan Raya`
+        );
+        shotToast(
+          result === "shared"
+            ? "Gambar dikirim ke aplikasi pilihan."
+            : "WhatsApp dibuka — gambar sudah diunduh untuk dilampirkan.",
+          "success"
+        );
+      } else {
+        shotSavePng(canvas, name);
+        shotToast(`PNG diunduh: ${name}.png`, "success");
+      }
+    } catch (error) {
+      if (error && error.name === "AbortError") {
+        shotToast("Dibatalkan.", "info");
+      } else {
+        shotToast(`Gagal membuat gambar: ${analysisSafeError(error)}`, "warn");
+      }
+    } finally {
+      shotState.busy = false;
+    }
+  }
+
+  function shotButtons(scope) {
+    const wrap = document.createElement("div");
+    wrap.className = "shot-actions";
+    wrap.dataset.shotScope = scope;
+    wrap.innerHTML =
+      `<button type="button" class="shot-btn" data-shot-action="download" title="Unduh gambar PNG" aria-label="Unduh gambar PNG">${SHOT_ICON_DOWNLOAD}</button>` +
+      `<button type="button" class="shot-btn shot-btn-wa" data-shot-action="share" title="Kirim ke WhatsApp" aria-label="Kirim gambar ke WhatsApp">${SHOT_ICON_WHATSAPP}</button>`;
+    return wrap;
+  }
+
+  function shotInitPanels() {
+    document.querySelectorAll(SHOT_HOST_SELECTOR).forEach((host) => {
+      if (host.querySelector(":scope > .shot-actions")) return;
+      host.classList.add("shot-host");
+      host.appendChild(shotButtons("host"));
+    });
+  }
+
+  function shotInitPageBar() {
+    if (document.getElementById("shotPageBar")) return;
+    const bar = document.createElement("div");
+    bar.id = "shotPageBar";
+    bar.className = "shot-page-bar";
+    bar.setAttribute("role", "group");
+    bar.setAttribute("aria-label", "Unduh atau kirim halaman sebagai gambar");
+    bar.appendChild(shotButtons("page"));
+    document.body.appendChild(bar);
+  }
+
+  function initScreenshot() {
+    shotInitPanels();
+    shotInitPageBar();
+    document.addEventListener("click", (event) => {
+      const button = event.target.closest("[data-shot-action]");
+      if (!button) return;
+      const container = button.closest("[data-shot-scope]");
+      if (!container) return;
+      event.preventDefault();
+      shotRun(container, button.dataset.shotAction);
+    });
+    const main = document.querySelector("main.page");
+    if (main && window.MutationObserver) {
+      let pending = false;
+      const observer = new MutationObserver(() => {
+        if (pending) return;
+        pending = true;
+        window.requestAnimationFrame(() => {
+          pending = false;
+          shotInitPanels();
+        });
+      });
+      observer.observe(main, { childList: true, subtree: true });
+    }
+  }
+
+  initScreenshot();
   initAnalysis();
   initJksEditor();
   initSidebar();
