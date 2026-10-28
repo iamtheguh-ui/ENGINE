@@ -2540,6 +2540,19 @@ body:not(.analysis-mode) #logistik { display: none; }
   gap: 14px;
   padding-top: 14px;
 }
+.sales-detail-subhead {
+  margin: 2px 0 0;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--text);
+}
+.sales-detail-note {
+  margin: -8px 0 0;
+  font-size: 10px;
+}
+.sales-detail-table tr.is-focus td {
+  background: rgba(56, 189, 248, 0.08);
+}
 .sales-detail-stats {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
@@ -4544,454 +4557,6 @@ body.shot-capturing .avatar {
   .master-grid { grid-template-columns: minmax(0, 1fr); }
 }
 
-/* ----- Setting ROA SKU Fokus + TAT ---------------------------------------- */
-.roa-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
-  gap: 14px;
-  align-items: start;
-  margin-top: 14px;
-}
-.roa-card { padding: 14px; }
-.roa-card-wide { grid-column: 1 / -1; }
-.roa-card h2 { font-size: 13px; }
-.roa-card h3 {
-  margin: 0 0 8px;
-  font-size: 10px;
-  font-weight: 750;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--accent, #7dd3fc);
-}
-.roa-form {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-  margin-top: 12px;
-}
-.roa-form .analysis-field { flex: 1 1 160px; }
-.roa-form .analysis-field input { width: 100%; min-width: 0; }
-.roa-threshold-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 14px;
-  margin-top: 12px;
-}
-.roa-threshold {
-  padding: 12px;
-  border: 1px solid var(--line);
-  border-radius: 12px;
-  background: rgba(56, 189, 248, 0.04);
-}
-.roa-threshold .analysis-field { margin-bottom: 8px; }
-.roa-threshold .analysis-field input { width: 100%; min-width: 0; }
-.roa-note { margin: 12px 0 0; }
-.roa-sku-actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin-top: 10px;
-}
-.roa-sku-list {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
-  gap: 6px;
-  max-height: 260px;
-  overflow: auto;
-  margin-top: 10px;
-  padding-right: 4px;
-}
-.roa-sku-item {
-  display: flex;
-  align-items: center;
-  gap: 7px;
-  padding: 7px 9px;
-  border: 1px solid var(--line);
-  border-radius: 9px;
-  background: #0b1322;
-  color: var(--text);
-  font-size: 10px;
-  line-height: 1.3;
-  cursor: pointer;
-}
-.roa-sku-item input { accent-color: #38bdf8; }
-.roa-sku-item span {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-.roa-sku-item:hover { border-color: rgba(56, 189, 248, 0.45); }
-.roa-card .panel-head .roa-sku-actions { margin-top: 0; }
-.roa-sku-division-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(420px, 1fr));
-  gap: 12px;
-  margin-top: 12px;
-}
-.roa-sku-division {
-  display: flex;
-  flex-direction: column;
-  min-width: 0;
-  padding: 10px;
-  border: 1px solid var(--line);
-  border-radius: 12px;
-  background: rgba(56, 189, 248, 0.03);
-}
-.roa-sku-division-head {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 8px;
-  margin-bottom: 8px;
-}
-.roa-sku-division-head h3 { margin: 0; }
-.roa-sku-count {
-  color: var(--dim);
-  font-size: 9px;
-  font-weight: 650;
-  letter-spacing: 0.04em;
-}
-.roa-sku-division .roa-sku-list {
-  margin-top: 0;
-  grid-template-columns: minmax(0, 1fr);
-  max-height: 240px;
-}
-.roa-sku-item-count {
-  margin-left: auto;
-  color: var(--dim);
-  font-size: 8.5px;
-  font-style: normal;
-  white-space: nowrap;
-}
-@media (max-width: 720px) {
-  .roa-sku-division-grid { grid-template-columns: minmax(0, 1fr); }
-}
-.roa-sku-rule-toolbar {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 6px;
-  margin-bottom: 8px;
-}
-.roa-sku-rule-toolbar .roa-rule-select {
-  min-width: 0;
-  flex: 1 1 150px;
-}
-.roa-sku-rule-toolbar .score-btn {
-  min-height: 30px;
-  padding: 0 8px;
-  font-size: 9px;
-  white-space: nowrap;
-}
-.roa-sku-table { width: 100%; min-width: 620px; }
-.roa-sku-table th,
-.roa-sku-table td { padding: 6px 7px; }
-.roa-sku-table th { font-size: 8.5px; white-space: nowrap; }
-.roa-sku-table input[type="number"],
-.roa-sku-table input[type="text"] {
-  width: 64px;
-  height: 30px;
-  padding: 0 7px;
-  border: 1px solid var(--line);
-  border-radius: 8px;
-  color: var(--text);
-  background: #0b1322;
-  font-size: 10px;
-  font-weight: 650;
-  text-align: right;
-}
-.roa-sku-table input[type="number"]:focus,
-.roa-sku-table input[type="text"]:focus,
-.roa-sku-table select:focus {
-  border-color: rgba(56, 189, 248, 0.55);
-  outline: none;
-}
-.roa-sku-table .roa-cb-cell {
-  color: #bae6fd;
-  font-weight: 750;
-  font-variant-numeric: tabular-nums;
-}
-.roa-sku-table select {
-  height: 30px;
-  padding: 0 6px;
-  border: 1px solid var(--line);
-  border-radius: 8px;
-  color: var(--text);
-  background: #0b1322;
-  font-size: 10px;
-  font-weight: 650;
-}
-.roa-sku-name { min-width: 92px; }
-.roa-sku-name strong {
-  display: block;
-  font-size: 10px;
-  letter-spacing: 0.03em;
-}
-.roa-sku-name em {
-  display: block;
-  margin-top: 2px;
-  color: var(--dim);
-  font-size: 8.5px;
-  font-style: normal;
-}
-.roa-sku-row-actions { text-align: right; }
-.roa-sku-row-actions .score-btn {
-  min-height: 26px;
-  padding: 0 8px;
-  font-size: 9px;
-}
-.roa-recap-group td {
-  padding: 7px 10px;
-  color: #7dd3fc;
-  background: rgba(56, 189, 248, 0.08);
-  border-top: 1px solid rgba(56, 189, 248, 0.2);
-  border-bottom: 1px solid rgba(56, 189, 248, 0.2);
-  font-size: 10px;
-  font-weight: 800;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-}
-.roa-recap-code {
-  color: #e0f2fe;
-  font-weight: 700;
-  white-space: nowrap;
-}
-.roa-recap-sku { white-space: nowrap; }
-.roa-recap-hit {
-  white-space: nowrap;
-  font-variant-numeric: tabular-nums;
-}
-.roa-recap-total td { background: rgba(56, 189, 248, 0.06); }
-.roa-recap-grand td { background: rgba(56, 189, 248, 0.1); }
-.roa-pct-good { color: #6ee7c6; font-weight: 800; }
-.roa-pct-warn { color: #fde68a; font-weight: 800; }
-.roa-pct-bad { color: #fda4af; font-weight: 800; }
-.roa-preview .data-table,
-.roa-panel .data-table { min-width: 760px; }
-.roa-actions {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 10px;
-  margin: 14px 0;
-}
-.roa-actions .analysis-status {
-  margin: 0;
-  padding: 0;
-  border-top: 0;
-}
-#roaStatus[data-kind="success"] { color: #6ee7c6; }
-#roaStatus[data-kind="warn"] { color: #fde68a; }
-#roaStatus[data-kind="error"] { color: #fda4af; }
-.roa-preview { padding: 14px; }
-.roa-panel { margin-top: 14px; }
-.roa-panel .panel-head h2 { font-size: 13px; }
-
-.roa-rule-toolbar {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  flex-wrap: wrap;
-}
-.roa-rule-toolbar .score-btn:disabled {
-  cursor: not-allowed;
-  filter: saturate(0.35);
-}
-.roa-rule-select {
-  height: 34px;
-  min-width: 150px;
-  padding: 0 10px;
-  border: 1px solid var(--line);
-  border-radius: 10px;
-  color: var(--text);
-  background: #0b1322;
-  font-size: 11px;
-  font-weight: 650;
-}
-.roa-rule-select:focus {
-  border-color: rgba(56, 189, 248, 0.55);
-  outline: none;
-}
-.roa-rule-select:disabled { opacity: 0.55; }
-.roa-rule-meta {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  flex-wrap: wrap;
-  margin: 8px 0 10px;
-}
-.roa-rule-meta .roa-note { margin: 0; }
-.roa-rule-count {
-  display: inline-flex;
-  align-items: center;
-  padding: 3px 9px;
-  border: 1px solid rgba(56, 189, 248, 0.28);
-  border-radius: 999px;
-  color: #7dd3fc;
-  background: rgba(56, 189, 248, 0.08);
-  font-size: 9px;
-  font-weight: 750;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  white-space: nowrap;
-}
-.roa-rule-table { width: 100%; }
-.roa-rule-table tbody td { vertical-align: middle; white-space: normal; }
-.roa-rule-table td:first-child { width: 64px; }
-.roa-rule-table tbody tr:hover { background: rgba(56, 189, 248, 0.04); }
-.roa-rule-division {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-width: 44px;
-  padding: 3px 8px;
-  border-radius: 8px;
-  color: #e0f2fe;
-  background: rgba(56, 189, 248, 0.12);
-  font-size: 10px;
-  letter-spacing: 0.06em;
-}
-.roa-rule-target-hint {
-  color: var(--dim);
-  font-size: 8.5px;
-  font-style: normal;
-  white-space: nowrap;
-}
-.roa-rule-status {
-  display: inline-flex;
-  align-items: center;
-  gap: 5px;
-  padding: 3px 9px;
-  border-radius: 999px;
-  font-size: 9px;
-  font-weight: 700;
-  letter-spacing: 0.04em;
-  white-space: nowrap;
-}
-.roa-rule-status::before {
-  content: "";
-  width: 5px;
-  height: 5px;
-  border-radius: 50%;
-  background: currentColor;
-}
-.roa-rule-status[data-ok="true"] {
-  color: #6ee7c6;
-  background: rgba(52, 211, 153, 0.1);
-}
-.roa-rule-status[data-ok="false"] {
-  color: #fde68a;
-  background: rgba(251, 191, 36, 0.1);
-}
-.roa-rule-actions {
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  gap: 6px;
-  white-space: nowrap;
-}
-.roa-rule-actions .score-btn {
-  min-height: 26px;
-  padding: 0 10px;
-  font-size: 9.5px;
-}
-.roa-form-inline .analysis-field { flex: 0 1 200px; }
-
-.roa-rule-modal-card {
-  width: min(760px, 100%);
-  max-height: min(90vh, 860px);
-}
-.roa-rule-modal-body {
-  flex: 1 1 auto;
-  overflow-y: auto;
-  padding: 16px 20px 18px;
-}
-.roa-rule-modal-grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 14px;
-}
-.roa-rule-block {
-  padding: 12px;
-  border: 1px solid var(--line);
-  border-radius: 12px;
-  background: rgba(56, 189, 248, 0.035);
-}
-.roa-rule-block-wide { grid-column: 1 / -1; }
-.roa-rule-block h3 {
-  margin: 0 0 8px;
-  font-size: 10px;
-  font-weight: 750;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--accent, #7dd3fc);
-}
-.roa-rule-block .analysis-field { margin-bottom: 8px; }
-.roa-rule-block .analysis-field:last-child { margin-bottom: 0; }
-.roa-rule-block .analysis-field input,
-.roa-rule-block .analysis-field select { width: 100%; min-width: 0; }
-.roa-rule-block .roa-note { margin: 6px 0 0; }
-.roa-threshold-inline {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) 82px;
-  gap: 6px;
-}
-.roa-threshold-inline select {
-  height: 34px;
-  padding: 0 8px;
-  border: 1px solid var(--line);
-  border-radius: 10px;
-  color: var(--text);
-  background: #0b1322;
-  font-size: 11px;
-  font-weight: 650;
-}
-.roa-threshold-inline select:focus {
-  border-color: rgba(56, 189, 248, 0.55);
-  outline: none;
-}
-.roa-target-row {
-  display: grid;
-  grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
-  gap: 10px;
-}
-.roa-target-row .analysis-field { margin-bottom: 0; }
-.roa-mapping-scroll { max-height: 220px; }
-.roa-mapping-scroll table { margin: 0; }
-.roa-mapping-scroll input[type="checkbox"] {
-  width: 15px;
-  height: 15px;
-  accent-color: #38bdf8;
-  cursor: pointer;
-}
-.roa-rule-modal-foot {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  flex-wrap: wrap;
-  padding: 12px 20px;
-  border-top: 1px solid var(--line);
-  background: rgba(2, 6, 12, 0.35);
-}
-.roa-rule-foot-spacer { flex: 1 1 auto; }
-.roa-rule-delete { color: #fda4af; }
-.roa-rule-delete:hover {
-  border-color: rgba(244, 63, 94, 0.5);
-  background: rgba(244, 63, 94, 0.1);
-}
-@media (max-width: 640px) {
-  .roa-rule-modal-grid { grid-template-columns: minmax(0, 1fr); }
-  .roa-rule-block-wide { grid-column: auto; }
-  .roa-target-row { grid-template-columns: minmax(0, 1fr); }
-  .roa-rule-toolbar { width: 100%; }
-  .roa-rule-select { flex: 1 1 auto; }
-}
-
-@media (max-width: 640px) {
-  .roa-grid { grid-template-columns: minmax(0, 1fr); }
-  .roa-card-wide { grid-column: auto; }
-}
-
 /* ==================================================================
    Operational · Logistik
    ================================================================== */
@@ -5115,22 +4680,41 @@ body.shot-capturing .avatar {
 }
 .logistik-map-panel { overflow: hidden; }
 .logistik-route-layout {
-  display: grid;
-  grid-template-columns: minmax(240px, 300px) minmax(0, 1fr);
-  gap: 14px;
-  padding: 0 18px 1px;
+  position: relative;
+  display: block;
+  padding: 0;
 }
 .logistik-route-sidebar {
+  position: absolute;
+  z-index: 620;
+  top: 12px;
+  left: 12px;
+  bottom: 12px;
   display: flex;
   flex-direction: column;
-  min-height: 440px;
-  max-height: 440px;
-  border: 1px solid var(--line);
+  width: 286px;
+  max-width: calc(100% - 24px);
+  min-height: 0;
+  border: 1px solid rgba(148, 163, 184, 0.22);
   border-radius: 14px;
-  background: rgba(2, 6, 12, 0.28);
+  background: rgba(5, 10, 19, 0.9);
+  box-shadow: 0 18px 44px rgba(0, 0, 0, 0.36);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
   overflow: hidden;
 }
-.logistik-route-layout .logistik-map-wrap { margin: 0; }
+.logistik-route-layout .logistik-map-wrap {
+  height: clamp(520px, calc(100vh - 255px), 860px);
+  margin: 0;
+  border: 0;
+  border-top: 1px solid var(--line);
+  border-radius: 0 0 14px 14px;
+}
+.logistik-route-layout .logistik-map-legend {
+  left: auto;
+  right: 12px;
+  bottom: 82px;
+}
 .logistik-route-side-head {
   display: flex;
   flex-direction: column;
@@ -5277,6 +4861,133 @@ body.shot-capturing .avatar {
 .logistik-route-stop.is-unassigned {
   background: rgba(245, 158, 11, 0.18);
   color: #fbbf24;
+}
+.logistik-map-actions {
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+.logistik-lasso-hint {
+  position: absolute;
+  z-index: 630;
+  top: 14px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  max-width: min(420px, calc(100% - 330px));
+  padding: 8px 12px;
+  border: 1px solid rgba(251, 191, 36, 0.38);
+  border-radius: 10px;
+  background: rgba(5, 10, 19, 0.9);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
+  pointer-events: none;
+}
+.logistik-lasso-hint.hidden { display: none; }
+.logistik-lasso-hint strong { color: #fbbf24; font-size: 10.5px; }
+.logistik-lasso-hint span { color: #cbd5e1; font-size: 9px; line-height: 1.4; }
+.logistik-map.is-lasso {
+  cursor: crosshair;
+  touch-action: none;
+}
+.logistik-map.is-lasso .leaflet-interactive,
+.logistik-map.is-lasso .leaflet-marker-icon {
+  pointer-events: none;
+}
+.logistik-lasso-line {
+  stroke-dasharray: 6 5;
+}
+.logistik-stop-marker.is-selected span {
+  border-color: #fbbf24;
+  box-shadow: 0 0 0 4px rgba(251, 191, 36, 0.3), 0 3px 14px rgba(0, 0, 0, 0.55);
+}
+.logistik-selection-shape {
+  stroke-dasharray: 7 5;
+}
+.logistik-driver-choice-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 9px;
+}
+.logistik-driver-choice {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 9px;
+  width: 100%;
+  padding: 10px 11px;
+  border: 1px solid rgba(148, 163, 184, 0.2);
+  border-radius: 11px;
+  background: rgba(15, 27, 48, 0.65);
+  color: var(--text);
+  text-align: left;
+  cursor: pointer;
+  transition: border-color 0.16s ease, background 0.16s ease, transform 0.16s ease;
+}
+.logistik-driver-choice:hover,
+.logistik-driver-choice:focus-visible {
+  border-color: rgba(56, 189, 248, 0.6);
+  background: rgba(56, 189, 248, 0.1);
+  transform: translateY(-1px);
+  outline: none;
+}
+.logistik-driver-choice.is-over {
+  border-color: rgba(251, 113, 133, 0.42);
+  background: rgba(251, 113, 133, 0.07);
+}
+.logistik-driver-choice-dot {
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  box-shadow: 0 0 0 3px rgba(248, 250, 252, 0.12);
+}
+.logistik-driver-choice-main {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+.logistik-driver-choice-main strong {
+  font-size: 11px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.logistik-driver-choice-main span {
+  color: var(--muted);
+  font-size: 9px;
+  line-height: 1.35;
+}
+.logistik-driver-choice-main em {
+  color: #fbbf24;
+  font-size: 8.5px;
+  font-style: normal;
+}
+.logistik-driver-choice > b {
+  font-size: 10px;
+  color: var(--text);
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+.logistik-driver-choice.is-unassigned {
+  border-color: rgba(245, 158, 11, 0.25);
+}
+.logistik-selected-stores {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin-top: 10px;
+}
+.logistik-selected-store {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 7px;
+  border: 1px solid rgba(56, 189, 248, 0.22);
+  border-radius: 999px;
+  background: rgba(56, 189, 248, 0.08);
+  color: #bae6fd;
+  font-size: 8.5px;
 }
 .logistik-route-hint {
   margin: 0;
@@ -5511,15 +5222,38 @@ body.shot-capturing .avatar {
 }
 @media (max-width: 900px) {
   .logistik-grid { grid-template-columns: minmax(0, 1fr); }
-  .logistik-route-layout { grid-template-columns: minmax(0, 1fr); padding: 0 12px 1px; }
-  .logistik-route-sidebar { min-height: 0; max-height: 340px; }
+  .logistik-route-layout { padding: 0; }
+  .logistik-route-sidebar { top: 10px; left: 10px; bottom: 10px; width: 250px; }
+  .logistik-route-layout .logistik-map-wrap {
+    height: clamp(520px, calc(100vh - 235px), 760px);
+  }
+  .logistik-map-actions { justify-content: flex-start; }
 }
 @media (max-width: 620px) {
   .logistik-process-bar { align-items: stretch; }
   .logistik-rent-field { flex: 1 1 100%; }
   .logistik-process-bar .score-btn { flex: 1 1 auto; }
   .logistik-map-wrap { height: 340px; margin: 0 12px 1px; }
-  .logistik-route-layout { padding: 0 12px 1px; }
+  .logistik-route-layout { padding: 0; }
+  .logistik-route-layout .logistik-map-wrap {
+    height: clamp(500px, calc(100vh - 205px), 700px);
+  }
+  .logistik-route-sidebar {
+    top: auto;
+    left: 8px;
+    right: 8px;
+    bottom: 8px;
+    width: auto;
+    max-width: none;
+    max-height: 42%;
+  }
+  .logistik-lasso-hint {
+    left: 8px;
+    right: 8px;
+    max-width: none;
+    transform: none;
+  }
+  .logistik-route-layout .logistik-map-legend { display: none; }
   .logistik-driver-field { min-width: 0; width: 100%; }
   .logistik-driver-summary { grid-template-columns: repeat(2, minmax(0, 1fr)); padding: 10px 12px; }
   .logistik-map-legend {
@@ -5530,6 +5264,368 @@ body.shot-capturing .avatar {
     padding: 7px 8px;
   }
   .logistik-map-legend-label em { display: none; }
+}
+
+/* ==================================================================
+   Menu motion + view transitions
+   ================================================================== */
+@keyframes menu-link-in {
+  from { opacity: 0; transform: translateX(-9px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes sublink-in {
+  from { opacity: 0; transform: translateX(-6px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes subnav-in {
+  from { opacity: 0; transform: translateY(-5px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes nav-item-in {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes nav-icon-pop {
+  0% { transform: scale(0.82) translateY(1px); }
+  55% { transform: scale(1.14) translateY(-1px); }
+  100% { transform: scale(1) translateY(0); }
+}
+
+@keyframes nav-line-in {
+  from { transform: scaleX(0); opacity: 0; }
+  to { transform: scaleX(1); opacity: 1; }
+}
+
+@keyframes active-bar-in {
+  from { transform: scaleY(0); opacity: 0; }
+  to { transform: scaleY(1); opacity: 1; }
+}
+
+@keyframes group-label-in {
+  from { opacity: 0; transform: translateX(-5px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes view-enter {
+  from { opacity: 0; transform: translateY(14px) scale(0.996); filter: blur(3px); }
+  to { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
+}
+
+@keyframes view-child-in {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes target-flash {
+  0% { box-shadow: 0 0 0 0 rgba(34, 211, 167, 0); }
+  28% { box-shadow: 0 0 0 3px rgba(34, 211, 167, 0.14), 0 0 38px rgba(34, 211, 167, 0.14); }
+  100% { box-shadow: 0 0 0 0 rgba(34, 211, 167, 0); }
+}
+
+@keyframes segment-in {
+  from { transform: scale(0.96); opacity: 0.7; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+@keyframes user-card-in {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Sidebar: a soft entrance, a sliding active rail, and an icon that reacts. */
+.sidebar-link {
+  position: relative;
+  overflow: hidden;
+  animation: menu-link-in 0.52s cubic-bezier(0.22, 0.61, 0.36, 1) backwards;
+  animation-delay: calc(var(--menu-i, 0) * 26ms + 70ms);
+  transition: color 0.2s ease, background 0.2s ease, border-color 0.2s ease,
+    transform 0.22s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+.sidebar-link::before {
+  content: "";
+  position: absolute;
+  top: 7px;
+  bottom: 7px;
+  left: 0;
+  width: 2px;
+  border-radius: 99px;
+  background: linear-gradient(180deg, #6ee7c6, #38bdf8);
+  box-shadow: 0 0 12px rgba(34, 211, 167, 0.65);
+  transform: scaleY(0);
+  opacity: 0;
+  transition: transform 0.25s ease, opacity 0.25s ease;
+}
+
+.sidebar-link::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(100deg, transparent 15%, rgba(255, 255, 255, 0.07) 48%, transparent 80%);
+  transform: translateX(-120%);
+  transition: transform 0.5s ease;
+  pointer-events: none;
+}
+
+.sidebar-link:hover {
+  transform: translateX(3px);
+}
+
+.sidebar-link:hover::after { transform: translateX(120%); }
+
+.sidebar-link:hover svg {
+  opacity: 1;
+  transform: scale(1.13) rotate(-3deg);
+}
+
+.sidebar-link:active { transform: translateX(2px) scale(0.99); }
+
+.sidebar-link.is-active {
+  transform: translateX(2px);
+  box-shadow: 0 8px 24px rgba(34, 211, 167, 0.06);
+}
+
+.sidebar-link.is-active::before {
+  transform: scaleY(1);
+  opacity: 1;
+  animation: active-bar-in 0.38s cubic-bezier(0.22, 0.61, 0.36, 1) both;
+}
+
+.sidebar-link svg {
+  transition: transform 0.24s cubic-bezier(0.22, 0.61, 0.36, 1), opacity 0.2s ease;
+}
+
+.sidebar-nav.menu-refresh .sidebar-link {
+  animation: menu-link-in 0.42s cubic-bezier(0.22, 0.61, 0.36, 1) backwards;
+  animation-delay: calc(var(--menu-i, 0) * 22ms);
+}
+
+.sidebar-nav.menu-refresh .sidebar-label {
+  animation: group-label-in 0.35s ease both;
+}
+
+.sidebar-subnav.is-visible {
+  animation: subnav-in 0.32s cubic-bezier(0.22, 0.61, 0.36, 1) both;
+}
+
+.sidebar-subnav.is-visible .sidebar-sublink {
+  animation: sublink-in 0.34s cubic-bezier(0.22, 0.61, 0.36, 1) backwards;
+}
+
+.sidebar-subnav.is-visible .sidebar-sublink:nth-child(1) { animation-delay: 0.04s; }
+.sidebar-subnav.is-visible .sidebar-sublink:nth-child(2) { animation-delay: 0.08s; }
+.sidebar-subnav.is-visible .sidebar-sublink:nth-child(3) { animation-delay: 0.12s; }
+.sidebar-subnav.is-visible .sidebar-sublink:nth-child(4) { animation-delay: 0.16s; }
+
+.sidebar-sublink {
+  position: relative;
+  transition: color 0.18s ease, background 0.18s ease, transform 0.2s ease;
+}
+
+.sidebar-sublink::before {
+  content: "";
+  position: absolute;
+  left: 1px;
+  top: 50%;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: #22d3a7;
+  opacity: 0;
+  transform: translate(-3px, -50%) scale(0.6);
+  transition: opacity 0.18s ease, transform 0.18s ease;
+}
+
+.sidebar-sublink:hover { transform: translateX(2px); }
+.sidebar-sublink.is-active { transform: translateX(2px); }
+.sidebar-sublink.is-active::before { opacity: 1; transform: translate(0, -50%) scale(1); }
+
+/* Bottom navigation: active item gets a small lift and a breathing rail. */
+.bottom-nav-item {
+  overflow: hidden;
+  animation: nav-item-in 0.46s cubic-bezier(0.22, 0.61, 0.36, 1) backwards;
+  animation-delay: calc(var(--menu-i, 0) * 36ms + 110ms);
+  transition: color 0.2s ease, background 0.2s ease, border-color 0.2s ease,
+    transform 0.22s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+.bottom-nav-item:hover { transform: translateY(-2px); }
+.bottom-nav-item:active { transform: translateY(0) scale(0.98); }
+.bottom-nav-item.is-active { transform: translateY(-1px); }
+.bottom-nav-item.is-active svg { animation: nav-icon-pop 0.45s cubic-bezier(0.22, 0.61, 0.36, 1) both; }
+
+.bottom-nav-item.is-active::before {
+  animation: nav-line-in 0.4s cubic-bezier(0.22, 0.61, 0.36, 1) both;
+}
+
+.bottom-nav.menu-refresh .bottom-nav-item {
+  animation: nav-item-in 0.4s cubic-bezier(0.22, 0.61, 0.36, 1) backwards;
+  animation-delay: calc(var(--menu-i, 0) * 28ms);
+}
+
+/* Views and cards that appear after choosing a menu. */
+.view-enter {
+  animation: view-enter 0.48s cubic-bezier(0.22, 0.61, 0.36, 1) both;
+}
+
+.view-enter > .kpi,
+.view-enter > .panel,
+.view-enter > .score-hero,
+.view-enter > .analysis-hero,
+.view-enter > .score-toolbar,
+.view-enter > .analysis-toolbar,
+.view-enter > .layout-main,
+.view-enter > .sales-kpi-grid,
+.view-enter > .analysis-kpi-grid,
+.view-enter > .page-foot {
+  animation: view-child-in 0.52s cubic-bezier(0.22, 0.61, 0.36, 1) backwards;
+  animation-delay: calc(var(--view-i, 0) * 34ms);
+}
+
+.menu-target-flash {
+  animation: target-flash 0.95s ease both;
+  border-radius: inherit;
+}
+
+/* Small, consistent feedback for controls inside the menus. */
+.score-btn,
+.btn-primary,
+.btn-icon,
+.analysis-segmented button,
+.jks-segmented button {
+  transition: transform 0.18s ease, filter 0.18s ease, color 0.18s ease,
+    background 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease;
+}
+
+.score-btn:hover,
+.btn-primary:hover {
+  transform: translateY(-1px);
+}
+
+.score-btn:active,
+.btn-primary:active,
+.btn-icon:active {
+  transform: translateY(0) scale(0.98);
+}
+
+.btn-icon:hover { transform: translateY(-1px); }
+
+.analysis-segmented button.is-active,
+.jks-segmented button.is-active {
+  animation: segment-in 0.28s cubic-bezier(0.22, 0.61, 0.36, 1) both;
+}
+
+.data-table tbody tr {
+  transition: background 0.16s ease, transform 0.16s ease;
+}
+
+.data-table tbody tr:hover {
+  transform: translateX(2px);
+}
+
+/* Signed-in identity card in the sidebar. */
+.sidebar-user {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin: 0 0 9px;
+  padding: 9px;
+  border: 1px solid rgba(34, 211, 167, 0.16);
+  border-radius: 12px;
+  background:
+    radial-gradient(120px 70px at 0% 0%, rgba(34, 211, 167, 0.1), transparent 70%),
+    rgba(8, 16, 28, 0.72);
+  animation: user-card-in 0.4s cubic-bezier(0.22, 0.61, 0.36, 1) both;
+}
+
+.sidebar-user-avatar {
+  width: 30px;
+  height: 30px;
+  flex: 0 0 auto;
+  display: grid;
+  place-items: center;
+  border-radius: 10px;
+  color: #04251f;
+  background: linear-gradient(145deg, #6cf0d1, #22d3a7 55%, #38bdf8);
+  box-shadow: 0 6px 16px rgba(34, 211, 167, 0.18);
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 0.03em;
+}
+
+.sidebar-user-copy {
+  flex: 1 1 auto;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.sidebar-user-copy strong {
+  overflow: hidden;
+  color: #e8eefb;
+  font-size: 10.5px;
+  font-weight: 700;
+  line-height: 1.25;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.sidebar-user-copy small {
+  overflow: hidden;
+  color: var(--dim);
+  font-size: 8px;
+  line-height: 1.25;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.sidebar-user-logout {
+  width: 25px;
+  height: 25px;
+  flex: 0 0 auto;
+  display: grid;
+  place-items: center;
+  border-radius: 8px;
+  color: var(--dim);
+  text-decoration: none;
+  transition: color 0.18s ease, background 0.18s ease, transform 0.18s ease;
+}
+
+.sidebar-user-logout svg { width: 14px; height: 14px; }
+.sidebar-user-logout:hover { color: #fecdd3; background: rgba(251, 113, 133, 0.1); transform: translateX(1px); }
+
+/* The reduced-motion block is repeated here because these rules live after
+   the original global block. */
+@media (prefers-reduced-motion: reduce) {
+  .sidebar-link,
+  .sidebar-subnav.is-visible,
+  .sidebar-subnav.is-visible .sidebar-sublink,
+  .bottom-nav-item,
+  .view-enter,
+  .view-enter > *,
+  .menu-target-flash,
+  .sidebar-user,
+  .bottom-nav-item.is-active svg,
+  .bottom-nav-item.is-active::before,
+  .sidebar-link.is-active::before {
+    animation: none !important;
+  }
+  .sidebar-link:hover,
+  .sidebar-link.is-active,
+  .sidebar-sublink:hover,
+  .sidebar-sublink.is-active,
+  .bottom-nav-item:hover,
+  .bottom-nav-item.is-active,
+  .data-table tbody tr:hover {
+    transform: none !important;
+  }
+  .sidebar-link::after { display: none; }
 }
 
 
@@ -5661,15 +5757,6 @@ body.shot-capturing .avatar {
           </svg>
           <span>Master Data</span>
         </a>
-        <a class="sidebar-link" href="#setting-roa" data-nav="setting-roa" data-group="upload">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <path d="M12 3v3"/><path d="M12 18v3"/><path d="M3 12h3"/><path d="M18 12h3"/>
-            <circle cx="12" cy="12" r="4"/>
-            <path d="M5.6 5.6l2.1 2.1"/><path d="M16.3 16.3l2.1 2.1"/>
-            <path d="M18.4 5.6l-2.1 2.1"/><path d="M7.7 16.3l-2.1 2.1"/>
-          </svg>
-          <span>Setting ROA</span>
-        </a>
         <a class="sidebar-link" href="#transaksi" data-nav="transaksi" data-group="omset">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <path d="M6 3h12v18l-3-2-3 2-3-2-3 2V3z"/><path d="M9 8h6"/><path d="M9 12h6"/>
@@ -5679,6 +5766,18 @@ body.shot-capturing .avatar {
       </nav>
 
       <div class="sidebar-foot">
+        <div class="sidebar-user hidden" id="sidebarUser" aria-live="polite">
+          <span class="sidebar-user-avatar" id="sidebarUserAvatar" aria-hidden="true">?</span>
+          <span class="sidebar-user-copy">
+            <strong id="sidebarUserName">Pengguna</strong>
+            <small id="sidebarUserEmail">—</small>
+          </span>
+          <a class="sidebar-user-logout" id="sidebarLogout" href="/logout" title="Keluar dari dashboard" aria-label="Keluar dari dashboard">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M10 17l5-5-5-5"/><path d="M15 12H3"/><path d="M14 4h5a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-5"/>
+            </svg>
+          </a>
+        </div>
         <div class="sidebar-status">
           <span class="pulse" aria-hidden="true"></span>
           <div>
@@ -6621,7 +6720,7 @@ body.shot-capturing .avatar {
           </a>
           <p class="score-eyebrow">MASTER DATA &middot; SATU TEMPAT UNTUK SEMUA UNGGAHAN</p>
           <h1 id="masterTitle" tabindex="-1">Master Data</h1>
-          <p class="score-subtitle">Semua file unggahan dikelola di sini: Dbase MTD (bulan berjalan) untuk Penjualan dan omset MTD Analisa Performa, Dbase 6 bulan terakhir untuk pembanding omset/EC/ROA dan Setting ROA, stok gudang, master outlet/item/salesman/armada, serta target salesman. Maksimal 15 file per kategori &middot; diproses di browser dan disimpan lokal di perangkat ini.</p>
+          <p class="score-subtitle">Semua file unggahan dikelola di sini: Dbase MTD (bulan berjalan) untuk Penjualan dan omset MTD Analisa Performa, Dbase 6 bulan terakhir untuk pembanding omset/EC/ROA, stok gudang, master outlet/item/salesman/armada, serta target salesman. Maksimal 15 file per kategori &middot; diproses di browser dan disimpan lokal di perangkat ini.</p>
         </div>
         <div class="score-hero-stats analysis-hero-stats master-hero-stats">
           <div class="score-stat">
@@ -6700,7 +6799,7 @@ body.shot-capturing .avatar {
           <header class="panel-head panel-head-wrap master-card-head">
             <div>
               <h2>Dbase &middot; 6 Bulan Terakhir</h2>
-              <p>Data penjualan historis 6 bulan &middot; Excel (.xlsx/.xls/.xlsb), CSV, atau JSON &middot; maksimal 15 file &middot; dipakai pembanding omset/EC/ROA pada HK sama di Analisa Performa Depo/Cabang dan Setting ROA</p>
+              <p>Data penjualan historis 6 bulan &middot; Excel (.xlsx/.xls/.xlsb), CSV, atau JSON &middot; maksimal 15 file &middot; dipakai pembanding omset/EC/ROA pada HK sama di Analisa Performa Depo/Cabang</p>
             </div>
             <div class="analysis-head-actions">
               <button id="analysisTemplateBtn" class="score-btn score-btn-ghost" type="button">Template</button>
@@ -6727,7 +6826,7 @@ body.shot-capturing .avatar {
               <div id="analysisFileList" class="analysis-file-list">
                 <p class="analysis-muted">Belum ada file. Unggah file dbase 6 bulan terakhir.</p>
               </div>
-              <p id="analysisUploadStatus" class="analysis-status">Dipakai pembanding Analisa Performa Depo/Cabang (omset, EC, ROA pada HK sama) dan Setting ROA. Disimpan lokal di perangkat ini.</p>
+              <p id="analysisUploadStatus" class="analysis-status">Dipakai pembanding Analisa Performa Depo/Cabang (omset, EC, ROA pada HK sama). Disimpan lokal di perangkat ini.</p>
             </div>
           </div>
         </article>
@@ -6948,191 +7047,6 @@ body.shot-capturing .avatar {
           </div>
         </article>
       </div>
-    </section>
-
-    <section id="setting-roa" class="score-view analysis-view hidden" aria-labelledby="roaTitle">
-      <div class="score-hero analysis-hero">
-        <div class="score-hero-main">
-          <a class="score-back" href="#ringkasan" data-return-dashboard>
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <path d="M19 12H5"/><path d="M11 18l-6-6 6-6"/>
-            </svg>
-            <span>Kembali ke Dashboard</span>
-          </a>
-          <p class="score-eyebrow">PENGATURAN &middot; ROA SKU FOKUS &amp; TAT</p>
-          <h1 id="roaTitle" tabindex="-1">Setting ROA</h1>
-          <p class="score-subtitle">Kelola aturan ROA per divisi sales (AEP/GDK): mapping type outlet dari Master Outlet, SKU fokus MARK NEW, Target (%) dari CB per SKU, dropsize RTL UP/DOWN, dan hari kerja untuk Target Allocation (TAT). CB diambil dari total outlet covered Master Outlet. Pengaturan disimpan lokal di perangkat ini.</p>
-        </div>
-        <div class="score-hero-stats analysis-hero-stats">
-          <div class="score-stat">
-            <span>Aturan ROA</span>
-            <strong id="roaHeroRules">0</strong>
-          </div>
-          <div class="score-stat">
-            <span>SKU Fokus</span>
-            <strong id="roaHeroSkus">0</strong>
-          </div>
-          <div class="score-stat">
-            <span>Total Outlet Covered</span>
-            <strong id="roaHeroOutlets">0</strong>
-          </div>
-          <div class="score-stat">
-            <span>HK Berjalan / Total</span>
-            <strong id="roaHeroHk">0 / 26</strong>
-          </div>
-        </div>
-      </div>
-
-      <div class="roa-grid">
-        <section class="panel roa-card roa-card-wide">
-          <header class="panel-head panel-head-wrap">
-            <div>
-              <h2>Daftar Aturan ROA</h2>
-              <p id="roaRuleHint">Pilih divisi lalu klik Tambah Divisi untuk membuka pengaturan ROA penalti.</p>
-            </div>
-            <div class="roa-rule-toolbar">
-              <select id="roaRuleDivision" class="roa-rule-select" aria-label="Pilih divisi sales">
-                <option value="">Pilih divisi&hellip;</option>
-              </select>
-              <button id="roaRuleAddBtn" class="score-btn score-btn-primary" type="button">Tambah Divisi</button>
-            </div>
-          </header>
-          <div class="roa-rule-meta">
-            <span id="roaRuleCount" class="roa-rule-count">0 aturan aktif</span>
-            <span class="analysis-muted roa-note">Setiap divisi punya mapping type outlet sendiri. Target % dan dropsize per MARK NEW diatur di SKU Fokus.</span>
-          </div>
-          <div class="table-scroll">
-            <table class="data-table roa-rule-table">
-              <thead>
-                <tr>
-                  <th>Divisi</th>
-                  <th>Mapping Type</th>
-                  <th class="num">MARK NEW</th>
-                  <th>Status</th>
-                  <th class="num">Aksi</th>
-                </tr>
-              </thead>
-              <tbody id="roaRuleList">
-                <tr><td colspan="5"><div class="table-loading">Memuat&hellip;</div></td></tr>
-              </tbody>
-            </table>
-          </div>
-        </section>
-
-        <section class="panel roa-card roa-card-wide">
-          <header class="panel-head panel-head-wrap">
-            <div>
-              <h2>Hari Kerja &amp; TAT</h2>
-              <p>Target Allocation diprorata sesuai hari kerja. Isi manual sesuai kalender kerja.</p>
-            </div>
-          </header>
-          <div class="roa-form roa-form-inline">
-            <label class="analysis-field">
-              <span>HK total bulan</span>
-              <input id="roaHkTotal" type="number" min="0" max="31" step="1" inputmode="numeric" value="26">
-            </label>
-            <label class="analysis-field">
-              <span>HK berjalan</span>
-              <input id="roaHkRun" type="number" min="0" max="31" step="1" inputmode="numeric" value="0">
-            </label>
-          </div>
-          <p class="analysis-muted roa-note">TAT = target bulanan salesman &times; HK berjalan / HK total &middot; <strong id="roaTatRatio">100%</strong> dari target bulanan.</p>
-        </section>
-
-        <section class="panel roa-card roa-card-wide">
-          <header class="panel-head panel-head-wrap">
-            <div>
-              <h2>SKU Fokus &middot; Target % dari CB per Eceran</h2>
-              <p>Atur MARK NEW fokus per divisi. <strong>Target (%)</strong> diisi angka atau persentase (mis. 25 atau 25%); target tiap salesman dihitung dari persentase tersebut dikali CB salesman (outlet covered Master Outlet). Kosong = 100% CB. <strong>CB / Jumlah Outlet</strong> adalah basis outlet covered divisi; RTL UP/DOWN tetap menjadi ambang dropsize per type outlet.</p>
-            </div>
-          </header>
-          <p id="roaSkuEmpty" class="analysis-muted roa-note" hidden>Belum ada MARK NEW. Unggah Master Item dengan kolom KATEGORI MARK NEW, atau pastikan Dbase 6 Bulan Terakhir punya kolom MARK NEW.</p>
-          <div id="roaSkuLists" class="roa-sku-division-grid">
-            <section class="roa-sku-division" data-division="AEP">
-              <div class="roa-sku-division-head">
-                <h3>AEP</h3>
-                <span id="roaSkuCountAEP" class="roa-sku-count">&mdash;</span>
-              </div>
-              <div class="roa-sku-rule-toolbar">
-                <select id="roaSkuAddAEP" class="roa-rule-select" aria-label="Tambah MARK NEW AEP"></select>
-                <button id="roaSkuAddBtnAEP" class="score-btn score-btn-ghost" type="button" data-roa-sku-add>+ Tambah Eceran</button>
-                <button class="score-btn score-btn-ghost" type="button" data-roa-sku-clear="up">Kosongkan RTL Up</button>
-                <button class="score-btn score-btn-ghost" type="button" data-roa-sku-clear="down">Kosongkan RTL Down</button>
-              </div>
-              <div class="table-scroll">
-                <table class="data-table roa-sku-table">
-                  <thead>
-                    <tr>
-                      <th>Eceran</th>
-                      <th class="num">Target (%)</th>
-                      <th class="num">CB / Jumlah Outlet</th>
-                      <th class="num">RTL UP</th>
-                      <th class="num">RTL DOWN</th>
-                      <th>Satuan</th>
-                      <th class="num">Aksi</th>
-                    </tr>
-                  </thead>
-                  <tbody id="roaSkuListAEP"></tbody>
-                </table>
-              </div>
-            </section>
-            <section class="roa-sku-division" data-division="GDK">
-              <div class="roa-sku-division-head">
-                <h3>GDK</h3>
-                <span id="roaSkuCountGDK" class="roa-sku-count">&mdash;</span>
-              </div>
-              <div class="roa-sku-rule-toolbar">
-                <select id="roaSkuAddGDK" class="roa-rule-select" aria-label="Tambah MARK NEW GDK"></select>
-                <button id="roaSkuAddBtnGDK" class="score-btn score-btn-ghost" type="button" data-roa-sku-add>+ Tambah Eceran</button>
-                <button class="score-btn score-btn-ghost" type="button" data-roa-sku-clear="up">Kosongkan RTL Up</button>
-                <button class="score-btn score-btn-ghost" type="button" data-roa-sku-clear="down">Kosongkan RTL Down</button>
-              </div>
-              <div class="table-scroll">
-                <table class="data-table roa-sku-table">
-                  <thead>
-                    <tr>
-                      <th>Eceran</th>
-                      <th class="num">Target (%)</th>
-                      <th class="num">CB / Jumlah Outlet</th>
-                      <th class="num">RTL UP</th>
-                      <th class="num">RTL DOWN</th>
-                      <th>Satuan</th>
-                      <th class="num">Aksi</th>
-                    </tr>
-                  </thead>
-                  <tbody id="roaSkuListGDK"></tbody>
-                </table>
-              </div>
-            </section>
-          </div>
-        </section>
-      </div>
-
-      <div class="roa-actions">
-        <button id="roaSaveBtn" class="score-btn score-btn-primary" type="button">Simpan pengaturan</button>
-        <button id="roaResetBtn" class="score-btn score-btn-ghost" type="button">Reset default</button>
-        <span id="roaStatus" class="analysis-status" data-kind="info"></span>
-      </div>
-
-      <section class="panel roa-preview" aria-label="Pratinjau Rekap ROA per Salesman">
-        <header class="panel-head panel-head-wrap">
-          <div>
-            <h2>Pratinjau Rekap ROA per Salesman</h2>
-            <p id="roaPreviewInfo">&mdash;</p>
-          </div>
-        </header>
-        <div class="table-scroll">
-          <table class="data-table score-table">
-            <thead id="roaPreviewHead"></thead>
-            <tbody id="roaPreviewBody">
-              <tr><td colspan="4"><div class="table-loading">Memuat&hellip;</div></td></tr>
-            </tbody>
-          </table>
-        </div>
-        <footer class="score-table-foot">
-          <span class="muted">CB = outlet covered salesman dari Master Outlet &middot; capaian/target per MARK NEW &middot; target = Target (%) &times; CB salesman; bila Target (%) kosong, otomatis 100% CB.</span>
-        </footer>
-      </section>
     </section>
 
     <section id="analisa-stok" class="score-view analysis-view hidden" aria-labelledby="stokTitle">
@@ -7696,7 +7610,12 @@ body.shot-capturing .avatar {
               <h2 id="logistikMapTitle">Route Armada</h2>
               <p id="logistikMapInfo">Peta semua outlet SODO yang sudah dibagi ke armada. Routing dapat diubah manual.</p>
             </div>
-            <button id="logistikMapFitBtn" class="score-btn score-btn-ghost" type="button">Fokus Peta</button>
+            <div class="analysis-head-actions logistik-map-actions">
+              <button id="logistikLassoBtn" class="score-btn score-btn-ghost" type="button" disabled>Lasso Toko</button>
+              <button id="logistikAssignBtn" class="score-btn score-btn-primary" type="button" disabled>Pilih Supir</button>
+              <button id="logistikClearSelectionBtn" class="score-btn score-btn-ghost" type="button" disabled>Hapus Pilihan</button>
+              <button id="logistikMapFitBtn" class="score-btn score-btn-ghost" type="button">Fokus Peta</button>
+            </div>
           </header>
           <div class="logistik-route-layout">
             <aside class="logistik-route-sidebar" aria-label="Pengaturan rute manual">
@@ -7707,10 +7626,14 @@ body.shot-capturing .avatar {
               <div id="logistikRouteList" class="logistik-route-list">
                 <p class="analysis-muted">Belum ada rute. Upload SO/DO lalu klik Proses Rute.</p>
               </div>
-              <p class="logistik-route-hint">Pilih armada pada dropdown di samping outlet untuk memindahkan toko. Perubahan langsung menghitung ulang kubikasi, omset, urutan rute, dan jarak tempuh.</p>
+              <p class="logistik-route-hint">Gunakan <strong>Lasso Toko</strong> untuk memilih toko di peta, lalu pilih supir. Dropdown pada outlet juga tetap bisa dipakai untuk memindahkan toko satu per satu.</p>
             </aside>
             <div class="logistik-map-wrap">
               <div id="logistikMap" class="logistik-map" role="application" aria-label="Peta sebaran armada dan titik toko"></div>
+              <div id="logistikLassoHint" class="logistik-lasso-hint hidden" role="status">
+                <strong>Mode lasso aktif</strong>
+                <span>Tahan dan gambar bentuk bebas mengelilingi toko yang akan dirutekan.</span>
+              </div>
               <div id="logistikMapLegend" class="logistik-map-legend"></div>
               <div id="logistikMapEmpty" class="logistik-map-empty hidden">
                 <strong>Belum ada titik toko untuk dipetakan</strong>
@@ -7718,7 +7641,7 @@ body.shot-capturing .avatar {
               </div>
             </div>
           </div>
-          <p class="analysis-status">Warna titik dan garis mengikuti armada. Nomor pada titik mengikuti urutan kunjungan; garis menghubungkan Pin Location &rarr; toko &rarr; Pin Location dan dirapikan dengan 2-opt. Garis putus-putus menandai armada sewa. Gunakan panel kiri untuk memindahkan outlet antar armada secara manual.</p>
+          <p class="analysis-status">Peta menampilkan semua toko dari file SO/DO pada titik koordinat JKS. Pilih <strong>Lasso Toko</strong>, gambar area di peta, lalu pilih supir pada daftar yang muncul. Toko terpilih langsung masuk ke Rekap Supir dan Detail Supir. Nomor titik mengikuti urutan kunjungan; garis menghubungkan Pin Location &rarr; toko &rarr; Pin Location dan dirapikan dengan 2-opt.</p>
         </section>
 
         <section id="logistik-armada" class="panel logistik-panel" aria-labelledby="logistikFleetTitle">
@@ -7906,51 +7829,6 @@ body.shot-capturing .avatar {
         </button>
       </header>
       <div id="salesDetailBody" class="modal-scroll sales-detail-body"></div>
-    </div>
-  </div>
-
-  <div class="modal hidden" id="roaRuleModal" role="dialog" aria-modal="true" aria-labelledby="roaRuleModalTitle">
-    <div class="modal-backdrop" data-roa-rule-close></div>
-    <div class="modal-card roa-rule-modal-card">
-      <header class="modal-head">
-        <div>
-          <h2 id="roaRuleModalTitle">Pengaturan ROA Penalti</h2>
-          <p id="roaRuleModalSub">Atur mapping type outlet. Target % dan dropsize per MARK NEW diatur di SKU Fokus.</p>
-        </div>
-        <button class="btn-icon" type="button" data-roa-rule-close aria-label="Tutup">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
-            <path d="M6 6l12 12"/><path d="M18 6L6 18"/>
-          </svg>
-        </button>
-      </header>
-      <div class="modal-scroll roa-rule-modal-body">
-        <div class="roa-rule-modal-grid">
-          <section class="roa-rule-block roa-rule-block-wide">
-            <h3>1. Mapping Type Outlet</h3>
-            <p class="analysis-muted roa-note">Satu type outlet hanya boleh masuk RTL UP atau RTL DOWN. Type diambil dari Master Outlet (TYPE OUTLET / JENIS OUTLET / CHANNEL).</p>
-            <div class="table-scroll roa-mapping-scroll">
-              <table class="data-table table-compact">
-                <thead>
-                  <tr>
-                    <th>Type Outlet</th>
-                    <th class="num">RTL UP</th>
-                    <th class="num">RTL DOWN</th>
-                  </tr>
-                </thead>
-                <tbody id="roaRuleMapBody"></tbody>
-              </table>
-            </div>
-            <p id="roaRuleMapEmpty" class="analysis-muted roa-note" hidden>Belum ada type outlet. Unggah Master Outlet untuk memetakan type outlet.</p>
-            <p class="analysis-muted roa-note">Target (%) dari CB dan dropsize per MARK NEW (RTL UP, RTL DOWN, dan satuan) diatur di bagian <strong>SKU Fokus &middot; Target % dari CB per Eceran</strong>.</p>
-          </section>
-        </div>
-      </div>
-      <footer class="modal-foot roa-rule-modal-foot">
-        <button id="roaRuleDeleteBtn" class="score-btn score-btn-ghost roa-rule-delete" type="button">Hapus divisi</button>
-        <span class="roa-rule-foot-spacer"></span>
-        <button class="score-btn score-btn-ghost" type="button" data-roa-rule-close>Batal</button>
-        <button id="roaRuleSaveBtn" class="score-btn score-btn-primary" type="button">Simpan aturan</button>
-      </footer>
     </div>
   </div>
 
@@ -9188,7 +9066,13 @@ body.shot-capturing .avatar {
   }
 
   function buildDashboard(records, targets, master, trend, meta) {
-    const included = records.filter(isIncluded);
+    const knownKds = new Set(master.salesmen.map((person) => String(person.kd_sls || "")));
+    const isSalesRecord = (record) => knownKds.has(String(record.kd_sls || ""));
+    // Hanya omset dari kode salesman terdaftar yang dihitung. DO dari kode
+    // lain (mis. penjualan kantor) tidak masuk realisasi, rekap depo,
+    // maupun top customer.
+    const salesRecords = records.filter(isSalesRecord);
+    const included = salesRecords.filter(isIncluded);
     const cancelled = records.filter((record) => (record.exclusion_reason || exclusionReason(record.tipe, record.status)) === "Cancel");
     const swapRows = records.filter((record) => (record.exclusion_reason || exclusionReason(record.tipe, record.status)) === "Swap");
     const returnRows = records.filter((record) => (record.exclusion_reason || exclusionReason(record.tipe, record.status)) === "Return");
@@ -9207,7 +9091,7 @@ body.shot-capturing .avatar {
     const excludedCount = cancelled.length + swapRows.length + returnRows.length + otherExcluded.length;
 
     const byKd = new Map();
-    for (const record of records) {
+    for (const record of salesRecords) {
       const key = String(record.kd_sls || "");
       if (!byKd.has(key)) byKd.set(key, []);
       byKd.get(key).push(record);
@@ -9258,10 +9142,7 @@ body.shot-capturing .avatar {
       return (b.pct || 0) - (a.pct || 0);
     });
 
-    const knownKds = new Set(master.salesmen.map((person) => person.kd_sls));
-    const unknownRows = records.filter((record) => !knownKds.has(String(record.kd_sls || "")));
-    const unknownActive = unknownRows.filter(isIncluded);
-
+    // Hanya tim salesman terdaftar yang direkap; tidak ada depo "LAINNYA".
     const depos = [];
     for (const depoName of master.depoOrder) {
       const team = salesmen.filter((person) => person.depo === depoName);
@@ -9296,33 +9177,6 @@ body.shot-capturing .avatar {
         excluded_count: team.reduce((total, person) => total + person.excluded_count, 0),
         top_sales: top.nama,
         top_sales_value: top.real,
-      });
-    }
-
-    if (unknownActive.length) {
-      depos.push({
-        nama: "LAINNYA",
-        short: "LAINNYA",
-        color: "#64748b",
-        target: 0,
-        real: sum(unknownActive),
-        billing: sum(unknownActive.filter((record) => statusKey(record.status) === "billing process")),
-        pct: null,
-        do_count: unknownActive.length,
-        ec: new Set(unknownActive.map(customerKey)).size,
-        ec_target: 0,
-        ec_pct: null,
-        sales_count: 0,
-        cancel_value: sum(unknownRows.filter((record) => (record.exclusion_reason || exclusionReason(record.tipe, record.status)) === "Cancel")),
-        cancel_count: unknownRows.filter((record) => (record.exclusion_reason || exclusionReason(record.tipe, record.status)) === "Cancel").length,
-        swap_value: sum(unknownRows.filter((record) => (record.exclusion_reason || exclusionReason(record.tipe, record.status)) === "Swap")),
-        swap_count: unknownRows.filter((record) => (record.exclusion_reason || exclusionReason(record.tipe, record.status)) === "Swap").length,
-        return_value: sum(unknownRows.filter((record) => (record.exclusion_reason || exclusionReason(record.tipe, record.status)) === "Return")),
-        return_count: unknownRows.filter((record) => (record.exclusion_reason || exclusionReason(record.tipe, record.status)) === "Return").length,
-        excluded_value: sum(unknownRows.filter((record) => !isIncluded(record))),
-        excluded_count: unknownRows.filter((record) => !isIncluded(record)).length,
-        top_sales: "—",
-        top_sales_value: 0,
       });
     }
 
@@ -9388,7 +9242,7 @@ body.shot-capturing .avatar {
       const total = Number(record.total) || 0;
       item.count += 1;
       item.value += total;
-      if (isIncluded(record)) item.included_value += total;
+      if (isIncluded(record) && isSalesRecord(record)) item.included_value += total;
       else item.excluded_value += total;
     }
 
@@ -9535,7 +9389,7 @@ body.shot-capturing .avatar {
       refresh_seconds: OMSET_CONFIG.refreshSeconds,
       stale_after_minutes: OMSET_CONFIG.staleAfterMinutes,
       trend_bucket_minutes: OMSET_CONFIG.trendBucketMinutes,
-      rule: "Omset dihitung dari DO non-Cancel, tanpa Swap (ZWE1) dan Return (ZRP1).",
+      rule: "Omset dihitung dari DO non-Cancel, tanpa Swap (ZWE1) dan Return (ZRP1), khusus kode salesman terdaftar.",
       source: meta.source || "live",
       partial: Boolean(meta.partial),
       expected_accounts: Number(meta.expected_accounts || OMSET_CONFIG.expectedAccounts),
@@ -10056,45 +9910,6 @@ body.shot-capturing .avatar {
     masterSalesmanHero: $("#masterSalesmanHero"),
     masterTargetHero: $("#masterTargetHero"),
     masterTitle: $("#masterTitle"),
-    roaTitle: $("#roaTitle"),
-    roaHeroRules: $("#roaHeroRules"),
-    roaRuleList: $("#roaRuleList"),
-    roaRuleDivision: $("#roaRuleDivision"),
-    roaRuleAddBtn: $("#roaRuleAddBtn"),
-    roaRuleCount: $("#roaRuleCount"),
-    roaRuleHint: $("#roaRuleHint"),
-    roaRuleModal: $("#roaRuleModal"),
-    roaRuleModalTitle: $("#roaRuleModalTitle"),
-    roaRuleModalSub: $("#roaRuleModalSub"),
-    roaRuleMapBody: $("#roaRuleMapBody"),
-    roaRuleMapEmpty: $("#roaRuleMapEmpty"),
-    roaRuleSaveBtn: $("#roaRuleSaveBtn"),
-    roaRuleDeleteBtn: $("#roaRuleDeleteBtn"),
-    roaHkTotal: $("#roaHkTotal"),
-    roaHkRun: $("#roaHkRun"),
-    roaSkuEmpty: $("#roaSkuEmpty"),
-    roaSkuLists: $("#roaSkuLists"),
-    roaSkuListAEP: $("#roaSkuListAEP"),
-    roaSkuListGDK: $("#roaSkuListGDK"),
-    roaSkuCountAEP: $("#roaSkuCountAEP"),
-    roaSkuCountGDK: $("#roaSkuCountGDK"),
-    roaSkuAddAEP: $("#roaSkuAddAEP"),
-    roaSkuAddBtnAEP: $("#roaSkuAddBtnAEP"),
-    roaSkuAddGDK: $("#roaSkuAddGDK"),
-    roaSkuAddBtnGDK: $("#roaSkuAddBtnGDK"),
-    roaSaveBtn: $("#roaSaveBtn"),
-    roaResetBtn: $("#roaResetBtn"),
-    roaStatus: $("#roaStatus"),
-    roaHeroSkus: $("#roaHeroSkus"),
-    roaHeroOutlets: $("#roaHeroOutlets"),
-    roaHeroHk: $("#roaHeroHk"),
-    roaTatRatio: $("#roaTatRatio"),
-    roaPreviewHead: $("#roaPreviewHead"),
-    roaPreviewBody: $("#roaPreviewBody"),
-    roaPreviewInfo: $("#roaPreviewInfo"),
-    roaPanelSub: $("#roaPanelSub"),
-    roaTableHead: $("#roaTableHead"),
-    roaTableBody: $("#roaTableBody"),
     stokTitle: $("#stokTitle"),
     stokSub: $("#stokSub"),
     stokItemHero: $("#stokItemHero"),
@@ -10179,6 +9994,99 @@ body.shot-capturing .avatar {
     analysisActionList: $("#analysisActionList"),
     analysisFootNote: $("#analysisFootNote"),
   };
+
+  const motionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+  function initMenuMotion() {
+    $$(".sidebar-link").forEach((item, index) => {
+      item.style.setProperty("--menu-i", String(index));
+    });
+    $$(".sidebar-sublink").forEach((item, index) => {
+      item.style.setProperty("--menu-i", String(index));
+    });
+    $$(".bottom-nav-item").forEach((item, index) => {
+      item.style.setProperty("--menu-i", String(index));
+    });
+  }
+
+  function animateMenuGroup() {
+    if (motionQuery.matches) return;
+    [$(".sidebar-nav"), $(".bottom-nav")].forEach((nav) => {
+      if (!nav) return;
+      nav.classList.remove("menu-refresh");
+      void nav.offsetWidth;
+      nav.classList.add("menu-refresh");
+      window.setTimeout(() => nav.classList.remove("menu-refresh"), 720);
+    });
+  }
+
+  function animateViewEnter(node) {
+    if (!node || motionQuery.matches) return;
+    Array.from(node.children).forEach((child, index) => {
+      child.style.setProperty("--view-i", String(index));
+    });
+    node.classList.remove("view-enter");
+    void node.offsetWidth;
+    node.classList.add("view-enter");
+    const token = `${Date.now()}-${Math.random()}`;
+    node.dataset.motionToken = token;
+    window.setTimeout(() => {
+      if (node.dataset.motionToken === token) {
+        node.classList.remove("view-enter");
+        delete node.dataset.motionToken;
+      }
+    }, 1050);
+  }
+
+  function flashMenuTarget(id) {
+    const node = document.getElementById(id);
+    if (!node || motionQuery.matches) return;
+    node.classList.remove("menu-target-flash");
+    void node.offsetWidth;
+    node.classList.add("menu-target-flash");
+    window.setTimeout(() => node.classList.remove("menu-target-flash"), 1050);
+  }
+
+  function initAuthUser() {
+    const wrap = $("#sidebarUser");
+    if (!wrap) return;
+    fetch("/api/auth/me", {
+      cache: "no-store",
+      credentials: "same-origin",
+      headers: { Accept: "application/json" },
+    })
+      .then((response) => (response.ok ? response.json() : null))
+      .then((payload) => {
+        if (!payload || !payload.authenticated || !payload.user) return;
+        const user = payload.user;
+        const name = user.name || "Pengguna";
+        const email = user.email || "";
+        const initials = user.initials || name.slice(0, 2).toUpperCase();
+        const nameNode = $("#sidebarUserName");
+        const emailNode = $("#sidebarUserEmail");
+        const avatarNode = $("#sidebarUserAvatar");
+        if (nameNode) nameNode.textContent = name;
+        if (emailNode) emailNode.textContent = email;
+        if (avatarNode) avatarNode.textContent = initials;
+        wrap.classList.remove("hidden");
+
+        const params = new URLSearchParams(window.location.search);
+        if (params.get("welcome") === "1") {
+          const firstName = name.trim().split(/\s+/)[0] || name;
+          shotToast(`Selamat datang, ${firstName}!`, "success");
+          params.delete("welcome");
+          const query = params.toString();
+          window.history.replaceState(
+            null,
+            "",
+            `${window.location.pathname}${query ? `?${query}` : ""}${window.location.hash}`
+          );
+        }
+      })
+      .catch(() => {
+        // Versi statis tidak punya endpoint auth; kartu pengguna tetap tersembunyi.
+      });
+  }
 
   const ANALYSIS_MAX_FILES = 15;
   const ANALYSIS_STORAGE_KEY = "analisaPenjualanLocalData.v1";
@@ -11068,6 +10976,9 @@ body.shot-capturing .avatar {
     renderCancel(data.cancel_orders || [], data.summary);
     renderRecent(data.recent_orders || []);
     setAlertFromMeta(data.meta);
+    // Tinggi halaman berubah setelah data masuk; ukur ulang posisi section agar
+    // sidebar tidak menandai bagian terakhir saat halaman masih pendek.
+    window.dispatchEvent(new Event("resize"));
   }
 
   function updateCountdown() {
@@ -11398,7 +11309,6 @@ body.shot-capturing .avatar {
     renderScoreHeader(data.columns);
     populateScoreAreas(data.rows);
     renderScoreRows();
-    roaPanelRender();
   }
 
   function scoreRenderError(message) {
@@ -12705,7 +12615,19 @@ body.shot-capturing .avatar {
 
     const targetMonthList = anchorKey ? [anchorKey] : Array.from(targetMonths).sort();
     let targetTotal = 0;
-    const tatRatio = roaTatRatio();
+    const tatRatio = (() => {
+      if (!maxDate) return 1;
+      const basis = analysisState.basis || "mon-sat";
+      const info = analysisMonthInfo(
+        maxDate.getFullYear(),
+        maxDate.getMonth(),
+        basis
+      );
+      const current = analysisHkForDateOrNext(maxDate, basis).hk;
+      return info.maxHk > 0
+        ? Math.max(0, Math.min(1, current / info.maxHk))
+        : 1;
+    })();
     salesmen.forEach((item) => {
       const entry = masterTargetEntry(item.code, item.name);
       item.target = masterTargetValue(entry, targetMonthList);
@@ -16055,8 +15977,15 @@ legendControl.addTo(map);
     notice: null,
     map: null,
     mapLayer: null,
+    mapAttentionLayer: null,
     mapBaseLayer: null,
     mapPoints: [],
+    mapSelectionShape: null,
+    lassoMode: false,
+    lassoStart: null,
+    lassoPoints: [],
+    lassoLine: null,
+    selectedKeys: new Set(),
     mapError: false,
     routeVehicleId: "",
   };
@@ -17963,6 +17892,7 @@ legendControl.addTo(map);
     return {
       vehicles: allVehicles,
       attention: remainingAttention,
+      outlets: groups,
       depot,
       target: fairTarget,
       totalCapacity,
@@ -18635,6 +18565,8 @@ legendControl.addTo(map);
   function logistikShowResultsShell() {
     const results = $("#logistikResults");
     if (results) results.classList.remove("hidden");
+    logistikStopLasso();
+    logistikUpdateSelectionUi();
     logistikRenderRouteList();
     logistikRenderDriverDetail();
     const empty = $("#logistikMapEmpty");
@@ -18787,7 +18719,407 @@ legendControl.addTo(map);
     });
   }
 
+  function logistikSetStatus(text, kind = "info") {
+    const status = $("#logistikUploadStatus");
+    if (!status) return;
+    status.dataset.kind = kind;
+    status.textContent = text;
+  }
+
+  function logistikPlanOutlets(plan) {
+    const map = new Map();
+    ((plan && plan.outlets) || []).forEach((outlet) => {
+      if (outlet && outlet.key) map.set(outlet.key, outlet);
+    });
+    ((plan && plan.vehicles) || []).forEach((vehicle) => {
+      (vehicle.outlets || []).forEach((outlet) => {
+        if (outlet && outlet.key) map.set(outlet.key, outlet);
+      });
+    });
+    ((plan && plan.attention) || []).forEach((outlet) => {
+      if (outlet && outlet.key) map.set(outlet.key, outlet);
+    });
+    return Array.from(map.values());
+  }
+
+  function logistikSelectedOutlets() {
+    const plan = logistikState.plan;
+    if (!plan || !logistikState.selectedKeys.size) return [];
+    return logistikPlanOutlets(plan).filter((outlet) =>
+      logistikState.selectedKeys.has(outlet.key)
+    );
+  }
+
+  function logistikUpdateSelectionUi() {
+    const hasPlan = !!logistikState.plan;
+    const count = logistikState.selectedKeys.size;
+    const lasso = $("#logistikLassoBtn");
+    const assign = $("#logistikAssignBtn");
+    const clear = $("#logistikClearSelectionBtn");
+    const hint = $("#logistikLassoHint");
+    if (lasso) {
+      lasso.disabled = !hasPlan;
+      lasso.classList.toggle("is-active", logistikState.lassoMode);
+      lasso.setAttribute("aria-pressed", logistikState.lassoMode ? "true" : "false");
+      lasso.textContent = logistikState.lassoMode
+        ? "Batalkan Lasso"
+        : "Lasso Toko";
+    }
+    if (assign) {
+      assign.disabled = !count;
+      assign.textContent = count
+        ? `Pilih Supir (${fmtNum(count)})`
+        : "Pilih Supir";
+    }
+    if (clear) clear.disabled = !count;
+    if (hint) hint.classList.toggle("hidden", !logistikState.lassoMode);
+  }
+
+  function logistikStopLasso() {
+    if (logistikState.lassoLine && logistikState.map) {
+      logistikState.map.removeLayer(logistikState.lassoLine);
+    }
+    logistikState.lassoMode = false;
+    logistikState.lassoStart = null;
+    logistikState.lassoPoints = [];
+    logistikState.lassoLine = null;
+    $("#logistikMap")?.classList.remove("is-lasso");
+    if (logistikState.map && logistikState.map.dragging) {
+      logistikState.map.dragging.enable();
+    }
+    logistikUpdateSelectionUi();
+  }
+
+  function logistikClearSelection(render = true, closeModal = true) {
+    logistikStopLasso();
+    if (logistikState.mapSelectionShape && logistikState.map) {
+      logistikState.map.removeLayer(logistikState.mapSelectionShape);
+    }
+    logistikState.mapSelectionShape = null;
+    logistikState.selectedKeys.clear();
+    logistikUpdateSelectionUi();
+    if (closeModal) closeSalesDetailModal();
+    if (render && logistikState.plan) {
+      logistikRenderMap(logistikState.plan, { fit: false });
+    }
+  }
+
+  function logistikStartLasso() {
+    if (!logistikState.plan) {
+      logistikSetStatus("Proses rute terlebih dahulu sebelum memilih toko dengan lasso.", "warn");
+      return;
+    }
+    if (logistikState.lassoMode) {
+      logistikStopLasso();
+      return;
+    }
+    const map = logistikEnsureMap();
+    if (!map) return;
+    logistikClearSelection(false, true);
+    logistikState.lassoMode = true;
+    logistikState.lassoPoints = [];
+    map.closePopup();
+    if (map.dragging) map.dragging.disable();
+    $("#logistikMap")?.classList.add("is-lasso");
+    logistikUpdateSelectionUi();
+    logistikSetStatus(
+      "Mode lasso aktif. Tahan dan gambar bentuk bebas mengelilingi toko yang akan dirutekan.",
+      "info"
+    );
+  }
+
+  function logistikMapMouseDown(event) {
+    if (!logistikState.lassoMode || !logistikState.map) return;
+    if (event.originalEvent && event.originalEvent.button !== 0) return;
+    const L = window.L;
+    if (logistikState.lassoLine) {
+      logistikState.map.removeLayer(logistikState.lassoLine);
+      logistikState.lassoLine = null;
+    }
+    const start = L.latLng(event.latlng.lat, event.latlng.lng);
+    logistikState.lassoStart = start;
+    logistikState.lassoPoints = [start];
+    logistikState.lassoLine = L.polyline([start], {
+      className: "logistik-lasso-line",
+      interactive: false,
+      color: "#fbbf24",
+      weight: 3,
+      opacity: 0.95,
+      dashArray: "6 5",
+    }).addTo(logistikState.map);
+  }
+
+  function logistikMapMouseMove(event) {
+    if (
+      !logistikState.lassoMode ||
+      !logistikState.lassoStart ||
+      !logistikState.lassoLine ||
+      !logistikState.map
+    ) {
+      return;
+    }
+    const points = logistikState.lassoPoints;
+    const last = points[points.length - 1];
+    const lastPixel = logistikState.map.latLngToContainerPoint(last);
+    const nextPixel = logistikState.map.latLngToContainerPoint(event.latlng);
+    if (lastPixel.distanceTo(nextPixel) < 3) return;
+    points.push(window.L.latLng(event.latlng.lat, event.latlng.lng));
+    logistikState.lassoLine.setLatLngs(points);
+  }
+
+  function logistikMapMouseUp(event) {
+    if (
+      !logistikState.lassoMode ||
+      !logistikState.lassoStart ||
+      !logistikState.lassoLine ||
+      !logistikState.map
+    ) {
+      return;
+    }
+    const L = window.L;
+    const map = logistikState.map;
+    const points = logistikState.lassoPoints.slice();
+    const last = points[points.length - 1];
+    if (
+      last &&
+      map
+        .latLngToContainerPoint(last)
+        .distanceTo(map.latLngToContainerPoint(event.latlng)) >= 2
+    ) {
+      points.push(L.latLng(event.latlng.lat, event.latlng.lng));
+    }
+    if (logistikState.lassoLine) map.removeLayer(logistikState.lassoLine);
+    logistikState.lassoLine = null;
+    logistikState.lassoStart = null;
+    const bounds = L.latLngBounds(points);
+    const height = bounds.getNorth() - bounds.getSouth();
+    const width = bounds.getEast() - bounds.getWest();
+    const tooSmall = points.length < 4 || (height < 0.00008 && width < 0.00008);
+    if (tooSmall) {
+      logistikStopLasso();
+      logistikSetStatus("Lasso terlalu kecil. Gambar area yang lebih lebar.", "warn");
+      return;
+    }
+    const inside = logistikPlanOutlets(logistikState.plan).filter(
+      (outlet) =>
+        Number.isFinite(Number(outlet.lat)) &&
+        Number.isFinite(Number(outlet.lng)) &&
+        jksPointInPolygon(Number(outlet.lat), Number(outlet.lng), points)
+    );
+    if (logistikState.mapSelectionShape) {
+      map.removeLayer(logistikState.mapSelectionShape);
+    }
+    logistikState.mapSelectionShape = L.polygon(
+      points.map((point) => [point.lat, point.lng]),
+      {
+        className: "logistik-selection-shape",
+        interactive: false,
+        color: "#38bdf8",
+        weight: 2,
+        opacity: 0.85,
+        fillColor: "#38bdf8",
+        fillOpacity: 0.08,
+      }
+    ).addTo(map);
+    logistikState.selectedKeys = new Set(inside.map((outlet) => outlet.key));
+    logistikStopLasso();
+    logistikRenderMap(logistikState.plan, { fit: false });
+    logistikUpdateSelectionUi();
+    if (!inside.length) {
+      logistikSetStatus("Tidak ada toko di dalam area lasso. Coba area lain.", "warn");
+      return;
+    }
+    logistikSetStatus(
+      `${fmtNum(inside.length)} toko dipilih. Pilih supir untuk memasukkan toko ke rute.`,
+      "info"
+    );
+    logistikOpenAssignPicker();
+  }
+
+  function logistikMapTouchStart(event) {
+    if (!logistikState.lassoMode) return;
+    if (event.originalEvent?.touches?.length > 1) return;
+    logistikMapMouseDown({
+      latlng: event.latlng,
+      originalEvent: { button: 0 },
+    });
+  }
+
+  function logistikMapTouchMove(event) {
+    if (!logistikState.lassoMode) return;
+    event.originalEvent?.preventDefault?.();
+    logistikMapMouseMove({ latlng: event.latlng });
+  }
+
+  function logistikMapTouchEnd(event) {
+    if (!logistikState.lassoMode) return;
+    const latlng =
+      event.latlng ||
+      logistikState.lassoPoints[logistikState.lassoPoints.length - 1] ||
+      logistikState.lassoStart;
+    if (!latlng) return;
+    logistikMapMouseUp({ latlng });
+  }
+
+  function logistikOpenAssignPicker() {
+    const selected = logistikSelectedOutlets();
+    if (!selected.length) {
+      logistikSetStatus("Pilih toko di peta dengan lasso terlebih dahulu.", "warn");
+      return;
+    }
+    const plan = logistikState.plan;
+    const volume = selected.reduce((total, outlet) => total + (Number(outlet.volume) || 0), 0);
+    const amount = selected.reduce((total, outlet) => total + (Number(outlet.amount) || 0), 0);
+    const stats = [
+      salesDetailStat("Toko dipilih", fmtNum(selected.length), "outlet"),
+      salesDetailStat("Kubikasi", logistikFmtVolume(volume), "total pilihan"),
+      salesDetailStat("Omset", fmtRp(amount), "total pilihan"),
+    ].join("");
+    const cards = (plan.vehicles || [])
+      .map((vehicle) => {
+        const currentKeys = new Set((vehicle.outlets || []).map((outlet) => outlet.key));
+        const incoming = selected.filter((outlet) => !currentKeys.has(outlet.key));
+        const incomingVolume = incoming.reduce(
+          (total, outlet) => total + (Number(outlet.volume) || 0),
+          0
+        );
+        const incomingAmount = incoming.reduce(
+          (total, outlet) => total + (Number(outlet.amount) || 0),
+          0
+        );
+        const projectedVolume = (Number(vehicle.volume) || 0) + incomingVolume;
+        const projectedAmount = (Number(vehicle.amount) || 0) + incomingAmount;
+        const overCapacity =
+          vehicle.capacity > 0 && projectedVolume > vehicle.capacity + 1e-9;
+        const overAmount = projectedAmount > LOGISTIK_MAX_AMOUNT + 1e-9;
+        const over = overCapacity || overAmount;
+        return `<button type="button" class="logistik-driver-choice${
+          over ? " is-over" : ""
+        }" data-logistik-assign-driver="${escapeHtml(vehicle.id)}">
+          <span class="logistik-driver-choice-dot" style="background:${
+            vehicle.color || "#38bdf8"
+          }"></span>
+          <span class="logistik-driver-choice-main">
+            <strong>${escapeHtml(vehicle.driver || "Tanpa supir")}</strong>
+            <span>${escapeHtml(vehicle.type || "Armada")}${
+              vehicle.rented ? " · Sewa" : ""
+            } · ${fmtNum(vehicle.outlets.length)} → ${fmtNum(
+              vehicle.outlets.length + incoming.length
+            )} toko · ${logistikFmtVolume(projectedVolume)} / ${logistikFmtVolume(
+              vehicle.capacity
+            )}</span>
+            <span>${fmtRp(projectedAmount)}</span>
+            ${
+              over
+                ? `<em>Melebihi ${overCapacity ? "kapasitas" : "batas omset"} — tetap bisa dipilih.</em>`
+                : ""
+            }
+          </span>
+          <b>Pilih</b>
+        </button>`;
+      })
+      .join("");
+    const unassigned = `<button type="button" class="logistik-driver-choice is-unassigned" data-logistik-assign-driver="">
+      <span class="logistik-driver-choice-dot" style="background:#f59e0b"></span>
+      <span class="logistik-driver-choice-main">
+        <strong>Belum ada armada / Tinjauan</strong>
+        <span>Kembalikan ${fmtNum(selected.length)} toko ke Tinjauan Armada.</span>
+      </span>
+      <b>Tinjauan</b>
+    </button>`;
+    const chips = selected
+      .slice(0, 12)
+      .map(
+        (outlet) =>
+          `<span class="logistik-selected-store">${escapeHtml(
+            outlet.name || outlet.code || "Outlet"
+          )}</span>`
+      )
+      .join("");
+    const more =
+      selected.length > 12
+        ? `<span class="logistik-selected-store">+${fmtNum(
+            selected.length - 12
+          )} toko</span>`
+        : "";
+    openSalesDetailModal({
+      eyebrow: "ROUTING MANUAL",
+      title: "Pilih Supir",
+      sub: `${fmtNum(selected.length)} toko dipilih · ${logistikFmtVolume(
+        volume
+      )} · ${fmtRp(amount)}`,
+      body: `<div class="sales-detail-stats">${stats}</div>
+        <div class="logistik-driver-choice-grid">${cards}${unassigned}</div>
+        <div class="logistik-selected-stores">${chips}${more}</div>`,
+    });
+  }
+
+  function logistikAssignSelection(targetId) {
+    const plan = logistikState.plan;
+    if (!plan) return;
+    const selected = logistikSelectedOutlets();
+    if (!selected.length) return;
+    const target = targetId
+      ? (plan.vehicles || []).find((vehicle) => vehicle.id === targetId)
+      : null;
+    if (targetId && !target) return;
+    const keys = new Set(selected.map((outlet) => outlet.key));
+    (plan.vehicles || []).forEach((vehicle) => {
+      vehicle.outlets = (vehicle.outlets || []).filter(
+        (outlet) => !keys.has(outlet.key)
+      );
+    });
+    plan.attention = (plan.attention || []).filter(
+      (outlet) => !keys.has(outlet.key)
+    );
+    keys.forEach((key) => logistikState.rentKeys.delete(key));
+    if (target) {
+      target.outlets.push(...selected);
+    } else {
+      plan.attention.push(
+        ...selected.map((outlet) => ({
+          ...outlet,
+          reason: "Dipilih manual ke Tinjauan Armada.",
+        }))
+      );
+    }
+    (plan.vehicles || []).forEach((vehicle) =>
+      logistikRecalculateVehicle(vehicle, plan.depot)
+    );
+    plan.totals = plan.totals || {};
+    plan.totals.attention = plan.attention.length;
+    plan.totals.assignedOutlets = plan.vehicles.reduce(
+      (total, vehicle) => total + (vehicle.outlets || []).length,
+      0
+    );
+    logistikState.routeVehicleId = target ? target.id : "";
+    logistikClearSelection(false, true);
+    logistikRenderPlan(plan, { fit: false });
+    if (target) {
+      const driverSelect = $("#logistikDriverSelect");
+      if (driverSelect) {
+        driverSelect.value = target.driver;
+        logistikRenderDriverDetail(plan);
+      }
+    }
+    logistikSetStatus(
+      target
+        ? `${fmtNum(selected.length)} toko masuk ke rute ${
+            target.driver || "armada"
+          }. Rekap Supir dan Detail Supir sudah diperbarui.`
+        : `${fmtNum(selected.length)} toko dipindahkan ke Tinjauan Armada.`,
+      target ? "success" : "info"
+    );
+  }
+
   function logistikMapClear() {
+    logistikStopLasso();
+    if (logistikState.mapSelectionShape && logistikState.map) {
+      logistikState.map.removeLayer(logistikState.mapSelectionShape);
+    }
+    logistikState.mapSelectionShape = null;
+    logistikState.selectedKeys.clear();
+    logistikUpdateSelectionUi();
     if (logistikState.mapLayer) logistikState.mapLayer.clearLayers();
     if (logistikState.mapAttentionLayer) {
       logistikState.mapAttentionLayer.clearLayers();
@@ -18864,6 +19196,12 @@ legendControl.addTo(map);
     ).addTo(map);
     L.control.zoom({ position: "bottomright" }).addTo(map);
     L.control.scale({ position: "bottomright", imperial: false }).addTo(map);
+    map.on("mousedown", logistikMapMouseDown);
+    map.on("mousemove", logistikMapMouseMove);
+    map.on("mouseup", logistikMapMouseUp);
+    map.on("touchstart", logistikMapTouchStart);
+    map.on("touchmove", logistikMapTouchMove);
+    map.on("touchend", logistikMapTouchEnd);
     window.setTimeout(() => map.invalidateSize(), 80);
     return map;
   }
@@ -18967,7 +19305,9 @@ legendControl.addTo(map);
         bounds.push(latlng);
         assignedPoints += 1;
         const stopIcon = L.divIcon({
-          className: "logistik-stop-marker",
+          className: `logistik-stop-marker${
+            logistikState.selectedKeys.has(outlet.key) ? " is-selected" : ""
+          }`,
           html: `<span style="background:${color}">${stopIndex + 1}</span>`,
           iconSize: [26, 26],
           iconAnchor: [13, 13],
@@ -19040,14 +19380,18 @@ legendControl.addTo(map);
     attentionPoints.forEach((outlet) => {
       const latlng = [outlet.lat, outlet.lng];
       bounds.push(latlng);
-      const marker = L.circleMarker(latlng, {
-        radius: 5,
-        color: "#fbbf24",
-        weight: 1.5,
-        opacity: 0.7,
-        fillColor: "#f59e0b",
-        fillOpacity: 0.16,
-        dashArray: "3 3",
+      const isSelected = logistikState.selectedKeys.has(outlet.key);
+      const attentionIcon = L.divIcon({
+        className: `logistik-stop-marker${isSelected ? " is-selected" : ""}`,
+        html: `<span style="background:#64748b">!</span>`,
+        iconSize: [24, 24],
+        iconAnchor: [12, 12],
+        popupAnchor: [0, -12],
+      });
+      const marker = L.marker(latlng, {
+        icon: attentionIcon,
+        title: outlet.name || "Outlet",
+        riseOnHover: true,
       });
       marker.bindPopup(
         `<div class="jks-popup">
@@ -19199,6 +19543,7 @@ legendControl.addTo(map);
     logistikRenderRouteList(plan);
     logistikRenderDriverDetail(plan);
     logistikRenderMap(plan, options);
+    logistikUpdateSelectionUi();
     const status = $("#logistikUploadStatus");
     if (status) {
       status.dataset.kind = plan.attention.length ? "warn" : "success";
@@ -19468,6 +19813,9 @@ legendControl.addTo(map);
     const templateBtn = $("#logistikTemplateBtn");
     const resetBtn = $("#logistikResetBtn");
     const mapFitBtn = $("#logistikMapFitBtn");
+    const lassoBtn = $("#logistikLassoBtn");
+    const assignBtn = $("#logistikAssignBtn");
+    const clearSelectionBtn = $("#logistikClearSelectionBtn");
     const attentionBody = $("#logistikAttentionBody");
     const list = $("#logistikFileList");
 
@@ -19522,6 +19870,16 @@ legendControl.addTo(map);
     }
     if (resetBtn) resetBtn.addEventListener("click", logistikReset);
     if (mapFitBtn) mapFitBtn.addEventListener("click", logistikMapFit);
+    if (lassoBtn) lassoBtn.addEventListener("click", logistikStartLasso);
+    if (assignBtn) assignBtn.addEventListener("click", logistikOpenAssignPicker);
+    if (clearSelectionBtn) {
+      clearSelectionBtn.addEventListener("click", () => logistikClearSelection());
+    }
+    document.addEventListener("click", (event) => {
+      const button = event.target.closest("[data-logistik-assign-driver]");
+      if (!button) return;
+      logistikAssignSelection(button.dataset.logistikAssignDriver || "");
+    });
     const routeList = $("#logistikRouteList");
     if (routeList) {
       routeList.addEventListener("change", (event) => {
@@ -19572,6 +19930,8 @@ legendControl.addTo(map);
         }
       });
     }
+    logistikStopLasso();
+    logistikUpdateSelectionUi();
     logistikRenderMaster();
     logistikRenderFiles();
     logistikUpdateStats(null);
@@ -20305,6 +20665,14 @@ legendControl.addTo(map);
           "KODE OUTLET", "OUTLET CODE", "KODE TOKO", "ID OUTLET", "CODE",
           "KODE SAP", "KD OUTLET", "KODE CUSTOMER", "CUSTOMER ID"
         );
+        const outletName = masterPick(
+          row,
+          "NAMA OUTLET", "NAMA TOKO", "NM OUTLET", "NM TOKO",
+          "OUTLET", "CUSTOMER", "NAMA CUSTOMER", "NAME"
+        );
+        // Baris tanpa kode outlet TETAP dipakai (COUNTIF juga menghitungnya):
+        // pakai nama sebagai kunci unik agar tidak hilang.
+        if (!code && outletName) code = `NAMA:${outletName}`;
         record = {
           code,
           sapCode: masterPick(
@@ -20316,11 +20684,7 @@ legendControl.addTo(map);
             row,
             "KD OUTLET", "KODE TOKO", "ID OUTLET", "OUTLET CODE"
           ),
-          name: masterPick(
-            row,
-            "NAMA OUTLET", "NAMA TOKO", "NM OUTLET", "NM TOKO",
-            "OUTLET", "CUSTOMER", "NAMA CUSTOMER", "NAME"
-          ),
+          name: outletName,
           depo: masterPick(row, "PMA", "DEPO", "DEPOT", "CABANG", "BRANCH", "DISTRIBUTOR", "FC", "AREA"),
           channel: masterPick(row, "JENIS OUTLET", "TYPE OUTLET", "TYPE OUTLET2", "CHANNEL", "CHANEL", "SALURAN"),
           divisi: masterPick(row, "DIV", "DIVISI", "DIVISION", "DEPARTEMEN", "DEPT"),
@@ -20329,13 +20693,18 @@ legendControl.addTo(map);
             row,
             "KD_SLS",
             "KD SLS2",
+            "KODE SLS",
+            "KD SLS",
             "KODE SALES",
             "KD SALES",
             "KODE SL",
             "KD SL",
             "NIK SALESMAN",
+            "NIK",
             "KODE SALESMAN",
             "KD SALESMAN",
+            "ID SALESMAN",
+            "ID SALES",
             "SALESMAN CODE",
             "SALES CODE"
           ),
@@ -20398,7 +20767,20 @@ legendControl.addTo(map);
         };
       }
       if (!code) return;
-      map[code.toUpperCase()] = record;
+      const key = code.toUpperCase();
+      if (type === "outlet" && map[key]) {
+        // Satu kode outlet bisa muncul beberapa kali dengan salesman berbeda.
+        // Simpan sebagai record tambahan agar hitungan per salesman tidak
+        // hilang, tanpa mengubah lookup utama berdasarkan kode outlet.
+        const duplicateKey = `__DUP__${key}||${
+          masterCodeKey(record.salesmanCode) ||
+          masterNameKey(record.salesman) ||
+          count
+        }`;
+        map[duplicateKey] = record;
+      } else {
+        map[key] = record;
+      }
       count += 1;
     });
     return { map, count };
@@ -20510,8 +20892,8 @@ legendControl.addTo(map);
     return matched;
   }
 
-  function masterObjectsFromAoa(aoa, type) {
-    if (!Array.isArray(aoa) || !aoa.length) return [];
+  function masterHeaderInfo(aoa, type) {
+    if (!Array.isArray(aoa) || !aoa.length) return { headerIndex: -1, score: -1 };
     const expected = new Set(
       masterHeadersFor(type).map((header) => jksNormalizeKey(header))
     );
@@ -20531,18 +20913,29 @@ legendControl.addTo(map);
     // baris pertama yang berisi data.
     if (headerIndex < 0 || bestScore < 1) {
       const hint = Math.min(masterHeaderRowHint(type), aoa.length - 1);
-      if (masterHeaderScore(aoa[hint], expected) >= 0) {
+      const hintScore = masterHeaderScore(aoa[hint], expected);
+      if (hintScore >= 0) {
         headerIndex = hint;
+        bestScore = hintScore;
       } else {
         headerIndex = 0;
         for (let index = 0; index < scanLimit; index += 1) {
-          if (masterHeaderScore(aoa[index], expected) >= 0) {
+          const score = masterHeaderScore(aoa[index], expected);
+          if (score >= 0) {
             headerIndex = index;
+            bestScore = score;
             break;
           }
         }
       }
     }
+    return { headerIndex, score: bestScore };
+  }
+
+  function masterObjectsFromAoa(aoa, type) {
+    if (!Array.isArray(aoa) || !aoa.length) return [];
+    const { headerIndex } = masterHeaderInfo(aoa, type);
+    if (headerIndex < 0) return [];
     const headers = (aoa[headerIndex] || []).map((header) => String(header).trim());
     if (!headers.some(Boolean)) return [];
     return aoa
@@ -20574,6 +20967,7 @@ legendControl.addTo(map);
       });
       const objects = [];
       const sheets = [];
+      const candidates = [];
       (workbook.SheetNames || []).forEach((sheetName) => {
         const sheet = workbook.Sheets[sheetName];
         if (!sheet) return;
@@ -20584,12 +20978,28 @@ legendControl.addTo(map);
           blankrows: false,
         });
         const rows = masterObjectsFromAoa(aoa, type);
-        if (rows.length) {
-          objects.push(...rows);
-          sheets.push(sheetName);
-        }
+        if (!rows.length) return;
+        const info = masterHeaderInfo(aoa, type);
+        candidates.push({ sheetName, rows, score: info.score });
       });
-      if (!objects.length) throw new Error("Tidak ada baris data pada file master.");
+      if (!candidates.length) {
+        throw new Error("Tidak ada baris data pada file master.");
+      }
+      // File Master Outlet sering memiliki sheet pivot/summary dengan sebagian
+      // header yang sama. Hanya baca sheet dengan header paling lengkap agar
+      // baris pivot tidak menimpa record outlet yang valid.
+      const selected =
+        type === "outlet"
+          ? candidates.filter(
+              (candidate) =>
+                candidate.score ===
+                Math.max(...candidates.map((item) => item.score))
+            )
+          : candidates;
+      selected.forEach((candidate) => {
+        objects.push(...candidate.rows);
+        sheets.push(candidate.sheetName);
+      });
       return { objects, sheets };
     }
 
@@ -21172,7 +21582,6 @@ legendControl.addTo(map);
   }
 
   function masterAfterChange(type) {
-    roaCache = { stamp: "", result: null };
     if (type === "armada") {
       if (typeof logistikRefreshMaster === "function") {
         logistikRefreshMaster({ notify: true });
@@ -21180,9 +21589,6 @@ legendControl.addTo(map);
       return;
     }
     if (type === "performance") loadScoreCard(false);
-    else roaPanelRender();
-    const page = document.getElementById("setting-roa");
-    if (page && !page.classList.contains("hidden")) roaSettingsRender();
   }
 
   function masterReset(type) {
@@ -21699,6 +22105,38 @@ legendControl.addTo(map);
     }
   }
 
+  function stokItemSaran(item) {
+    const rows = [];
+    if (!item || !item.depos) return rows;
+    STOK_REGIONS.forEach((region) => {
+      const present = region.depos.filter((depo) => item.depos[depo]);
+      const surplus = present.filter(
+        (depo) => stokStatus(item.depos[depo].doi) === "aman"
+      );
+      const critical = present.filter(
+        (depo) => stokStatus(item.depos[depo].doi) === "critical"
+      );
+      if (!surplus.length || !critical.length) return;
+      critical.forEach((toDepo) => {
+        surplus.forEach((fromDepo) => {
+          rows.push({
+            region: region.name,
+            fromDepo,
+            fromCell: item.depos[fromDepo],
+            toDepo,
+            toCell: item.depos[toDepo],
+          });
+        });
+      });
+    });
+    rows.sort(
+      (left, right) =>
+        left.toCell.doi - right.toCell.doi ||
+        right.fromCell.stock - left.fromCell.stock
+    );
+    return rows;
+  }
+
   function stokSyncLimitControls() {
     if (els.stokCriticalLimit) els.stokCriticalLimit.value = String(stokState.limits.critical);
     if (els.stokAmanLimit) els.stokAmanLimit.value = String(stokState.limits.aman);
@@ -21744,10 +22182,11 @@ legendControl.addTo(map);
     return totals;
   }
 
-  function stokOpenItemDetail(code) {
+  function stokOpenItemDetail(code, focusDepo) {
     const item = (stokState.lastItems || []).find((entry) => entry.code === code);
     if (!item) return;
     const totals = stokItemTotals(item);
+    const saran = stokItemSaran(item);
     const stats = [
       salesDetailStat("Total stok", stokFmtQty(totals.stock), "unit"),
       salesDetailStat("Total sellout", stokFmtQty(totals.sellout), "unit"),
@@ -21759,14 +22198,23 @@ legendControl.addTo(map);
       salesDetailStat("Depo critical", fmtNum(totals.critical), "depo"),
       salesDetailStat("Depo aman", fmtNum(totals.aman), "depo"),
       salesDetailStat("Depo tersedia", fmtNum(totals.cells.length), "depo"),
+      salesDetailStat("Saran intra", fmtNum(saran.length), "dari depo lain"),
     ].join("");
     const rows = totals.cells.map(
-      ({ depo, cell }) => `<tr>
+      ({ depo, cell }) => `<tr${focusDepo && depo === focusDepo ? ' class="is-focus"' : ""}>
         <td>${escapeHtml(depo)}</td>
         <td class="num">${stokFmtQty(cell.stock)}</td>
         <td class="num">${stokFmtQty(cell.sellout)}</td>
         <td class="num">${stokFmtDoi(cell.doi)}</td>
         <td>${escapeHtml(stokStatus(cell.doi))}</td>
+      </tr>`
+    );
+    const saranRows = saran.map(
+      (row) => `<tr>
+        <td><strong>${escapeHtml(row.toDepo)}</strong><span class="analysis-sub">DOI ${stokFmtDoi(row.toCell.doi)} h</span></td>
+        <td><strong>${escapeHtml(row.fromDepo)}</strong><span class="analysis-sub">${escapeHtml(row.region)}</span></td>
+        <td class="num">${stokFmtQty(row.fromCell.stock)}</td>
+        <td class="num">${stokFmtDoi(row.fromCell.doi)}</td>
       </tr>`
     );
     openSalesDetailModal({
@@ -21785,6 +22233,16 @@ legendControl.addTo(map);
         ],
         rows,
         "Belum ada data stok untuk item ini."
+      )}<h3 class="sales-detail-subhead">Saran Intra dari Depo Lain</h3>
+      <p class="analysis-muted sales-detail-note">Usulan kirim stok dari depo surplus (DOI aman) ke depo critical pada wilayah yang sama.</p>${salesDetailTable(
+        [
+          { label: "Depo tujuan (critical)" },
+          { label: "Depo asal (surplus)" },
+          { label: "Stok asal", num: true },
+          { label: "DOI asal (hari)", num: true },
+        ],
+        saranRows,
+        "Belum ada saran (butuh depo critical & depo surplus pada wilayah yang sama)."
       )}`,
     });
   }
@@ -22423,6 +22881,18 @@ legendControl.addTo(map);
       }),
       availableMonths
     );
+    // Jumlah outlet per salesman di menu Analisa memakai Master Outlet yang
+    // dipetakan ke Master Salesman (sama seperti kolom Outlet di Penjualan).
+    // Hanya outlet dengan FLAG covered yang dihitung; tidak ada fallback ke
+    // outlet bertransaksi.
+    const masterOutletCounts = masterCoveredStats().bySalesman;
+    salesmanItems.forEach((item) => {
+      const code = masterCodeKey(item.code);
+      item.masterOutlets =
+        code && masterOutletCounts.has(code)
+          ? masterOutletCounts.get(code)
+          : null;
+    });
     const channelItems = analysisAggregate(
       periodRows,
       mtdRows,
@@ -23425,6 +23895,15 @@ legendControl.addTo(map);
     }
   }
 
+  function analysisSalesmanOutletCount(item) {
+    return item && item.masterOutlets != null ? item.masterOutlets : null;
+  }
+
+  function analysisSalesmanOutletText(item) {
+    const count = analysisSalesmanOutletCount(item);
+    return count == null ? "—" : `${fmtNum(count)} outlet`;
+  }
+
   function analysisRenderResults(data) {
     analysisState.lastData = data;
     if (els.analysisResults) els.analysisResults.classList.remove("hidden");
@@ -23435,7 +23914,11 @@ legendControl.addTo(map);
     const dimItems = mode === "cabang" ? data.depos : data.salesmen;
     const dimSub = mode === "cabang"
       ? (item) => `${fmtNum(item.mtdOutlets)} outlet`
-      : (item) => [item.code, item.divisi, `${fmtNum(item.mtdOutlets)} outlet`]
+      : (item) => [
+        item.code,
+        item.divisi,
+        analysisSalesmanOutletText(item),
+      ]
         .filter(Boolean)
         .join(" · ");
 
@@ -23646,7 +24129,9 @@ legendControl.addTo(map);
         : undefined,
     });
     if (els.analysisSalesmanInfo) {
-      els.analysisSalesmanInfo.textContent = `${fmtNum(dimItems.length)} ${dimLabel.toLowerCase()} · top ${Math.min(10, dimItems.length)}`;
+      const outletSourceNote =
+        mode === "depo" ? " · outlet covered dari Master Outlet" : "";
+      els.analysisSalesmanInfo.textContent = `${fmtNum(dimItems.length)} ${dimLabel.toLowerCase()} · top ${Math.min(10, dimItems.length)}${outletSourceNote}`;
     }
 
     analysisRenderCompareTable(els.analysisChannelBody, data.channels, {
@@ -23871,6 +24356,13 @@ legendControl.addTo(map);
     const previousAvailable = Boolean(
       data.previousAvailable && data.previous && data.previous.available
     );
+    const isSalesman = type === "salesman";
+    const outletCount = isSalesman
+      ? analysisSalesmanOutletCount(item)
+      : item.mtdOutlets;
+    const outletValue = outletCount == null ? "—" : fmtNum(outletCount);
+    const outletText = outletCount == null ? "—" : `${outletValue} outlet`;
+    const outletNote = isSalesman ? "Master Outlet" : "outlet aktif";
     const stats = [
       salesDetailStat("Omset MTD", fmtRp(item.mtdNet), data.anchor.label),
       salesDetailStat(
@@ -23889,7 +24381,11 @@ legendControl.addTo(map);
         data.previous ? data.previous.label : "pembanding belum ada"
       ),
       salesDetailStat("Qty MTD", fmtNum(item.mtdQty), "unit"),
-      salesDetailStat("Outlet MTD", fmtNum(item.mtdOutlets), "outlet aktif"),
+      salesDetailStat(
+        isSalesman ? "Outlet" : "Outlet MTD",
+        outletValue,
+        outletNote
+      ),
       salesDetailStat("EC MTD", fmtNum(item.mtdEc), "faktur/outlet efektif"),
       salesDetailStat("ROA MTD", fmtNum(item.roaMtd), "outlet bertransaksi"),
     ].join("");
@@ -23901,15 +24397,20 @@ legendControl.addTo(map);
     ]
       .filter(Boolean)
       .join(" · ");
+    const masterOutletNote = isSalesman
+      ? `<div class="sales-detail-note">${
+          item.masterOutlets == null
+            ? "Tidak ada outlet FLAG covered di Master Outlet yang cocok dengan Master Salesman untuk salesman ini."
+            : "Jumlah outlet diambil dari Master Outlet (FLAG covered) sesuai Master Salesman."
+        } Daftar di bawah hanya outlet yang bertransaksi MTD.</div>`
+      : "";
     openSalesDetailModal({
       eyebrow: `DETAIL ${analysisDetailTypeLabel(type)}`,
       title: item.name || key || "Detail",
-      sub: `${fmtRp(item.mtdNet)} MTD · ${fmtNum(
-        item.mtdOutlets
-      )} outlet · ${fmtNum(item.mtdEc)} EC · HK ${data.hk}`,
+      sub: `${fmtRp(item.mtdNet)} MTD · ${outletText} · ${fmtNum(item.mtdEc)} EC · HK ${data.hk}`,
       body: `<div class="sales-detail-stats">${stats}</div>${
         meta ? `<div class="sales-detail-note">${meta}</div>` : ""
-      }${analysisOutletBreakdownTable(
+      }${masterOutletNote}${analysisOutletBreakdownTable(
         rows,
         "Belum ada transaksi MTD untuk data ini."
       )}`,
@@ -24297,300 +24798,6 @@ legendControl.addTo(map);
     );
   }
 
-  // =========================================================================
-  // Setting ROA SKU Fokus + Target Allocation (TAT)
-  // =========================================================================
-  const ROA_SETTINGS_KEY = "roa-settings-v1";
-  const ROA_DIVISIONS = ["AEP", "GDK"];
-  const ROA_DROP_UNITS = ["KRT", "BOX", "PCS"];
-  const ROA_SKU_DEFAULT = { targetPct: null, up: 1, down: 1, unit: "KRT" };
-  const ROA_RULE_DEFAULTS = {
-    typeUp: ["RTL", "SG", "BG", "GR"],
-    typeDown: ["RTS", "RTM"],
-    skuRules: {},
-  };
-  function roaDefaultRule() {
-    return {
-      ...ROA_RULE_DEFAULTS,
-      typeUp: [...ROA_RULE_DEFAULTS.typeUp],
-      typeDown: [...ROA_RULE_DEFAULTS.typeDown],
-      skuRules: {},
-    };
-  }
-  const ROA_DEFAULT_SETTINGS = {
-    // Satu aturan per divisi sales (AEP/GDK); divisi bisa ditambah/dihapus.
-    rules: { AEP: roaDefaultRule(), GDK: roaDefaultRule() },
-    // Hanya MARK NEW yang dipilih sebagai SKU Fokus yang ditampilkan/dihitung.
-    divSkus: { AEP: [], GDK: [] },
-    hkTotal: 26,
-    hkRun: 0,
-  };
-  function roaDefaultSettings() {
-    const rules = {};
-    ROA_DIVISIONS.forEach((division) => {
-      rules[division] = roaDefaultRule();
-    });
-    return {
-      rules,
-      divSkus: { AEP: [], GDK: [] },
-      hkTotal: 26,
-      hkRun: 0,
-    };
-  }
-  const roaState = {
-    settings: roaDefaultSettings(),
-    ready: false,
-    notice: "",
-  };
-  let roaCache = { stamp: "", result: null };
-  const roaRuleModalState = { division: "", isNew: false };
-
-  function roaNormalizeSkuRule(raw) {
-    const src = raw && typeof raw === "object" ? raw : {};
-    const number = (value, fallback) => {
-      const parsed = Number(value);
-      return Number.isFinite(parsed) && parsed >= 0 ? parsed : fallback;
-    };
-    const percentage = (value, fallback) => {
-      if (value === "" || value === null || value === undefined) return fallback;
-      const parsed = Number(String(value).replace(/%/g, "").replace(",", "."));
-      return Number.isFinite(parsed) && parsed >= 0
-        ? Math.min(100, parsed)
-        : fallback;
-    };
-    const unit = String(src.unit || "").trim().toUpperCase();
-    return {
-      // targetPct = persentase CB yang dijadikan target. null berarti otomatis
-      // 100%; target lama (absolute) tetap dibaca untuk migrasi pengaturan.
-      targetPct: percentage(src.targetPct, null),
-      up: number(src.up, ROA_SKU_DEFAULT.up),
-      down: number(src.down, ROA_SKU_DEFAULT.down),
-      target: number(src.target, 0),
-      unit: ROA_DROP_UNITS.includes(unit) ? unit : ROA_SKU_DEFAULT.unit,
-    };
-  }
-
-  function roaNormalizeRule(raw) {
-    const src = raw && typeof raw === "object" ? raw : {};
-    const list = (value, fallback) => {
-      if (Array.isArray(value)) {
-        return Array.from(
-          new Set(
-            value
-              .map((entry) => String(entry || "").trim().toUpperCase())
-              .filter(Boolean)
-          )
-        );
-      }
-      if (typeof value === "string" && value.trim()) {
-        return roaList(value);
-      }
-      return [...fallback];
-    };
-    const skuRules = {};
-    if (src.skuRules && typeof src.skuRules === "object") {
-      Object.entries(src.skuRules).forEach(([code, value]) => {
-        const key = String(code || "").trim().toUpperCase();
-        if (key) skuRules[key] = roaNormalizeSkuRule(value);
-      });
-    }
-    return {
-      typeUp: list(src.typeUp, ROA_RULE_DEFAULTS.typeUp),
-      typeDown: list(src.typeDown, ROA_RULE_DEFAULTS.typeDown),
-      skuRules,
-    };
-  }
-
-  function roaSettingsNormalize(raw) {
-    const src = raw && typeof raw === "object" ? raw : {};
-    const number = (value, fallback) => {
-      const parsed = Number(value);
-      return Number.isFinite(parsed) && parsed >= 0 ? parsed : fallback;
-    };
-    const rules = {};
-    const hasRules = Object.prototype.hasOwnProperty.call(src, "rules");
-    if (hasRules) {
-      ROA_DIVISIONS.forEach((division) => {
-        const rule = src.rules && src.rules[division];
-        if (rule && typeof rule === "object") {
-          rules[division] = roaNormalizeRule(rule);
-        }
-      });
-    } else {
-      // Migrasi pengaturan lama (global) ke aturan AEP dan GDK.
-      const legacy = roaNormalizeRule({
-        typeUp: src.typeUp,
-        typeDown: src.typeDown,
-      });
-      ROA_DIVISIONS.forEach((division) => {
-        rules[division] = roaNormalizeRule(legacy);
-      });
-    }
-    const rawDivSkus =
-      src.divSkus && typeof src.divSkus === "object" ? src.divSkus : {};
-    const divSkus = {};
-    ROA_DIVISIONS.forEach((division) => {
-      const list = rawDivSkus[division];
-      divSkus[division] = Array.isArray(list)
-        ? Array.from(
-            new Set(
-              list
-                .map((code) => String(code || "").trim().toUpperCase())
-                .filter(Boolean)
-            )
-          )
-        : [];
-    });
-    return {
-      rules,
-      divSkus,
-      hkTotal: number(src.hkTotal, ROA_DEFAULT_SETTINGS.hkTotal),
-      hkRun: number(src.hkRun, ROA_DEFAULT_SETTINGS.hkRun),
-    };
-  }
-
-  function roaLoad() {
-    if (roaState.ready) return;
-    roaState.ready = true;
-    try {
-      const raw = window.localStorage.getItem(ROA_SETTINGS_KEY);
-      if (raw) roaState.settings = roaSettingsNormalize(JSON.parse(raw));
-    } catch (error) {
-      roaState.settings = roaDefaultSettings();
-    }
-  }
-
-  function roaPersist() {
-    try {
-      window.localStorage.setItem(ROA_SETTINGS_KEY, JSON.stringify(roaState.settings));
-      return true;
-    } catch (error) {
-      return false;
-    }
-  }
-
-  function roaList(text) {
-    return String(text || "")
-      .split(/[,;\n]+/)
-      .map((part) => part.trim().toUpperCase())
-      .filter(Boolean);
-  }
-
-  function roaTatRatio() {
-    const total = Number(roaState.settings.hkTotal) || 0;
-    const run = Number(roaState.settings.hkRun) || 0;
-    if (total <= 0 || run <= 0) return 1;
-    return Math.max(0, Math.min(1, run / total));
-  }
-
-  function roaActiveDivisions() {
-    const rules = roaState.settings.rules || {};
-    return ROA_DIVISIONS.filter((division) => rules[division]);
-  }
-
-  function roaRule(division) {
-    return (roaState.settings.rules || {})[division] || null;
-  }
-
-  function roaSkuRule(division, code) {
-    const rule = roaRule(division);
-    const key = String(code || "").trim().toUpperCase();
-    const raw =
-      rule && rule.skuRules && key ? rule.skuRules[key] : null;
-    return roaNormalizeSkuRule(raw || ROA_SKU_DEFAULT);
-  }
-
-  function roaSkuMinForCategory(skuRule, category) {
-    if (!skuRule) return 0;
-    if (category === "up") return Number(skuRule.up) || 0;
-    if (category === "down") return Number(skuRule.down) || 0;
-    // Kategori biasa tidak lagi memakai min dropsize. Cukup ada pembelian
-    // (qty > 0) agar outlet dihitung mencapai SKU.
-    return 0;
-  }
-
-  function roaSkuRuleLabel(skuRule, division) {
-    const pct = roaSkuTargetPct(division, skuRule);
-    const up = Number(skuRule && skuRule.up) || 0;
-    const down = Number(skuRule && skuRule.down) || 0;
-    return `${roaPctText(pct)} · DS ${fmtNum(up)}/${fmtNum(down)} ${
-      skuRule.unit
-    }`;
-  }
-
-  function roaSkuRuleLabelForDivisions(code, divisions) {
-    const labels = (divisions || []).map(
-      (division) =>
-        `${division} ${roaSkuRuleLabel(
-          roaSkuRule(division, code),
-          division
-        )}`
-    );
-    const unique = Array.from(
-      new Set(labels.map((label) => label.replace(/^[A-Z]+\s+/, "")))
-    );
-    return {
-      text: unique.length === 1 ? unique[0] : labels.join(" · "),
-      title: labels.join(" · "),
-    };
-  }
-
-  function roaCategory(division, typeValue) {
-    const rule = roaRule(division);
-    if (!rule) return "";
-    const text = String(typeValue || "").trim().toUpperCase();
-    if (!text) return "";
-    const up = (rule.typeUp || []).map((value) => String(value).toUpperCase());
-    const down = (rule.typeDown || []).map((value) =>
-      String(value).toUpperCase()
-    );
-    if (down.includes(text)) return "down";
-    if (up.includes(text)) return "up";
-    const match = (values) =>
-      values
-        .filter((value) => text.includes(value) || value.includes(text))
-        .sort((left, right) => right.length - left.length)[0] || "";
-    const upMatch = match(up);
-    const downMatch = match(down);
-    if (upMatch && downMatch) {
-      return upMatch.length >= downMatch.length ? "up" : "down";
-    }
-    if (upMatch) return "up";
-    if (downMatch) return "down";
-    return "";
-  }
-
-  function roaOutletTypeOf(record) {
-    return String(
-      (record &&
-        (record.typeOutlet || record.jenisOutlet || record.channel)) ||
-        ""
-    )
-      .trim()
-      .toUpperCase();
-  }
-
-  function roaOutletTypes() {
-    const types = new Set();
-    const map = (masterState.maps && masterState.maps.outlet) || {};
-    Object.values(map).forEach((record) => {
-      const type = roaOutletTypeOf(record);
-      if (type) types.add(type);
-    });
-    Object.values(roaState.settings.rules || {}).forEach((rule) => {
-      (rule.typeUp || []).forEach((type) =>
-        types.add(String(type).trim().toUpperCase())
-      );
-      (rule.typeDown || []).forEach((type) =>
-        types.add(String(type).trim().toUpperCase())
-      );
-    });
-    types.delete("");
-    return Array.from(types).sort((left, right) =>
-      left.localeCompare(right, "id")
-    );
-  }
-
   function masterSalesmanRoster() {
     const map = masterState.maps && masterState.maps.salesman;
     if (!map) return [];
@@ -24613,10 +24820,26 @@ legendControl.addTo(map);
   }
 
   function masterCodeKey(value) {
-    return String(value ?? "").trim().toUpperCase();
+    const raw = String(value ?? "").trim().toUpperCase();
+    // Excel sering menyimpan kode numerik sebagai "199830.0"
+    return raw.replace(/\.0+$/, "");
   }
 
-  let masterCoveredCache = { map: null, size: 0, result: null };
+  function masterNameKey(value) {
+    return String(value ?? "")
+      .trim()
+      .toUpperCase()
+      .replace(/\s+/g, " ")
+      .replace(/\s*-\s*/g, "-");
+  }
+
+  let masterCoveredCache = {
+    map: null,
+    size: 0,
+    salesmanMap: null,
+    salesmanSize: 0,
+    result: null,
+  };
   function masterCoveredStats() {
     const result = {
       bySalesman: new Map(),
@@ -24624,14 +24847,19 @@ legendControl.addTo(map);
       byDivision: new Map(),
       byCode: new Map(),
       total: 0,
+      unmapped: 0,
       flagMode: "none",
     };
     const map = masterState.maps && masterState.maps.outlet;
     if (!map) return result;
     const mapSize = Object.keys(map).length;
+    const salesmanMap = masterState.maps && masterState.maps.salesman;
+    const salesmanSize = salesmanMap ? Object.keys(salesmanMap).length : 0;
     if (
       masterCoveredCache.map === map &&
       masterCoveredCache.size === mapSize &&
+      masterCoveredCache.salesmanMap === salesmanMap &&
+      masterCoveredCache.salesmanSize === salesmanSize &&
       masterCoveredCache.result
     ) {
       return masterCoveredCache.result;
@@ -24640,6 +24868,8 @@ legendControl.addTo(map);
     const hasFlags = records.some((record) => String(record.flag || "").trim() !== "");
     result.flagMode = hasFlags ? "flag" : "all";
     const seenOutlets = new Set();
+    const seenAssignments = new Set();
+    const mappedOutlets = new Set();
     const addList = (key, record) => {
       if (!key) return;
       if (!result.bySalesmanList.has(key)) {
@@ -24647,8 +24877,38 @@ legendControl.addTo(map);
       }
       result.bySalesmanList.get(key).push(record);
     };
+    // Peta roster dengan kunci ternormalisasi di KEDUA sisi (kode bernomor
+    // Excel "199830.0", spasi, huruf) agar cocok dengan KD_SLS/NAMA_SLS.
+    // Kode diprioritaskan; nama dipakai sebagai fallback hanya bila unik,
+    // karena banyak file Master Outlet hanya mengisi NAMA_SLS.
+    const rosterByCode = new Map();
+    const rosterByName = new Map();
+    const ambiguousNames = new Set();
+    if (salesmanMap) {
+      Object.values(salesmanMap).forEach((person) => {
+        if (!person) return;
+        const pCode = masterCodeKey(person.code);
+        if (!pCode) return;
+        if (!rosterByCode.has(pCode)) rosterByCode.set(pCode, person);
+        const pName = masterNameKey(person.name);
+        if (!pName) return;
+        if (rosterByName.has(pName)) {
+          const existing = rosterByName.get(pName);
+          if (masterCodeKey(existing.code) !== pCode) {
+            ambiguousNames.add(pName);
+          }
+        } else {
+          rosterByName.set(pName, person);
+        }
+      });
+      ambiguousNames.forEach((name) => rosterByName.delete(name));
+    }
     records.forEach((record) => {
-      const flag = String(record.flag || "").trim().toUpperCase();
+      const rawFlag = String(record.flag || "").trim();
+      const flag = rawFlag.toUpperCase();
+      // Bila kolom FLAG berisi nilai, hanya baris FLAG COVERED yang dihitung;
+      // baris tanpa FLAG tidak dihitung. Bila tidak ada nilai FLAG sama sekali,
+      // semua outlet dianggap covered (kompatibilitas file tanpa kolom FLAG).
       const covered = hasFlags
         ? /COVER/.test(flag) && !/NOT|UNCOVER|NON/.test(flag)
         : true;
@@ -24656,1418 +24916,63 @@ legendControl.addTo(map);
 
       // Kunci outlet harus unik agar satu outlet tidak dihitung dua kali
       // ketika Master Outlet berisi beberapa baris untuk outlet yang sama.
+      // Dedupe dilakukan per salesman, bukan global: satu outlet bisa
+      // di-assign ke dua kode salesman dan tetap dihitung untuk masing-masing.
       const code = masterCodeKey(record.code);
       const name = masterCodeKey(record.name);
       const outletKey = code || name;
-      if (!outletKey || seenOutlets.has(outletKey)) return;
-      seenOutlets.add(outletKey);
-      result.total += 1;
-      if (code) result.byCode.set(code, record);
-
-      // Covered salesman WAJIB memakai KODE SALES (KD_SLS) dari Master Outlet.
-      // Nama salesman tidak dipakai sebagai fallback agar tidak salah orang.
-      const salesmanCode = masterCodeKey(record.salesmanCode);
-      const division =
-        analysisNormalizeDivision(record.divisi) ||
-        roaSalesmanDivision(salesmanCode, record.salesman, record);
-      if (division) {
-        result.byDivision.set(
-          division,
-          (result.byDivision.get(division) || 0) + 1
-        );
+      if (!outletKey) return;
+      if (!seenOutlets.has(outletKey)) {
+        seenOutlets.add(outletKey);
+        if (code) result.byCode.set(code, record);
       }
-      if (!salesmanCode) return;
+
+      // CB = outlet COVERED yang terikat salesman di Master Outlet.
+      // Cocokkan kode lebih dulu; bila KD_SLS kosong/tidak cocok, cocokkan
+      // NAMA_SLS ke nama unik di Master Salesman. Kode boleh tertulis di
+      // kolom KD_SLS maupun NAMA_SLS.
+      const codeKey = masterCodeKey(record.salesmanCode);
+      const nameKey = masterNameKey(record.salesman);
+      const codeAsName = masterNameKey(record.salesmanCode);
+      const nameAsCode = masterCodeKey(record.salesman);
+      let matchedPerson = null;
+      if (codeKey && rosterByCode.has(codeKey)) {
+        matchedPerson = rosterByCode.get(codeKey);
+      } else if (nameAsCode && rosterByCode.has(nameAsCode)) {
+        matchedPerson = rosterByCode.get(nameAsCode);
+      } else if (codeAsName && rosterByName.has(codeAsName)) {
+        matchedPerson = rosterByName.get(codeAsName);
+      } else if (nameKey && rosterByName.has(nameKey)) {
+        matchedPerson = rosterByName.get(nameKey);
+      }
+      const effectiveCode = matchedPerson
+        ? masterCodeKey(matchedPerson.code)
+        : "";
+      if (!effectiveCode) {
+        result.unmapped += 1;
+        return;
+      }
+      const assignmentKey = `${effectiveCode}|${outletKey}`;
+      if (seenAssignments.has(assignmentKey)) return;
+      seenAssignments.add(assignmentKey);
+      if (!mappedOutlets.has(outletKey)) {
+        mappedOutlets.add(outletKey);
+        result.total += 1;
+      }
       result.bySalesman.set(
-        salesmanCode,
-        (result.bySalesman.get(salesmanCode) || 0) + 1
+        effectiveCode,
+        (result.bySalesman.get(effectiveCode) || 0) + 1
       );
-      addList(salesmanCode, record);
+      addList(effectiveCode, record);
     });
-    masterCoveredCache = { map, size: mapSize, result };
+    masterCoveredCache = {
+      map,
+      size: mapSize,
+      salesmanMap,
+      salesmanSize,
+      result,
+    };
     return result;
-  }
-
-  function roaSkuCbTotal(division) {
-    const key =
-      analysisNormalizeDivision(division) ||
-      String(division || "").trim().toUpperCase();
-    if (!key) return 0;
-    return Number(masterCoveredStats().byDivision.get(key)) || 0;
-  }
-
-  function roaSkuTargetPct(division, skuRule) {
-    if (!skuRule) return 100;
-    if (
-      skuRule.targetPct !== null &&
-      skuRule.targetPct !== undefined &&
-      skuRule.targetPct !== ""
-    ) {
-      const direct = Number(skuRule.targetPct);
-      if (Number.isFinite(direct)) {
-        return Math.max(0, Math.min(100, direct));
-      }
-    }
-    const legacy = Number(skuRule.target) || 0;
-    if (legacy > 0) {
-      const cb = roaSkuCbTotal(division);
-      if (cb > 0) return Math.max(0, Math.min(100, (legacy / cb) * 100));
-    }
-    // Kosong = otomatis 100% dari outlet covered, sama seperti perilaku lama.
-    return 100;
-  }
-
-  function roaSkuTargetCount(division, skuRule, covered) {
-    const basis = Number(covered) || 0;
-    const pct = roaSkuTargetPct(division, skuRule);
-    if (basis <= 0 || pct <= 0) return 0;
-    return Math.max(1, Math.round((basis * pct) / 100));
-  }
-
-  function roaPctText(value) {
-    const number = Number(value);
-    if (!Number.isFinite(number)) return "—";
-    return `${number.toLocaleString("id-ID", {
-      maximumFractionDigits: 2,
-    })}%`;
-  }
-
-  function roaPctInputValue(value) {
-    const number = Number(value);
-    if (!Number.isFinite(number)) return "";
-    return String(Math.round(number * 100) / 100).replace(".", ",");
-  }
-
-  function roaParsePct(value) {
-    const text = String(value ?? "").trim().replace(/%/g, "").replace(",", ".");
-    if (!text) return null;
-    const parsed = Number(text);
-    if (!Number.isFinite(parsed) || parsed < 0) return null;
-    return Math.max(0, Math.min(100, parsed));
-  }
-
-  function roaMarkNewOf(value) {
-    return String(value || "").trim().toUpperCase();
-  }
-
-  function roaMarkNewCatalog() {
-    const catalog = new Map();
-    const add = (value, productCode) => {
-      const code = roaMarkNewOf(value);
-      if (!code) return;
-      let entry = catalog.get(code);
-      if (!entry) {
-        entry = { code, products: new Set() };
-        catalog.set(code, entry);
-      }
-      const product = roaMarkNewOf(productCode);
-      if (product) entry.products.add(product);
-    };
-    const itemMap = (masterState.maps && masterState.maps.item) || {};
-    Object.values(itemMap).forEach((item) => {
-      if (!item) return;
-      add(item.category, item.code);
-    });
-    (analysisState.files || []).forEach((file) => {
-      (file.rows || []).forEach((row) => {
-        const product = roaMarkNewOf(row.productCode);
-        const item = product ? itemMap[product] : null;
-        add(item && item.category ? item.category : row.category, product);
-      });
-    });
-    return Array.from(catalog.values())
-      .map((entry) => ({ code: entry.code, items: entry.products.size }))
-      .sort((left, right) => left.code.localeCompare(right.code, "id"));
-  }
-
-  function roaDivisionSkuSet(division, catalogCodes) {
-    const list =
-      roaState.settings.divSkus && roaState.settings.divSkus[division];
-    if (!Array.isArray(list)) return new Set();
-    const available = new Set(catalogCodes);
-    return new Set(list.filter((code) => available.has(code)));
-  }
-
-  function roaSalesmanDivision(code, name, outlet) {
-    const person =
-      code && masterState.maps.salesman
-        ? masterState.maps.salesman[String(code).trim().toUpperCase()]
-        : null;
-    return (
-      analysisNormalizeDivision(person && person.divisi) ||
-      analysisNormalizeDivision(outlet && outlet.divisi) ||
-      analysisDivisionFromSalesman(
-        name || (person && person.name) || (outlet && outlet.salesman)
-      ) ||
-      ""
-    );
-  }
-
-  function roaAnchorMonth() {
-    let latest = "";
-    (analysisState.files || []).forEach((file) => {
-      (file.rows || []).forEach((row) => {
-        const key = row.dateKey || (row.date ? analysisDateKey(row.date) : "");
-        if (key && key > latest) latest = key;
-      });
-    });
-    return latest ? latest.slice(0, 7) : analysisState.anchorKey || "";
-  }
-
-  function roaStamp() {
-    const files = analysisState.files || [];
-    const rows = files.reduce((total, file) => total + (file.rows || []).length, 0);
-    return [
-      files.length,
-      rows,
-      roaAnchorMonth(),
-      JSON.stringify(roaState.settings),
-      masterState.files.outlet.length,
-      masterState.files.item.length,
-      masterState.files.salesman.length,
-      masterState.files.target.length,
-    ].join("|");
-  }
-
-  function roaCompute() {
-    const stamp = roaStamp();
-    if (roaCache.stamp === stamp) return roaCache.result;
-
-    const monthKey = roaAnchorMonth();
-    const activeDivisions = roaActiveDivisions();
-    const result = {
-      monthKey,
-      monthLabel: monthKey ? analysisMonthLabel(monthKey) : "—",
-      activeDivisions,
-      skus: [],
-      skuDivisions: {},
-      rows: [],
-      totals: { skus: {}, outlets: 0, trx: 0 },
-      hasData: false,
-      noRules: false,
-      missingMarkNew: false,
-      emptySelection: false,
-      roster: 0,
-      covered: 0,
-      coveredRows: 0,
-      achieved: 0,
-      groups: 0,
-      skuRuleCount: 0,
-    };
-    const files = analysisState.files || [];
-    if (!files.length) {
-      roaCache = { stamp, result };
-      return result;
-    }
-    if (!activeDivisions.length) {
-      result.hasData = true;
-      result.noRules = true;
-      roaCache = { stamp, result };
-      return result;
-    }
-
-    const catalog = roaMarkNewCatalog();
-    const catalogCodes = catalog.map((entry) => entry.code);
-    const skuSets = {};
-    activeDivisions.forEach((division) => {
-      skuSets[division] = roaDivisionSkuSet(division, catalogCodes);
-    });
-    const columnCodes = [];
-    activeDivisions.forEach((division) => {
-      Array.from(skuSets[division])
-        .sort((left, right) => left.localeCompare(right, "id"))
-        .forEach((code) => {
-          if (!columnCodes.includes(code)) columnCodes.push(code);
-        });
-    });
-    const skuDivisions = {};
-    columnCodes.forEach((code) => {
-      skuDivisions[code] = activeDivisions.filter((division) =>
-        skuSets[division].has(code)
-      );
-    });
-    const skuList = columnCodes.map((code) => {
-      const entry = catalog.find((item) => item.code === code);
-      return {
-        code,
-        divisions: skuDivisions[code],
-        items: entry ? entry.items : 0,
-      };
-    });
-    result.skuRuleCount = activeDivisions.reduce(
-      (total, division) => total + skuSets[division].size,
-      0
-    );
-    if (!skuList.length) {
-      result.hasData = true;
-      result.missingMarkNew = !catalogCodes.length;
-      result.emptySelection = !!catalogCodes.length;
-      roaCache = { stamp, result };
-      return result;
-    }
-
-    const outletMap = (masterState.maps && masterState.maps.outlet) || {};
-    const itemMap = (masterState.maps && masterState.maps.item) || {};
-    const salesmanMap = (masterState.maps && masterState.maps.salesman) || {};
-    const groups = new Map();
-
-    files.forEach((file) => {
-      (file.rows || []).forEach((row, index) => {
-        const month =
-          row.monthKey ||
-          (row.date ? analysisMonthKey(row.date) : String(row.dateKey || "").slice(0, 7));
-        if (monthKey && month !== monthKey) return;
-        const productCode = String(row.productCode || "").trim().toUpperCase();
-        if (!productCode) return;
-        const item = itemMap[productCode] || null;
-        const markNew = roaMarkNewOf(
-          item && item.category ? item.category : row.category
-        );
-        if (!markNew) return;
-        const outletCode = String(row.outletCode || "").trim().toUpperCase();
-        const outlet = outletMap[outletCode] || null;
-        const salesmanCode = String(
-          row.salesmanCode || (outlet && outlet.salesmanCode) || ""
-        )
-          .trim()
-          .toUpperCase();
-        const salesmanName = String(
-          row.salesman || (outlet && outlet.salesman) || ""
-        )
-          .trim()
-          .toUpperCase();
-        const division = roaSalesmanDivision(salesmanCode, row.salesman, outlet);
-        if (!activeDivisions.includes(division)) return;
-        if (!skuSets[division].has(markNew)) return;
-        const category = roaCategory(
-          division,
-          outlet ? roaOutletTypeOf(outlet) : ""
-        );
-        const groupKey = `${row.invoice || `#${index}`}|${outletCode}|${salesmanCode}`;
-        let group = groups.get(groupKey);
-        if (!group) {
-          group = {
-            category,
-            outletCode,
-            salesmanCode,
-            salesmanName,
-            division,
-            skus: new Map(),
-          };
-          groups.set(groupKey, group);
-        }
-        const qty = Number(row.qty) || 0;
-        group.skus.set(markNew, (group.skus.get(markNew) || 0) + qty);
-      });
-    });
-
-    const reached = new Map();
-    groups.forEach((group) => {
-      group.skus.forEach((qty, sku) => {
-        const skuRule = roaSkuRule(group.division, sku);
-        const min = roaSkuMinForCategory(skuRule, group.category);
-        if (qty <= 0) return;
-        if (min > 0 && qty < min) return;
-        const key = `${group.salesmanCode}|${group.outletCode}|${sku}`;
-        if (!reached.has(key)) {
-          reached.set(key, {
-            outletCode: group.outletCode,
-            salesmanCode: group.salesmanCode,
-            salesmanName: group.salesmanName,
-            division: group.division,
-            sku,
-            category: group.category,
-          });
-        }
-      });
-    });
-
-    const buckets = new Map();
-    const bucket = (code, name, divisi, depo) => {
-      const key =
-        String(code || name || "TANPA").trim().toUpperCase() || "TANPA";
-      let item = buckets.get(key);
-      if (!item) {
-        item = {
-          code: key,
-          name: name || code || "Tanpa salesman",
-          divisi: divisi || "",
-          depo: depo || "",
-          covered: null,
-          skus: {},
-          skuStats: {},
-          total: 0,
-          inRoster: false,
-        };
-        buckets.set(key, item);
-      }
-      return item;
-    };
-    const roster = masterSalesmanRoster().filter((person) =>
-      activeDivisions.includes(analysisNormalizeDivision(person.divisi))
-    );
-    roster.forEach((person) => {
-      const item = bucket(
-        person.code,
-        person.name,
-        analysisNormalizeDivision(person.divisi) || person.divisi,
-        person.depo
-      );
-      item.inRoster = true;
-    });
-    const outletsReached = new Set();
-    const outletSets = new Map();
-    reached.forEach((hit) => {
-      const person = salesmanMap[hit.salesmanCode] || null;
-      const item = bucket(
-        hit.salesmanCode || hit.salesmanName || "TANPA",
-        person ? person.name : hit.salesmanName || hit.salesmanCode,
-        hit.division,
-        person ? person.depo : ""
-      );
-      item.skus[hit.sku] = (item.skus[hit.sku] || 0) + 1;
-      item.total += 1;
-      outletsReached.add(hit.outletCode);
-      if (!outletSets.has(item.code)) outletSets.set(item.code, new Set());
-      outletSets.get(item.code).add(hit.outletCode);
-    });
-
-    let rows = Array.from(buckets.values());
-    if (roster.length) rows = rows.filter((item) => item.inRoster);
-    rows = rows.filter((item) =>
-      activeDivisions.includes(analysisNormalizeDivision(item.divisi))
-    );
-
-    const coveredStats = masterCoveredStats();
-    const skuOutletSets = new Map();
-    reached.forEach((hit) => {
-      const key = `${
-        String(
-          hit.salesmanCode || hit.salesmanName || "TANPA"
-        )
-          .trim()
-          .toUpperCase() || "TANPA"
-      }|${hit.sku}`;
-      if (!skuOutletSets.has(key)) skuOutletSets.set(key, new Set());
-      skuOutletSets.get(key).add(hit.outletCode);
-    });
-
-    rows.forEach((item) => {
-      item.covered = coveredStats.bySalesman.get(item.code) ?? null;
-      item.outletRoa = (outletSets.get(item.code) || new Set()).size;
-      const division = analysisNormalizeDivision(item.divisi);
-      item.skuStats = {};
-      skuList.forEach((sku) => {
-        if (!(sku.divisions || []).includes(division)) return;
-        const skuRule = roaSkuRule(division, sku.code);
-        // Target = persentase CB salesman terhadap SKU. CB tetap diambil dari
-        // Master Outlet (FLAG COVERED), bukan dari angka manual per divisi.
-        const target = roaSkuTargetCount(division, skuRule, item.covered);
-        const achieved = (
-          skuOutletSets.get(`${item.code}|${sku.code}`) || new Set()
-        ).size;
-        item.skuStats[sku.code] = {
-          achieved,
-          target,
-          pct: target > 0 ? (achieved / target) * 100 : null,
-        };
-      });
-    });
-
-    rows.sort(
-      (left, right) =>
-        right.total - left.total || left.name.localeCompare(right.name, "id")
-    );
-
-    const totals = { skus: {}, outlets: outletsReached.size, trx: groups.size };
-    skuList.forEach((sku) => {
-      totals.skus[sku.code] = rows.reduce(
-        (total, row) => total + (row.skus[sku.code] || 0),
-        0
-      );
-    });
-
-    result.skus = skuList;
-    result.skuDivisions = skuDivisions;
-    result.rows = rows;
-    result.totals = totals;
-    result.hasData = true;
-    result.noRules = false;
-    result.missingMarkNew = false;
-    result.roster = rows.length;
-    result.covered = coveredStats.total;
-    result.coveredRows = rows.reduce(
-      (total, row) => total + (row.covered || 0),
-      0
-    );
-    result.achieved = reached.size;
-    result.groups = groups.size;
-    roaCache = { stamp, result };
-    return result;
-  }
-
-  function roaSetStatus(text, kind = "info") {
-    roaState.notice = text || "";
-    if (!els.roaStatus) return;
-    els.roaStatus.textContent = text || "";
-    els.roaStatus.dataset.kind = kind;
-  }
-
-  function roaUpdateSkuCounts() {
-    ROA_DIVISIONS.forEach((division) => {
-      const countEl = els[`roaSkuCount${division}`];
-      const listEl = els[`roaSkuList${division}`];
-      if (!countEl || !listEl) return;
-      const rows = listEl.querySelectorAll("tr[data-sku]");
-      countEl.textContent = rows.length
-        ? `${fmtNum(rows.length)} MARK NEW`
-        : "—";
-      roaUpdateSkuAddOptions(division);
-    });
-  }
-
-  function roaUpdateSkuAddOptions(division) {
-    const select = els[`roaSkuAdd${division}`];
-    const button = els[`roaSkuAddBtn${division}`];
-    const listEl = els[`roaSkuList${division}`];
-    if (!select || !button || !listEl) return;
-    const current = new Set(
-      Array.from(listEl.querySelectorAll("tr[data-sku]")).map((row) =>
-        String(row.dataset.sku || "").toUpperCase()
-      )
-    );
-    const available = roaMarkNewCatalog()
-      .map((entry) => entry.code)
-      .filter((code) => !current.has(code));
-    const previous = select.value;
-    select.replaceChildren();
-    const placeholder = document.createElement("option");
-    placeholder.value = "";
-    placeholder.textContent = available.length
-      ? "Tambah MARK NEW…"
-      : "Semua MARK NEW sudah dipilih";
-    select.appendChild(placeholder);
-    available.forEach((code) => {
-      const option = document.createElement("option");
-      option.value = code;
-      option.textContent = code;
-      select.appendChild(option);
-    });
-    select.value = available.includes(previous) ? previous : "";
-    select.disabled = !available.length;
-    button.disabled = !available.length;
-  }
-
-  function roaRuleStatus(rule, skuCount) {
-    const mapped = (rule.typeUp || []).length + (rule.typeDown || []).length;
-    if (!mapped || !skuCount) return { text: "Belum lengkap", ok: false };
-    return { text: "Lengkap", ok: true };
-  }
-
-  function roaRulesRender() {
-    const rules = roaState.settings.rules || {};
-    const active = roaActiveDivisions();
-    const catalogCodes = roaMarkNewCatalog().map((entry) => entry.code);
-    if (els.roaRuleList) {
-      const fragment = document.createDocumentFragment();
-      if (!active.length) {
-        const row = document.createElement("tr");
-        const cell = document.createElement("td");
-        cell.colSpan = 5;
-        cell.appendChild(
-          salesMake(
-            "div",
-            "sales-empty",
-            "Belum ada aturan ROA. Pilih divisi AEP atau GDK lalu klik Tambah Divisi."
-          )
-        );
-        row.appendChild(cell);
-        fragment.appendChild(row);
-      } else {
-        active.forEach((division) => {
-          const rule = rules[division];
-          const skuCount = roaDivisionSkuSet(division, catalogCodes).size;
-          const status = roaRuleStatus(rule, skuCount);
-          const row = document.createElement("tr");
-          const divisionCell = document.createElement("td");
-          const divisionLabel = document.createElement("strong");
-          divisionLabel.className = "roa-rule-division";
-          divisionLabel.textContent = division;
-          divisionCell.appendChild(divisionLabel);
-          row.appendChild(divisionCell);
-
-          const mappingCell = salesMake(
-            "td",
-            "",
-            `${(rule.typeUp || []).length} UP · ${(rule.typeDown || []).length} DOWN`
-          );
-          mappingCell.title = `UP: ${
-            (rule.typeUp || []).join(", ") || "—"
-          } · DOWN: ${(rule.typeDown || []).join(", ") || "—"}`;
-          row.appendChild(mappingCell);
-
-          const skuCell = salesMake(
-            "td",
-            "num",
-            `${fmtNum(skuCount)} MARK NEW`
-          );
-          skuCell.title =
-            "Jumlah MARK NEW fokus. Atur Target (%) dan dropsize per SKU di bagian SKU Fokus.";
-          row.appendChild(skuCell);
-
-          const statusCell = document.createElement("td");
-          const statusBadge = document.createElement("span");
-          statusBadge.className = "roa-rule-status";
-          statusBadge.dataset.ok = status.ok ? "true" : "false";
-          statusBadge.textContent = status.text;
-          statusCell.appendChild(statusBadge);
-          row.appendChild(statusCell);
-
-          const actionCell = document.createElement("td");
-          actionCell.className = "roa-rule-actions";
-          const edit = document.createElement("button");
-          edit.type = "button";
-          edit.className = "score-btn score-btn-ghost";
-          edit.textContent = "Atur";
-          edit.dataset.roaRuleEdit = division;
-          const remove = document.createElement("button");
-          remove.type = "button";
-          remove.className = "score-btn score-btn-ghost";
-          remove.textContent = "Hapus";
-          remove.dataset.roaRuleDelete = division;
-          actionCell.append(edit, remove);
-          row.appendChild(actionCell);
-
-          fragment.appendChild(row);
-        });
-      }
-      els.roaRuleList.replaceChildren(fragment);
-    }
-    if (els.roaRuleCount) {
-      els.roaRuleCount.textContent = `${fmtNum(active.length)} aturan aktif`;
-    }
-    const available = ROA_DIVISIONS.filter((division) => !rules[division]);
-    if (els.roaRuleDivision) {
-      const previous = els.roaRuleDivision.value;
-      els.roaRuleDivision.replaceChildren();
-      const placeholder = document.createElement("option");
-      placeholder.value = "";
-      placeholder.textContent = available.length
-        ? "Pilih divisi…"
-        : "Semua divisi sudah ditambahkan";
-      els.roaRuleDivision.appendChild(placeholder);
-      available.forEach((division) => {
-        const option = document.createElement("option");
-        option.value = division;
-        option.textContent = division;
-        els.roaRuleDivision.appendChild(option);
-      });
-      els.roaRuleDivision.value = available.includes(previous) ? previous : "";
-      els.roaRuleDivision.disabled = !available.length;
-    }
-    if (els.roaRuleAddBtn) els.roaRuleAddBtn.disabled = !available.length;
-    if (els.roaRuleHint) {
-      els.roaRuleHint.textContent = available.length
-        ? "Pilih divisi lalu klik Tambah Divisi untuk mengatur mapping type outlet divisi baru."
-        : "Divisi AEP dan GDK sudah memiliki aturan. Klik Atur untuk mengubah mapping atau Hapus untuk mengganti.";
-    }
-  }
-
-  function roaRuleMappingRender(rule) {
-    const body = els.roaRuleMapBody;
-    if (!body) return;
-    const types = roaOutletTypes();
-    const up = new Set((rule.typeUp || []).map((value) => value.toUpperCase()));
-    const down = new Set(
-      (rule.typeDown || []).map((value) => value.toUpperCase())
-    );
-    const fragment = document.createDocumentFragment();
-    types.forEach((type) => {
-      const row = document.createElement("tr");
-      row.appendChild(salesMake("td", "", type));
-      ["up", "down"].forEach((kind) => {
-        const cell = document.createElement("td");
-        cell.className = "num";
-        const input = document.createElement("input");
-        input.type = "checkbox";
-        input.value = type;
-        input.dataset.roaMap = kind;
-        input.checked = kind === "up" ? up.has(type) : down.has(type);
-        input.setAttribute(
-          "aria-label",
-          `${type} masuk ${kind === "up" ? "RTL UP" : "RTL DOWN"}`
-        );
-        cell.appendChild(input);
-        row.appendChild(cell);
-      });
-      fragment.appendChild(row);
-    });
-    body.replaceChildren(fragment);
-    if (els.roaRuleMapEmpty) els.roaRuleMapEmpty.hidden = types.length > 0;
-  }
-
-  function roaRuleOpen(division, isNew) {
-    const rules = roaState.settings.rules || {};
-    if (!ROA_DIVISIONS.includes(division)) return;
-    if (isNew && rules[division]) return;
-    const rule = rules[division]
-      ? roaNormalizeRule(rules[division])
-      : roaDefaultRule();
-    roaRuleModalState.division = division;
-    roaRuleModalState.isNew = !!isNew;
-    if (els.roaRuleModalTitle) {
-      els.roaRuleModalTitle.textContent = `Pengaturan ROA Penalti · ${division}`;
-    }
-    if (els.roaRuleModalSub) {
-      els.roaRuleModalSub.textContent = isNew
-        ? "Atur mapping type outlet untuk divisi baru. Target % dan dropsize per MARK NEW diatur di SKU Fokus."
-        : "Ubah mapping type outlet divisi ini. Target % dan dropsize per MARK NEW diatur di SKU Fokus.";
-    }
-    roaRuleMappingRender(rule);
-    if (els.roaRuleDeleteBtn) els.roaRuleDeleteBtn.hidden = !!isNew;
-    els.roaRuleModal?.classList.remove("hidden");
-    window.setTimeout(
-      () => els.roaRuleMapBody?.querySelector("input")?.focus(),
-      30
-    );
-  }
-
-  function roaRuleClose() {
-    els.roaRuleModal?.classList.add("hidden");
-    roaRuleModalState.division = "";
-    roaRuleModalState.isNew = false;
-  }
-
-  function roaRuleReadModal() {
-    const division = roaRuleModalState.division;
-    if (!division) return null;
-    const existing = roaNormalizeRule(roaRule(division) || roaDefaultRule());
-    const rule = {
-      ...existing,
-      typeUp: [],
-      typeDown: [],
-      skuRules: { ...(existing.skuRules || {}) },
-    };
-    Array.from(
-      els.roaRuleMapBody?.querySelectorAll("input[data-roa-map]") || []
-    ).forEach((input) => {
-      if (!input.checked) return;
-      const key = input.dataset.roaMap === "down" ? "typeDown" : "typeUp";
-      rule[key].push(String(input.value || "").trim().toUpperCase());
-    });
-    rule.typeUp = Array.from(new Set(rule.typeUp)).sort((left, right) =>
-      left.localeCompare(right, "id")
-    );
-    rule.typeDown = Array.from(new Set(rule.typeDown)).sort((left, right) =>
-      left.localeCompare(right, "id")
-    );
-    return { division, rule: roaNormalizeRule(rule) };
-  }
-
-  function roaRuleSave() {
-    const parsed = roaRuleReadModal();
-    if (!parsed) return;
-    const { division, rule } = parsed;
-    roaState.settings.rules = {
-      ...(roaState.settings.rules || {}),
-      [division]: rule,
-    };
-    if (!roaState.settings.divSkus) roaState.settings.divSkus = {};
-    if (!(division in roaState.settings.divSkus)) {
-      roaState.settings.divSkus[division] = [];
-    }
-    const saved = roaPersist();
-    roaCache = { stamp: "", result: null };
-    roaState.notice = "";
-    roaRuleClose();
-    roaSettingsRender();
-    roaPanelRender();
-    salesRefresh();
-    roaSetStatus(
-      saved
-        ? `Aturan ROA ${division} disimpan. Pratinjau ROA dan tabel Salesman diperbarui.`
-        : `Aturan ROA ${division} dipakai untuk sesi ini, tetapi gagal disimpan lokal.`,
-      saved ? "success" : "warn"
-    );
-  }
-
-  function roaRuleDelete(division) {
-    if (!ROA_DIVISIONS.includes(division)) return;
-    if (
-      typeof window.confirm === "function" &&
-      !window.confirm(`Hapus aturan ROA divisi ${division}?`)
-    ) {
-      return;
-    }
-    const rules = { ...(roaState.settings.rules || {}) };
-    delete rules[division];
-    roaState.settings.rules = rules;
-    if (roaState.settings.divSkus) delete roaState.settings.divSkus[division];
-    const saved = roaPersist();
-    roaCache = { stamp: "", result: null };
-    roaState.notice = "";
-    roaRuleClose();
-    roaSettingsRender();
-    roaPanelRender();
-    salesRefresh();
-    roaSetStatus(
-      saved
-        ? `Aturan ROA ${division} dihapus.`
-        : `Aturan ROA ${division} dihapus untuk sesi ini, tetapi gagal disimpan lokal.`,
-      saved ? "success" : "warn"
-    );
-  }
-
-  function roaPctClass(pct) {
-    if (pct == null) return "";
-    if (pct >= 100) return "roa-pct-good";
-    if (pct >= 80) return "roa-pct-warn";
-    return "roa-pct-bad";
-  }
-
-  function roaRecapGroupLabel(rows, division) {
-    const first = rows && rows[0];
-    const prefix = first
-      ? String(first.name || "").split("-")[0].trim().toUpperCase()
-      : "";
-    if (prefix && /^[A-Z]{2,}$/.test(prefix)) return prefix;
-    return division || "LAINNYA";
-  }
-
-  function roaRecapHitText(stat, applies) {
-    if (!applies || !stat) return "—";
-    if (!stat.target && !stat.achieved) return "—";
-    return `${fmtNum(stat.achieved)} / ${fmtNum(stat.target)}`;
-  }
-
-  function roaRenderTable(head, body) {
-    if (!head || !body) return;
-    const result = roaCompute();
-    const skuCount = result.skus.length;
-    const columnCount = 3 + skuCount * 2;
-    if (!result.hasData || !skuCount) {
-      head.replaceChildren();
-      const row = document.createElement("tr");
-      const cell = document.createElement("td");
-      cell.colSpan = Math.max(columnCount, 4);
-      cell.appendChild(
-        salesMake(
-          "div",
-          "sales-empty",
-          result.noRules
-            ? "Belum ada aturan ROA. Tambahkan divisi AEP atau GDK di Daftar Aturan ROA."
-            : result.missingMarkNew
-              ? "Belum ada MARK NEW. Unggah Master Item dengan kolom KATEGORI MARK NEW (mis. WFR-E02K), atau pastikan Dbase punya kolom MARK NEW."
-              : result.emptySelection
-                ? "Belum ada MARK NEW yang dipilih untuk divisi yang punya aturan ROA. Buka Setting ROA untuk menambahkan MARK NEW per divisi sales."
-                : "Belum ada data ROA SKU Fokus. Unggah Dbase, Master Item, dan Master Outlet di Master Data."
-        )
-      );
-      row.appendChild(cell);
-      body.replaceChildren(row);
-      return;
-    }
-
-    const headerRow = document.createElement("tr");
-    const codeTh = document.createElement("th");
-    codeTh.textContent = "KODE SALESMAN";
-    headerRow.appendChild(codeTh);
-    const nameTh = document.createElement("th");
-    nameTh.textContent = "NAMA SALESMAN";
-    headerRow.appendChild(nameTh);
-    const cbTh = document.createElement("th");
-    cbTh.className = "num";
-    cbTh.textContent = "CB";
-    cbTh.title = "Outlet covered salesman dari Master Outlet (FLAG COVERED).";
-    headerRow.appendChild(cbTh);
-    result.skus.forEach((sku) => {
-      const label = roaSkuRuleLabelForDivisions(sku.code, sku.divisions || []);
-      const skuTh = document.createElement("th");
-      skuTh.className = "num roa-recap-sku";
-      skuTh.textContent = `${sku.code} — ${label.text}`;
-      skuTh.title = `${label.title} · target = persentase Target SKU Fokus × CB salesman; kosong = 100% CB.`;
-      headerRow.appendChild(skuTh);
-      const pctTh = document.createElement("th");
-      pctTh.className = "num";
-      pctTh.textContent = `% ${sku.code}`;
-      pctTh.title =
-        "Capaian ÷ target SKU Fokus. Target dihitung dari persentase CB salesman yang diisi di Setting ROA.";
-      headerRow.appendChild(pctTh);
-    });
-    head.replaceChildren(headerRow);
-
-    const groupMap = new Map();
-    result.rows.forEach((row) => {
-      const division = analysisNormalizeDivision(row.divisi) || "LAINNYA";
-      if (!groupMap.has(division)) groupMap.set(division, []);
-      groupMap.get(division).push(row);
-    });
-
-    const fragment = document.createDocumentFragment();
-    if (!groupMap.size) {
-      const row = document.createElement("tr");
-      const cell = document.createElement("td");
-      cell.colSpan = columnCount;
-      cell.appendChild(
-        salesMake(
-          "div",
-          "sales-empty",
-          "Belum ada salesman dengan data ROA pada periode ini."
-        )
-      );
-      row.appendChild(cell);
-      fragment.appendChild(row);
-      body.replaceChildren(fragment);
-      return;
-    }
-
-    const groupList = Array.from(groupMap.entries());
-    groupList.forEach(([division, rows]) => {
-      const groupLabel = roaRecapGroupLabel(rows, division);
-      const groupRow = document.createElement("tr");
-      groupRow.className = "roa-recap-group";
-      const groupCell = document.createElement("td");
-      groupCell.colSpan = columnCount;
-      groupCell.textContent = groupLabel;
-      groupRow.appendChild(groupCell);
-      fragment.appendChild(groupRow);
-
-      rows.forEach((row) => {
-        const tr = document.createElement("tr");
-        tr.dataset.division = division;
-        const codeCell = document.createElement("td");
-        codeCell.className = "roa-recap-code";
-        codeCell.textContent = row.code || "—";
-        tr.appendChild(codeCell);
-        tr.appendChild(salesMake("td", "", row.name || row.code || "—"));
-        tr.appendChild(
-          salesMake(
-            "td",
-            "num",
-            row.covered == null ? "—" : fmtNum(row.covered)
-          )
-        );
-        result.skus.forEach((sku) => {
-          const applies = (sku.divisions || []).includes(division);
-          const stat = row.skuStats ? row.skuStats[sku.code] : null;
-          const hitCell = document.createElement("td");
-          hitCell.className = "num roa-recap-hit";
-          hitCell.textContent = roaRecapHitText(stat, applies);
-          tr.appendChild(hitCell);
-          const pctCell = document.createElement("td");
-          const pct = applies && stat ? stat.pct : null;
-          pctCell.className = `num ${roaPctClass(pct)}`;
-          pctCell.textContent = pct == null ? "—" : fmtPct(pct);
-          tr.appendChild(pctCell);
-        });
-        fragment.appendChild(tr);
-      });
-
-      const totalRow = document.createElement("tr");
-      totalRow.className = "score-summary roa-recap-total";
-      const totalLabel = document.createElement("td");
-      totalLabel.colSpan = 2;
-      totalLabel.textContent = `TOTAL ${groupLabel}`;
-      totalRow.appendChild(totalLabel);
-      const groupCb = roaSkuCbTotal(division);
-      const groupCbCell = salesMake("td", "num", fmtNum(groupCb));
-      groupCbCell.title = `CB divisi ${division} dari total outlet covered Master Outlet (FLAG COVERED).`;
-      totalRow.appendChild(groupCbCell);
-      result.skus.forEach((sku) => {
-        let achieved = 0;
-        let target = 0;
-        rows.forEach((row) => {
-          if (!(sku.divisions || []).includes(analysisNormalizeDivision(row.divisi))) {
-            return;
-          }
-          const stat = row.skuStats ? row.skuStats[sku.code] : null;
-          if (!stat) return;
-          achieved += stat.achieved || 0;
-          target += stat.target || 0;
-        });
-        totalRow.appendChild(
-          salesMake(
-            "td",
-            "num roa-recap-hit",
-            !achieved && !target ? "—" : `${fmtNum(achieved)} / ${fmtNum(target)}`
-          )
-        );
-        const pct = target > 0 ? (achieved / target) * 100 : null;
-        totalRow.appendChild(
-          salesMake(
-            "td",
-            `num ${roaPctClass(pct)}`,
-            pct == null ? "—" : fmtPct(pct)
-          )
-        );
-      });
-      fragment.appendChild(totalRow);
-    });
-
-    if (groupList.length > 1) {
-      const grand = document.createElement("tr");
-      grand.className = "score-summary roa-recap-total roa-recap-grand";
-      const label = document.createElement("td");
-      label.colSpan = 2;
-      label.textContent = "TOTAL SEMUA";
-      grand.appendChild(label);
-      const grandCb = salesMake(
-        "td",
-        "num",
-        fmtNum(result.covered)
-      );
-      grandCb.title = "Total outlet covered dari Master Outlet (FLAG COVERED).";
-      grand.appendChild(grandCb);
-      result.skus.forEach((sku) => {
-        let achieved = 0;
-        let target = 0;
-        result.rows.forEach((row) => {
-          const stat = row.skuStats ? row.skuStats[sku.code] : null;
-          if (!stat) return;
-          achieved += stat.achieved || 0;
-          target += stat.target || 0;
-        });
-        grand.appendChild(
-          salesMake(
-            "td",
-            "num roa-recap-hit",
-            !achieved && !target ? "—" : `${fmtNum(achieved)} / ${fmtNum(target)}`
-          )
-        );
-        const pct = target > 0 ? (achieved / target) * 100 : null;
-        grand.appendChild(
-          salesMake(
-            "td",
-            `num ${roaPctClass(pct)}`,
-            pct == null ? "—" : fmtPct(pct)
-          )
-        );
-      });
-      fragment.appendChild(grand);
-    }
-    body.replaceChildren(fragment);
-  }
-
-  function roaPanelRender() {
-    if (!els.roaTableHead || !els.roaTableBody) return;
-    const result = roaCompute();
-    if (els.roaPanelSub) {
-      if (result.noRules) {
-        els.roaPanelSub.textContent =
-          "Belum ada aturan ROA. Buka Setting ROA → Daftar Aturan ROA untuk menambahkan divisi AEP atau GDK.";
-      } else if (result.missingMarkNew) {
-        els.roaPanelSub.textContent =
-          "MARK NEW belum tersedia. Pastikan Master Item punya kolom KATEGORI MARK NEW (mis. WFR-E02K) atau Dbase punya kolom MARK NEW.";
-      } else if (result.emptySelection) {
-        els.roaPanelSub.textContent =
-          "Belum ada MARK NEW yang dipilih untuk divisi yang punya aturan ROA. Buka Setting ROA untuk menambahkan MARK NEW per divisi sales.";
-      } else if (result.hasData) {
-        const counts = {};
-        (result.activeDivisions || []).forEach((division) => {
-          counts[division] = result.skus.filter((sku) =>
-            (sku.divisions || []).includes(division)
-          ).length;
-        });
-        const divisionText = (result.activeDivisions || [])
-          .map((division) => `${division} ${counts[division] || 0}`)
-          .join(" · ");
-        els.roaPanelSub.textContent = `Bulan ${result.monthLabel} · ${result.skuRuleCount} aturan aktif (${divisionText}) · ${result.roster} salesman · ${fmtNum(result.covered)} total CB dari Master Outlet · target per salesman = persentase CB SKU Fokus · ${result.totals.outlets} outlet unik memenuhi ROA`;
-      } else {
-        els.roaPanelSub.textContent =
-          "Belum ada data. Unggah Dbase, Master Item, dan Master Outlet di menu Master Data.";
-      }
-    }
-    roaRenderTable(els.roaTableHead, els.roaTableBody);
-  }
-
-  function roaSkuEmptyRowElement() {
-    const tr = document.createElement("tr");
-    const cell = document.createElement("td");
-    cell.colSpan = 7;
-    cell.appendChild(
-      salesMake(
-        "div",
-        "sales-empty",
-        "Belum ada SKU fokus. Pilih MARK NEW lewat + Tambah Eceran."
-      )
-    );
-    tr.appendChild(cell);
-    return tr;
-  }
-
-  function roaSkuRowElement(division, code, skuRule, items) {
-    const tr = document.createElement("tr");
-    tr.dataset.sku = code;
-    const nameCell = document.createElement("td");
-    nameCell.className = "roa-sku-name";
-    const name = document.createElement("strong");
-    name.textContent = code;
-    const count = document.createElement("em");
-    count.textContent = `${fmtNum(items || 0)} item`;
-    nameCell.append(name, count);
-    tr.appendChild(nameCell);
-
-    const targetCell = document.createElement("td");
-    targetCell.className = "num";
-    const targetInput = document.createElement("input");
-    targetInput.type = "text";
-    targetInput.inputMode = "decimal";
-    targetInput.className = "roa-pct-input";
-    const hasDirectPct =
-      skuRule.targetPct !== null && skuRule.targetPct !== undefined;
-    const hasLegacyTarget = Number(skuRule.target) > 0;
-    const displayPct = hasDirectPct
-      ? Number(skuRule.targetPct)
-      : hasLegacyTarget
-        ? roaSkuTargetPct(division, skuRule)
-        : null;
-    targetInput.value = displayPct == null ? "" : roaPctInputValue(displayPct);
-    targetInput.placeholder = "100";
-    targetInput.dataset.skuField = "targetPct";
-    targetInput.setAttribute(
-      "aria-label",
-      `${code} target persen dari CB divisi ${division}`
-    );
-    targetInput.title =
-      "Target dalam persen dari CB salesman (outlet covered Master Outlet). Contoh: 25 atau 25%. Kosong = 100% CB.";
-    targetCell.appendChild(targetInput);
-    tr.appendChild(targetCell);
-
-    const cb = roaSkuCbTotal(division);
-    const cbCell = salesMake(
-      "td",
-      "num roa-cb-cell",
-      cb > 0 ? fmtNum(cb) : "—"
-    );
-    cbCell.title = `Jumlah outlet covered divisi ${division} dari Master Outlet (FLAG COVERED).`;
-    tr.appendChild(cbCell);
-
-    [
-      ["up", "RTL UP"],
-      ["down", "RTL DOWN"],
-    ].forEach(([field, label]) => {
-      const cell = document.createElement("td");
-      cell.className = "num";
-      const input = document.createElement("input");
-      input.type = "number";
-      input.min = "0";
-      input.step = "0.01";
-      input.inputMode = "decimal";
-      input.value = String(skuRule[field]);
-      input.dataset.skuField = field;
-      input.setAttribute("aria-label", `${code} ${label}`);
-      cell.appendChild(input);
-      tr.appendChild(cell);
-    });
-    const unitCell = document.createElement("td");
-    const unit = document.createElement("select");
-    unit.dataset.skuField = "unit";
-    unit.setAttribute("aria-label", `Satuan ${code}`);
-    ROA_DROP_UNITS.forEach((value) => {
-      const option = document.createElement("option");
-      option.value = value;
-      option.textContent = value;
-      unit.appendChild(option);
-    });
-    unit.value = skuRule.unit;
-    unitCell.appendChild(unit);
-    tr.appendChild(unitCell);
-    const actionCell = document.createElement("td");
-    actionCell.className = "roa-sku-row-actions";
-    const remove = document.createElement("button");
-    remove.type = "button";
-    remove.className = "score-btn score-btn-ghost";
-    remove.textContent = "Hapus";
-    remove.dataset.roaSkuRemove = code;
-    actionCell.appendChild(remove);
-    tr.appendChild(actionCell);
-    return tr;
-  }
-
-  function roaSettingsRender() {
-    roaLoad();
-    const settings = roaState.settings;
-    const active = roaActiveDivisions();
-    if (els.roaHkTotal) els.roaHkTotal.value = String(settings.hkTotal);
-    if (els.roaHkRun) els.roaHkRun.value = String(settings.hkRun);
-    roaRulesRender();
-
-    const catalog = roaMarkNewCatalog();
-    const hasCatalog = catalog.length > 0;
-    ROA_DIVISIONS.forEach((division) => {
-      const section = document.querySelector(
-        `#setting-roa .roa-sku-division[data-division="${division}"]`
-      );
-      if (section) section.hidden = !active.includes(division);
-      const listEl = els[`roaSkuList${division}`];
-      if (!listEl) return;
-      if (!hasCatalog || !active.includes(division)) {
-        listEl.replaceChildren();
-        return;
-      }
-      const configured = settings.divSkus ? settings.divSkus[division] : [];
-      const selected = new Set(Array.isArray(configured) ? configured : []);
-      const fragment = document.createDocumentFragment();
-      catalog.forEach((entry) => {
-        if (!selected.has(entry.code)) return;
-        fragment.appendChild(
-          roaSkuRowElement(
-            division,
-            entry.code,
-            roaSkuRule(division, entry.code),
-            entry.items
-          )
-        );
-      });
-      if (!fragment.childNodes.length) {
-        fragment.appendChild(roaSkuEmptyRowElement());
-      }
-      listEl.replaceChildren(fragment);
-      roaUpdateSkuAddOptions(division);
-    });
-    if (els.roaSkuEmpty) {
-      els.roaSkuEmpty.hidden = hasCatalog && active.length > 0;
-      els.roaSkuEmpty.textContent = !active.length
-        ? "Belum ada aturan ROA. Tambahkan divisi AEP atau GDK di Daftar Aturan ROA."
-        : "Belum ada MARK NEW. Unggah Master Item dengan kolom KATEGORI MARK NEW, atau pastikan Dbase punya kolom MARK NEW.";
-    }
-    if (els.roaSkuLists) {
-      els.roaSkuLists.hidden = !hasCatalog || !active.length;
-    }
-    roaUpdateSkuCounts();
-
-    const result = roaCompute();
-    if (els.roaHeroRules) {
-      els.roaHeroRules.textContent = fmtNum(active.length);
-    }
-    if (els.roaHeroSkus) els.roaHeroSkus.textContent = fmtNum(result.skus.length);
-    if (els.roaHeroOutlets) els.roaHeroOutlets.textContent = fmtNum(result.covered);
-    if (els.roaHeroHk) {
-      els.roaHeroHk.textContent = `${fmtNum(settings.hkRun)} / ${fmtNum(settings.hkTotal)}`;
-    }
-    if (els.roaTatRatio) {
-      els.roaTatRatio.textContent = `${fmtPct(roaTatRatio() * 100)} dari target bulanan`;
-    }
-    if (els.roaPreviewInfo) {
-      if (result.noRules) {
-        els.roaPreviewInfo.textContent =
-          "Belum ada aturan ROA. Tambahkan divisi AEP atau GDK di Daftar Aturan ROA.";
-      } else if (result.missingMarkNew) {
-        els.roaPreviewInfo.textContent =
-          "MARK NEW belum tersedia. Lengkapi Master Item (KATEGORI MARK NEW) atau Dbase (MARK NEW).";
-      } else if (result.emptySelection) {
-        els.roaPreviewInfo.textContent =
-          "Belum ada MARK NEW yang dipilih. Tambahkan minimal satu MARK NEW untuk divisi yang punya aturan.";
-      } else {
-        els.roaPreviewInfo.textContent = result.hasData
-          ? `Bulan ${result.monthLabel} · ${result.skuRuleCount} aturan aktif · ${result.roster} salesman · ${fmtNum(result.covered)} total CB Master Outlet · target SKU = % dari CB · ${result.groups} TRX diperiksa`
-          : "Belum ada data untuk dihitung.";
-      }
-    }
-    roaRenderTable(els.roaPreviewHead, els.roaPreviewBody);
-    if (!roaState.notice) {
-      roaSetStatus(
-        "Pengaturan disimpan lokal di perangkat ini dan dipakai pratinjau ROA serta tabel Salesman.",
-        "info"
-      );
-    }
-  }
-
-  function roaReadForm() {
-    const number = (element, fallback) => {
-      const parsed = Number(element && element.value);
-      return Number.isFinite(parsed) && parsed >= 0 ? parsed : fallback;
-    };
-    const active = roaActiveDivisions();
-    const catalog = roaMarkNewCatalog();
-    const divSkus = { ...(roaState.settings.divSkus || {}) };
-    const rules = { ...(roaState.settings.rules || {}) };
-    if (catalog.length) {
-      active.forEach((division) => {
-        const listEl = els[`roaSkuList${division}`];
-        if (!listEl) return;
-        const rows = Array.from(listEl.querySelectorAll("tr[data-sku]"));
-        const codes = [];
-        const skuRules = {};
-        rows.forEach((tr) => {
-          const code = String(tr.dataset.sku || "").trim().toUpperCase();
-          if (!code) return;
-          codes.push(code);
-          const unitEl = tr.querySelector('[data-sku-field="unit"]');
-          skuRules[code] = {
-            targetPct: roaParsePct(
-              tr.querySelector('[data-sku-field="targetPct"]')?.value
-            ),
-            // Target lama tidak dipakai lagi setelah form disimpan.
-            target: 0,
-            up: number(tr.querySelector('[data-sku-field="up"]'), 0),
-            down: number(tr.querySelector('[data-sku-field="down"]'), 0),
-            unit: ROA_DROP_UNITS.includes(unitEl?.value)
-              ? unitEl.value
-              : ROA_SKU_DEFAULT.unit,
-          };
-        });
-        divSkus[division] = codes;
-        if (rules[division]) {
-          rules[division] = roaNormalizeRule({
-            ...rules[division],
-            skuRules,
-          });
-        }
-      });
-    }
-    return roaSettingsNormalize({
-      rules,
-      divSkus,
-      hkTotal: number(els.roaHkTotal, ROA_DEFAULT_SETTINGS.hkTotal),
-      hkRun: number(els.roaHkRun, ROA_DEFAULT_SETTINGS.hkRun),
-    });
-  }
-
-  function initRoaSettings() {
-    roaLoad();
-    els.roaSaveBtn?.addEventListener("click", () => {
-      roaState.settings = roaReadForm();
-      const saved = roaPersist();
-      roaCache = { stamp: "", result: null };
-      roaState.notice = "";
-      roaSettingsRender();
-      roaPanelRender();
-      salesRefresh();
-      roaSetStatus(
-        saved
-          ? "Pengaturan ROA disimpan. Pratinjau ROA dan tabel Salesman diperbarui."
-          : "Pengaturan dipakai untuk sesi ini, tetapi gagal disimpan lokal.",
-        saved ? "success" : "warn"
-      );
-    });
-    els.roaResetBtn?.addEventListener("click", () => {
-      if (
-        typeof window.confirm === "function" &&
-        !window.confirm("Kembalikan semua pengaturan ROA ke default?")
-      ) {
-        return;
-      }
-      roaState.settings = roaDefaultSettings();
-      roaPersist();
-      roaCache = { stamp: "", result: null };
-      roaState.notice = "";
-      roaRuleClose();
-      roaSettingsRender();
-      roaPanelRender();
-      salesRefresh();
-      roaSetStatus("Pengaturan ROA dikembalikan ke default.", "info");
-    });
-    els.roaSkuLists?.addEventListener("click", (event) => {
-      const section = event.target.closest(".roa-sku-division");
-      if (!section) return;
-      const division = section.dataset.division;
-      const listEl = els[`roaSkuList${division}`];
-      if (!listEl) return;
-
-      const remove = event.target.closest("[data-roa-sku-remove]");
-      if (remove) {
-        remove.closest("tr[data-sku]")?.remove();
-        if (!listEl.querySelector("tr[data-sku]")) {
-          listEl.replaceChildren(roaSkuEmptyRowElement());
-        }
-        roaUpdateSkuCounts();
-        return;
-      }
-
-      const addButton = event.target.closest("[data-roa-sku-add]");
-      if (addButton) {
-        const select = els[`roaSkuAdd${division}`];
-        const code = select ? select.value : "";
-        if (!code) return;
-        if (
-          Array.from(listEl.querySelectorAll("tr[data-sku]")).some(
-            (row) => row.dataset.sku === code
-          )
-        ) {
-          return;
-        }
-        listEl
-          .querySelectorAll("tr:not([data-sku])")
-          .forEach((row) => row.remove());
-        const entry = roaMarkNewCatalog().find((item) => item.code === code);
-        listEl.appendChild(
-          roaSkuRowElement(
-            division,
-            code,
-            roaSkuRule(division, code),
-            entry ? entry.items : 0
-          )
-        );
-        roaUpdateSkuCounts();
-        return;
-      }
-
-      const clear = event.target.closest("[data-roa-sku-clear]");
-      if (clear) {
-        const field = clear.dataset.roaSkuClear;
-        listEl
-          .querySelectorAll(`tr[data-sku] input[data-sku-field="${field}"]`)
-          .forEach((input) => {
-            input.value = "0";
-          });
-      }
-    });
-
-    els.roaRuleAddBtn?.addEventListener("click", () => {
-      const division = els.roaRuleDivision?.value;
-      if (!division) {
-        roaSetStatus("Pilih divisi AEP atau GDK dulu.", "warn");
-        return;
-      }
-      roaRuleOpen(division, true);
-    });
-
-    els.roaRuleList?.addEventListener("click", (event) => {
-      const edit = event.target.closest("[data-roa-rule-edit]");
-      if (edit) {
-        roaRuleOpen(edit.dataset.roaRuleEdit, false);
-        return;
-      }
-      const remove = event.target.closest("[data-roa-rule-delete]");
-      if (remove) {
-        roaRuleDelete(remove.dataset.roaRuleDelete);
-      }
-    });
-
-    $$("#roaRuleModal [data-roa-rule-close]").forEach((element) => {
-      element.addEventListener("click", roaRuleClose);
-    });
-
-    els.roaRuleMapBody?.addEventListener("change", (event) => {
-      const input = event.target;
-      if (!input || !input.matches("input[data-roa-map]")) return;
-      if (!input.checked) return;
-      const other = input.dataset.roaMap === "up" ? "down" : "up";
-      Array.from(
-        els.roaRuleMapBody.querySelectorAll(
-          `input[data-roa-map="${other}"]`
-        )
-      ).forEach((peer) => {
-        if (peer.value === input.value) peer.checked = false;
-      });
-    });
-
-    els.roaRuleSaveBtn?.addEventListener("click", roaRuleSave);
-    els.roaRuleDeleteBtn?.addEventListener("click", () => {
-      if (roaRuleModalState.division) {
-        roaRuleDelete(roaRuleModalState.division);
-      }
-    });
-
-    document.addEventListener("keydown", (event) => {
-      if (
-        event.key === "Escape" &&
-        els.roaRuleModal &&
-        !els.roaRuleModal.classList.contains("hidden")
-      ) {
-        roaRuleClose();
-      }
-    });
   }
 
   async function initAnalysis() {
@@ -26258,7 +25163,7 @@ legendControl.addTo(map);
         return;
       }
       if (target.dataset.stokItem) {
-        stokOpenItemDetail(target.dataset.stokItem);
+        stokOpenItemDetail(target.dataset.stokItem, target.dataset.stokDepo);
       }
     };
     els.stokResults?.addEventListener("click", (event) => {
@@ -26308,7 +25213,6 @@ legendControl.addTo(map);
     // Penjualan memakai data Dbase yang sama; segarkan agar tidak basi ketika
     // pemulihan lokal selesai setelah rute awal diterapkan.
     salesRefresh();
-    roaSettingsRender();
     // Bila file Performance sudah tersedia di Master Data, tampilkan langsung
     // tanpa menunggu Google Sheets.
     if (masterState.maps.performance) loadScoreCard(false);
@@ -26451,6 +25355,7 @@ legendControl.addTo(map);
           els.sidebarSheetLink.setAttribute("aria-disabled", "true");
         }
       }
+      animateMenuGroup();
     }
 
     menuToggle.addEventListener("click", () => {
@@ -26469,7 +25374,6 @@ legendControl.addTo(map);
         else if (link.dataset.nav === "analisa-penjualan") showAnalysisView({ mode: "depo" });
         else if (link.dataset.nav === "analisa-cabang") showAnalysisView({ mode: "cabang" });
         else if (link.dataset.nav === "master-data") showMasterView();
-        else if (link.dataset.nav === "setting-roa") showRoaView();
         else if (link.dataset.nav === "analisa-stok") showStokView();
         else if (link.dataset.nav === "jks-editor") showJksView();
         else if (link.dataset.nav === "logistik") showLogistikView();
@@ -26540,6 +25444,7 @@ legendControl.addTo(map);
       if (options.scroll !== false) window.scrollTo({ top: 0, behavior: "auto" });
       loadScoreCard(false);
       startScoreAutoRefresh();
+      animateViewEnter(els.scoreCard);
       window.requestAnimationFrame(() => els.scoreTitle?.focus());
     }
 
@@ -26555,6 +25460,7 @@ legendControl.addTo(map);
       setHash("#penjualan");
       if (options.scroll !== false) window.scrollTo({ top: 0, behavior: "auto" });
       salesRefresh();
+      animateViewEnter(document.getElementById("penjualan"));
       window.requestAnimationFrame(() => els.salesTitle?.focus());
     }
 
@@ -26563,7 +25469,6 @@ legendControl.addTo(map);
         "analisa-penjualan",
         "analisa-stok",
         "master-data",
-        "setting-roa",
         "logistik",
       ].forEach((sid) => {
         const node = document.getElementById(sid);
@@ -26591,6 +25496,7 @@ legendControl.addTo(map);
       }
       if (options.scroll !== false) window.scrollTo({ top: 0, behavior: "auto" });
       analysisRefresh();
+      animateViewEnter(document.getElementById("analisa-penjualan"));
       window.requestAnimationFrame(() => els.analysisTitle?.focus());
     }
 
@@ -26608,24 +25514,8 @@ legendControl.addTo(map);
       setHash("#master-data");
       if (options.scroll !== false) window.scrollTo({ top: 0, behavior: "auto" });
       masterRenderFiles();
+      animateViewEnter(document.getElementById("master-data"));
       window.requestAnimationFrame(() => els.masterTitle?.focus());
-    }
-
-    function showRoaView(options = {}) {
-      jksLeave();
-      document.body.classList.remove("score-mode", "sales-mode");
-      stopScoreAutoRefresh();
-      stopSalesAutoRefresh();
-      document.body.classList.add("analysis-mode");
-      setGroup("upload");
-      setAnalysisSection("setting-roa");
-      document.title = "Setting ROA · Engine Dashboard · CAB Medan Raya";
-      if (mobileQuery.matches) setOpen(false);
-      setActive("setting-roa");
-      setHash("#setting-roa");
-      if (options.scroll !== false) window.scrollTo({ top: 0, behavior: "auto" });
-      roaSettingsRender();
-      window.requestAnimationFrame(() => els.roaTitle?.focus());
     }
 
     function showStokView(options = {}) {
@@ -26642,6 +25532,7 @@ legendControl.addTo(map);
       setHash("#analisa-stok");
       if (options.scroll !== false) window.scrollTo({ top: 0, behavior: "auto" });
       stokRefresh();
+      animateViewEnter(document.getElementById("analisa-stok"));
       window.requestAnimationFrame(() => els.stokTitle?.focus());
     }
 
@@ -26653,6 +25544,7 @@ legendControl.addTo(map);
       document.title = "JKS Editor · Engine Dashboard · CAB Medan Raya";
       setHash("#jks-editor");
       if (options.scroll !== false) window.scrollTo({ top: 0, behavior: "auto" });
+      animateViewEnter(document.querySelector(".jks-view"));
       window.requestAnimationFrame(() => jksState.map?.invalidateSize());
     }
 
@@ -26676,6 +25568,8 @@ legendControl.addTo(map);
       logistikRefreshMaster();
       logistikRenderFiles();
       logistikRenderRawStats();
+      animateViewEnter(document.getElementById("logistik"));
+      if (section) flashMenuTarget(section);
       const resultSections = [
         "logistik-map",
         "logistik-supir",
@@ -26720,14 +25614,14 @@ legendControl.addTo(map);
       const id = targetId || "ringkasan";
       setActive(id);
       setHash(`#${id}`);
-      if (options.scroll !== false) {
-        const target = document.getElementById(id);
-        if (target) {
-          requestAnimationFrame(() =>
-            target.scrollIntoView({ behavior: "smooth", block: "start" })
-          );
-        }
+      const target = document.getElementById(id);
+      if (options.scroll !== false && target) {
+        requestAnimationFrame(() =>
+          target.scrollIntoView({ behavior: "smooth", block: "start" })
+        );
       }
+      animateViewEnter(target);
+      flashMenuTarget(id);
       window.requestAnimationFrame(measure);
       if (state.data && Date.now() - state.lastFetch > state.refreshSeconds * 1000) {
         fetchDashboard(false);
@@ -26776,7 +25670,8 @@ legendControl.addTo(map);
         return;
       }
       if (hash === "#setting-roa") {
-        showRoaView({ scroll: false });
+        // Menu Setting ROA sudah dihapus; arahkan tautan lama ke dashboard.
+        showDashboardView("ringkasan", { scroll: false });
         return;
       }
       if (hash === "#analisa-stok") {
@@ -26809,8 +25704,7 @@ legendControl.addTo(map);
           link.dataset.nav !== "analisa-penjualan" &&
           link.dataset.nav !== "analisa-cabang" &&
           link.dataset.nav !== "analisa-stok" &&
-          link.dataset.nav !== "master-data" &&
-          link.dataset.nav !== "setting-roa"
+          link.dataset.nav !== "master-data"
       )
       .map((link) => document.getElementById(link.dataset.nav))
       .filter(Boolean);
@@ -26862,18 +25756,27 @@ legendControl.addTo(map);
         return;
       }
 
+      const visibleSections = sections.filter((section) => {
+        const style = window.getComputedStyle(section);
+        return style.display !== "none" && style.visibility !== "hidden";
+      });
+      const visibleIds = new Set(visibleSections.map((section) => section.id));
       const marker = window.scrollY + 130;
-      let activeId = sections[0].id;
+      let activeId = visibleSections[0]?.id || sections[0].id;
 
       offsets.forEach((item) => {
-        if (item.top <= marker) activeId = item.id;
+        if (visibleIds.has(item.id) && item.top <= marker) activeId = item.id;
       });
 
+      const scrollable =
+        document.documentElement.scrollHeight > window.innerHeight + 8;
       if (
+        scrollable &&
         window.innerHeight + window.scrollY >=
-        document.documentElement.scrollHeight - 4
+          document.documentElement.scrollHeight - 4
       ) {
-        activeId = sections[sections.length - 1].id;
+        activeId =
+          visibleSections[visibleSections.length - 1]?.id || activeId;
       }
 
       setActive(activeId);
@@ -27200,12 +26103,20 @@ legendControl.addTo(map);
     }
   }
 
+  try {
+    // Fitur Setting ROA sudah dihapus; bersihkan pengaturan lama di perangkat.
+    window.localStorage.removeItem("roa-settings-v1");
+  } catch (error) {
+    // localStorage bisa diblokir; abaikan.
+  }
+
   initScreenshot();
-  initRoaSettings();
   initAnalysis();
   initJksEditor();
   initLogistik();
+  initMenuMotion();
   initSidebar();
+  initAuthUser();
   initScoreCard();
   initSalesView();
   bindEvents();
@@ -27217,3 +26128,4 @@ legendControl.addTo(map);
   </script>
 </body>
 </html>
+
