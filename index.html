@@ -7250,6 +7250,12 @@ body.jks-mode .sync-block { display: none; }
             </select>
           </label>
           <label class="analysis-field analysis-field-wide">
+            <span>Filter salesman</span>
+            <select id="analysisSalesman" class="select" aria-label="Filter salesman">
+              <option value="all">Semua salesman</option>
+            </select>
+          </label>
+          <label class="analysis-field analysis-field-wide">
             <span>Filter depo</span>
             <select id="analysisDepo" class="select" aria-label="Filter depo">
               <option value="all">Semua depo</option>
@@ -23709,8 +23715,31 @@ legendControl.addTo(map);
     const period = Math.max(1, Math.min(6, Math.round(Number(data.period) || analysisState.period || 1)));
     const divisiLabel = data.divisi === "all" ? "Semua divisi" : `Divisi ${data.divisi}`;
     const depoLabel = data.depo === "all" ? "Semua depo" : `Depo ${data.depo}`;
+    const salesmanLabel = data.salesman === "all" ? "Semua salesman" : `Salesman ${data.salesman}`;
     analysisRenderDivisiOptions(data.divisiOptions);
     analysisRenderDepoOptions(data.depoOptions);
+    analysisRenderSalesmanOptions(data.salesmanOptions);
+    // Add data-depo attributes to salesman options for depot filtering
+    if (els.analysisSalesman) {
+      const salesmanOptions = els.analysisSalesman.options;
+      // Build a map of salesman name -> depot from the data.salesmen array
+      if (data.salesmen && data.salesmen.length > 0) {
+        const depoMap = {};
+        data.salesmen.forEach((s) => {
+          if (s.depo && s.nama) {
+            depoMap[s.nama] = s.depo;
+          }
+        });
+        for (let i = 0; i < salesmanOptions.length; i++) {
+          const option = salesmanOptions[i];
+          if (option.value !== "all") {
+            // Get the option text - could be value or inner text
+            const optText = option.textContent || option.value || "";
+            option.dataset.depo = depoMap[optText] || "all";
+          }
+        }
+      }
+    }
     const anchorSuffix = data.anchorIsCurrent ? "" : " (bulan data terakhir)";
     const mtdSourceLabel = data.mtdFallback
       ? "Dbase 6 bulan (MTD belum ada)"
@@ -24856,6 +24885,27 @@ legendControl.addTo(map);
 
     els.analysisDepo?.addEventListener("change", () => {
       analysisState.depo = els.analysisDepo.value || "all";
+      // Filter salesman options to show only salesmen from selected depot
+      const selectedDepo = analysisState.depo;
+      if (els.analysisSalesman) {
+        const allOptions = els.analysisSalesman.options;
+        for (let i = allOptions.length - 1; i >= 0; i--) {
+          const option = allOptions[i];
+          if (option.value === "all") continue;
+          // Show option if it matches the selected depot or if depot is "all"
+          option.style.display = selectedDepo === "all" || option.dataset.depo === selectedDepo ? "" : "none";
+        }
+        // Reset salesman selection if current value is no longer valid
+        if (els.analysisSalesman.value !== "all" && !els.analysisSalesman.options[els.analysisSalesman.selectedIndex].dataset.depo) {
+          els.analysisSalesman.value = "all";
+          analysisState.salesman = "all";
+        }
+      }
+      analysisRefresh();
+    });
+
+    els.analysisSalesman?.addEventListener("change", () => {
+      analysisState.salesman = els.analysisSalesman.value || "all";
       analysisRefresh();
     });
 
