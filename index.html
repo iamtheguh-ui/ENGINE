@@ -422,6 +422,30 @@ button { cursor: pointer; }
 .error-icon svg { width: 24px; height: 24px; }
 .error-state h2 { margin: 8px 0 0; font-size: 18px; }
 .error-state p { margin: 0; color: var(--muted); font-size: 13px; max-width: 420px; }
+.error-detail {
+  width: 100%;
+  max-width: 460px;
+  margin-top: 10px;
+  padding: 12px 14px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: rgba(20, 48, 63, 0.035);
+  text-align: left;
+  font-size: 12px;
+  line-height: 1.65;
+}
+.error-state .error-detail p { max-width: 100%; color: var(--muted); }
+.error-detail code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 11px;
+  word-break: break-all;
+  color: var(--text);
+}
+.error-state .error-detail .error-advice {
+  margin-top: 8px;
+  color: var(--text);
+  font-weight: 500;
+}
 .btn-primary {
   margin-top: 14px;
   padding: 10px 20px;
@@ -6648,6 +6672,7 @@ body.jks-mode .sync-block { display: none; }
       </div>
       <h2>Data belum bisa dimuat</h2>
       <p id="errorMessage">Periksa koneksi ke Google Sheets lalu coba lagi.</p>
+      <div id="errorDetail" class="error-detail hidden"></div>
       <button id="retryBtn" class="btn-primary" type="button">Coba lagi</button>
     </div>
 
@@ -8708,6 +8733,7 @@ body.jks-mode .sync-block { display: none; }
   <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js" crossorigin=""></script>
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
   <script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js" crossorigin=""></script>
+  <script>window.OmsetSnapshot = {"meta":{"source_updated_at":"2026-11-02T17:05:54","data_date":"2026-11-02","accounts":["pmalpm_sa@pinusmerahabadi.co.id","pmamdn_sa@pinusmerahabadi.co.id","pmamds_sa@pinusmerahabadi.co.id"],"raw_rows":510,"target_date":"2026-11-02","target_names":{"199830":"AEPDA-ADAN SAPUTRA","199823":"GDKDA-IRWAN JUNIARDI","199803":"GDKDA-Yogi Prayuda","199805":"GDKDA-ANDIKA ERFIAN","199806":"GDKDA-GUSTI KARAN","153468":"GDKDA-AHMAD ERWIN","153471":"GDKDA-REZA GANDA PRADANA","153466":"AEPDA-RIDHO","153472":"GDKDA-RENDY A PRADANA","153425":"GDKDA-FAISAL AKBAR HSB","153434":"GDKDA-SONI RANU","134682":"GDKDA-JUNIARTO","134613":"GDKDA-M SYAWALUDDIN","134675":"AEPDA-IVANSYAH","134680":"GDKDA-AKMAL","134606":"GDKDA-MHD.RIZKI","134631":"GDKDA-S PUTRA HASIBUAN","134679":"GDKDA-HALIMAH","134681":"GDKDA-HAEKAL RAHMAN","168847":"GDKDA-SUARA MAHARDIKA","168849":"GDKDA-RAAMAN TOBY","168843":"AEPDA-WAHYUDI","168811":"GDKDA-PUTRA","168808":"GDKDA-ADRI","168805":"GDKDA-AZRA","ASS0001":"JEFRI SYAHPUTRA","ASS0002":"ANDRI PRATAMA","ASS0003":"RAJA HARI MUKTI","1004":"TEGUH PRIHATIN","MDT002":"HERMAN","BM0001":"YOHANES"},"target_count":31,"source":"live","partial":false,"expected_accounts":3,"generated_at":"2026-11-02T19:14:51","generated_at_label":"2 Nov 2026 19:14 WIB","source_updated_at_label":"2 Nov 2026 17:05 WIB","data_date_label":"2 November 2026","stale":true,"stale_minutes":129,"data_is_today":true,"refresh_seconds":30,"stale_after_minutes":25,"trend_bucket_minutes":5,"rule":"Omset dihitung dari DO non-Cancel, tanpa Swap (ZWE1) dan Return (ZRP1), khusus kode salesman terdaftar."},"summary":{"revenue":179959042,"billing":0,"gross_value":250048676,"target":519977396,"pct":34.61,"do_count":472,"do_total":508,"cancel_count":36,"cancel_value":70089634,"swap_count":0,"swap_value":0,"return_count":0,"return_value":0,"other_excluded_count":0,"other_excluded_value":0,"excluded_count":36,"excluded_value":70089634,"customers":472,"avg_order":381269,"sales_count":25,"ec":472,"ec_target":557,"ec_pct":84.74,"cancel_pct_of_gross":28.03,"excluded_pct_of_gross":28.03},"depos":[{"nama":"PMA LUBUK PAKAM","short":"LUBUK PAKAM","color":"#22d3a7","target":94418074,"real":53664271,"billing":0,"pct":56.84,"do_count":92,"ec":92,"ec_target":108,"ec_pct":85.19,"sales_count":5,"cancel_value":581669,"cancel_count":2,"swap_value":0,"swap_count":0,"return_value":0,"return_count":0,"excluded_value":581669,"excluded_count":2,"top_sales":"AEPDA-ADAN SAPUTRA","top_sales_value":27314154},{"nama":"PMA MEDAN SELATAN","short":"MEDAN SELATAN","color":"#38bdf8","target":106350837,"real":51574370,"billing":0,"pct":48.49,"do_count":120,"ec":120,"ec_target":133,"ec_pct":90.23,"sales_count":6,"cancel_value":30367853,"cancel_count":26,"swap_value":0,"swap_count":0,"return_value":0,"return_count":0,"excluded_value":30367853,"excluded_count":26,"top_sales":"AEPDA-RIDHO","top_sales_value":19452372},{"nama":"PMA MEDAN TIMUR","short":"MEDAN TIMUR","color":"#a78bfa","target":138963214,"real":30138686,"billing":0,"pct":21.69,"do_count":46,"ec":46,"ec_target":58,"ec_pct":79.31,"sales_count":3,"cancel_value":36054107,"cancel_count":5,"swap_value":0,"swap_count":0,"return_value":0,"return_count":0,"excluded_value":36054107,"excluded_count":5,"top_sales":"AEPDA-IVANSYAH","top_sales_value":22888314},{"nama":"PMA MEDAN TIMUR1","short":"MEDAN TIMUR1","color":"#fbbf24","target":21446057,"real":17335318,"billing":0,"pct":80.83,"do_count":102,"ec":102,"ec_target":125,"ec_pct":81.6,"sales_count":5,"cancel_value":0,"cancel_count":0,"swap_value":0,"swap_count":0,"return_value":0,"return_count":0,"excluded_value":0,"excluded_count":0,"top_sales":"GDKDA-S PUTRA HASIBUAN","top_sales_value":4463015},{"nama":"PMA MEDAN UTARA","short":"MEDAN UTARA","color":"#fb7185","target":158799214,"real":27246397,"billing":0,"pct":17.16,"do_count":112,"ec":112,"ec_target":133,"ec_pct":84.21,"sales_count":6,"cancel_value":3086005,"cancel_count":3,"swap_value":0,"swap_count":0,"return_value":0,"return_count":0,"excluded_value":3086005,"excluded_count":3,"top_sales":"GDKDA-SUARA MAHARDIKA","top_sales_value":6416333}],"salesmen":[{"kd_sls":"153425","nama":"GDKDA-FAISAL AKBAR HSB","depo":"PMA MEDAN SELATAN","divisi":"SALESMAN","level":"GDKDA","target":5946825,"real":7958335,"billing":0,"pct":133.82,"do_count":26,"ec":26,"ec_target":25,"ec_pct":104.0,"cancel_value":1154879,"cancel_count":4,"swap_value":0,"swap_count":0,"return_value":0,"return_count":0,"excluded_value":1154879,"excluded_count":4,"avg_order":306089,"color":"#38bdf8"},{"kd_sls":"199806","nama":"GDKDA-GUSTI KARAN","depo":"PMA LUBUK PAKAM","divisi":"SALESMAN","level":"GDKDA","target":7808432,"real":9339030,"billing":0,"pct":119.6,"do_count":20,"ec":20,"ec_target":25,"ec_pct":80.0,"cancel_value":0,"cancel_count":0,"swap_value":0,"swap_count":0,"return_value":0,"return_count":0,"excluded_value":0,"excluded_count":0,"avg_order":466951,"color":"#22d3a7"},{"kd_sls":"168847","nama":"GDKDA-SUARA MAHARDIKA","depo":"PMA MEDAN UTARA","divisi":"SALESMAN","level":"GDKDA","target":6046254,"real":6416333,"billing":0,"pct":106.12,"do_count":18,"ec":18,"ec_target":25,"ec_pct":72.0,"cancel_value":1411697,"cancel_count":1,"swap_value":0,"swap_count":0,"return_value":0,"return_count":0,"excluded_value":1411697,"excluded_count":1,"avg_order":356462,"color":"#fb7185"},{"kd_sls":"134681","nama":"GDKDA-HAEKAL RAHMAN","depo":"PMA MEDAN TIMUR1","divisi":"SALESMAN","level":"GDKDA","target":4173141,"real":4335051,"billing":0,"pct":103.88,"do_count":23,"ec":23,"ec_target":25,"ec_pct":92.0,"cancel_value":0,"cancel_count":0,"swap_value":0,"swap_count":0,"return_value":0,"return_count":0,"excluded_value":0,"excluded_count":0,"avg_order":188480,"color":"#fbbf24"},{"kd_sls":"153472","nama":"GDKDA-RENDY A PRADANA","depo":"PMA MEDAN SELATAN","divisi":"SALESMAN","level":"GDKDA","target":7190985,"real":7449525,"billing":0,"pct":103.6,"do_count":23,"ec":23,"ec_target":25,"ec_pct":92.0,"cancel_value":3186354,"cancel_count":7,"swap_value":0,"swap_count":0,"return_value":0,"return_count":0,"excluded_value":3186354,"excluded_count":7,"avg_order":323892,"color":"#38bdf8"},{"kd_sls":"153434","nama":"GDKDA-SONI RANU","depo":"PMA MEDAN SELATAN","divisi":"SALESMAN","level":"GDKDA","target":6162623,"real":6216103,"billing":0,"pct":100.87,"do_count":21,"ec":21,"ec_target":25,"ec_pct":84.0,"cancel_value":821180,"cancel_count":3,"swap_value":0,"swap_count":0,"return_value":0,"return_count":0,"excluded_value":821180,"excluded_count":3,"avg_order":296004,"color":"#38bdf8"},{"kd_sls":"134631","nama":"GDKDA-S PUTRA HASIBUAN","depo":"PMA MEDAN TIMUR1","divisi":"SALESMAN","level":"GDKDA","target":4754558,"real":4463015,"billing":0,"pct":93.87,"do_count":23,"ec":23,"ec_target":25,"ec_pct":92.0,"cancel_value":0,"cancel_count":0,"swap_value":0,"swap_count":0,"return_value":0,"return_count":0,"excluded_value":0,"excluded_count":0,"avg_order":194044,"color":"#fbbf24"},{"kd_sls":"168805","nama":"GDKDA-AZRA","depo":"PMA MEDAN UTARA","divisi":"SALESMAN","level":"GDKDA","target":4990764,"real":4666516,"billing":0,"pct":93.5,"do_count":23,"ec":23,"ec_target":25,"ec_pct":92.0,"cancel_value":0,"cancel_count":0,"swap_value":0,"swap_count":0,"return_value":0,"return_count":0,"excluded_value":0,"excluded_count":0,"avg_order":202892,"color":"#fb7185"},{"kd_sls":"153471","nama":"GDKDA-REZA GANDA SAPUTRA","depo":"PMA MEDAN SELATAN","divisi":"SALESMAN","level":"GDKDA","target":6050607,"real":5464585,"billing":0,"pct":90.31,"do_count":23,"ec":23,"ec_target":25,"ec_pct":92.0,"cancel_value":0,"cancel_count":0,"swap_value":0,"swap_count":0,"return_value":0,"return_count":0,"excluded_value":0,"excluded_count":0,"avg_order":237590,"color":"#38bdf8"},{"kd_sls":"134680","nama":"GDKDA-AKMAL","depo":"PMA MEDAN TIMUR1","divisi":"SALESMAN","level":"GDKDA","target":3644851,"real":3111156,"billing":0,"pct":85.36,"do_count":22,"ec":22,"ec_target":25,"ec_pct":88.0,"cancel_value":0,"cancel_count":0,"swap_value":0,"swap_count":0,"return_value":0,"return_count":0,"excluded_value":0,"excluded_count":0,"avg_order":141416,"color":"#fbbf24"},{"kd_sls":"134606","nama":"GDKDA-MHD.RIZKI","depo":"PMA MEDAN TIMUR1","divisi":"SALESMAN","level":"GDKDA","target":4509657,"real":3724045,"billing":0,"pct":82.58,"do_count":23,"ec":23,"ec_target":25,"ec_pct":92.0,"cancel_value":0,"cancel_count":0,"swap_value":0,"swap_count":0,"return_value":0,"return_count":0,"excluded_value":0,"excluded_count":0,"avg_order":161915,"color":"#fbbf24"},{"kd_sls":"134682","nama":"GDKDA-JUNIARTO","depo":"PMA MEDAN TIMUR","divisi":"SALESMAN","level":"GDKDA","target":4137760,"real":3406427,"billing":0,"pct":82.33,"do_count":21,"ec":21,"ec_target":25,"ec_pct":84.0,"cancel_value":172998,"cancel_count":1,"swap_value":0,"swap_count":0,"return_value":0,"return_count":0,"excluded_value":172998,"excluded_count":1,"avg_order":162210,"color":"#a78bfa"},{"kd_sls":"168849","nama":"GDKDA-RAAMAN TOBY","depo":"PMA MEDAN UTARA","divisi":"SALESMAN","level":"GDKDA","target":5175064,"real":4160837,"billing":0,"pct":80.4,"do_count":23,"ec":23,"ec_target":25,"ec_pct":92.0,"cancel_value":1235559,"cancel_count":1,"swap_value":0,"swap_count":0,"return_value":0,"return_count":0,"excluded_value":1235559,"excluded_count":1,"avg_order":180905,"color":"#fb7185"},{"kd_sls":"199805","nama":"GDKDA-ANDIKA ERFIAN","depo":"PMA LUBUK PAKAM","divisi":"SALESMAN","level":"GDKDA","target":8363105,"real":6420194,"billing":0,"pct":76.77,"do_count":21,"ec":21,"ec_target":25,"ec_pct":84.0,"cancel_value":0,"cancel_count":0,"swap_value":0,"swap_count":0,"return_value":0,"return_count":0,"excluded_value":0,"excluded_count":0,"avg_order":305723,"color":"#22d3a7"},{"kd_sls":"134613","nama":"GDKDA-M SYAWALUDDIN","depo":"PMA MEDAN TIMUR","divisi":"SALESMAN","level":"GDKDA","target":5030558,"real":3843945,"billing":0,"pct":76.41,"do_count":23,"ec":23,"ec_target":25,"ec_pct":92.0,"cancel_value":0,"cancel_count":0,"swap_value":0,"swap_count":0,"return_value":0,"return_count":0,"excluded_value":0,"excluded_count":0,"avg_order":167128,"color":"#a78bfa"},{"kd_sls":"199803","nama":"GDKDA-YOGI PRAYUDA","depo":"PMA LUBUK PAKAM","divisi":"SALESMAN","level":"GDKDA","target":6689712,"real":5094307,"billing":0,"pct":76.15,"do_count":21,"ec":21,"ec_target":25,"ec_pct":84.0,"cancel_value":104529,"cancel_count":1,"swap_value":0,"swap_count":0,"return_value":0,"return_count":0,"excluded_value":104529,"excluded_count":1,"avg_order":242586,"color":"#22d3a7"},{"kd_sls":"168808","nama":"GDKDA-ADRI","depo":"PMA MEDAN UTARA","divisi":"SALESMAN","level":"GDKDA","target":4534122,"real":3286713,"billing":0,"pct":72.49,"do_count":22,"ec":22,"ec_target":25,"ec_pct":88.0,"cancel_value":0,"cancel_count":0,"swap_value":0,"swap_count":0,"return_value":0,"return_count":0,"excluded_value":0,"excluded_count":0,"avg_order":149396,"color":"#fb7185"},{"kd_sls":"168811","nama":"GDKDA-PUTRA","depo":"PMA MEDAN UTARA","divisi":"SALESMAN","level":"GDKDA","target":5355340,"real":3861713,"billing":0,"pct":72.11,"do_count":22,"ec":22,"ec_target":25,"ec_pct":88.0,"cancel_value":0,"cancel_count":0,"swap_value":0,"swap_count":0,"return_value":0,"return_count":0,"excluded_value":0,"excluded_count":0,"avg_order":175532,"color":"#fb7185"},{"kd_sls":"199823","nama":"GDKDA-IRWAN JUNIARDI","depo":"PMA LUBUK PAKAM","divisi":"SALESMAN","level":"GDKDA","target":7656905,"real":5496586,"billing":0,"pct":71.79,"do_count":22,"ec":22,"ec_target":25,"ec_pct":88.0,"cancel_value":0,"cancel_count":0,"swap_value":0,"swap_count":0,"return_value":0,"return_count":0,"excluded_value":0,"excluded_count":0,"avg_order":249844,"color":"#22d3a7"},{"kd_sls":"153468","nama":"GDKDA-AHMAD ERWIN","depo":"PMA MEDAN SELATAN","divisi":"SALESMAN","level":"GDKDA","target":7017922,"real":5033450,"billing":0,"pct":71.72,"do_count":21,"ec":21,"ec_target":25,"ec_pct":84.0,"cancel_value":1923158,"cancel_count":7,"swap_value":0,"swap_count":0,"return_value":0,"return_count":0,"excluded_value":1923158,"excluded_count":7,"avg_order":239688,"color":"#38bdf8"},{"kd_sls":"199830","nama":"AEPDA-ADAN SAPUTRA","depo":"PMA LUBUK PAKAM","divisi":"SALESMAN","level":"AEPDA","target":63899920,"real":27314154,"billing":0,"pct":42.75,"do_count":8,"ec":8,"ec_target":8,"ec_pct":100.0,"cancel_value":477140,"cancel_count":1,"swap_value":0,"swap_count":0,"return_value":0,"return_count":0,"excluded_value":477140,"excluded_count":1,"avg_order":3414269,"color":"#22d3a7"},{"kd_sls":"134679","nama":"GDKDA-HALIMAH","depo":"PMA MEDAN TIMUR1","divisi":"SALESMAN","level":"GDKDA","target":4363850,"real":1702051,"billing":0,"pct":39.0,"do_count":11,"ec":11,"ec_target":25,"ec_pct":44.0,"cancel_value":0,"cancel_count":0,"swap_value":0,"swap_count":0,"return_value":0,"return_count":0,"excluded_value":0,"excluded_count":0,"avg_order":154731,"color":"#fbbf24"},{"kd_sls":"153466","nama":"AEPDA-RIDHO","depo":"PMA MEDAN SELATAN","divisi":"SALESMAN","level":"AEPDA","target":73981875,"real":19452372,"billing":0,"pct":26.29,"do_count":6,"ec":6,"ec_target":8,"ec_pct":75.0,"cancel_value":23282282,"cancel_count":5,"swap_value":0,"swap_count":0,"return_value":0,"return_count":0,"excluded_value":23282282,"excluded_count":5,"avg_order":3242062,"color":"#38bdf8"},{"kd_sls":"134675","nama":"AEPDA-IVANSYAH","depo":"PMA MEDAN TIMUR","divisi":"SALESMAN","level":"AEPDA","target":129794896,"real":22888314,"billing":0,"pct":17.63,"do_count":2,"ec":2,"ec_target":8,"ec_pct":25.0,"cancel_value":35881109,"cancel_count":4,"swap_value":0,"swap_count":0,"return_value":0,"return_count":0,"excluded_value":35881109,"excluded_count":4,"avg_order":11444157,"color":"#a78bfa"},{"kd_sls":"168843","nama":"AEPDA-WAHYUDI","depo":"PMA MEDAN UTARA","divisi":"SALESMAN","level":"AEPDA","target":132697670,"real":4854285,"billing":0,"pct":3.66,"do_count":4,"ec":4,"ec_target":8,"ec_pct":50.0,"cancel_value":438749,"cancel_count":1,"swap_value":0,"swap_count":0,"return_value":0,"return_count":0,"excluded_value":438749,"excluded_count":1,"avg_order":1213571,"color":"#fb7185"}],"supervisors":[{"kd_sls":"1001","nama":"ASSDA - JEFRI SAPUTRA","depo":"PMA MEDAN TIMUR","divisi":"SUPERVISOR","target":138963214,"real":30138686,"pct":21.69,"ec":46,"ec_target":58,"ec_pct":79.31,"team_count":3,"color":"#a78bfa"},{"kd_sls":"1002","nama":"ASSDA - ANDRI PRATAMA","depo":"PMA MEDAN UTARA","divisi":"SUPERVISOR","target":158799214,"real":27246397,"pct":17.16,"ec":112,"ec_target":133,"ec_pct":84.21,"team_count":6,"color":"#fb7185"},{"kd_sls":"1003","nama":"ASSDA - RAJA HARI MUKTI","depo":"PMA MEDAN SELATAN","divisi":"SUPERVISOR","target":106350837,"real":51574370,"pct":48.49,"ec":120,"ec_target":133,"ec_pct":90.23,"team_count":6,"color":"#38bdf8"},{"kd_sls":"1004","nama":"ASSDA - TEGUH PRIHATIN","depo":"PMA LUBUK PAKAM","divisi":"SUPERVISOR","target":94418074,"real":53664271,"pct":56.84,"ec":92,"ec_target":108,"ec_pct":85.19,"team_count":5,"color":"#22d3a7"},{"kd_sls":"1006","nama":"ASSDA - HERMAN","depo":"PMA MEDAN TIMUR1","divisi":"SUPERVISOR","target":21446057,"real":17335318,"pct":80.83,"ec":102,"ec_target":125,"ec_pct":81.6,"team_count":5,"color":"#fbbf24"}],"manager":{"kd_sls":"1005","nama":"YOHANES","depo":"MEDAN RAYA","divisi":"MANAGER","target":519977396,"real":179959042,"pct":34.61,"ec":472,"ec_target":557,"ec_pct":84.74,"team_count":25},"status_breakdown":[{"status":"New","count":472,"value":179959042,"included_value":179959042,"excluded_value":0,"excluded":false,"color":"#38bdf8"},{"status":"Cancel","count":36,"value":70089634,"included_value":0,"excluded_value":70089634,"excluded":true,"color":"#fb7185"}],"top_customers":[{"customer":"C1669859-KIEN HUA JAYA","value":17505257,"count":1,"depo":"PMA MEDAN TIMUR","sales":"AEPDA-IVANSYAH"},{"customer":"C3289124-BINTANG TERANG, TK","value":8626169,"count":1,"depo":"PMA LUBUK PAKAM","sales":"AEPDA-ADAN SAPUTRA"},{"customer":"C3285920-Iswan tk","value":7660157,"count":1,"depo":"PMA MEDAN SELATAN","sales":"AEPDA-RIDHO"},{"customer":"C3289554-ZAKIYAH, TK","value":6230184,"count":1,"depo":"PMA LUBUK PAKAM","sales":"AEPDA-ADAN SAPUTRA"},{"customer":"C3284006-MITRA ACC","value":5459747,"count":1,"depo":"PMA MEDAN SELATAN","sales":"AEPDA-RIDHO"},{"customer":"C3035313-NURRAHMAN","value":5383057,"count":1,"depo":"PMA MEDAN TIMUR","sales":"AEPDA-IVANSYAH"},{"customer":"C3290229-BUDI","value":4601795,"count":1,"depo":"PMA LUBUK PAKAM","sales":"AEPDA-ADAN SAPUTRA"},{"customer":"C3289641-ABADI JAYA 2, TK","value":3095049,"count":1,"depo":"PMA LUBUK PAKAM","sales":"AEPDA-ADAN SAPUTRA"}],"cancel_orders":[{"no_do":"1121500408592","tgl_do":"2026-11-02","customer":"C1669859-KIEN HUA JAYA","sales_name":"AEPDA-IVANSYAH","kd_sls":"134675","depo":"PMA MEDAN TIMUR","status":"Cancel","total":18396245},{"no_do":"2181500164018","tgl_do":"2026-11-02","customer":"C3266521-TOKO ANDRE TR . TK","sales_name":"AEPDA-RIDHO","kd_sls":"153466","depo":"PMA MEDAN SELATAN","status":"Cancel","total":14955907},{"no_do":"1121500408563","tgl_do":"2026-11-02","customer":"C3035313-NURRAHMAN","sales_name":"AEPDA-IVANSYAH","kd_sls":"134675","depo":"PMA MEDAN TIMUR","status":"Cancel","total":6081386},{"no_do":"1121500408692","tgl_do":"2026-11-02","customer":"C3035313-NURRAHMAN","sales_name":"AEPDA-IVANSYAH","kd_sls":"134675","depo":"PMA MEDAN TIMUR","status":"Cancel","total":5721044},{"no_do":"1121500408743","tgl_do":"2026-11-02","customer":"C3035313-NURRAHMAN","sales_name":"AEPDA-IVANSYAH","kd_sls":"134675","depo":"PMA MEDAN TIMUR","status":"Cancel","total":5682434},{"no_do":"2181500164056","tgl_do":"2026-11-02","customer":"C1813041-HAGANTA SITEPU","sales_name":"AEPDA-RIDHO","kd_sls":"153466","depo":"PMA MEDAN SELATAN","status":"Cancel","total":3957030},{"no_do":"2181500164060","tgl_do":"2026-11-02","customer":"C1814453-BINTANG BARU. TK","sales_name":"AEPDA-RIDHO","kd_sls":"153466","depo":"PMA MEDAN SELATAN","status":"Cancel","total":2829722},{"no_do":"1121500408554","tgl_do":"2026-11-02","customer":"C3271008-SEMPURNA, TK","sales_name":"GDKDA-SUARA MAHARDIKA","kd_sls":"168847","depo":"PMA MEDAN UTARA","status":"Cancel","total":1411697},{"no_do":"1121500408481","tgl_do":"2026-11-02","customer":"C3273974-RIZKY PONSEL, TOKO","sales_name":"GDKDA-RAAMAN TOBY","kd_sls":"168849","depo":"PMA MEDAN UTARA","status":"Cancel","total":1235559},{"no_do":"2181500164062","tgl_do":"2026-11-02","customer":"C3286236-BEU MEUHASE","sales_name":"AEPDA-RIDHO","kd_sls":"153466","depo":"PMA MEDAN SELATAN","status":"Cancel","total":1103455},{"no_do":"2181500163992","tgl_do":"2026-11-02","customer":"C3283153-RIZAL JAYA.TK.","sales_name":"GDKDA-RENDY A PRADANA","kd_sls":"153472","depo":"PMA MEDAN SELATAN","status":"Cancel","total":843638},{"no_do":"2181500163971","tgl_do":"2026-11-02","customer":"C3287076-MITRA BERKAH","sales_name":"GDKDA-RENDY A PRADANA","kd_sls":"153472","depo":"PMA MEDAN SELATAN","status":"Cancel","total":685661},{"no_do":"2181500164008","tgl_do":"2026-11-02","customer":"C3286993-BOAS ASIAN JAYA","sales_name":"GDKDA-RENDY A PRADANA","kd_sls":"153472","depo":"PMA MEDAN SELATAN","status":"Cancel","total":563126},{"no_do":"2181500164040","tgl_do":"2026-11-02","customer":"C3283034-HENDRA","sales_name":"GDKDA-RENDY A PRADANA","kd_sls":"153472","depo":"PMA MEDAN SELATAN","status":"Cancel","total":537019},{"no_do":"4611500124250","tgl_do":"2026-11-02","customer":"C3289064-YANTI, TK","sales_name":"AEPDA-ADAN SAPUTRA","kd_sls":"199830","depo":"PMA LUBUK PAKAM","status":"Cancel","total":477140},{"no_do":"1121500408552","tgl_do":"2026-11-02","customer":"C3271449-ACUAN, TK","sales_name":"AEPDA-WAHYUDI","kd_sls":"168843","depo":"PMA MEDAN UTARA","status":"Cancel","total":438749},{"no_do":"2181500164035","tgl_do":"2026-11-02","customer":"C3266521-TOKO ANDRE TR . TK","sales_name":"AEPDA-RIDHO","kd_sls":"153466","depo":"PMA MEDAN SELATAN","status":"Cancel","total":436168},{"no_do":"2181500163966","tgl_do":"2026-11-02","customer":"C3286079-Terang Jaya","sales_name":"GDKDA-AHMAD ERWIN","kd_sls":"153468","depo":"PMA MEDAN SELATAN","status":"Cancel","total":409492},{"no_do":"2181500164057","tgl_do":"2026-11-02","customer":"C3286880-TOKO YESHI","sales_name":"GDKDA-FAISAL AKBAR HSB","kd_sls":"153425","depo":"PMA MEDAN SELATAN","status":"Cancel","total":374679},{"no_do":"2181500164003","tgl_do":"2026-11-02","customer":"C3284568-3 BERSAUDARA TK.","sales_name":"GDKDA-SONI RANU","kd_sls":"153434","depo":"PMA MEDAN SELATAN","status":"Cancel","total":367291},{"no_do":"2181500163972","tgl_do":"2026-11-02","customer":"C3285423-IKBAL","sales_name":"GDKDA-AHMAD ERWIN","kd_sls":"153468","depo":"PMA MEDAN SELATAN","status":"Cancel","total":351640},{"no_do":"2181500164030","tgl_do":"2026-11-02","customer":"C2854430-TK.JORDAN","sales_name":"GDKDA-FAISAL AKBAR HSB","kd_sls":"153425","depo":"PMA MEDAN SELATAN","status":"Cancel","total":300399},{"no_do":"2181500163997","tgl_do":"2026-11-02","customer":"C3284518-SUSI, TK..","sales_name":"GDKDA-AHMAD ERWIN","kd_sls":"153468","depo":"PMA MEDAN SELATAN","status":"Cancel","total":275646},{"no_do":"2181500163949","tgl_do":"2026-11-02","customer":"C3284064-EDO","sales_name":"GDKDA-AHMAD ERWIN","kd_sls":"153468","depo":"PMA MEDAN SELATAN","status":"Cancel","total":271792},{"no_do":"2181500163970","tgl_do":"2026-11-02","customer":"C3287120-AURORA","sales_name":"GDKDA-FAISAL AKBAR HSB","kd_sls":"153425","depo":"PMA MEDAN SELATAN","status":"Cancel","total":264398},{"no_do":"2181500164044","tgl_do":"2026-11-02","customer":"C3283179-BOLANG.TK","sales_name":"GDKDA-SONI RANU","kd_sls":"153434","depo":"PMA MEDAN SELATAN","status":"Cancel","total":259555},{"no_do":"2181500164011","tgl_do":"2026-11-02","customer":"C3287155-TOKO ALBAROKAH CANTIKA","sales_name":"GDKDA-RENDY A PRADANA","kd_sls":"153472","depo":"PMA MEDAN SELATAN","status":"Cancel","total":227439},{"no_do":"2181500164071","tgl_do":"2026-11-02","customer":"C3285480-PARDA","sales_name":"GDKDA-RENDY A PRADANA","kd_sls":"153472","depo":"PMA MEDAN SELATAN","status":"Cancel","total":224795},{"no_do":"2181500164010","tgl_do":"2026-11-02","customer":"C3285024-SANDI TK","sales_name":"GDKDA-AHMAD ERWIN","kd_sls":"153468","depo":"PMA MEDAN SELATAN","status":"Cancel","total":224283},{"no_do":"2181500163968","tgl_do":"2026-11-02","customer":"C3286925-TOKO BANCIN","sales_name":"GDKDA-FAISAL AKBAR HSB","kd_sls":"153425","depo":"PMA MEDAN SELATAN","status":"Cancel","total":215403},{"no_do":"2181500164024","tgl_do":"2026-11-02","customer":"C3286820-TOKO AHOK","sales_name":"GDKDA-AHMAD ERWIN","kd_sls":"153468","depo":"PMA MEDAN SELATAN","status":"Cancel","total":201375},{"no_do":"2181500164050","tgl_do":"2026-11-02","customer":"C3285703-TOKO AMAL TOMAGOLA","sales_name":"GDKDA-SONI RANU","kd_sls":"153434","depo":"PMA MEDAN SELATAN","status":"Cancel","total":194334},{"no_do":"2181500164068","tgl_do":"2026-11-02","customer":"C3286368-AKIRA PONSEL","sales_name":"GDKDA-AHMAD ERWIN","kd_sls":"153468","depo":"PMA MEDAN SELATAN","status":"Cancel","total":188930},{"no_do":"1121500408683","tgl_do":"2026-11-02","customer":"C1670565-TANJUNG,,TK","sales_name":"GDKDA-JUNIARTO","kd_sls":"134682","depo":"PMA MEDAN TIMUR","status":"Cancel","total":172998},{"no_do":"2181500164074","tgl_do":"2026-11-02","customer":"C3286165-SUBUR BARU GULTOM","sales_name":"GDKDA-RENDY A PRADANA","kd_sls":"153472","depo":"PMA MEDAN SELATAN","status":"Cancel","total":104676},{"no_do":"4611500124294","tgl_do":"2026-11-02","customer":"C3290644-TK Intan","sales_name":"GDKDA-YOGI PRAYUDA","kd_sls":"199803","depo":"PMA LUBUK PAKAM","status":"Cancel","total":104529}],"recent_orders":[{"no_do":"4611500124312","tgl_do":"2026-11-02","tgl_do_label":"02 Nov","scraped_at":"2026-11-02T17:05:54","scraped_at_label":"17:05:54","customer":"C3284201-ELLA HOMBING, TK","sales_name":"GDKDA-ANDIKA ERFIAN","kd_sls":"199805","depo":"PMA LUBUK PAKAM","status":"New","total":99575,"is_cancel":false,"is_swap":false,"is_return":false,"is_excluded":false,"exclusion_reason":null,"tipe":"ZOP1 - Taking Order"},{"no_do":"4611500124311","tgl_do":"2026-11-02","tgl_do_label":"02 Nov","scraped_at":"2026-11-02T17:05:54","scraped_at_label":"17:05:54","customer":"C3289534-MAS BUDI TK","sales_name":"GDKDA-YOGI PRAYUDA","kd_sls":"199803","depo":"PMA LUBUK PAKAM","status":"New","total":477805,"is_cancel":false,"is_swap":false,"is_return":false,"is_excluded":false,"exclusion_reason":null,"tipe":"ZOP1 - Taking Order"},{"no_do":"4611500124310","tgl_do":"2026-11-02","tgl_do_label":"02 Nov","scraped_at":"2026-11-02T17:05:54","scraped_at_label":"17:05:54","customer":"C3289535-IDA TK","sales_name":"GDKDA-YOGI PRAYUDA","kd_sls":"199803","depo":"PMA LUBUK PAKAM","status":"New","total":271384,"is_cancel":false,"is_swap":false,"is_return":false,"is_excluded":false,"exclusion_reason":null,"tipe":"ZOP1 - Taking Order"},{"no_do":"4611500124309","tgl_do":"2026-11-02","tgl_do_label":"02 Nov","scraped_at":"2026-11-02T17:05:54","scraped_at_label":"17:05:54","customer":"C3289607-DESI, TK","sales_name":"GDKDA-GUSTI KARAN","kd_sls":"199806","depo":"PMA LUBUK PAKAM","status":"New","total":494577,"is_cancel":false,"is_swap":false,"is_return":false,"is_excluded":false,"exclusion_reason":null,"tipe":"ZOP1 - Taking Order"},{"no_do":"4611500124308","tgl_do":"2026-11-02","tgl_do_label":"02 Nov","scraped_at":"2026-11-02T17:05:54","scraped_at_label":"17:05:54","customer":"C3290842-TK. SYAURAH","sales_name":"GDKDA-YOGI PRAYUDA","kd_sls":"199803","depo":"PMA LUBUK PAKAM","status":"New","total":188576,"is_cancel":false,"is_swap":false,"is_return":false,"is_excluded":false,"exclusion_reason":null,"tipe":"ZOP1 - Taking Order"},{"no_do":"4611500124307","tgl_do":"2026-11-02","tgl_do_label":"02 Nov","scraped_at":"2026-11-02T17:05:54","scraped_at_label":"17:05:54","customer":"C3289603-SRI,, TK","sales_name":"GDKDA-GUSTI KARAN","kd_sls":"199806","depo":"PMA LUBUK PAKAM","status":"New","total":249177,"is_cancel":false,"is_swap":false,"is_return":false,"is_excluded":false,"exclusion_reason":null,"tipe":"ZOP1 - Taking Order"},{"no_do":"4611500124306","tgl_do":"2026-11-02","tgl_do_label":"02 Nov","scraped_at":"2026-11-02T17:05:54","scraped_at_label":"17:05:54","customer":"C3290596-TK Rara","sales_name":"GDKDA-YOGI PRAYUDA","kd_sls":"199803","depo":"PMA LUBUK PAKAM","status":"New","total":266551,"is_cancel":false,"is_swap":false,"is_return":false,"is_excluded":false,"exclusion_reason":null,"tipe":"ZOP1 - Taking Order"},{"no_do":"4611500124305","tgl_do":"2026-11-02","tgl_do_label":"02 Nov","scraped_at":"2026-11-02T17:05:54","scraped_at_label":"17:05:54","customer":"C3289598-SAIDIN, TK","sales_name":"GDKDA-GUSTI KARAN","kd_sls":"199806","depo":"PMA LUBUK PAKAM","status":"New","total":117063,"is_cancel":false,"is_swap":false,"is_return":false,"is_excluded":false,"exclusion_reason":null,"tipe":"ZOP1 - Taking Order"},{"no_do":"4611500124304","tgl_do":"2026-11-02","tgl_do_label":"02 Nov","scraped_at":"2026-11-02T17:05:54","scraped_at_label":"17:05:54","customer":"C3289600-HABIBAH, TK","sales_name":"GDKDA-GUSTI KARAN","kd_sls":"199806","depo":"PMA LUBUK PAKAM","status":"New","total":107135,"is_cancel":false,"is_swap":false,"is_return":false,"is_excluded":false,"exclusion_reason":null,"tipe":"ZOP1 - Taking Order"},{"no_do":"4611500124303","tgl_do":"2026-11-02","tgl_do_label":"02 Nov","scraped_at":"2026-11-02T17:05:54","scraped_at_label":"17:05:54","customer":"C3289532-AYU, TK","sales_name":"GDKDA-YOGI PRAYUDA","kd_sls":"199803","depo":"PMA LUBUK PAKAM","status":"New","total":117035,"is_cancel":false,"is_swap":false,"is_return":false,"is_excluded":false,"exclusion_reason":null,"tipe":"ZOP1 - Taking Order"},{"no_do":"4611500124302","tgl_do":"2026-11-02","tgl_do_label":"02 Nov","scraped_at":"2026-11-02T17:05:54","scraped_at_label":"17:05:54","customer":"C3285401-TK ABABIL","sales_name":"GDKDA-IRWAN JUNIARDI","kd_sls":"199823","depo":"PMA LUBUK PAKAM","status":"New","total":132370,"is_cancel":false,"is_swap":false,"is_return":false,"is_excluded":false,"exclusion_reason":null,"tipe":"ZOP1 - Taking Order"},{"no_do":"4611500124301","tgl_do":"2026-11-02","tgl_do_label":"02 Nov","scraped_at":"2026-11-02T17:05:54","scraped_at_label":"17:05:54","customer":"C3289602-KIKI TK","sales_name":"GDKDA-GUSTI KARAN","kd_sls":"199806","depo":"PMA LUBUK PAKAM","status":"New","total":514839,"is_cancel":false,"is_swap":false,"is_return":false,"is_excluded":false,"exclusion_reason":null,"tipe":"ZOP1 - Taking Order"},{"no_do":"4611500124300","tgl_do":"2026-11-02","tgl_do_label":"02 Nov","scraped_at":"2026-11-02T17:05:54","scraped_at_label":"17:05:54","customer":"C3289538-SAIDI, TK","sales_name":"GDKDA-YOGI PRAYUDA","kd_sls":"199803","depo":"PMA LUBUK PAKAM","status":"New","total":113929,"is_cancel":false,"is_swap":false,"is_return":false,"is_excluded":false,"exclusion_reason":null,"tipe":"ZOP1 - Taking Order"},{"no_do":"4611500124299","tgl_do":"2026-11-02","tgl_do_label":"02 Nov","scraped_at":"2026-11-02T17:05:54","scraped_at_label":"17:05:54","customer":"C3289610-APO, TK","sales_name":"GDKDA-GUSTI KARAN","kd_sls":"199806","depo":"PMA LUBUK PAKAM","status":"New","total":934205,"is_cancel":false,"is_swap":false,"is_return":false,"is_excluded":false,"exclusion_reason":null,"tipe":"ZOP1 - Taking Order"},{"no_do":"4611500124298","tgl_do":"2026-11-02","tgl_do_label":"02 Nov","scraped_at":"2026-11-02T17:05:54","scraped_at_label":"17:05:54","customer":"C3290945-WARUNG BILLA","sales_name":"GDKDA-GUSTI KARAN","kd_sls":"199806","depo":"PMA LUBUK PAKAM","status":"New","total":180464,"is_cancel":false,"is_swap":false,"is_return":false,"is_excluded":false,"exclusion_reason":null,"tipe":"ZOP1 - Taking Order"}],"trend":[{"ts":"2026-11-02T17:18:49","label":"17:18","revenue":179959042,"billing":0,"target":519977396,"do_count":472},{"ts":"2026-11-02T17:24:37","label":"17:24","revenue":179959042,"billing":0,"target":519977396,"do_count":472},{"ts":"2026-11-02T17:59:48","label":"17:59","revenue":179959042,"billing":0,"target":519977396,"do_count":472},{"ts":"2026-11-02T18:51:13","label":"18:51","revenue":179959042,"billing":0,"target":519977396,"do_count":472},{"ts":"2026-11-02T18:57:23","label":"18:57","revenue":179959042,"billing":0,"target":519977396,"do_count":472},{"ts":"2026-11-02T19:01:49","label":"19:01","revenue":179959042,"billing":0,"target":519977396,"do_count":472},{"ts":"2026-11-02T19:05:58","label":"19:05","revenue":179959042,"billing":0,"target":519977396,"do_count":472},{"ts":"2026-11-02T19:14:51","label":"19:14","revenue":179959042,"billing":0,"target":519977396,"do_count":472}],"trend_delta":0};</script>
   <script>
 /*
  * Engine Dashboard - data layer untuk versi statis (tanpa server).
@@ -10317,6 +10343,25 @@ body.jks-mode .sync-block { display: none; }
     }
   }
 
+  function loadSnapshotPayload() {
+    const payload = window.OmsetSnapshot;
+    if (!payload || !payload.summary) return null;
+    try {
+      return JSON.parse(JSON.stringify(payload));
+    } catch (error) {
+      return null;
+    }
+  }
+
+  function minutesSinceIso(isoValue) {
+    if (!isoValue) return null;
+    const raw = String(isoValue).slice(0, 19);
+    const time = new Date(`${raw}+07:00`).getTime();
+    const now = new Date(`${nowIso()}+07:00`).getTime();
+    if (!Number.isFinite(time) || !Number.isFinite(now)) return null;
+    return Math.max(0, Math.round((now - time) / 60000));
+  }
+
   function saveCachedPayload(payload) {
     writeStorage(PAYLOAD_KEY, JSON.stringify(payload));
   }
@@ -10370,10 +10415,18 @@ body.jks-mode .sync-block { display: none; }
   function decorateCached(cached, options = {}) {
     const payload = JSON.parse(JSON.stringify(cached));
     const now = nowIso();
+    const today = now.slice(0, 10);
+    const dataDate = String((payload.meta && payload.meta.data_date) || "");
+    const dataIsToday = Boolean(dataDate) && dataDate === today;
+    const stale =
+      options.stale !== undefined ? Boolean(options.stale) : !dataIsToday;
     payload.meta = {
       ...(payload.meta || {}),
       source: options.source || "cache",
-      stale: options.stale !== undefined ? options.stale : true,
+      stale: stale || !dataIsToday,
+      data_is_today: dataIsToday,
+      stale_minutes: minutesSinceIso(payload.meta && payload.meta.source_updated_at),
+      stale_after_minutes: OMSET_CONFIG.staleAfterMinutes,
       partial: options.partial !== undefined ? options.partial : false,
       accounts: options.accounts || [],
       expected_accounts: OMSET_CONFIG.expectedAccounts,
@@ -10441,10 +10494,18 @@ body.jks-mode .sync-block { display: none; }
         if (cached) {
           return decorateCached(cached, {
             source: "live",
-            stale: false,
+            stale: !cached.meta || cached.meta.data_date !== nowIso().slice(0, 10),
             partial: true,
             accounts: scrapeMeta.accounts,
             note: "Sheet sedang ditulis ulang oleh bot. Menampilkan data lengkap terakhir.",
+          });
+        }
+        const snapshot = loadSnapshotPayload();
+        if (snapshot) {
+          return decorateCached(snapshot, {
+            source: "snapshot",
+            stale: true,
+            note: "Sheet SCRAPING kosong. Menampilkan snapshot build terakhir.",
           });
         }
         throw new Error("Sheet SCRAPING kosong. Bot mungkin sedang menulis data.");
@@ -10496,6 +10557,14 @@ body.jks-mode .sync-block { display: none; }
       if (cached) {
         return decorateCached(cached, {
           source: "cache",
+          stale: true,
+          error: error && error.message ? error.message : String(error),
+        });
+      }
+      const snapshot = loadSnapshotPayload();
+      if (snapshot) {
+        return decorateCached(snapshot, {
+          source: "snapshot",
           stale: true,
           error: error && error.message ? error.message : String(error),
         });
@@ -10563,6 +10632,7 @@ body.jks-mode .sync-block { display: none; }
     alert: $("#alert"),
     errorState: $("#errorState"),
     errorMessage: $("#errorMessage"),
+    errorDetail: $("#errorDetail"),
     retryBtn: $("#retryBtn"),
     refreshBtn: $("#refreshBtn"),
     sidebar: $("#sidebar"),
@@ -11585,6 +11655,10 @@ body.jks-mode .sync-block { display: none; }
     if (source === "demo") {
       setSourceBadge("demo", "DEMO");
       els.footSource.textContent = "Sumber: data demo (OMSET_DEMO=1)";
+    } else if (source === "snapshot") {
+      setSourceBadge("cache", "DATA LAMA");
+      els.footSource.textContent =
+        "Sumber: snapshot build · Google Sheets belum tersambung";
     } else if (meta.error || source === "cache") {
       setSourceBadge("cache", "CACHE");
       els.footSource.textContent = "Sumber: cache lokal · Google Sheets belum tersambung";
@@ -12106,6 +12180,36 @@ body.jks-mode .sync-block { display: none; }
     els.countdown.textContent = `${Math.max(0, Math.round(state.countdown))}s`;
   }
 
+  function fetchErrorHint(error) {
+    const staticMode = Boolean(
+      window.OmsetData && typeof window.OmsetData.load === "function"
+    );
+    const pageUrl = window.location.href;
+    const sourceLabel = staticMode
+      ? "Google Sheets langsung (versi statis)"
+      : "/api/dashboard (server Flask)";
+    const message = String(error?.message || "");
+    let advice = "Buka dashboard dari alamat yang sama dengan desktop.";
+
+    if (window.location.protocol === "file:") {
+      advice =
+        "Halaman ini dibuka dari file di HP, bukan dari server. Buka alamat server atau tunnel yang sama dengan desktop.";
+    } else if (error?.name === "AbortError") {
+      advice =
+        "Server tidak menjawab dalam 25 detik. Periksa koneksi lalu tekan Coba lagi.";
+    } else if (/Failed to fetch|NetworkError|Load failed/i.test(message)) {
+      advice = staticMode
+        ? "HP tidak bisa menghubungi Google Sheets. Periksa koneksi internet di HP."
+        : "HP tidak bisa menghubungi server. Pastikan server/tunnel masih berjalan dan alamatnya sama dengan desktop.";
+    } else if (/HTTP 404|HTTP 405|Respons server tidak valid/i.test(message)) {
+      advice = staticMode
+        ? "Alamat ini bukan halaman dashboard yang benar."
+        : "Alamat ini tidak dilayani server dashboard. Di HP, buka alamat server/tunnel yang sama dengan desktop.";
+    }
+
+    return { staticMode, pageUrl, sourceLabel, advice };
+  }
+
   function handleFetchError(error) {
     const message =
       error?.name === "AbortError"
@@ -12119,6 +12223,15 @@ body.jks-mode .sync-block { display: none; }
       );
     } else {
       els.errorMessage.textContent = message;
+      const info = fetchErrorHint(error);
+      if (els.errorDetail) {
+        els.errorDetail.innerHTML =
+          `<p><strong>Mode:</strong> ${info.staticMode ? "Statis" : "Server"}</p>` +
+          `<p><strong>Halaman:</strong> <code>${escapeHtml(info.pageUrl)}</code></p>` +
+          `<p><strong>Sumber data:</strong> ${escapeHtml(info.sourceLabel)}</p>` +
+          `<p class="error-advice">${escapeHtml(info.advice)}</p>`;
+        els.errorDetail.classList.remove("hidden");
+      }
       els.errorState.classList.remove("hidden");
       setSourceBadge("error", "ERROR");
     }
@@ -19517,35 +19630,24 @@ legendControl.addTo(map);
     const keys = (Array.isArray(row) ? row : []).map(jksNormalizeKey);
     const hasDate = keys.some(
       (key) =>
-        key === "TGL" ||
-        key === "TANGGAL" ||
-        key === "DATE" ||
+        key.includes("TGL") ||
         key.includes("TANGGAL") ||
-        key.includes("TGL FAKTUR") ||
-        key.includes("INVOICE DATE")
+        key === "DATE" ||
+        key.includes("INVOICE DATE") ||
+        key.includes("DO DATE")
     );
-    const hasGross = keys.some(
+    const hasNet = keys.some(
       (key) =>
-        key === "VALUE" ||
-        key.includes("VALUE GROSS") ||
-        key === "GROSS" ||
-        key === "OMSET" ||
-        key.includes("OMSET GROSS") ||
+        key.startsWith("VALUE") ||
+        key.startsWith("NILAI") ||
+        key.startsWith("OMSET") ||
+        key.startsWith("TOTAL") ||
+        key.includes("GROSS") ||
         key === "PENJUALAN" ||
         key === "SALES" ||
-        key === "TOTAL" ||
-        key === "NILAI" ||
-        key === "AMOUNT"
-    );
-    const hasNet = hasGross || keys.some(
-      (key) =>
-        key.includes("VALUE NETT") ||
-        key.includes("VALUE NET") ||
-        key === "NETT" ||
-        key.includes("NETT EXCL") ||
-        key.includes("NET SALES") ||
-        key === "NETTO" ||
-        key.includes("NILAI NETT")
+        key === "AMOUNT" ||
+        key === "JUMLAH" ||
+        key.includes("NETT")
     );
     const hasOutlet = keys.some(
       (key) => key.includes("OUTLET") || key.includes("TOKO") || key.includes("CUSTOMER")
@@ -19629,7 +19731,7 @@ legendControl.addTo(map);
 
   function analysisObjectsFromWorkbook(workbook) {
     if (!workbook || !Array.isArray(workbook.SheetNames)) {
-      return { objects: [], sheets: [], score: 0 };
+      return { objects: [], sheets: [], score: 0, emptyWithHeader: false };
     }
 
     const summaryName = /(REKAP|SUMMARY|RINGKASAN|PIVOT|DASHBOARD|GRAFIK|CHART|COVER|PETUNJUK)/i;
@@ -19643,11 +19745,13 @@ legendControl.addTo(map);
         blankrows: false,
       });
       const result = analysisObjectsFromAoa(aoa);
-      if (!result.objects.length || !result.hasDate) return null;
-      return { name, ...result };
+      if (!result.hasDate) return null;
+      return { name, ...result, empty: !result.objects.length };
     }).filter(Boolean);
 
-    if (!parsed.length) return { objects: [], sheets: [], score: 0 };
+    if (!parsed.length) {
+      return { objects: [], sheets: [], score: 0, emptyWithHeader: false };
+    }
 
     const rawSheets = parsed.filter((sheet) => !summaryName.test(sheet.name));
     const pool = rawSheets.length ? rawSheets : parsed;
@@ -19658,6 +19762,7 @@ legendControl.addTo(map);
       objects: chosen.flatMap((sheet) => sheet.objects),
       sheets: chosen.map((sheet) => sheet.name),
       score: bestScore,
+      emptyWithHeader: parsed.some((sheet) => sheet.hasDate && sheet.empty),
     };
   }
 
@@ -19676,7 +19781,11 @@ legendControl.addTo(map);
       });
       const parsed = analysisObjectsFromWorkbook(workbook);
       if (!parsed.objects.length) {
-        throw new Error("Kolom TGL dan data penjualan tidak ditemukan.");
+        throw new Error(
+          parsed.emptyWithHeader
+            ? "File hanya berisi header; belum ada baris data. Isi minimal satu baris transaksi."
+            : "Kolom TGL dan data penjualan tidak ditemukan."
+        );
       }
       return parsed;
     }
@@ -19700,7 +19809,14 @@ legendControl.addTo(map);
       const delimiter = jksDetectDelimiter(text);
       const aoa = jksParseDelimited(text, delimiter);
       const parsed = analysisObjectsFromAoa(aoa);
-      if (!parsed.objects.length || !parsed.hasDate) {
+      if (!parsed.objects.length) {
+        throw new Error(
+          parsed.hasDate
+            ? "File hanya berisi header; belum ada baris data. Isi minimal satu baris transaksi."
+            : "Kolom TGL dan data penjualan tidak ditemukan."
+        );
+      }
+      if (!parsed.hasDate) {
         throw new Error("Kolom TGL dan data penjualan tidak ditemukan.");
       }
       return { objects: parsed.objects, sheets: ["CSV"], score: parsed.score };
@@ -19749,7 +19865,14 @@ legendControl.addTo(map);
     };
 
     const date = analysisParseDate(
-      read("TGL", "TANGGAL", "DATE", "TGL FAKTUR", "TANGGAL FAKTUR", "INVOICE DATE")
+      read(
+        "TGL", "TANGGAL", "DATE",
+        "TGL DO", "TANGGAL DO",
+        "TGL TRANSAKSI", "TANGGAL TRANSAKSI",
+        "TGL KIRIM", "TANGGAL KIRIM",
+        "TGL FAKTUR", "TANGGAL FAKTUR",
+        "TGL INVOICE", "INVOICE DATE", "DO DATE"
+      )
     );
     if (!date) return null;
 
@@ -19814,14 +19937,21 @@ legendControl.addTo(map);
     const grossCell = read(
       "VALUE",
       "VALUE GROSS",
+      "VALUE RP",
       "GROSS",
       "OMSET",
       "OMSET GROSS",
+      "OMSET RP",
       "SALES",
       "TOTAL",
+      "TOTAL RP",
+      "TOTAL FAKTUR",
       "PENJUALAN",
       "NILAI",
-      "AMOUNT"
+      "NILAI RP",
+      "NILAI FAKTUR",
+      "AMOUNT",
+      "JUMLAH"
     );
     const netCell = read(
       "VALUE NETT",
@@ -24791,18 +24921,23 @@ legendControl.addTo(map);
   }
 
   const ANALYSIS_TEMPLATE_HEADERS = [
-    "TGL", "KODE OUTLET", "NAMA OUTLET", "PMA", "CHANNEL", "TYPE OUTLET",
-    "NAMA SALESMAN", "KODE SALESMAN", "DIVISI", "KD_BRG", "NM_BRG",
-    "MARK NEW", "QTY", "VALUE", "VALUE NETT", "NO FAKTUR", "RUTE",
+    "KODE OUTLET", "NAMA OUTLET", "CHANNEL", "FC", "RUTE", "PMA",
+    "KODE SALESMAN", "TGL", "KD_BRG", "NM_BRG", "BU", "MARK",
+    "KODE BARANG", "DESCRIPTION", "QTY", "VALUE", "KET", "BULAN",
+    "BRAND", "MARK NEW", "DIV", "MUTASI", "KD SLS2", "KD OUTLET",
+    "NIK SALESMAN", "NAMA SALESMAN", "VALUE NETT", "NO FAKTUR",
   ];
 
   function analysisTemplateAoa() {
     return [
       ANALYSIS_TEMPLATE_HEADERS,
       [
-        "01-Oct-26", "OUT-001", "TOKO MAKMUR", "PMA MEDAN", "RETAIL", "TOKO",
-        "BUDI", "SLS-001", "GT", "M2C24", "PRODUK CONTOH", "MARK", 10,
-        150000, 145000, "INV-001", "R01 - SENIN",
+        "OUT-001", "TOKO MAKMUR", "GT", "FC1", "R01 - SENIN", "PMA MEDAN",
+        "SLS-001", "02-Nov-26", "M2C13", "PRODUK CONTOH", "BU1", "MARK",
+        "M2C13", "PRODUK CONTOH", 10, 150000, "NORMAL", "NOV 2026",
+        "BRAND", "MARK", "AEP", "MUTASI", "SLS-001", "OUT-001",
+        "SLS-001", "BUDI", 145000, "INV-001",
+        "02-Nov-26", "M2C13", "NETT EXCL PPN",
       ],
     ];
   }
