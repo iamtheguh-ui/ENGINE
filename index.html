@@ -129,6 +129,12 @@ button { cursor: pointer; }
   color: var(--dim);
 }
 .sidebar-nav { display: flex; flex-direction: column; gap: 3px; }
+.sidebar-group { display: flex; flex-direction: column; gap: 3px; }
+.sidebar-group + .sidebar-group {
+  margin-top: 10px;
+  padding-top: 12px;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+}
 .sidebar-link {
   display: flex;
   align-items: center;
@@ -6445,9 +6451,9 @@ body.jks-mode .sync-block { display: none; }
   <div class="ambient ambient-a" aria-hidden="true"></div>
   <div class="ambient ambient-b" aria-hidden="true"></div>
 
-  <div class="sidebar-backdrop" id="sidebarBackdrop" aria-hidden="true"></div>
-
   <div class="app-shell">
+    <div class="sidebar-backdrop" id="sidebarBackdrop" aria-hidden="true"></div>
+
     <aside class="sidebar" id="sidebar" aria-label="Navigasi dashboard">
       <div class="sidebar-brand">
         <div class="brand-mark" aria-hidden="true">
@@ -6464,8 +6470,9 @@ body.jks-mode .sync-block { display: none; }
       </div>
 
       <nav class="sidebar-nav" aria-label="Menu utama">
-        <span class="sidebar-label" id="sidebarMenuLabel">Menu Omset</span>
-        <a class="sidebar-link is-active" href="#ringkasan" data-nav="ringkasan"  aria-current="page">
+        <div class="sidebar-group">
+          <span class="sidebar-label">Menu Omset</span>
+          <a class="sidebar-link is-active" href="#ringkasan" data-nav="ringkasan"  aria-current="page">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/>
             <rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/>
@@ -6503,7 +6510,11 @@ body.jks-mode .sync-block { display: none; }
           </svg>
           <span>Transaksi</span>
         </a>
-        <a class="sidebar-link" href="#score-card" data-nav="score-card">
+        </div>
+
+        <div class="sidebar-group">
+          <span class="sidebar-label">Menu Performance</span>
+          <a class="sidebar-link" href="#score-card" data-nav="score-card">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <rect x="4" y="3" width="16" height="18" rx="2"/>
             <path d="M8 8h8"/><path d="M8 12h8"/><path d="M8 16h5"/>
@@ -6511,7 +6522,11 @@ body.jks-mode .sync-block { display: none; }
           </svg>
           <span>Performance</span>
         </a>
-        <a class="sidebar-link" href="#penjualan" data-nav="penjualan">
+        </div>
+
+        <div class="sidebar-group">
+          <span class="sidebar-label">Menu Analisa</span>
+          <a class="sidebar-link" href="#penjualan" data-nav="penjualan">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <path d="M5 7h14l1.2 13H3.8L5 7z"/>
             <path d="M9 7a3 3 0 0 1 6 0"/>
@@ -6545,7 +6560,11 @@ body.jks-mode .sync-block { display: none; }
           <span>Analisa Stok Gudang</span>
         </a>
         
-        <a class="sidebar-link" href="#jks-editor" data-nav="jks-editor">
+        </div>
+
+        <div class="sidebar-group">
+          <span class="sidebar-label">Menu Operasional</span>
+          <a class="sidebar-link" href="#jks-editor" data-nav="jks-editor">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <path d="M12 21s7-5.4 7-11a7 7 0 1 0-14 0c0 5.6 7 11 7 11z"/>
             <circle cx="12" cy="10" r="2.2"/>
@@ -6565,7 +6584,11 @@ body.jks-mode .sync-block { display: none; }
           <a class="sidebar-sublink" href="#logistik-supir-detail" data-logistik-target="logistik-supir-detail">Detail Supir</a>
           <a class="sidebar-sublink" href="#logistik-upload" data-logistik-target="logistik-upload">Upload Data</a>
         </nav>
-        <a class="sidebar-link" href="#master-data" data-nav="master-data">
+        </div>
+
+        <div class="sidebar-group">
+          <span class="sidebar-label">Menu Setting</span>
+          <a class="sidebar-link" href="#master-data" data-nav="master-data">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <ellipse cx="12" cy="6" rx="7" ry="3"/>
             <path d="M5 6v6c0 1.7 3.1 3 7 3s7-1.3 7-3V6"/>
@@ -6573,12 +6596,7 @@ body.jks-mode .sync-block { display: none; }
           </svg>
           <span>Master Data</span>
         </a>
-        <a class="sidebar-link" href="#transaksi" data-nav="transaksi" >
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <path d="M6 3h12v18l-3-2-3 2-3-2-3 2V3z"/><path d="M9 8h6"/><path d="M9 12h6"/>
-          </svg>
-          <span>Transaksi</span>
-        </a>
+        </div>
       </nav>
 
       <div class="sidebar-foot">
