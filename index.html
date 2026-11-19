@@ -2338,6 +2338,23 @@ body:not(.analysis-mode) #logistik { display: none; }
   font-weight: 700;
   font-size: 10px;
 }
+.stok-region-map {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 10px;
+  padding: 12px 16px 16px;
+}
+.stok-region-item {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  padding: 10px 12px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--panel);
+}
+.stok-region-item strong { font-size: 12px; color: var(--text); }
+.stok-region-depos { display: flex; flex-wrap: wrap; gap: 6px; }
 .stok-list-item.is-critical .stok-chip { background: rgba(248, 113, 113, 0.16); color: #fda4af; }
 .stok-list-item.is-aman .stok-chip { background: rgba(52, 211, 153, 0.16); color: #6ee7c6; }
 .stok-list-actions {
@@ -7542,6 +7559,24 @@ body.jks-mode .sync-block { display: none; }
             </div>
           </section>
 
+          <section class="panel analysis-panel" aria-label="Omset per principle">
+            <header class="panel-head panel-head-wrap">
+              <div>
+                <h2>Omset by Principle</h2>
+                <p>NABATI, ROLLS, NEXTAR, AHH, SIIP, AMO CSD, TIME BREAK, PASTA &rarr; KSNI &middot; Hello Panda &rarr; MEIJI &middot; Simba &rarr; SIMBA</p>
+              </div>
+              <span id="analysisPrincipleInfo" class="muted sales-table-info">&mdash;</span>
+            </header>
+            <div class="table-scroll analysis-table-scroll">
+              <table class="data-table analysis-compare-table">
+                <thead>
+                  <tr><th>#</th><th>Principle</th><th class="num">MTD</th><th class="num">Avg/bln</th><th class="num">MTD vs avg</th><th class="num">Share MTD</th></tr>
+                </thead>
+                <tbody id="analysisPrincipleBody"></tbody>
+              </table>
+            </div>
+          </section>
+
           <section class="panel analysis-panel" aria-label="Omset per salesman">
             <header class="panel-head panel-head-wrap">
               <div>
@@ -7592,6 +7627,24 @@ body.jks-mode .sync-block { display: none; }
                   <tr><th>#</th><th>Kategori Produk</th><th class="num">ROA MTD</th><th class="num">ROA Avg/bln</th><th class="num">MTD vs avg</th><th class="num">Omset MTD</th></tr>
                 </thead>
                 <tbody id="analysisRoaProductBody"></tbody>
+              </table>
+            </div>
+          </section>
+
+          <section class="panel analysis-panel" aria-label="ROA per principle">
+            <header class="panel-head panel-head-wrap">
+              <div>
+                <h2>ROA by Principle</h2>
+                <p>ROA = jumlah outlet bertransaksi (distinct) &middot; pengelompokan brand sama dengan Omset by Principle</p>
+              </div>
+              <span id="analysisRoaPrincipleInfo" class="muted sales-table-info">&mdash;</span>
+            </header>
+            <div class="table-scroll analysis-table-scroll">
+              <table class="data-table analysis-compare-table">
+                <thead>
+                  <tr><th>#</th><th>Principle</th><th class="num">ROA MTD</th><th class="num">ROA Avg/bln</th><th class="num">MTD vs avg</th><th class="num">Omset MTD</th></tr>
+                </thead>
+                <tbody id="analysisRoaPrincipleBody"></tbody>
               </table>
             </div>
           </section>
@@ -8066,7 +8119,7 @@ body.jks-mode .sync-block { display: none; }
           <article class="kpi is-clickable" data-stok-card="critical" role="button" tabindex="0" title="Klik untuk detail item critical">
             <span class="kpi-label">Item DOI Critical</span>
             <strong id="stokKpiCritical" class="kpi-value">&mdash;</strong>
-            <span class="kpi-sub">DOI &lt; 14 hari</span>
+            <span class="kpi-sub">DOI &le; 5 hari</span>
           </article>
           <article class="kpi is-clickable" data-stok-card="aman" role="button" tabindex="0" title="Klik untuk detail item aman">
             <span class="kpi-label">Item DOI Aman</span>
@@ -8096,12 +8149,22 @@ body.jks-mode .sync-block { display: none; }
           </div>
         </section>
 
+        <section class="panel analysis-panel" aria-label="Pemetaan cabang dan depo">
+          <header class="panel-head panel-head-wrap">
+            <div>
+              <h2>Pemetaan Cabang &amp; Depo</h2>
+              <p>Dasar pengelompokan Saran Intra-Barang agar transfer stok tetap dalam cabang yang sama.</p>
+            </div>
+          </header>
+          <div id="stokRegionMap" class="stok-region-map"></div>
+        </section>
+
         <div class="analysis-detail-grid">
           <section class="panel analysis-panel">
             <header class="panel-head panel-head-wrap">
               <div>
                 <h2>Item DOI Critical</h2>
-                <p>DOI &lt; 14 hari &middot; perlu segera dikirim</p>
+                <p>DOI &le; 5 hari &middot; perlu segera dikirim</p>
               </div>
               <div class="stok-list-actions">
                 <span id="stokCriticalInfo" class="muted sales-table-info">&mdash;</span>
@@ -8167,7 +8230,7 @@ body.jks-mode .sync-block { display: none; }
 
         <footer class="sales-foot analysis-foot">
           <span id="stokFootNote">Belum ada data.</span>
-          <span class="muted">DOI = Days of Inventory (hari) &middot; Critical &lt; 14 hari &middot; Aman &gt; 30 hari &middot; saran intra-barang memakai pengelompokan wilayah depo</span>
+          <span class="muted">DOI = Days of Inventory (hari) &middot; Critical &le; 5 hari &middot; Aman &gt; 30 hari &middot; saran intra-barang memakai pengelompokan wilayah depo</span>
         </footer>
       </div>
     </section>
@@ -10917,6 +10980,7 @@ body.jks-mode .sync-block { display: none; }
     stokTableInfo: $("#stokTableInfo"),
     stokTableHead: $("#stokTableHead"),
     stokTableBody: $("#stokTableBody"),
+    stokRegionMap: $("#stokRegionMap"),
     stokCriticalInfo: $("#stokCriticalInfo"),
     stokCriticalList: $("#stokCriticalList"),
     stokCriticalLimit: $("#stokCriticalLimit"),
@@ -10951,6 +11015,8 @@ body.jks-mode .sync-block { display: none; }
     analysisOutletBody: $("#analysisOutletBody"),
     analysisProductInfo: $("#analysisProductInfo"),
     analysisProductBody: $("#analysisProductBody"),
+    analysisPrincipleInfo: $("#analysisPrincipleInfo"),
+    analysisPrincipleBody: $("#analysisPrincipleBody"),
     analysisSalesmanInfo: $("#analysisSalesmanInfo"),
     analysisSalesmanBody: $("#analysisSalesmanBody"),
     analysisSalesmanTargetCol: $("#analysisSalesmanTargetCol"),
@@ -10965,6 +11031,8 @@ body.jks-mode .sync-block { display: none; }
     analysisChannelBody: $("#analysisChannelBody"),
     analysisRoaProductInfo: $("#analysisRoaProductInfo"),
     analysisRoaProductBody: $("#analysisRoaProductBody"),
+    analysisRoaPrincipleInfo: $("#analysisRoaPrincipleInfo"),
+    analysisRoaPrincipleBody: $("#analysisRoaPrincipleBody"),
     analysisRoaSalesmanInfo: $("#analysisRoaSalesmanInfo"),
     analysisRoaSalesmanBody: $("#analysisRoaSalesmanBody"),
     analysisEcInfo: $("#analysisEcInfo"),
@@ -11047,12 +11115,7 @@ body.jks-mode .sync-block { display: none; }
   function initAuthUser() {
     applyGreetingTime();
     const wrap = $("#sidebarUser");
-    fetch("/api/auth/me", {
-      cache: "no-store",
-      credentials: "same-origin",
-      headers: { Accept: "application/json" },
-    })
-      .then((response) => (response.ok ? response.json() : null))
+    Promise.resolve(null).then((response) => (response.ok ? response.json() : null))
       .then((payload) => {
         if (!payload || !payload.authenticated || !payload.user) return;
         const user = payload.user;
@@ -11092,6 +11155,49 @@ body.jks-mode .sync-block { display: none; }
 
   const ANALYSIS_MAX_FILES = 15;
   const ANALYSIS_STORAGE_KEY = "analisaPenjualanLocalData.v1";
+  // Principle mengelompokkan brand pada Dbase. Nama produk dicek lebih dulu,
+  // lalu brand/kategori sebagai cadangan agar tetap terbaca bila kolom berbeda.
+  const ANALYSIS_PRINCIPLES = [
+    {
+      name: "KSNI",
+      keywords: [
+        "KSNI", "NABATI", "ROLLS", "NEXTAR", "AHH", "SIIP", "AMO CSD",
+        "TIME BREAK", "PASTA",
+      ],
+    },
+    { name: "MEIJI", keywords: ["MEIJI", "HELLO PANDA", "HELLO", "PANDA"] },
+    { name: "SIMBA", keywords: ["SIMBA"] },
+  ];
+  const ANALYSIS_PRINCIPLE_OTHER = "LAINNYA";
+
+  function analysisPrincipleText(value) {
+    return String(value || "")
+      .toUpperCase()
+      .replace(/[^A-Z0-9]+/g, " ")
+      .trim();
+  }
+
+  function analysisPrincipleMatch(text) {
+    if (!text) return "";
+    const match = ANALYSIS_PRINCIPLES.find((entry) =>
+      entry.keywords.some((keyword) => text.includes(keyword))
+    );
+    return match ? match.name : "";
+  }
+
+  function analysisPrinciple(row) {
+    if (!row) return ANALYSIS_PRINCIPLE_OTHER;
+    const product = analysisPrincipleText(
+      [row.productName, row.brand].filter(Boolean).join(" ")
+    );
+    const category = analysisPrincipleText(row.category);
+    return (
+      analysisPrincipleMatch(product) ||
+      analysisPrincipleMatch(category) ||
+      ANALYSIS_PRINCIPLE_OTHER
+    );
+  }
+
   const analysisState = {
     files: [],
     nextId: 1,
@@ -11258,12 +11364,12 @@ body.jks-mode .sync-block { display: none; }
 
   const STOK_MAX_FILES = 15;
   const STOK_KEY = "stok-gudang-v1";
-  const STOK_DOI_CRITICAL = 14;
+  const STOK_DOI_CRITICAL = 5;
   const STOK_DOI_AMAN = 30;
   const STOK_BI_MIN = 1;
   const STOK_DEPO_CODES = [
-    "BNJ", "PBD", "KBJ", "MDT", "MDU", "LDC", "TJM", "LPM", "RAP", "KIS",
-    "KPN", "PMR", "TBT", "SBR", "PYB", "SBA", "PSP", "GST",
+    "BNJ", "PBD", "KBJ", "MDT", "MDU", "MDS", "LDC", "TJM", "LPM", "RAP",
+    "KIS", "KPN", "PMR", "TBT", "SBR", "PYB", "SBA", "PSP", "GST",
   ];
   const STOK_DEPO_NAMES = {
     LPM: "Lubuk Pakam",
@@ -11282,19 +11388,21 @@ body.jks-mode .sync-block { display: none; }
     SBA: "Sibolga",
     PSP: "Padang Sidimpuan",
     MDU: "Medan Utara",
+    MDS: "Medan Selatan",
     LDC: "LDC",
     GST: "GST",
   };
   const STOK_REGIONS = [
-    { name: "Medan Raya", depos: ["MDT", "MDU", "BNJ", "PBD", "LPM", "TJM", "GST", "LDC"] },
-    { name: "Sumatera Timur", depos: ["TBT", "PMR", "KIS", "RAP", "KPN"] },
-    { name: "Dataran Tinggi", depos: ["KBJ", "SBR"] },
-    { name: "Pantai Barat", depos: ["SBA", "PSP", "PYB"] },
+    { name: "Cabang Medan Timur", depos: ["MDT", "LPM", "MDU", "MDS"] },
+    { name: "Cabang Tebing Tinggi", depos: ["TBT", "PMR", "SBR"] },
+    { name: "Cabang Rantau Prapat", depos: ["RAP", "KIS", "KPN"] },
+    { name: "Cabang Binjai", depos: ["BNJ", "KBJ", "PBD", "GST"] },
+    { name: "Cabang Tapanuli", depos: ["PSP", "PYB", "SBA"] },
   ];
   const STOK_TEMPLATE_HEADERS = [
     "NO", "KODE ITEM", "ITEM PRODUK",
     "BNJ", "SELLOUT", "DOI", "PBD", "SELLOUT", "DOI", "KBJ", "SELLOUT", "DOI",
-    "MDT", "SELLOUT", "DOI", "MDU", "SELLOUT", "DOI", "SELLOUT LDC", "DOI LDC",
+    "MDT", "SELLOUT", "DOI", "MDU", "SELLOUT", "DOI", "MDS", "SELLOUT", "DOI", "SELLOUT LDC", "DOI LDC",
     "TJM", "SELLOUT", "DOI", "LPM", "SELLOUT", "DOI", "RAP", "SELLOUT", "DOI",
     "KIS", "SELLOUT", "DOI", "KPN", "SELLOUT", "DOI", "", "",
     "PMR", "SELLOUT", "DOI", "TBT", "SELLOUT", "DOI", "SBR", "SELLOUT", "DOI",
@@ -21281,7 +21389,7 @@ legendControl.addTo(map);
   function stokStatus(doi) {
     const value = Number(doi) || 0;
     if (value <= 0) return "empty";
-    if (value < STOK_DOI_CRITICAL) return "critical";
+    if (value <= STOK_DOI_CRITICAL) return "critical";
     if (value > STOK_DOI_AMAN) return "aman";
     return "normal";
   }
@@ -21494,6 +21602,27 @@ legendControl.addTo(map);
     }
   }
 
+  function stokRenderRegionMap() {
+    if (!els.stokRegionMap) return;
+    els.stokRegionMap.innerHTML = STOK_REGIONS.map(
+      (region) => `
+        <div class="stok-region-item">
+          <strong>${escapeHtml(region.name)}</strong>
+          <div class="stok-region-depos">
+            ${region.depos
+              .map(
+                (depo) =>
+                  `<span class="stok-chip" title="${escapeHtml(
+                    stokDepoLabel(depo)
+                  )}">${escapeHtml(depo)}</span>`
+              )
+              .join("")}
+          </div>
+        </div>
+      `
+    ).join("");
+  }
+
   function stokRenderDepoOptions(depos) {
     if (!els.stokDepo) return;
     const values = ["all", ...depos];
@@ -21594,7 +21723,7 @@ legendControl.addTo(map);
     const limit = Number(stokState.limits.critical) || 0;
     const shown = limit > 0 ? rows.slice(0, limit) : rows;
     if (els.stokCriticalInfo) {
-      els.stokCriticalInfo.textContent = `${fmtNum(rows.length)} baris · DOI < ${STOK_DOI_CRITICAL} h${stokLimitNote(rows.length, shown.length)}`;
+      els.stokCriticalInfo.textContent = `${fmtNum(rows.length)} baris · DOI ≤ ${STOK_DOI_CRITICAL} h${stokLimitNote(rows.length, shown.length)}`;
     }
     if (els.stokCriticalList) {
       els.stokCriticalList.innerHTML = shown.length
@@ -21764,7 +21893,7 @@ legendControl.addTo(map);
       salesDetailStat(
         "DOI terendah",
         totals.minDoi === null ? "—" : `${stokFmtDoi(totals.minDoi)} h`,
-        "critical < 14 hari"
+        "critical ≤ 5 hari"
       ),
       salesDetailStat("Depo critical", fmtNum(totals.critical), "depo"),
       salesDetailStat("Depo aman", fmtNum(totals.aman), "depo"),
@@ -22024,6 +22153,7 @@ legendControl.addTo(map);
 
     if (els.stokResults) els.stokResults.classList.remove("hidden");
     if (els.stokEmpty) els.stokEmpty.classList.add("hidden");
+    stokRenderRegionMap();
 
     let criticalItems = 0;
     let amanItems = 0;
@@ -22045,7 +22175,7 @@ legendControl.addTo(map);
     if (els.stokCriticalHero) els.stokCriticalHero.textContent = fmtNum(criticalItems);
     if (els.stokAmanHero) els.stokAmanHero.textContent = fmtNum(amanItems);
     if (els.stokSub) {
-      els.stokSub.textContent = `${fmtNum(items.length)} item · ${visibleDepos.length} depo · DOI critical < ${STOK_DOI_CRITICAL} hari · DOI aman > ${STOK_DOI_AMAN} hari.`;
+      els.stokSub.textContent = `${fmtNum(items.length)} item · ${visibleDepos.length} depo · DOI critical ≤ ${STOK_DOI_CRITICAL} hari · DOI aman > ${STOK_DOI_AMAN} hari.`;
     }
 
     if (els.stokKpiItems) els.stokKpiItems.textContent = fmtNum(items.length);
@@ -22063,7 +22193,7 @@ legendControl.addTo(map);
     stokRenderSaran(items, filterDepo);
 
     if (els.stokFootNote) {
-      els.stokFootNote.textContent = `${fmtNum(stokState.files.length)} file · ${fmtNum(items.length)} item · ${visibleDepos.length} depo · DOI critical < ${STOK_DOI_CRITICAL}, aman > ${STOK_DOI_AMAN} hari`;
+      els.stokFootNote.textContent = `${fmtNum(stokState.files.length)} file · ${fmtNum(items.length)} item · ${visibleDepos.length} depo · DOI critical ≤ ${STOK_DOI_CRITICAL} hari, aman > ${STOK_DOI_AMAN} hari · ${STOK_REGIONS.map(r => r.name).join(", ")}`;
     }
   }
 
@@ -22457,6 +22587,14 @@ legendControl.addTo(map);
       (row) => ({ name: row.category }),
       availableMonths
     );
+    const principleItems = analysisAggregate(
+      periodRows,
+      mtdRows,
+      previousMonthRows,
+      (row) => analysisPrinciple(row),
+      (row) => ({ name: analysisPrinciple(row) }),
+      availableMonths
+    );
     const salesmanItems = analysisAggregate(
       periodRows,
       mtdRows,
@@ -22525,6 +22663,7 @@ legendControl.addTo(map);
       depos: depoItems,
       outlets: outletItems,
       categories: categoryItems,
+      principles: principleItems,
       salesmen: salesmanItems,
       channels: channelItems,
     };
@@ -24282,6 +24421,15 @@ legendControl.addTo(map);
       els.analysisProductInfo.textContent = `${fmtNum(data.categories.length)} kategori produk · top ${Math.min(10, data.categories.length)}`;
     }
 
+    analysisRenderCompareTable(els.analysisPrincipleBody, data.principles, {
+      ...compareOptions,
+      detailType: "principle",
+      sub: (item) => `${fmtNum(item.mtdOutlets)} outlet MTD`,
+    });
+    if (els.analysisPrincipleInfo) {
+      els.analysisPrincipleInfo.textContent = `${fmtNum(data.principles.length)} principle · top ${Math.min(10, data.principles.length)}`;
+    }
+
     if (els.analysisOmsetDimTitle) els.analysisOmsetDimTitle.textContent = `Omset by ${dimLabel}`;
     if (els.analysisOmsetDimCol) els.analysisOmsetDimCol.textContent = dimLabel;
     if (els.analysisRoaDimTitle) els.analysisRoaDimTitle.textContent = `ROA by ${dimLabel}`;
@@ -24339,6 +24487,20 @@ legendControl.addTo(map);
       els.analysisRoaProductInfo.textContent = `${fmtNum(roaCategories.length)} kategori produk · ROA = jumlah outlet`;
     }
 
+    analysisRenderRoaTable(els.analysisRoaPrincipleBody, data.principles, {
+      limit: 10,
+      months: data.availableMonths,
+      comparisonAvailable: data.availableMonths > 0,
+      detailType: "principle",
+      sub: (item) => `${fmtNum(item.periodOutlets)} outlet unik ${data.availableMonths} bln`,
+    });
+    if (els.analysisRoaPrincipleInfo) {
+      const roaPrinciples = data.principles.filter(
+        (item) => item.mtdOutlets > 0 || item.periodOutlets > 0
+      );
+      els.analysisRoaPrincipleInfo.textContent = `${fmtNum(roaPrinciples.length)} principle · ROA = jumlah outlet`;
+    }
+
     analysisRenderRoaTable(els.analysisRoaSalesmanBody, dimItems, {
       limit: 10,
       months: data.availableMonths,
@@ -24389,6 +24551,7 @@ legendControl.addTo(map);
         depo: "DEPO",
         outlet: "OUTLET",
         category: "KATEGORI PRODUK",
+        principle: "PRINCIPLE",
         salesman: "SALESMAN",
         channel: "CHANNEL",
       }[type] || "ANALISA"
@@ -24404,8 +24567,10 @@ legendControl.addTo(map);
           ? data.outlets
           : type === "category"
             ? data.categories
-            : type === "salesman"
-              ? data.salesmen
+            : type === "principle"
+              ? data.principles
+              : type === "salesman"
+                ? data.salesmen
               : type === "channel"
                 ? data.channels
                 : [];
@@ -24429,6 +24594,10 @@ legendControl.addTo(map);
       }
       if (type === "category") {
         return row.category === item.name || row.category === item.key;
+      }
+      if (type === "principle") {
+        const principle = analysisPrinciple(row);
+        return principle === item.name || principle === item.key;
       }
       if (type === "salesman") {
         return (
